@@ -15,6 +15,9 @@
 		A9A1AD4F2699FAE800169D76 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9A1AD4D2699FAE800169D76 /* LaunchScreen.storyboard */; };
 		A9A1AD5A2699FAE800169D76 /* dnd_5th_1_iOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A1AD592699FAE800169D76 /* dnd_5th_1_iOSTests.swift */; };
 		A9A1AD652699FAE800169D76 /* dnd_5th_1_iOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A1AD642699FAE800169D76 /* dnd_5th_1_iOSUITests.swift */; };
+		A9C12B7E269AB7B900729A74 /* BaseViewContoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C12B7D269AB7B900729A74 /* BaseViewContoller.swift */; };
+		A9C12B80269AB86A00729A74 /* Extension+UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C12B7F269AB86A00729A74 /* Extension+UIColor.swift */; };
+		A9C12B82269AB94B00729A74 /* Extension+UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C12B81269AB94B00729A74 /* Extension+UIFont.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,13 +45,16 @@
 		A9A1AD492699FAE600169D76 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A9A1AD4B2699FAE800169D76 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A9A1AD4E2699FAE800169D76 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		A9A1AD502699FAE800169D76 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A9A1AD502699FAE800169D76 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = "dnd-5th-1-iOS/Configure/Info.plist"; sourceTree = SOURCE_ROOT; };
 		A9A1AD552699FAE800169D76 /* dnd-5th-1-iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "dnd-5th-1-iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9A1AD592699FAE800169D76 /* dnd_5th_1_iOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dnd_5th_1_iOSTests.swift; sourceTree = "<group>"; };
 		A9A1AD5B2699FAE800169D76 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A9A1AD602699FAE800169D76 /* dnd-5th-1-iOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "dnd-5th-1-iOSUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9A1AD642699FAE800169D76 /* dnd_5th_1_iOSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dnd_5th_1_iOSUITests.swift; sourceTree = "<group>"; };
 		A9A1AD662699FAE800169D76 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A9C12B7D269AB7B900729A74 /* BaseViewContoller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewContoller.swift; sourceTree = "<group>"; };
+		A9C12B7F269AB86A00729A74 /* Extension+UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIColor.swift"; sourceTree = "<group>"; };
+		A9C12B81269AB94B00729A74 /* Extension+UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIFont.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,13 +105,13 @@
 		A9A1AD412699FAE600169D76 /* dnd-5th-1-iOS */ = {
 			isa = PBXGroup;
 			children = (
-				A9A1AD422699FAE600169D76 /* AppDelegate.swift */,
-				A9A1AD442699FAE600169D76 /* SceneDelegate.swift */,
-				A9A1AD462699FAE600169D76 /* ViewController.swift */,
-				A9A1AD482699FAE600169D76 /* Main.storyboard */,
-				A9A1AD4B2699FAE800169D76 /* Assets.xcassets */,
-				A9A1AD4D2699FAE800169D76 /* LaunchScreen.storyboard */,
-				A9A1AD502699FAE800169D76 /* Info.plist */,
+				A9C12B78269AB6E800729A74 /* Service */,
+				A9C12B77269AB6DE00729A74 /* ViewModel */,
+				A9C12B7C269AB72000729A74 /* View */,
+				A9C12B76269AB6D900729A74 /* Model */,
+				A9C12B79269AB6EE00729A74 /* Utility */,
+				A9C12B7A269AB6F600729A74 /* Base */,
+				A9C12B7B269AB70F00729A74 /* Configure */,
 			);
 			path = "dnd-5th-1-iOS";
 			sourceTree = "<group>";
@@ -126,6 +132,105 @@
 				A9A1AD662699FAE800169D76 /* Info.plist */,
 			);
 			path = "dnd-5th-1-iOSUITests";
+			sourceTree = "<group>";
+		};
+		A9C12B74269AB6C500729A74 /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				A9A1AD482699FAE600169D76 /* Main.storyboard */,
+			);
+			path = Storyboard;
+			sourceTree = "<group>";
+		};
+		A9C12B75269AB6CD00729A74 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				A9A1AD462699FAE600169D76 /* ViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		A9C12B76269AB6D900729A74 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		A9C12B77269AB6DE00729A74 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		A9C12B78269AB6E800729A74 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		A9C12B79269AB6EE00729A74 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				A9C12B85269ABE5B00729A74 /* Enum */,
+				A9C12B84269ABE5500729A74 /* Protocol */,
+				A9C12B83269ABD7D00729A74 /* Extension */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
+		A9C12B7A269AB6F600729A74 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				A9C12B7D269AB7B900729A74 /* BaseViewContoller.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		A9C12B7B269AB70F00729A74 /* Configure */ = {
+			isa = PBXGroup;
+			children = (
+				A9A1AD422699FAE600169D76 /* AppDelegate.swift */,
+				A9A1AD442699FAE600169D76 /* SceneDelegate.swift */,
+				A9A1AD4B2699FAE800169D76 /* Assets.xcassets */,
+				A9A1AD4D2699FAE800169D76 /* LaunchScreen.storyboard */,
+				A9A1AD502699FAE800169D76 /* Info.plist */,
+			);
+			path = Configure;
+			sourceTree = "<group>";
+		};
+		A9C12B7C269AB72000729A74 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A9C12B75269AB6CD00729A74 /* Controller */,
+				A9C12B74269AB6C500729A74 /* Storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		A9C12B83269ABD7D00729A74 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				A9C12B7F269AB86A00729A74 /* Extension+UIColor.swift */,
+				A9C12B81269AB94B00729A74 /* Extension+UIFont.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		A9C12B84269ABE5500729A74 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		A9C12B85269ABE5B00729A74 /* Enum */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Enum;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -259,7 +364,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				A9A1AD472699FAE600169D76 /* ViewController.swift in Sources */,
+				A9C12B80269AB86A00729A74 /* Extension+UIColor.swift in Sources */,
 				A9A1AD432699FAE600169D76 /* AppDelegate.swift in Sources */,
+				A9C12B7E269AB7B900729A74 /* BaseViewContoller.swift in Sources */,
+				A9C12B82269AB94B00729A74 /* Extension+UIFont.swift in Sources */,
 				A9A1AD452699FAE600169D76 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -437,7 +545,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = "dnd-5th-1-iOS/Info.plist";
+				INFOPLIST_FILE = "dnd-5th-1-iOS/Configure/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -456,7 +564,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = "dnd-5th-1-iOS/Info.plist";
+				INFOPLIST_FILE = "dnd-5th-1-iOS/Configure/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
