@@ -22,5 +22,4 @@ extension UITableView {
     }
 }
 
-
 extension UITableViewCell: ReusableCell {}

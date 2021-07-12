@@ -15,7 +15,6 @@ class ViewController: UIViewController, ASAuthorizationControllerDelegate, ASAut
         return self.view.window!
     }
     
-
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -53,4 +52,3 @@ class ViewController: UIViewController, ASAuthorizationControllerDelegate, ASAut
         }
     }
 }
-

@@ -23,5 +23,3 @@ extension UICollectionView {
 }
 
 extension UICollectionViewCell: ReusableCell {}
-
-
