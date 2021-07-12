@@ -7,7 +7,7 @@
 
 import UIKit
 
-enum MainFont:String {
+enum MainFont: String {
     case sampleFont = "HelveticaNeue-Bold"
 }
 
@@ -18,6 +18,8 @@ extension UIColor {
         case .sampleFont:
             guard let font = UIFont(name: font.rawValue, size: 18) else { return UIFont() }
             return font
+        @unknown default:
+            return UIFont()
         }
     }
 }
