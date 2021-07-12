@@ -20,6 +20,9 @@
 		A9C12B80269AB86A00729A74 /* Extension+UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C12B7F269AB86A00729A74 /* Extension+UIColor.swift */; };
 		A9C12B82269AB94B00729A74 /* Extension+UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C12B81269AB94B00729A74 /* Extension+UIFont.swift */; };
 		A9C12B87269C137600729A74 /* Dynamic.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C12B86269C137600729A74 /* Dynamic.swift */; };
+		A9C12B89269C14FF00729A74 /* Protocol+ResuableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C12B88269C14FF00729A74 /* Protocol+ResuableCell.swift */; };
+		A9C12B8B269C158900729A74 /* Extension+UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C12B8A269C158900729A74 /* Extension+UITableView.swift */; };
+		A9C12B8D269C170C00729A74 /* Extension+CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C12B8C269C170C00729A74 /* Extension+CollectionView.swift */; };
 		CFA57BDB90958A54C259B1B1 /* Pods_dnd_5th_1_iOS_dnd_5th_1_iOSUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E146255FB214A8BFC2A3783 /* Pods_dnd_5th_1_iOS_dnd_5th_1_iOSUITests.framework */; };
 		D473D242685AB9B1BC7282B8 /* Pods_dnd_5th_1_iOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03A27B19F00B99F102892238 /* Pods_dnd_5th_1_iOSTests.framework */; };
 /* End PBXBuildFile section */
@@ -63,6 +66,9 @@
 		A9C12B7F269AB86A00729A74 /* Extension+UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIColor.swift"; sourceTree = "<group>"; };
 		A9C12B81269AB94B00729A74 /* Extension+UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIFont.swift"; sourceTree = "<group>"; };
 		A9C12B86269C137600729A74 /* Dynamic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dynamic.swift; sourceTree = "<group>"; };
+		A9C12B88269C14FF00729A74 /* Protocol+ResuableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Protocol+ResuableCell.swift"; sourceTree = "<group>"; };
+		A9C12B8A269C158900729A74 /* Extension+UITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UITableView.swift"; sourceTree = "<group>"; };
+		A9C12B8C269C170C00729A74 /* Extension+CollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+CollectionView.swift"; sourceTree = "<group>"; };
 		BFB6BE28506C4B940193697F /* Pods-dnd-5th-1-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-dnd-5th-1-iOS.release.xcconfig"; path = "Target Support Files/Pods-dnd-5th-1-iOS/Pods-dnd-5th-1-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		D04B0DB0A86D6EB81AD48E64 /* Pods-dnd-5th-1-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-dnd-5th-1-iOS.debug.xcconfig"; path = "Target Support Files/Pods-dnd-5th-1-iOS/Pods-dnd-5th-1-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		DF0290F64A3C096A484947A4 /* Pods-dnd-5th-1-iOS-dnd-5th-1-iOSUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-dnd-5th-1-iOS-dnd-5th-1-iOSUITests.debug.xcconfig"; path = "Target Support Files/Pods-dnd-5th-1-iOS-dnd-5th-1-iOSUITests/Pods-dnd-5th-1-iOS-dnd-5th-1-iOSUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -245,6 +251,8 @@
 			children = (
 				A9C12B7F269AB86A00729A74 /* Extension+UIColor.swift */,
 				A9C12B81269AB94B00729A74 /* Extension+UIFont.swift */,
+				A9C12B8A269C158900729A74 /* Extension+UITableView.swift */,
+				A9C12B8C269C170C00729A74 /* Extension+CollectionView.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -252,6 +260,7 @@
 		A9C12B84269ABE5500729A74 /* Protocol */ = {
 			isa = PBXGroup;
 			children = (
+				A9C12B88269C14FF00729A74 /* Protocol+ResuableCell.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -518,8 +527,11 @@
 				A9C12B80269AB86A00729A74 /* Extension+UIColor.swift in Sources */,
 				A9A1AD432699FAE600169D76 /* AppDelegate.swift in Sources */,
 				A9C12B87269C137600729A74 /* Dynamic.swift in Sources */,
+				A9C12B8D269C170C00729A74 /* Extension+CollectionView.swift in Sources */,
 				A9C12B7E269AB7B900729A74 /* BaseViewContoller.swift in Sources */,
 				A9C12B82269AB94B00729A74 /* Extension+UIFont.swift in Sources */,
+				A9C12B89269C14FF00729A74 /* Protocol+ResuableCell.swift in Sources */,
+				A9C12B8B269C158900729A74 /* Extension+UITableView.swift in Sources */,
 				A9A1AD452699FAE600169D76 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
