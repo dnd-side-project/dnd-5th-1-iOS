@@ -7,13 +7,51 @@
 
 import UIKit
 import AuthenticationServices
+import KakaoSDKUser
+import KakaoSDKAuth
 
 class LoginViewController: UIViewController {
-
+    
+    // MARK: - Properties
+    
+    var loginViewModel: LoginViewModel? = LoginViewModel()
+    
+    @IBOutlet weak var appleLoginButton: ASAuthorizationAppleIDButton!
+    
+    // MARK: - LifeCycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        loginViewModel?.loginDelegate = self
     }
 
+    
+    @IBAction func kakaoAction(_ sender: UIButton) {
+        loginViewModel?.kakaoLogin()
+    }
+    
+    @IBAction func appleLogin(_ sender: ASAuthorizationAppleIDButton) {
+        let appleIDProvider = ASAuthorizationAppleIDProvider()
+        let request = appleIDProvider.createRequest()
+        request.requestedScopes = [.fullName, .email]
+        
+        let authorizationController = ASAuthorizationController(authorizationRequests: [request])
+        authorizationController.delegate = loginViewModel
+        authorizationController.presentationContextProvider = loginViewModel
+        authorizationController.performRequests()
+    }
+}
+
+// MARK: - Protocol Login State
+
+extension LoginViewController: LoginState {
+    
+    func loginSuccess() {
+        print("\(Date()): Login Success")
+    }
+    
+    func loginFail(error: String) {
+        print(error)
+    }
 }
