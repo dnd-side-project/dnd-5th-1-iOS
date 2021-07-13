@@ -1,0 +1,25 @@
+# Uncomment the next line to define a global platform for your project
+# platform :ios, '9.0'
+
+target 'dnd-5th-1-iOS' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for dnd-5th-1-iOS
+pod 'Alamofire', '~> 5.4'
+pod 'SwiftLint'
+pod 'KakaoSDKCommon'  # 필수 요소를 담은 공통 모듈
+pod 'KakaoSDKAuth'    # 사용자 인증
+pod 'KakaoSDKUser'    # 카카오 로그인, 사용자 관리
+pod 'GoogleSignIn'    # 구글 로그인
+
+  target 'dnd-5th-1-iOSTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+  target 'dnd-5th-1-iOSUITests' do
+    # Pods for testing
+  end
+
+end
