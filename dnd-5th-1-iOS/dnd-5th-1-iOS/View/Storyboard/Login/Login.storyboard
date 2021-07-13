@@ -23,14 +23,26 @@
                                     <action selector="kakaoAction:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="i1e-ay-uuI"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="agI-23-g58" customClass="ASAuthorizationAppleIDButton">
+                                <rect key="frame" x="184" y="353" width="46" height="30"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="appleLogin:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="8UC-W5-eIy"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="fKE-x9-cJh" firstAttribute="top" secondItem="agI-23-g58" secondAttribute="bottom" constant="50" id="65E-UK-x1y"/>
+                            <constraint firstItem="agI-23-g58" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="T8g-5X-LNN"/>
                             <constraint firstItem="fKE-x9-cJh" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="TGs-U7-whU"/>
                             <constraint firstItem="fKE-x9-cJh" firstAttribute="centerY" secondItem="5EZ-qb-Rvc" secondAttribute="centerY" id="Tei-eY-IoJ"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="appleLoginButton" destination="agI-23-g58" id="X2s-DE-v39"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

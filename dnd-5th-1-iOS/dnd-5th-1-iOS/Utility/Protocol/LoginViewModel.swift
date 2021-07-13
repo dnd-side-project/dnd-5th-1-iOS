@@ -8,17 +8,20 @@
 import Foundation
 import KakaoSDKUser
 import KakaoSDKAuth
+import AuthenticationServices
 
-class LoginViewModel {
+class LoginViewModel: NSObject {
     
     weak var loginDelegate: LoginState?
+    
+    // MARK: - Kakao Login
     
     func kakaoLogin() {
         UserApi.shared.loginWithKakaoAccount { [weak self] (oauthToken, error) in
             guard let self = self else { return }
             
             if let error = error {
-                self.loginDelegate?.loginFail(error: error.localizedDescription)
+                self.loginDelegate?.loginFail(error: "kakao Login Error: \(error.localizedDescription)")
             } else {
                 print("loginWithKakaoAccount() success.")
                 
@@ -40,4 +43,36 @@ class LoginViewModel {
             }
         }
     }
+    
+}
+
+// MARK: - Apple Login
+
+extension LoginViewModel: ASAuthorizationControllerDelegate, ASAuthorizationControllerPresentationContextProviding {
+    
+    func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
+        let loginVC = LoginViewController()
+        return loginVC.view.window ?? UIWindow()
+    }
+    
+    // Apple ID 연동 성공 시
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+        
+        switch authorization.credential {
+        case let appleIDCredetial as ASAuthorizationAppleIDCredential:
+            
+            print(appleIDCredetial.identityToken?.base64EncodedString())
+            
+            loginDelegate?.loginSuccess()
+            
+        default:
+            break
+        }
+    }
+    
+    // Apple ID 연동 실패 시
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
+        loginDelegate?.loginFail(error: "apple Login Error: \(error.localizedDescription)")
+    }
+    
 }
