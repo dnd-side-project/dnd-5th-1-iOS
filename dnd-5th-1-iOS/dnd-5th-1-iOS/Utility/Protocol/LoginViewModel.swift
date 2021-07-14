@@ -14,7 +14,11 @@ class LoginViewModel: NSObject {
     
     weak var loginDelegate: LoginState?
     
-    // MARK: - Kakao Login
+}
+
+// MARK: - Kakao Login
+
+extension LoginViewModel {
     
     func kakaoLogin() {
         UserApi.shared.loginWithKakaoAccount { [weak self] (oauthToken, error) in
