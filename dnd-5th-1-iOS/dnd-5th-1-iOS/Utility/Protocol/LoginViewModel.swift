@@ -76,3 +76,14 @@ extension LoginViewModel: ASAuthorizationControllerDelegate, ASAuthorizationCont
     }
     
 }
+
+/*
+ fetchURLSession { response in
+     switch response{
+     case .success(let data):
+         print(data)
+     case .failure(let err):
+         print(err.localized)
+     }
+ }
+ */
