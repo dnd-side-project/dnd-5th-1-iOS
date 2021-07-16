@@ -14,7 +14,11 @@ class LoginViewModel: NSObject {
     
     weak var loginDelegate: LoginState?
     
-    // MARK: - Kakao Login
+}
+
+// MARK: - Kakao Login
+
+extension LoginViewModel {
     
     func kakaoLogin() {
         UserApi.shared.loginWithKakaoAccount { [weak self] (oauthToken, error) in
@@ -76,3 +80,14 @@ extension LoginViewModel: ASAuthorizationControllerDelegate, ASAuthorizationCont
     }
     
 }
+
+/*
+ fetchURLSession { response in
+     switch response{
+     case .success(let data):
+         print(data)
+     case .failure(let err):
+         print(err.localized)
+     }
+ }
+ */

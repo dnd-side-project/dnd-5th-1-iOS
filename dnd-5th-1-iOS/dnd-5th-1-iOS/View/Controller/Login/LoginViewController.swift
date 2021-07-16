@@ -10,7 +10,7 @@ import AuthenticationServices
 import KakaoSDKUser
 import KakaoSDKAuth
 
-class LoginViewController: UIViewController {
+class LoginViewController: BaseViewContoller {
     
     // MARK: - Properties
     
@@ -26,7 +26,6 @@ class LoginViewController: UIViewController {
         loginViewModel?.loginDelegate = self
     }
 
-    
     @IBAction func kakaoAction(_ sender: UIButton) {
         loginViewModel?.kakaoLogin()
     }
