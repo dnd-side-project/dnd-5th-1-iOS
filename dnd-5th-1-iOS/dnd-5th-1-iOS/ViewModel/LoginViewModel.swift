@@ -44,6 +44,16 @@ extension LoginViewModel {
                     }
                     self.loginDelegate?.loginSuccess()
                 }
+                
+                UserApi.shared.me { user, error in
+                    if let error = error {
+                        
+                    } else {
+                        if let kakaoUser = user {
+                            print(kakaoUser.id)
+                        }
+                    }
+                }
             }
         }
     }
@@ -66,6 +76,7 @@ extension LoginViewModel: ASAuthorizationControllerDelegate, ASAuthorizationCont
         case let appleIDCredetial as ASAuthorizationAppleIDCredential:
             
             print(appleIDCredetial.identityToken?.base64EncodedString())
+            print(appleIDCredetial.user)
             
             loginDelegate?.loginSuccess()
             
