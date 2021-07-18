@@ -7,6 +7,8 @@
 
 import Foundation
 
+typealias ResultModel<T> = (Result<T, APIError>) -> Void
+
 extension URLRequest {
     
     init<Body: Encodable>(url: URL, method: HTTPMethod<Body>) {

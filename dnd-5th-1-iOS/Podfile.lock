@@ -24,6 +24,7 @@ PODS:
     - KakaoSDKCommon/Common (= 2.5.3)
   - KakaoSDKUser (2.5.3):
     - KakaoSDKAuth (= 2.5.3)
+  - Kingfisher (6.3.0)
   - SwiftLint (0.43.1)
 
 DEPENDENCIES:
@@ -32,6 +33,7 @@ DEPENDENCIES:
   - KakaoSDKAuth
   - KakaoSDKCommon
   - KakaoSDKUser
+  - Kingfisher (~> 6.0)
   - SwiftLint
 
 SPEC REPOS:
@@ -44,6 +46,7 @@ SPEC REPOS:
     - KakaoSDKAuth
     - KakaoSDKCommon
     - KakaoSDKUser
+    - Kingfisher
     - SwiftLint
 
 SPEC CHECKSUMS:
@@ -55,8 +58,9 @@ SPEC CHECKSUMS:
   KakaoSDKAuth: b1a0b9a84c21c967c4139d221edce83a7f15cdfe
   KakaoSDKCommon: 08548932f6f570215ea038241a98157c0b3f7a8b
   KakaoSDKUser: 5d2de71fe070455bbaaad6a37af3eb500fbc8972
+  Kingfisher: 6c3df386db71d82c0817a429d2c9421a77396529
   SwiftLint: 99f82d07b837b942dd563c668de129a03fc3fb52
 
-PODFILE CHECKSUM: 38014f1770814ab45dfd48af10e7e34f64b65745
+PODFILE CHECKSUM: 832641c44603d81739a18cc69619ea2c847d7cea
 
 COCOAPODS: 1.10.1

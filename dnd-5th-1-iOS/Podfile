@@ -7,6 +7,7 @@ target 'dnd-5th-1-iOS' do
 
   # Pods for dnd-5th-1-iOS
 pod 'Alamofire', '~> 5.4'
+pod 'Kingfisher', '~> 6.0'
 pod 'SwiftLint'
 pod 'KakaoSDKCommon'  # 필수 요소를 담은 공통 모듈
 pod 'KakaoSDKAuth'    # 사용자 인증
