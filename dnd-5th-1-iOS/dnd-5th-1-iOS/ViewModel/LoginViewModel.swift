@@ -21,7 +21,7 @@ class LoginViewModel: NSObject {
 extension LoginViewModel {
     
     func kakaoLogin() {
-        UserApi.shared.loginWithKakaoAccount { [weak self] (oauthToken, error) in
+        UserApi.shared.loginWithKakaoAccount { [weak self] (_ oauthToken, error) in
             guard let self = self else { return }
             
             if let error = error {
@@ -29,28 +29,27 @@ extension LoginViewModel {
             } else {
                 print("loginWithKakaoAccount() success.")
                 
-                let accessToken = oauthToken
-                print(accessToken?.accessToken)
-                
-                // 사용자 액세스 토큰 정보 조회
-                UserApi.shared.accessTokenInfo {(accessTokenInfo, error) in
-                    if let error = error {
-                        print(error)
-                    } else {
-                        print("accessTokenInfo() success.")
-
-                        let tokenInfo = accessTokenInfo
-                        print(tokenInfo)
-                    }
-                    self.loginDelegate?.loginSuccess()
-                }
-                
                 UserApi.shared.me { user, error in
                     if let error = error {
-                        
+                        print("Kakao user get info Error, \(error.localizedDescription)")
                     } else {
-                        if let kakaoUser = user {
-                            print(kakaoUser.id)
+                        
+                        guard let kakaoUser = user,
+                              let kakaoUserId = kakaoUser.id,
+                              let kakaoUserEmail = kakaoUser.kakaoAccount?.email else { return }
+                        
+                        print(kakaoUserId)
+                        print(kakaoUserEmail)
+                        
+                        LoginAPICenter.fetchUserData(.kakao, userID: String(kakaoUserId), email: kakaoUserEmail) { (response) in
+                            switch response {
+                            case .success(let data):
+                                print(data)
+                                
+                                self.loginDelegate?.loginSuccess()
+                            case .failure(let err):
+                                print(err.localized)
+                            }
                         }
                     }
                 }
@@ -75,10 +74,24 @@ extension LoginViewModel: ASAuthorizationControllerDelegate, ASAuthorizationCont
         switch authorization.credential {
         case let appleIDCredetial as ASAuthorizationAppleIDCredential:
             
-            print(appleIDCredetial.identityToken?.base64EncodedString())
-            print(appleIDCredetial.user)
-            
-            loginDelegate?.loginSuccess()
+            if let userEmail = appleIDCredetial.email {
+                
+                print(appleIDCredetial.user)
+                print(userEmail)
+                
+                LoginAPICenter.fetchUserData(.apple,
+                                             userID: appleIDCredetial.user,
+                                             email: userEmail) { (response) in
+                    switch response {
+                    case .success(let data):
+                        print(data)
+                        
+                        self.loginDelegate?.loginSuccess()
+                    case .failure(let err):
+                        print(err.localized)
+                    }
+                }
+            }
             
         default:
             break

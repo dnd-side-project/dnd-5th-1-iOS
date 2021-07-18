@@ -24,6 +24,14 @@ class LoginViewController: BaseViewContoller {
         super.viewDidLoad()
 
         loginViewModel?.loginDelegate = self
+        
+        UserApi.shared.unlink {(error) in
+            if let error = error {
+                print(error)
+            } else {
+                print("unlink() success.")
+            }
+        }
     }
 
     @IBAction func kakaoAction(_ sender: UIButton) {
@@ -39,6 +47,10 @@ class LoginViewController: BaseViewContoller {
         authorizationController.delegate = loginViewModel
         authorizationController.presentationContextProvider = loginViewModel
         authorizationController.performRequests()
+    }
+    
+    @IBAction func apiTestAction(_ sender: UIButton) {
+        
     }
 }
 
