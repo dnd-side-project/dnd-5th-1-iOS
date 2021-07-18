@@ -41,12 +41,13 @@ extension LoginViewModel {
                         print(kakaoUserId)
                         print(kakaoUserEmail)
                         
-                        LoginAPICenter.fetchUserData(.kakao, userID: String(kakaoUserId), email: kakaoUserEmail) { (response) in
+                        let kakaoInfo = LoginAPICenter.LoginKind.kakao(userID: String(kakaoUserId),
+                                                                       email: kakaoUserEmail)
+                        
+                        LoginAPICenter.fetchUserData(kakaoInfo.loginValue) { (response) in
                             switch response {
                             case .success(let data):
                                 print(data)
-                                
-                                self.loginDelegate?.loginSuccess()
                             case .failure(let err):
                                 print(err.localized)
                             }
@@ -79,14 +80,13 @@ extension LoginViewModel: ASAuthorizationControllerDelegate, ASAuthorizationCont
                 print(appleIDCredetial.user)
                 print(userEmail)
                 
-                LoginAPICenter.fetchUserData(.apple,
-                                             userID: appleIDCredetial.user,
-                                             email: userEmail) { (response) in
+                let appleInfo = LoginAPICenter.LoginKind.apple(userID: appleIDCredetial.user,
+                                                               email: userEmail)
+                
+                LoginAPICenter.fetchUserData(appleInfo.loginValue) { (response) in
                     switch response {
                     case .success(let data):
                         print(data)
-                        
-                        self.loginDelegate?.loginSuccess()
                     case .failure(let err):
                         print(err.localized)
                     }
@@ -104,14 +104,3 @@ extension LoginViewModel: ASAuthorizationControllerDelegate, ASAuthorizationCont
     }
     
 }
-
-/*
- fetchURLSession { response in
-     switch response{
-     case .success(let data):
-         print(data)
-     case .failure(let err):
-         print(err.localized)
-     }
- }
- */

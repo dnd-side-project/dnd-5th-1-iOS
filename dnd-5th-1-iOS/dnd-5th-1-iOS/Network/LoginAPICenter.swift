@@ -10,14 +10,35 @@ import Alamofire
 
 struct LoginAPICenter {
     
-    static func fetchUserData(_ type: SNSLoginKind,
-                              userID: String,
-                              email: String,
+    enum LoginKind {
+        case apple(userID: String, email: String)
+        case kakao(userID: String, email: String)
+        
+        var loginRawValue: String {
+            switch self {
+            case .apple:
+                return "apple"
+            case .kakao:
+                return "kakao"
+            }
+        }
+        
+        var loginValue: LoginSignInModel {
+            switch self {
+            case let .apple(userID, email):
+                return LoginSignInModel(vendor: loginRawValue, vendorAccountId: userID, email: email)
+            case let .kakao(userID, email):
+                return LoginSignInModel(vendor: loginRawValue, vendorAccountId: userID, email: email)
+            }
+        }
+    }
+    
+    static func fetchUserData(_ type: LoginSignInModel,
                               completion: @escaping ResultModel<LoginSignInResponseModel>) {
         
         let urlString = "https://ptsv2.com/t/m3fgc-1626575320"
         
-        let parameters = LoginSignInModel(vendor: type.rawValue, vendorAccountId: userID, email: email)
+        let parameters = type
         
         print(parameters)
         
