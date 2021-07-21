@@ -26,6 +26,7 @@ PODS:
     - KakaoSDKAuth (= 2.5.3)
   - Kingfisher (6.3.0)
   - SwiftLint (0.43.1)
+  - SwiftyJSON (5.0.1)
 
 DEPENDENCIES:
   - Alamofire (~> 5.4)
@@ -35,6 +36,7 @@ DEPENDENCIES:
   - KakaoSDKUser
   - Kingfisher (~> 6.0)
   - SwiftLint
+  - SwiftyJSON
 
 SPEC REPOS:
   trunk:
@@ -48,6 +50,7 @@ SPEC REPOS:
     - KakaoSDKUser
     - Kingfisher
     - SwiftLint
+    - SwiftyJSON
 
 SPEC CHECKSUMS:
   Alamofire: e447a2774a40c996748296fa2c55112fdbbc42f9
@@ -60,7 +63,8 @@ SPEC CHECKSUMS:
   KakaoSDKUser: 5d2de71fe070455bbaaad6a37af3eb500fbc8972
   Kingfisher: 6c3df386db71d82c0817a429d2c9421a77396529
   SwiftLint: 99f82d07b837b942dd563c668de129a03fc3fb52
+  SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
 
-PODFILE CHECKSUM: 832641c44603d81739a18cc69619ea2c847d7cea
+PODFILE CHECKSUM: f9f0d6a106eb1c22a5bf0c885e71298edce0a60c
 
 COCOAPODS: 1.10.1
