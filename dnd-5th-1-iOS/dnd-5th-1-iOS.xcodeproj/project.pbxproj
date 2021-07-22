@@ -212,7 +212,6 @@
 		A9C12B75269AB6CD00729A74 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				D1449D9A26A84BD90083418D /* Vote */,
 				D1449D9526A846460083418D /* Main */,
 				A9C12B90269C1A4C00729A74 /* Login */,
 			);
@@ -348,13 +347,6 @@
 				D1449D9826A848610083418D /* MainViewController.swift */,
 			);
 			path = Main;
-			sourceTree = "<group>";
-		};
-		D1449D9A26A84BD90083418D /* Vote */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Vote;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
