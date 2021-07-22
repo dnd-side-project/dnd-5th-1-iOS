@@ -32,6 +32,8 @@
 		A9C12B94269C1A8B00729A74 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C12B93269C1A8B00729A74 /* LoginViewController.swift */; };
 		A9C12B96269C315E00729A74 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = A9C12B95269C315E00729A74 /* .swiftlint.yml */; };
 		CFA57BDB90958A54C259B1B1 /* Pods_dnd_5th_1_iOS_dnd_5th_1_iOSUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E146255FB214A8BFC2A3783 /* Pods_dnd_5th_1_iOS_dnd_5th_1_iOSUITests.framework */; };
+		D1449D9426A845370083418D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D1449D9326A845370083418D /* Main.storyboard */; };
+		D1449D9926A848610083418D /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1449D9826A848610083418D /* MainViewController.swift */; };
 		D473D242685AB9B1BC7282B8 /* Pods_dnd_5th_1_iOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03A27B19F00B99F102892238 /* Pods_dnd_5th_1_iOSTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -88,6 +90,8 @@
 		A9C12B95269C315E00729A74 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		BFB6BE28506C4B940193697F /* Pods-dnd-5th-1-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-dnd-5th-1-iOS.release.xcconfig"; path = "Target Support Files/Pods-dnd-5th-1-iOS/Pods-dnd-5th-1-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		D04B0DB0A86D6EB81AD48E64 /* Pods-dnd-5th-1-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-dnd-5th-1-iOS.debug.xcconfig"; path = "Target Support Files/Pods-dnd-5th-1-iOS/Pods-dnd-5th-1-iOS.debug.xcconfig"; sourceTree = "<group>"; };
+		D1449D9326A845370083418D /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		D1449D9826A848610083418D /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		DF0290F64A3C096A484947A4 /* Pods-dnd-5th-1-iOS-dnd-5th-1-iOSUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-dnd-5th-1-iOS-dnd-5th-1-iOSUITests.debug.xcconfig"; path = "Target Support Files/Pods-dnd-5th-1-iOS-dnd-5th-1-iOSUITests/Pods-dnd-5th-1-iOS-dnd-5th-1-iOSUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		E47C3871C116C712787F22C0 /* Pods-dnd-5th-1-iOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-dnd-5th-1-iOSTests.release.xcconfig"; path = "Target Support Files/Pods-dnd-5th-1-iOSTests/Pods-dnd-5th-1-iOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		F0360725E62068FC7932F268 /* Pods_dnd_5th_1_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_dnd_5th_1_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -199,6 +203,7 @@
 		A9C12B74269AB6C500729A74 /* Storyboard */ = {
 			isa = PBXGroup;
 			children = (
+				D1449D9226A845270083418D /* Main */,
 				A9C12B8F269C1A4000729A74 /* Login */,
 			);
 			path = Storyboard;
@@ -207,6 +212,7 @@
 		A9C12B75269AB6CD00729A74 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				D1449D9526A846460083418D /* Main */,
 				A9C12B90269C1A4C00729A74 /* Login */,
 			);
 			path = Controller;
@@ -327,6 +333,22 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		D1449D9226A845270083418D /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				D1449D9326A845370083418D /* Main.storyboard */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		D1449D9526A846460083418D /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				D1449D9826A848610083418D /* MainViewController.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -439,6 +461,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A9C12B96269C315E00729A74 /* .swiftlint.yml in Resources */,
+				D1449D9426A845370083418D /* Main.storyboard in Resources */,
 				A9C12B92269C1A7A00729A74 /* Login.storyboard in Resources */,
 				A9A1AD4F2699FAE800169D76 /* LaunchScreen.storyboard in Resources */,
 				A9A1AD4C2699FAE800169D76 /* Assets.xcassets in Resources */,
@@ -635,6 +658,7 @@
 				A9A1AD452699FAE600169D76 /* SceneDelegate.swift in Sources */,
 				A95CD36526A30357002CCCA8 /* LoginSignInModel.swift in Sources */,
 				A9C12B94269C1A8B00729A74 /* LoginViewController.swift in Sources */,
+				D1449D9926A848610083418D /* MainViewController.swift in Sources */,
 				A95CD354269EB2BF002CCCA8 /* Enum+APIError.swift in Sources */,
 				A95CD356269EB5B7002CCCA8 /* Enum+HTTPMethod.swift in Sources */,
 			);
