@@ -73,7 +73,7 @@
 		A9A1AD442699FAE600169D76 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		A9A1AD4B2699FAE800169D76 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A9A1AD4E2699FAE800169D76 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		A9A1AD502699FAE800169D76 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = "dnd-5th-1-iOS/Configure/Info.plist"; sourceTree = SOURCE_ROOT; };
+		A9A1AD502699FAE800169D76 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Picme/Configure/Info.plist; sourceTree = SOURCE_ROOT; };
 		A9A1AD552699FAE800169D76 /* PicmeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PicmeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9A1AD592699FAE800169D76 /* PicmeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PicmeTests.swift; sourceTree = "<group>"; };
 		A9A1AD5B2699FAE800169D76 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
