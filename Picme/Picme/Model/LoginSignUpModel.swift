@@ -7,13 +7,14 @@
 
 import Foundation
 
-struct LoginSignInModel: Codable {
+struct LoginSignUpModel: Codable {
     let vendor: String
     let vendorAccountId: String
+    let nickname: String
     let email: String
 }
 
-struct LoginSignInResponseModel: Codable {
-    let profilePictureUrl: String
+struct LoginSignUpResponseModel: Codable {
+    let profilePictureImage: String
     let nickname: String
 }

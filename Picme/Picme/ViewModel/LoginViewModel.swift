@@ -42,6 +42,7 @@ extension LoginViewModel {
                         print(kakaoUserEmail)
                         
                         let kakaoInfo = LoginAPICenter.LoginKind.kakao(userID: String(kakaoUserId),
+                                                                       nickName: "kakao1",
                                                                        email: kakaoUserEmail)
                         
                         LoginAPICenter.fetchUserData(kakaoInfo.loginValue) { (response) in
@@ -81,6 +82,7 @@ extension LoginViewModel: ASAuthorizationControllerDelegate, ASAuthorizationCont
                 print(userEmail)
                 
                 let appleInfo = LoginAPICenter.LoginKind.apple(userID: appleIDCredetial.user,
+                                                               nickName: "apple",
                                                                email: userEmail)
                 
                 LoginAPICenter.fetchUserData(appleInfo.loginValue) { (response) in

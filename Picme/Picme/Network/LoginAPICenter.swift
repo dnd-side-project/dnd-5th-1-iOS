@@ -11,70 +11,64 @@ import Alamofire
 struct LoginAPICenter {
     
     enum LoginKind {
-        case apple(userID: String, email: String)
-        case kakao(userID: String, email: String)
+        case apple(userID: String, nickName: String, email: String)
+        case kakao(userID: String, nickName: String, email: String)
         
         var loginRawValue: String {
             switch self {
             case .apple:
-                return "apple"
+                return "Apple"
             case .kakao:
-                return "kakao"
+                return "Kakao"
             }
         }
         
-        var loginValue: LoginSignInModel {
+        var loginValue: LoginSignUpModel {
             switch self {
-            case let .apple(userID, email):
-                return LoginSignInModel(vendor: loginRawValue, vendorAccountId: userID, email: email)
-            case let .kakao(userID, email):
-                return LoginSignInModel(vendor: loginRawValue, vendorAccountId: userID, email: email)
+            case let .apple(userID, nickName, email):
+                return LoginSignUpModel(vendor: loginRawValue, vendorAccountId: userID, nickname: nickName, email: email)
+            case let .kakao(userID, nickName, email):
+                return LoginSignUpModel(vendor: loginRawValue, vendorAccountId: userID, nickname: nickName, email: email)
             }
         }
     }
     
-    static func fetchUserData(_ type: LoginSignInModel,
-                              completion: @escaping ResultModel<LoginSignInResponseModel>) {
+    static func fetchUserData(_ type: LoginSignUpModel,
+                              completion: @escaping ResultModel<LoginSignUpResponseModel>) {
         
-        let urlString = "https://ptsv2.com/t/m3fgc-1626575320"
+        let urlString = "http://2d63c4581cec.ngrok.io/v1/auth/signup"
         
         let parameters = type
         
         print(parameters)
         
-        AF.request(urlString,
-                   method: .post,
-                   parameters: parameters,
-                   encoder: JSONParameterEncoder.default).responseDecodable(of: LoginSignInResponseModel.self, completionHandler: { (response) in
-            switch response.result {
-            case .success(let data):
-                completion(.success(data))
-            case .failure(_):
-                completion(.failure(.decodingFailed))
-            }
-        })
-        
-        /*
         // JSONEncoding
         let parameter = [
-            "vendor": type.rawValue,
-            "vendorAccountId": userID,
-            "email": email
+            "vendor": type.vendor,
+            "vendorAccountId": type.vendorAccountId,
+            "nickname": type.nickname,
+            "email": type.email
         ]
+
+        print(parameter)
         
         AF.request(urlString,
                    method: .post,
                    parameters: parameter,
-                   encoding: JSONEncoding.default).responseDecodable(of: LoginSignInResponseModel.self, completionHandler: { (response) in
+                   encoding: JSONEncoding.default).responseDecodable(of: LoginSignUpResponseModel.self, completionHandler: { (response) in
+                    print(response.response)
             switch response.result {
             case .success(let data):
                 completion(.success(data))
-            case .failure(_):
-                completion(.failure(.decodingFailed))
+            case .failure(let err):
+                switch response.response?.statusCode {
+                case 400:
+                    completion(.failure(.decodingFailed))
+                default:
+                    return print(err.localizedDescription)
+                }
             }
         })
-        
-        */
         
     }
 }

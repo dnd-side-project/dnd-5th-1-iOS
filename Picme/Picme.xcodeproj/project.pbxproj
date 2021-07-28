@@ -14,7 +14,7 @@
 		A95CD356269EB5B7002CCCA8 /* Enum+HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95CD355269EB5B7002CCCA8 /* Enum+HTTPMethod.swift */; };
 		A95CD35C269EFB66002CCCA8 /* Extension+URLSession,Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95CD35B269EFB66002CCCA8 /* Extension+URLSession,Request.swift */; };
 		A95CD35E269EFBC8002CCCA8 /* LoginAPICenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95CD35D269EFBC8002CCCA8 /* LoginAPICenter.swift */; };
-		A95CD36526A30357002CCCA8 /* LoginSignInModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95CD36426A30357002CCCA8 /* LoginSignInModel.swift */; };
+		A95CD36526A30357002CCCA8 /* LoginSignUpModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95CD36426A30357002CCCA8 /* LoginSignUpModel.swift */; };
 		A96C9E8926AC2451001F279B /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A96C9E8826AC2451001F279B /* LoginViewModel.swift */; };
 		A9A1AD432699FAE600169D76 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A1AD422699FAE600169D76 /* AppDelegate.swift */; };
 		A9A1AD452699FAE600169D76 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A1AD442699FAE600169D76 /* SceneDelegate.swift */; };
@@ -65,7 +65,7 @@
 		A95CD355269EB5B7002CCCA8 /* Enum+HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Enum+HTTPMethod.swift"; sourceTree = "<group>"; };
 		A95CD35B269EFB66002CCCA8 /* Extension+URLSession,Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+URLSession,Request.swift"; sourceTree = "<group>"; };
 		A95CD35D269EFBC8002CCCA8 /* LoginAPICenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginAPICenter.swift; sourceTree = "<group>"; };
-		A95CD36426A30357002CCCA8 /* LoginSignInModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginSignInModel.swift; sourceTree = "<group>"; };
+		A95CD36426A30357002CCCA8 /* LoginSignUpModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginSignUpModel.swift; sourceTree = "<group>"; };
 		A96C9E8826AC2451001F279B /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		A96C9E8A26AC249C001F279B /* Picme.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Picme.entitlements; sourceTree = "<group>"; };
 		A9A1AD3F2699FAE600169D76 /* Picme.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Picme.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -221,7 +221,7 @@
 		A9C12B76269AB6D900729A74 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				A95CD36426A30357002CCCA8 /* LoginSignInModel.swift */,
+				A95CD36426A30357002CCCA8 /* LoginSignUpModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -656,7 +656,7 @@
 				A9C12B89269C14FF00729A74 /* Protocol+ResuableCell.swift in Sources */,
 				A9C12B8B269C158900729A74 /* Extension+UITableView.swift in Sources */,
 				A9A1AD452699FAE600169D76 /* SceneDelegate.swift in Sources */,
-				A95CD36526A30357002CCCA8 /* LoginSignInModel.swift in Sources */,
+				A95CD36526A30357002CCCA8 /* LoginSignUpModel.swift in Sources */,
 				A9C12B94269C1A8B00729A74 /* LoginViewController.swift in Sources */,
 				D1449D9926A848610083418D /* MainViewController.swift in Sources */,
 				A95CD354269EB2BF002CCCA8 /* Enum+APIError.swift in Sources */,
@@ -831,7 +831,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Picme/Picme.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = S63RBKT6UQ;
 				INFOPLIST_FILE = Picme/Configure/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -853,7 +853,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Picme/Picme.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = S63RBKT6UQ;
 				INFOPLIST_FILE = Picme/Configure/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
