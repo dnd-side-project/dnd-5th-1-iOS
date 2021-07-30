@@ -1,0 +1,13 @@
+//
+//  MainCollectionViewCell.swift
+//  Picme
+//
+//  Created by 권민하 on 2021/07/30.
+//
+
+import UIKit
+
+class MainCollectionViewCell: UICollectionViewCell {
+    @IBOutlet weak var mainPhotoImageView: UIImageView!
+    
+}
