@@ -48,7 +48,7 @@ class LoginViewController: BaseViewContoller {
             let param = [
                 "files": imagedatas
             ]
-            ImageAPICenter.convertImage(param)
+//            ImageAPICenter.convertImage(param)
         }
     }
 

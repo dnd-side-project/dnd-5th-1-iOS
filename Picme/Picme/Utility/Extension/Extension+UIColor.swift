@@ -7,7 +7,7 @@
 
 import UIKit
 
-// Enum 이름 수정 예정
+// Enum, case 이름 수정 예정
 enum SolidColor {
     case solid0
     case solid12
