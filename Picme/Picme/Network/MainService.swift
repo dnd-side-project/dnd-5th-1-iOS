@@ -12,7 +12,7 @@ import SwiftyJSON
 class MainService {
     
     static func getMainList(completion: @escaping([MainModel]?) -> Void) {
-        let URL = APIConstants.postURL
+        let URL = APIConstants.Post.create.urlString
         
         let dataRequest = AF.request(URL,
                                      method: .get,

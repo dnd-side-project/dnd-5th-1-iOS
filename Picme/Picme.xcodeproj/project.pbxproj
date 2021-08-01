@@ -14,8 +14,11 @@
 		A95CD356269EB5B7002CCCA8 /* Enum+HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95CD355269EB5B7002CCCA8 /* Enum+HTTPMethod.swift */; };
 		A95CD35C269EFB66002CCCA8 /* Extension+URLSession,Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95CD35B269EFB66002CCCA8 /* Extension+URLSession,Request.swift */; };
 		A95CD35E269EFBC8002CCCA8 /* LoginAPICenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95CD35D269EFBC8002CCCA8 /* LoginAPICenter.swift */; };
-		A95CD36526A30357002CCCA8 /* LoginSignInModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95CD36426A30357002CCCA8 /* LoginSignInModel.swift */; };
+		A95CD36526A30357002CCCA8 /* LoginSignUpModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95CD36426A30357002CCCA8 /* LoginSignUpModel.swift */; };
 		A96C9E8926AC2451001F279B /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A96C9E8826AC2451001F279B /* LoginViewModel.swift */; };
+		A975287826B69DE1003EE1A9 /* ImageAPICenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A975287726B69DE1003EE1A9 /* ImageAPICenter.swift */; };
+		A975287D26B69EAF003EE1A9 /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A975287C26B69EAF003EE1A9 /* Onboarding.storyboard */; };
+		A975288026B69F27003EE1A9 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A975287F26B69F27003EE1A9 /* OnboardingViewController.swift */; };
 		A9A1AD432699FAE600169D76 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A1AD422699FAE600169D76 /* AppDelegate.swift */; };
 		A9A1AD452699FAE600169D76 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A1AD442699FAE600169D76 /* SceneDelegate.swift */; };
 		A9A1AD4C2699FAE800169D76 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A9A1AD4B2699FAE800169D76 /* Assets.xcassets */; };
@@ -71,9 +74,12 @@
 		A95CD355269EB5B7002CCCA8 /* Enum+HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Enum+HTTPMethod.swift"; sourceTree = "<group>"; };
 		A95CD35B269EFB66002CCCA8 /* Extension+URLSession,Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+URLSession,Request.swift"; sourceTree = "<group>"; };
 		A95CD35D269EFBC8002CCCA8 /* LoginAPICenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginAPICenter.swift; sourceTree = "<group>"; };
-		A95CD36426A30357002CCCA8 /* LoginSignInModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginSignInModel.swift; sourceTree = "<group>"; };
+		A95CD36426A30357002CCCA8 /* LoginSignUpModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginSignUpModel.swift; sourceTree = "<group>"; };
 		A96C9E8826AC2451001F279B /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		A96C9E8A26AC249C001F279B /* Picme.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Picme.entitlements; sourceTree = "<group>"; };
+		A975287726B69DE1003EE1A9 /* ImageAPICenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageAPICenter.swift; sourceTree = "<group>"; };
+		A975287C26B69EAF003EE1A9 /* Onboarding.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
+		A975287F26B69F27003EE1A9 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		A9A1AD3F2699FAE600169D76 /* Picme.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Picme.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9A1AD422699FAE600169D76 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A9A1AD442699FAE600169D76 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -148,10 +154,42 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		A98C691226AC23D500AD9191 /* ViewModel */ = {
+		A975287926B69E5B003EE1A9 /* Login */ = {
 			isa = PBXGroup;
 			children = (
 				A96C9E8826AC2451001F279B /* LoginViewModel.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		A975287A26B69E65003EE1A9 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				A95CD35D269EFBC8002CCCA8 /* LoginAPICenter.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		A975287B26B69E91003EE1A9 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				A975287C26B69EAF003EE1A9 /* Onboarding.storyboard */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		A975287E26B69F05003EE1A9 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				A975287F26B69F27003EE1A9 /* OnboardingViewController.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		A98C691226AC23D500AD9191 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				A975287926B69E5B003EE1A9 /* Login */,
 				D180457526B3F03B0053430E /* MainViewModel.swift */,
 			);
 			path = ViewModel;
@@ -216,6 +254,7 @@
 		A9C12B74269AB6C500729A74 /* Storyboard */ = {
 			isa = PBXGroup;
 			children = (
+				A975287B26B69E91003EE1A9 /* Onboarding */,
 				D1449D9226A845270083418D /* Main */,
 				A9C12B8F269C1A4000729A74 /* Login */,
 			);
@@ -225,6 +264,7 @@
 		A9C12B75269AB6CD00729A74 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				A975287E26B69F05003EE1A9 /* Onboarding */,
 				D1449D9526A846460083418D /* Main */,
 				A9C12B90269C1A4C00729A74 /* Login */,
 			);
@@ -235,7 +275,7 @@
 			isa = PBXGroup;
 			children = (
 				D180457726B402D50053430E /* Main */,
-				A95CD36426A30357002CCCA8 /* LoginSignInModel.swift */,
+				A95CD36426A30357002CCCA8 /* LoginSignUpModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -243,9 +283,9 @@
 		A9C12B78269AB6E800729A74 /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				D180456B26B3E8DD0053430E /* APIConstants.swift */,
-				A95CD35D269EFBC8002CCCA8 /* LoginAPICenter.swift */,
+				A975287A26B69E65003EE1A9 /* Login */,
 				D180456D26B3E93C0053430E /* MainService.swift */,
+				A975287726B69DE1003EE1A9 /* ImageAPICenter.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -265,6 +305,7 @@
 			children = (
 				A9C12B7D269AB7B900729A74 /* BaseViewContoller.swift */,
 				A9C12B86269C137600729A74 /* Dynamic.swift */,
+				D180456B26B3E8DD0053430E /* APIConstants.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -497,6 +538,7 @@
 				A9C12B96269C315E00729A74 /* .swiftlint.yml in Resources */,
 				D1449D9426A845370083418D /* Main.storyboard in Resources */,
 				A9C12B92269C1A7A00729A74 /* Login.storyboard in Resources */,
+				A975287D26B69EAF003EE1A9 /* Onboarding.storyboard in Resources */,
 				A9A1AD4F2699FAE800169D76 /* LaunchScreen.storyboard in Resources */,
 				A9A1AD4C2699FAE800169D76 /* Assets.xcassets in Resources */,
 			);
@@ -687,15 +729,17 @@
 				D180456A26B3E2940053430E /* MainCollectionViewCell.swift in Sources */,
 				D180456E26B3E93C0053430E /* MainService.swift in Sources */,
 				D180456C26B3E8DD0053430E /* APIConstants.swift in Sources */,
+				A975287826B69DE1003EE1A9 /* ImageAPICenter.swift in Sources */,
 				A9C12B8D269C170C00729A74 /* Extension+CollectionView.swift in Sources */,
 				A9C12B7E269AB7B900729A74 /* BaseViewContoller.swift in Sources */,
+				A975288026B69F27003EE1A9 /* OnboardingViewController.swift in Sources */,
 				A96C9E8926AC2451001F279B /* LoginViewModel.swift in Sources */,
 				D180457326B3EAB90053430E /* MainModel.swift in Sources */,
 				A9C12B82269AB94B00729A74 /* Extension+UIFont.swift in Sources */,
 				A9C12B89269C14FF00729A74 /* Protocol+ResuableCell.swift in Sources */,
 				A9C12B8B269C158900729A74 /* Extension+UITableView.swift in Sources */,
 				A9A1AD452699FAE600169D76 /* SceneDelegate.swift in Sources */,
-				A95CD36526A30357002CCCA8 /* LoginSignInModel.swift in Sources */,
+				A95CD36526A30357002CCCA8 /* LoginSignUpModel.swift in Sources */,
 				A9C12B94269C1A8B00729A74 /* LoginViewController.swift in Sources */,
 				D1449D9926A848610083418D /* MainViewController.swift in Sources */,
 				A95CD354269EB2BF002CCCA8 /* Enum+APIError.swift in Sources */,
@@ -871,7 +915,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Picme/Picme.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = S63RBKT6UQ;
 				INFOPLIST_FILE = Picme/Configure/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -893,7 +937,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Picme/Picme.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = S63RBKT6UQ;
 				INFOPLIST_FILE = Picme/Configure/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
