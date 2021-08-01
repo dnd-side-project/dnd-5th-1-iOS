@@ -1,86 +1,58 @@
 //
-//  LoginViewController.swift
-//  dnd-5th-1-iOS
+//  LoginsViewController.swift
+//  Picme
 //
-//  Created by taeuk on 2021/07/12.
+//  Created by taeuk on 2021/08/02.
 //
 
 import UIKit
-import AuthenticationServices
-import KakaoSDKUser
 import KakaoSDKAuth
+import KakaoSDKUser
+import AuthenticationServices
 
 class LoginViewController: BaseViewContoller {
-    
+
     // MARK: - Properties
     
-    var loginViewModel: LoginViewModel? = LoginViewModel()
-    
-    @IBOutlet weak var appleLoginButton: ASAuthorizationAppleIDButton!
+    @IBOutlet weak var mainTitleLabel: UILabel!
+    @IBOutlet weak var subLable: UILabel!
+    @IBOutlet weak var kakaoLoginButton: UIButton!
+    @IBOutlet weak var appleLoginButton: UIButton!
+    @IBOutlet weak var unLoginButton: UIButton!
     
     // MARK: - LifeCycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        loginViewModel?.loginDelegate = self
         
-        UserApi.shared.unlink {(error) in
-            if let error = error {
-                print(error)
-            } else {
-                print("unlink() success.")
-            }
-        }
-        
-//        let images = ["3","3","3","4","5","5"]
-        let images = ["4"]
-        var imageData: [Any] = []
-        
-        images.forEach {
-            let image = UIImage(named: $0)
-            imageData.append((image?.jpegData(compressionQuality: 0.2))!)
-//            imageData.append((image?.pngData()) ?? Data())
-        }
-        if let imagedatas = imageData as? [Data] {
-            print(imagedatas)
-            print(imagedatas.count)
-            let param = [
-                "files": imagedatas
-            ]
-//            ImageAPICenter.convertImage(param)
-        }
     }
 
-    @IBAction func kakaoAction(_ sender: UIButton) {
-        loginViewModel?.kakaoLogin()
-    }
-    
-    @IBAction func appleLogin(_ sender: ASAuthorizationAppleIDButton) {
-        let appleIDProvider = ASAuthorizationAppleIDProvider()
-        let request = appleIDProvider.createRequest()
-        request.requestedScopes = [.fullName, .email]
-        
-        let authorizationController = ASAuthorizationController(authorizationRequests: [request])
-        authorizationController.delegate = loginViewModel
-        authorizationController.presentationContextProvider = loginViewModel
-        authorizationController.performRequests()
-    }
-    
-    @IBAction func apiTestAction(_ sender: UIButton) {
-        
-    }
 }
 
-// MARK: - Protocol Login State
+// MARK: - UI
 
-extension LoginViewController: LoginState {
+extension LoginViewController {
     
-    func loginSuccess() {
-        print("\(Date()): Login Success")
+    // Label 일부 색 변경
+    func attributeString(text: String?, changeString: String) -> NSMutableAttributedString {
+        guard let text = text else { fatalError("NSMutable Error") }
+        let attributeString = NSMutableAttributedString(string: text)
+        attributeString.addAttribute(.foregroundColor,
+                                     value: UIColor.logoColor(.logoPink),
+                                     range: (text as NSString).range(of: changeString))
+        return attributeString
     }
     
-    func loginFail(error: String) {
-        print(error)
+    override func setConfiguration() {
+        
+        // Color
+        view.backgroundColor = .solidColor(.solid0)
+        mainTitleLabel.textColor = .textColor(.text100)
+        subLable.textColor = .textColor(.text71)
+        unLoginButton.setTitleColor(.textColor(.text91), for: .normal)
+        
+        // String
+        mainTitleLabel.attributedText = attributeString(text: mainTitleLabel.text, changeString: "인생사진")
+        
     }
 }

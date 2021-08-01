@@ -1,58 +1,94 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Inh-nG-xUb">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Login View Controller-->
-        <scene sceneID="s0d-6b-0kx">
+        <scene sceneID="UVd-YQ-JZi">
             <objects>
-                <viewController id="Y6W-OH-hqX" customClass="LoginViewController" customModule="dnd_5th_1_iOS" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                <viewController id="Inh-nG-xUb" customClass="LoginViewController" customModule="Picme" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="RrA-Xk-qBS">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fKE-x9-cJh">
-                                <rect key="frame" x="184" y="433" width="46" height="30"/>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <action selector="kakaoAction:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="i1e-ay-uuI"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="agI-23-g58" customClass="ASAuthorizationAppleIDButton">
-                                <rect key="frame" x="184" y="353" width="46" height="30"/>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <action selector="appleLogin:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="8UC-W5-eIy"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Azx-rR-NMV">
-                                <rect key="frame" x="169.5" y="563" width="75" height="30"/>
-                                <state key="normal" title="TestButton"/>
-                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="qAK-pE-jJK">
+                                <rect key="frame" x="20" y="144" width="194" height="153.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Zs-zn-2Rq">
+                                        <rect key="frame" x="0.0" y="0.0" width="171.5" height="129"/>
+                                        <string key="text">너도 
+인생사진 
+건질 수 있어</string>
+                                        <fontDescription key="fontDescription" type="system" pointSize="36"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="투표를 하기 위해서는 로그인이 필요해요!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MSC-5m-x7I">
+                                        <rect key="frame" x="0.0" y="139" width="194" height="14.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="4in-FE-Lcr">
+                                <rect key="frame" x="20" y="688" width="374" height="154"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="g1M-eb-P1v">
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="114"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AMA-Qg-pdL">
+                                                <rect key="frame" x="0.0" y="0.0" width="374" height="52"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="52" id="YNJ-2A-BHD"/>
+                                                </constraints>
+                                                <state key="normal" title="카카오"/>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VWu-rR-Ga7">
+                                                <rect key="frame" x="0.0" y="62" width="374" height="52"/>
+                                                <state key="normal" title="애플"/>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RL0-ae-cfF">
+                                        <rect key="frame" x="0.0" y="124" width="374" height="30"/>
+                                        <state key="normal" title="로그인 전에 둘러보기"/>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
-                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="5UX-PF-ZPP"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="Azx-rR-NMV" firstAttribute="top" secondItem="fKE-x9-cJh" secondAttribute="bottom" constant="100" id="2qZ-wG-XJr"/>
-                            <constraint firstItem="fKE-x9-cJh" firstAttribute="top" secondItem="agI-23-g58" secondAttribute="bottom" constant="50" id="65E-UK-x1y"/>
-                            <constraint firstItem="agI-23-g58" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="T8g-5X-LNN"/>
-                            <constraint firstItem="fKE-x9-cJh" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="TGs-U7-whU"/>
-                            <constraint firstItem="fKE-x9-cJh" firstAttribute="centerY" secondItem="5EZ-qb-Rvc" secondAttribute="centerY" id="Tei-eY-IoJ"/>
-                            <constraint firstItem="Azx-rR-NMV" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="yKA-iF-GvB"/>
+                            <constraint firstItem="qAK-pE-jJK" firstAttribute="leading" secondItem="5UX-PF-ZPP" secondAttribute="leading" constant="20" id="Ffv-mM-vY3"/>
+                            <constraint firstItem="qAK-pE-jJK" firstAttribute="top" secondItem="5UX-PF-ZPP" secondAttribute="top" constant="100" id="ZNj-xl-FAZ"/>
+                            <constraint firstItem="5UX-PF-ZPP" firstAttribute="bottom" secondItem="4in-FE-Lcr" secondAttribute="bottom" constant="20" id="dhf-xD-t1I"/>
+                            <constraint firstItem="4in-FE-Lcr" firstAttribute="leading" secondItem="5UX-PF-ZPP" secondAttribute="leading" constant="20" id="e4D-YP-bEg"/>
+                            <constraint firstItem="5UX-PF-ZPP" firstAttribute="trailing" secondItem="4in-FE-Lcr" secondAttribute="trailing" constant="20" id="obp-Q7-boI"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="appleLoginButton" destination="agI-23-g58" id="X2s-DE-v39"/>
+                        <outlet property="appleLoginButton" destination="VWu-rR-Ga7" id="UjN-1Q-wZ5"/>
+                        <outlet property="kakaoLoginButton" destination="AMA-Qg-pdL" id="zqw-Hf-Gfa"/>
+                        <outlet property="mainTitleLabel" destination="0Zs-zn-2Rq" id="VIW-rO-I0i"/>
+                        <outlet property="subLable" destination="MSC-5m-x7I" id="zgQ-ld-dCY"/>
+                        <outlet property="unLoginButton" destination="RL0-ae-cfF" id="x2P-VH-AVL"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uvc-Sj-JZ2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="30" y="89"/>
+            <point key="canvasLocation" x="323" y="84"/>
         </scene>
     </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>
