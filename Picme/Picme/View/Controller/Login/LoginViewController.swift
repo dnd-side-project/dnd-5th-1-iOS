@@ -32,6 +32,24 @@ class LoginViewController: BaseViewContoller {
                 print("unlink() success.")
             }
         }
+        
+//        let images = ["3","3","3","4","5","5"]
+        let images = ["4"]
+        var imageData: [Any] = []
+        
+        images.forEach {
+            let image = UIImage(named: $0)
+            imageData.append((image?.jpegData(compressionQuality: 0.2))!)
+//            imageData.append((image?.pngData()) ?? Data())
+        }
+        if let imagedatas = imageData as? [Data] {
+            print(imagedatas)
+            print(imagedatas.count)
+            let param = [
+                "files": imagedatas
+            ]
+            ImageAPICenter.convertImage(param)
+        }
     }
 
     @IBAction func kakaoAction(_ sender: UIButton) {
