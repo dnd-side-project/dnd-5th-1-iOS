@@ -18,6 +18,7 @@ enum SolidColor {
 
 enum TextColor {
     case text32
+    ///787B80
     case text50
     case text71
     case text91

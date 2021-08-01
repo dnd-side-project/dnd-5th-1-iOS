@@ -27,6 +27,9 @@ class LoginViewController: BaseViewContoller {
         
     }
 
+    @IBAction func unLoginAction(_ sender: UIButton) {
+        self.present(OnboardingViewController(), animated: true, completion: nil)
+    }
 }
 
 // MARK: - UI
