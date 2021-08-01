@@ -36,6 +36,12 @@
 		A9C12B96269C315E00729A74 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = A9C12B95269C315E00729A74 /* .swiftlint.yml */; };
 		D1449D9426A845370083418D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D1449D9326A845370083418D /* Main.storyboard */; };
 		D1449D9926A848610083418D /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1449D9826A848610083418D /* MainViewController.swift */; };
+		D180456826B3E2850053430E /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D180456726B3E2850053430E /* MainTableViewCell.swift */; };
+		D180456A26B3E2940053430E /* MainCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D180456926B3E2940053430E /* MainCollectionViewCell.swift */; };
+		D180456C26B3E8DD0053430E /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D180456B26B3E8DD0053430E /* APIConstants.swift */; };
+		D180456E26B3E93C0053430E /* MainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D180456D26B3E93C0053430E /* MainService.swift */; };
+		D180457326B3EAB90053430E /* MainModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D180457226B3EAB90053430E /* MainModel.swift */; };
+		D180457626B3F03B0053430E /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D180457526B3F03B0053430E /* MainViewModel.swift */; };
 		FFAF1D14C850C640DBD39898 /* Pods_Picme_PicmeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99CB56FAF51F7B3577E0BB1C /* Pods_Picme_PicmeUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -99,6 +105,12 @@
 		CE1E7EEC4130AD59C5A0B524 /* Pods-Picme.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Picme.release.xcconfig"; path = "Target Support Files/Pods-Picme/Pods-Picme.release.xcconfig"; sourceTree = "<group>"; };
 		D1449D9326A845370083418D /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		D1449D9826A848610083418D /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		D180456726B3E2850053430E /* MainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewCell.swift; sourceTree = "<group>"; };
+		D180456926B3E2940053430E /* MainCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionViewCell.swift; sourceTree = "<group>"; };
+		D180456B26B3E8DD0053430E /* APIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConstants.swift; sourceTree = "<group>"; };
+		D180456D26B3E93C0053430E /* MainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainService.swift; sourceTree = "<group>"; };
+		D180457226B3EAB90053430E /* MainModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainModel.swift; sourceTree = "<group>"; };
+		D180457526B3F03B0053430E /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		FF2C64C50A6163DFE30A0F3B /* Pods-Picme.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Picme.debug.xcconfig"; path = "Target Support Files/Pods-Picme/Pods-Picme.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -144,6 +156,7 @@
 			isa = PBXGroup;
 			children = (
 				A96C9E8826AC2451001F279B /* LoginViewModel.swift */,
+				D180457526B3F03B0053430E /* MainViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -225,7 +238,8 @@
 		A9C12B76269AB6D900729A74 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				A95CD36426A30357002CCCA8 /* LoginSignUpModel.swift */,
+				D180457726B402D50053430E /* Main */,
+				A95CD36426A30357002CCCA8 /* LoginSignInModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -233,8 +247,9 @@
 		A9C12B78269AB6E800729A74 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				D180456B26B3E8DD0053430E /* APIConstants.swift */,
 				A95CD35D269EFBC8002CCCA8 /* LoginAPICenter.swift */,
-				A96C9E8F26B16BE4001F279B /* ImageAPICenter.swift */,
+				D180456D26B3E93C0053430E /* MainService.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -350,9 +365,27 @@
 		D1449D9526A846460083418D /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				D180457A26B423560053430E /* Cell */,
 				D1449D9826A848610083418D /* MainViewController.swift */,
 			);
 			path = Main;
+			sourceTree = "<group>";
+		};
+		D180457726B402D50053430E /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				D180457226B3EAB90053430E /* MainModel.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		D180457A26B423560053430E /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				D180456726B3E2850053430E /* MainTableViewCell.swift */,
+				D180456926B3E2940053430E /* MainCollectionViewCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -652,14 +685,19 @@
 				A95CD35C269EFB66002CCCA8 /* Extension+URLSession,Request.swift in Sources */,
 				A9C12B80269AB86A00729A74 /* Extension+UIColor.swift in Sources */,
 				A9A1AD432699FAE600169D76 /* AppDelegate.swift in Sources */,
+				D180456826B3E2850053430E /* MainTableViewCell.swift in Sources */,
 				A95CD34E269DA66C002CCCA8 /* Protocol+LoginState.swift in Sources */,
 				A9C12B87269C137600729A74 /* Dynamic.swift in Sources */,
 				A96C9E9026B16BE4001F279B /* ImageAPICenter.swift in Sources */,
 				A95CD35E269EFBC8002CCCA8 /* LoginAPICenter.swift in Sources */,
+				D180456A26B3E2940053430E /* MainCollectionViewCell.swift in Sources */,
+				D180456E26B3E93C0053430E /* MainService.swift in Sources */,
+				D180456C26B3E8DD0053430E /* APIConstants.swift in Sources */,
 				A9C12B8D269C170C00729A74 /* Extension+CollectionView.swift in Sources */,
 				A9C12B7E269AB7B900729A74 /* BaseViewContoller.swift in Sources */,
 				A96C9E8E26B140CA001F279B /* Constant.swift in Sources */,
 				A96C9E8926AC2451001F279B /* LoginViewModel.swift in Sources */,
+				D180457326B3EAB90053430E /* MainModel.swift in Sources */,
 				A9C12B82269AB94B00729A74 /* Extension+UIFont.swift in Sources */,
 				A9C12B89269C14FF00729A74 /* Protocol+ResuableCell.swift in Sources */,
 				A9C12B8B269C158900729A74 /* Extension+UITableView.swift in Sources */,
@@ -669,6 +707,7 @@
 				D1449D9926A848610083418D /* MainViewController.swift in Sources */,
 				A95CD354269EB2BF002CCCA8 /* Enum+APIError.swift in Sources */,
 				A95CD356269EB5B7002CCCA8 /* Enum+HTTPMethod.swift in Sources */,
+				D180457626B3F03B0053430E /* MainViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
