@@ -47,6 +47,12 @@
                                 </constraints>
                                 <state key="normal" title="시작하기"/>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="영어소문자,한글,숫자로 구성된 12자까지 가능합니다!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8zv-Ri-1aJ">
+                                <rect key="frame" x="20" y="459.5" width="231.5" height="13.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <color key="textColor" systemColor="systemRedColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="N7R-cJ-07Q"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -56,14 +62,17 @@
                             <constraint firstItem="yWE-gL-B7I" firstAttribute="leading" secondItem="N7R-cJ-07Q" secondAttribute="leading" constant="20" id="Gde-AS-Woe"/>
                             <constraint firstItem="N7R-cJ-07Q" firstAttribute="trailing" secondItem="yWE-gL-B7I" secondAttribute="trailing" constant="20" id="KWi-9b-Rpe"/>
                             <constraint firstItem="rEi-E4-sTz" firstAttribute="centerX" secondItem="dML-5c-3ro" secondAttribute="centerX" id="Sfb-lE-apW"/>
+                            <constraint firstItem="8zv-Ri-1aJ" firstAttribute="leading" secondItem="rEi-E4-sTz" secondAttribute="leading" id="T0d-in-k2n"/>
                             <constraint firstItem="N7R-cJ-07Q" firstAttribute="bottom" secondItem="yWE-gL-B7I" secondAttribute="bottom" constant="100" id="UNv-7N-HMu"/>
                             <constraint firstItem="N7R-cJ-07Q" firstAttribute="trailing" secondItem="rEi-E4-sTz" secondAttribute="trailing" constant="20" id="jDc-Lx-OyT"/>
+                            <constraint firstItem="8zv-Ri-1aJ" firstAttribute="top" secondItem="rEi-E4-sTz" secondAttribute="bottom" constant="15" id="xuk-Fx-Otb"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="nickNameLabel" destination="tsT-Wz-jQA" id="0sC-cg-KT3"/>
                         <outlet property="nickNameTextfield" destination="MV1-QW-HEj" id="rG7-rX-4Yt"/>
                         <outlet property="startButton" destination="yWE-gL-B7I" id="aS8-pD-bKc"/>
+                        <outlet property="validLabel" destination="8zv-Ri-1aJ" id="gMI-4t-Y0g"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CyN-as-qAb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -74,6 +83,9 @@
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
