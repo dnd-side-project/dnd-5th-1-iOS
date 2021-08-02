@@ -28,13 +28,15 @@ class LoginViewController: BaseViewContoller {
         super.viewDidLoad()
         
         loginViewModel?.loginDelegate = self
+//        appleLoginButton.cornerRadius = 10
+        
     }
 
     @IBAction func kakaoLoginAction(_ sender: UIButton) {
         loginViewModel?.kakaoLogin()
     }
     
-    @IBAction func appleLoginAction(_ sender: Any) {
+    @IBAction func appleLoginAction(_ sender: ASAuthorizationAppleIDButton) {
         let appleIDProvider = ASAuthorizationAppleIDProvider()
         let request = appleIDProvider.createRequest()
         request.requestedScopes = [.fullName, .email]

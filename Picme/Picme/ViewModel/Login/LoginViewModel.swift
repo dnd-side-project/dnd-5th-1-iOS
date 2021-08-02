@@ -79,7 +79,9 @@ extension LoginViewModel: ASAuthorizationControllerDelegate, ASAuthorizationCont
         
         switch authorization.credential {
         case let appleIDCredetial as ASAuthorizationAppleIDCredential:
-            
+            print(appleIDCredetial.email)
+            print(appleIDCredetial.fullName)
+            // 초기 로그인시에만 이메일받아오기 때문에 로직 수정 필요
             if let userEmail = appleIDCredetial.email {
                 
                 print(appleIDCredetial.user)

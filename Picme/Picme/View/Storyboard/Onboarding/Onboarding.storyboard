@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Tix-Us-cWh">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -10,19 +10,65 @@
     </dependencies>
     <scenes>
         <!--Onboarding View Controller-->
-        <scene sceneID="s0d-6b-0kx">
+        <scene sceneID="RmB-g0-3Ue">
             <objects>
-                <viewController storyboardIdentifier="OnboardingViewController" id="Y6W-OH-hqX" customClass="OnboardingViewController" customModule="Picme" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                <viewController storyboardIdentifier="OnboardingViewController" id="Tix-Us-cWh" customClass="OnboardingViewController" customModule="Picme" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="dML-5c-3ro">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="rEi-E4-sTz">
+                                <rect key="frame" x="20" y="362" width="374" height="82.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="사용할 닉네임" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tsT-Wz-jQA">
+                                        <rect key="frame" x="140.5" y="0.0" width="93" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="최대 12자 까지 자유롭게 입력해주세요." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="MV1-QW-HEj">
+                                        <rect key="frame" x="0.0" y="30.5" width="374" height="52"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="52" id="tHO-0f-kRy"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="MV1-QW-HEj" firstAttribute="leading" secondItem="rEi-E4-sTz" secondAttribute="leading" id="2aE-4X-9Al"/>
+                                    <constraint firstAttribute="trailing" secondItem="MV1-QW-HEj" secondAttribute="trailing" id="dHg-S8-WUF"/>
+                                </constraints>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yWE-gL-B7I">
+                                <rect key="frame" x="20" y="710" width="374" height="52"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="52" id="qsC-X4-xYa"/>
+                                </constraints>
+                                <state key="normal" title="시작하기"/>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="N7R-cJ-07Q"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="rEi-E4-sTz" firstAttribute="centerY" secondItem="dML-5c-3ro" secondAttribute="centerY" multiplier="0.9" id="1ry-tO-C5s"/>
+                            <constraint firstItem="rEi-E4-sTz" firstAttribute="leading" secondItem="N7R-cJ-07Q" secondAttribute="leading" constant="20" id="CSi-2c-bMO"/>
+                            <constraint firstItem="yWE-gL-B7I" firstAttribute="leading" secondItem="N7R-cJ-07Q" secondAttribute="leading" constant="20" id="Gde-AS-Woe"/>
+                            <constraint firstItem="N7R-cJ-07Q" firstAttribute="trailing" secondItem="yWE-gL-B7I" secondAttribute="trailing" constant="20" id="KWi-9b-Rpe"/>
+                            <constraint firstItem="rEi-E4-sTz" firstAttribute="centerX" secondItem="dML-5c-3ro" secondAttribute="centerX" id="Sfb-lE-apW"/>
+                            <constraint firstItem="N7R-cJ-07Q" firstAttribute="bottom" secondItem="yWE-gL-B7I" secondAttribute="bottom" constant="100" id="UNv-7N-HMu"/>
+                            <constraint firstItem="N7R-cJ-07Q" firstAttribute="trailing" secondItem="rEi-E4-sTz" secondAttribute="trailing" constant="20" id="jDc-Lx-OyT"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="nickNameLabel" destination="tsT-Wz-jQA" id="0sC-cg-KT3"/>
+                        <outlet property="nickNameTextfield" destination="MV1-QW-HEj" id="rG7-rX-4Yt"/>
+                        <outlet property="startButton" destination="yWE-gL-B7I" id="aS8-pD-bKc"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CyN-as-qAb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="30" y="84"/>
+            <point key="canvasLocation" x="487" y="74"/>
         </scene>
     </scenes>
     <resources>
