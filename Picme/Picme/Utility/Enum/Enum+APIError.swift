@@ -30,3 +30,15 @@ enum APIError: Error {
         }
     }
 }
+
+enum LoginHandler {
+    case failedHandler
+    
+    var statusCode: Int {
+        switch self {
+        case .failedHandler:
+            return 404
+        }
+    }
+}
+

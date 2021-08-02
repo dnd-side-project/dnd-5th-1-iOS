@@ -49,6 +49,9 @@
                                                     <constraint firstAttribute="height" constant="52" id="YNJ-2A-BHD"/>
                                                 </constraints>
                                                 <state key="normal" title="카카오" image="kakao_login"/>
+                                                <connections>
+                                                    <action selector="kakaoLoginAction:" destination="Inh-nG-xUb" eventType="touchUpInside" id="i0r-RI-gJn"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VWu-rR-Ga7" customClass="ASAuthorizationAppleIDButton">
                                                 <rect key="frame" x="0.0" y="62" width="374" height="52"/>

@@ -34,7 +34,7 @@ class LoginViewController: BaseViewContoller {
         loginViewModel?.kakaoLogin()
     }
     
-    @IBAction func appleLoginAction(_ sender: ASAuthorizationAppleIDButton) {
+    @IBAction func appleLoginAction(_ sender: Any) {
         let appleIDProvider = ASAuthorizationAppleIDProvider()
         let request = appleIDProvider.createRequest()
         request.requestedScopes = [.fullName, .email]
@@ -80,6 +80,12 @@ extension LoginViewController {
 }
 
 extension LoginViewController: LoginState {
+    
+    func presentOnboarding() {
+        let onBoarding = UIStoryboard(name: "Onboarding", bundle: nil)
+        let presentController = onBoarding.instantiateViewController(withIdentifier: "OnboardingViewController")
+        self.present(presentController, animated: true, completion: nil)
+    }
     
     func loginSuccess() {
         print("\(Date()): Login Success")

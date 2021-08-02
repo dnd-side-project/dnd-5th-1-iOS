@@ -41,16 +41,21 @@ extension LoginViewModel {
                         print(kakaoUserId)
                         print(kakaoUserEmail)
                         
-                        let kakaoInfo = LoginAPICenter.LoginKind.kakao(userID: String(kakaoUserId),
-                                                                       nickName: "kakao1",
-                                                                       email: kakaoUserEmail)
+                        let kakaoUserInfo = LoginKind.SignIn.kakao(userID: String(kakaoUserId),
+                                                                   email: kakaoUserEmail)
                         
-                        LoginAPICenter.fetchUserData(kakaoInfo.loginValue) { (response) in
+                        LoginAPICenter.fetchSignIn(kakaoUserInfo.loginValue) { [weak self] (response) in
+                            guard let self = self else { return }
+                            
                             switch response {
                             case .success(let data):
+                                // home으로 이동
                                 print(data)
+                                self.loginDelegate?.loginSuccess()
                             case .failure(let err):
+                                // onboarding으로 이동
                                 print(err.localized)
+                                self.loginDelegate?.presentOnboarding()
                             }
                         }
                     }
@@ -58,7 +63,6 @@ extension LoginViewModel {
             }
         }
     }
-    
 }
 
 // MARK: - Apple Login
@@ -81,20 +85,21 @@ extension LoginViewModel: ASAuthorizationControllerDelegate, ASAuthorizationCont
                 print(appleIDCredetial.user)
                 print(userEmail)
                 
-                let appleInfo = LoginAPICenter.LoginKind.apple(userID: appleIDCredetial.user,
-                                                               nickName: "apple",
-                                                               email: userEmail)
+                let appleUserInfo = LoginKind.SignIn.apple(userID: appleIDCredetial.user, email: userEmail)
                 
-                LoginAPICenter.fetchUserData(appleInfo.loginValue) { (response) in
+                LoginAPICenter.fetchSignIn(appleUserInfo.loginValue) { [weak self] (response) in
+                    guard let self = self else { return}
+                    
                     switch response {
                     case .success(let data):
                         print(data)
+                        self.loginDelegate?.loginSuccess()
                     case .failure(let err):
                         print(err.localized)
+                        self.loginDelegate?.presentOnboarding()
                     }
                 }
             }
-            
         default:
             break
         }

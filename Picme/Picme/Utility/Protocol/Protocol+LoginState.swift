@@ -11,4 +11,5 @@ protocol LoginState: AnyObject {
     
     func loginSuccess()
     func loginFail(error: String)
+    func presentOnboarding()
 }
