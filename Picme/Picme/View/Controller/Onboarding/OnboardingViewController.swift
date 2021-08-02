@@ -15,11 +15,37 @@ class OnboardingViewController: BaseViewContoller {
     @IBOutlet weak var nickNameTextfield: UITextField!
     @IBOutlet weak var startButton: UIButton!
     
+    var onboardingViewModel: OnboardingViewModel? = OnboardingViewModel()
+    
     // MARK: - LifeCycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        onboardingViewModel?.isButtonState.bindAndFire(listener: { state in
+            self.startButtonState(state)
+        })
+    }
+    
+    @objc func textfieldDidChanged(_ textfield: UITextField) {
+        guard let text = textfield.text else { return }
+        
+        if !text.isEmpty {
+            onboardingViewModel?.isButtonState.value = true
+        } else {
+            onboardingViewModel?.isButtonState.value = false
+        }
+    }
+    
+    func startButtonState(_ state: Bool) {
+        
+        if state {
+            startButton.setTitleColor(.textColor(.text100), for: .normal)
+            startButton.backgroundColor = .mainColor(.pink)
+        } else {
+            startButton.setTitleColor(.textColor(.text50), for: .normal)
+            startButton.backgroundColor = .solidColor(.solid26)
+        }
     }
 }
 
@@ -43,6 +69,8 @@ extension OnboardingViewController {
         nickNameTextfield.textColor = .white
         nickNameTextfield.layer.cornerRadius = 10
         startButton.layer.cornerRadius = 10
+        
+        nickNameTextfield.addTarget(self, action: #selector(textfieldDidChanged(_:)), for: .editingChanged)
     }
     
     override func setConfiguration() {
@@ -52,10 +80,6 @@ extension OnboardingViewController {
         nickNameTextfield.backgroundColor = .solidColor(.solid12)
         startButton.setTitleColor(.textColor(.text50), for: .normal)
         startButton.backgroundColor = .solidColor(.solid26)
-        
-        // 입력시
-//        startButton.setTitleColor(.textColor(.text100), for: .normal)
-//        startButton.backgroundColor = .mainColor(.pink)
         
         nickNameTextfield.addLeftPadding()
     }

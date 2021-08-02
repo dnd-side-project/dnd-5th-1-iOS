@@ -10,6 +10,7 @@
 		521630CB556750301749121F /* Pods_Picme.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB74E774F2085618C97D3804 /* Pods_Picme.framework */; };
 		7AA762B0B95B4242803315E5 /* Pods_PicmeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B8846FE285BDFC765A499DA /* Pods_PicmeTests.framework */; };
 		A91F57D426B7B261006F20AD /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91F57D326B7B261006F20AD /* OnboardingViewController.swift */; };
+		A91F57D726B7B641006F20AD /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91F57D626B7B641006F20AD /* OnboardingViewModel.swift */; };
 		A95CD34E269DA66C002CCCA8 /* Protocol+LoginState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95CD34D269DA66C002CCCA8 /* Protocol+LoginState.swift */; };
 		A95CD354269EB2BF002CCCA8 /* Enum+APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95CD353269EB2BF002CCCA8 /* Enum+APIError.swift */; };
 		A95CD356269EB5B7002CCCA8 /* Enum+HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95CD355269EB5B7002CCCA8 /* Enum+HTTPMethod.swift */; };
@@ -70,6 +71,7 @@
 		95A7318E3A14E589BF7BB1AF /* Pods-PicmeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PicmeTests.debug.xcconfig"; path = "Target Support Files/Pods-PicmeTests/Pods-PicmeTests.debug.xcconfig"; sourceTree = "<group>"; };
 		99CB56FAF51F7B3577E0BB1C /* Pods_Picme_PicmeUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Picme_PicmeUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A91F57D326B7B261006F20AD /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
+		A91F57D626B7B641006F20AD /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
 		A95CD34D269DA66C002CCCA8 /* Protocol+LoginState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Protocol+LoginState.swift"; sourceTree = "<group>"; };
 		A95CD353269EB2BF002CCCA8 /* Enum+APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Enum+APIError.swift"; sourceTree = "<group>"; };
 		A95CD355269EB5B7002CCCA8 /* Enum+HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Enum+HTTPMethod.swift"; sourceTree = "<group>"; };
@@ -162,6 +164,14 @@
 			path = Login;
 			sourceTree = "<group>";
 		};
+		A91F57D526B7B632006F20AD /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				A91F57D626B7B641006F20AD /* OnboardingViewModel.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
 		A975287926B69E5B003EE1A9 /* Login */ = {
 			isa = PBXGroup;
 			children = (
@@ -197,6 +207,7 @@
 		A98C691226AC23D500AD9191 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				A91F57D526B7B632006F20AD /* Onboarding */,
 				A975287926B69E5B003EE1A9 /* Login */,
 				D180457526B3F03B0053430E /* MainViewModel.swift */,
 			);
@@ -731,6 +742,7 @@
 				A975288226B74322003EE1A9 /* LoginViewController.swift in Sources */,
 				A9C12B80269AB86A00729A74 /* Extension+UIColor.swift in Sources */,
 				A9A1AD432699FAE600169D76 /* AppDelegate.swift in Sources */,
+				A91F57D726B7B641006F20AD /* OnboardingViewModel.swift in Sources */,
 				D180456826B3E2850053430E /* MainTableViewCell.swift in Sources */,
 				A91F57D426B7B261006F20AD /* OnboardingViewController.swift in Sources */,
 				A95CD34E269DA66C002CCCA8 /* Protocol+LoginState.swift in Sources */,
