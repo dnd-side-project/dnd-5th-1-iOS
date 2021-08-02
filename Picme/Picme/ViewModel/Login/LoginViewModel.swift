@@ -66,7 +66,7 @@ extension LoginViewModel {
 extension LoginViewModel: ASAuthorizationControllerDelegate, ASAuthorizationControllerPresentationContextProviding {
     
     func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
-        let loginVC = LoginssViewController()
+        let loginVC = LoginViewController()
         return loginVC.view.window ?? UIWindow()
     }
     

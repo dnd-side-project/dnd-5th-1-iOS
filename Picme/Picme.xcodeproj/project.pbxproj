@@ -14,7 +14,7 @@
 		A95CD356269EB5B7002CCCA8 /* Enum+HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95CD355269EB5B7002CCCA8 /* Enum+HTTPMethod.swift */; };
 		A95CD35C269EFB66002CCCA8 /* Extension+URLSession,Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95CD35B269EFB66002CCCA8 /* Extension+URLSession,Request.swift */; };
 		A95CD35E269EFBC8002CCCA8 /* LoginAPICenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95CD35D269EFBC8002CCCA8 /* LoginAPICenter.swift */; };
-		A95CD36526A30357002CCCA8 /* LoginSignUpModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95CD36426A30357002CCCA8 /* LoginSignUpModel.swift */; };
+		A95CD36526A30357002CCCA8 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95CD36426A30357002CCCA8 /* LoginModel.swift */; };
 		A96C9E8926AC2451001F279B /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A96C9E8826AC2451001F279B /* LoginViewModel.swift */; };
 		A975287826B69DE1003EE1A9 /* ImageAPICenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A975287726B69DE1003EE1A9 /* ImageAPICenter.swift */; };
 		A975287D26B69EAF003EE1A9 /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A975287C26B69EAF003EE1A9 /* Onboarding.storyboard */; };
@@ -75,7 +75,7 @@
 		A95CD355269EB5B7002CCCA8 /* Enum+HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Enum+HTTPMethod.swift"; sourceTree = "<group>"; };
 		A95CD35B269EFB66002CCCA8 /* Extension+URLSession,Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+URLSession,Request.swift"; sourceTree = "<group>"; };
 		A95CD35D269EFBC8002CCCA8 /* LoginAPICenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginAPICenter.swift; sourceTree = "<group>"; };
-		A95CD36426A30357002CCCA8 /* LoginSignUpModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginSignUpModel.swift; sourceTree = "<group>"; };
+		A95CD36426A30357002CCCA8 /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
 		A96C9E8826AC2451001F279B /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		A96C9E8A26AC249C001F279B /* Picme.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Picme.entitlements; sourceTree = "<group>"; };
 		A975287726B69DE1003EE1A9 /* ImageAPICenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageAPICenter.swift; sourceTree = "<group>"; };
@@ -154,6 +154,14 @@
 				2B8846FE285BDFC765A499DA /* Pods_PicmeTests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A91F57D026B7740D006F20AD /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				A95CD36426A30357002CCCA8 /* LoginModel.swift */,
+			);
+			path = Login;
 			sourceTree = "<group>";
 		};
 		A975287926B69E5B003EE1A9 /* Login */ = {
@@ -276,8 +284,8 @@
 		A9C12B76269AB6D900729A74 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				A91F57D026B7740D006F20AD /* Login */,
 				D180457726B402D50053430E /* Main */,
-				A95CD36426A30357002CCCA8 /* LoginSignUpModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -743,7 +751,7 @@
 				A9C12B89269C14FF00729A74 /* Protocol+ResuableCell.swift in Sources */,
 				A9C12B8B269C158900729A74 /* Extension+UITableView.swift in Sources */,
 				A9A1AD452699FAE600169D76 /* SceneDelegate.swift in Sources */,
-				A95CD36526A30357002CCCA8 /* LoginSignUpModel.swift in Sources */,
+				A95CD36526A30357002CCCA8 /* LoginModel.swift in Sources */,
 				A9C12B94269C1A8B00729A74 /* LoginssViewController.swift in Sources */,
 				D1449D9926A848610083418D /* MainViewController.swift in Sources */,
 				A95CD354269EB2BF002CCCA8 /* Enum+APIError.swift in Sources */,

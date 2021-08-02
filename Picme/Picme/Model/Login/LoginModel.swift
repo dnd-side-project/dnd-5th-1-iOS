@@ -18,3 +18,9 @@ struct LoginSignUpResponseModel: Codable {
     let profilePictureImage: String
     let nickname: String
 }
+
+struct LoginSignInModel: Codable {
+    let vendor: String
+    let vendorAccountId: String
+    let email: String?
+}
