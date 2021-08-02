@@ -14,9 +14,10 @@ class BaseViewContoller: UIViewController {
 
         setProperties()
         setConfiguration()
-
+        setConstraints()
     }
     
+    @objc dynamic func setConstraints() {}
     @objc dynamic func setConfiguration() {}
     @objc dynamic func setProperties() {}
 

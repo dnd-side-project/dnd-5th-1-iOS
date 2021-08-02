@@ -9,28 +9,42 @@ import UIKit
 
 // Enum, case 이름 수정 예정
 enum SolidColor {
+    /// #000000, RGB(0, 0, 0, alpha: 1.0)
     case solid0
+    /// #1A1C1F, RGB(26, 28, 31, alpha: 1.0)
     case solid12
+    /// #212428, RGB(33, 36, 40, alpha: 1.0)
     case solid16
+    /// #373C42, RGB(55, 60, 66, alpha: 1.0)
     case solid26
+    /// #494D52, RGB(73, 77, 82, alpha: 1.0)
     case solid32
 }
 
 enum TextColor {
+    /// #4D4F52, RGB(77, 79, 82, alpha: 1.0)
     case text32
+    /// #787B80, RGB(120, 123, 128, alpha: 1.0)
     case text50
+    /// #B2B4B6, RGB(178, 180, 182, alpha: 1.0)
     case text71
+    /// #E6E7E9, RGB(230, 231, 233, alpha: 1.0)
     case text91
+    /// #FEFEFE, RGB(254, 254, 254, alpha: 1.0)
     case text100
 }
 
 enum LogoColor {
+    /// #F21CA0, RGB(242, 28, 160, alpha: 1.0)
     case logoPink
 }
 
 enum MainColor {
+    /// #EB499A, RGB(235, 73, 154, alpha: 1.0)
     case pink
+    /// #F0793C, RGB(240, 121, 60, alpha: 1.0)
     case orange
+    /// #33CC8C, RGB(51, 204, 140, alpha: 1.0)
     case mint
 }
 
