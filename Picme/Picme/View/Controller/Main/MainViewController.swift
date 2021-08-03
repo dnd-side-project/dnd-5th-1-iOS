@@ -16,24 +16,29 @@ class MainViewController: UIViewController {
     
     @IBOutlet weak var mainTableView: UITableView!
     
+    //MARK: paging
+    
+    var isPaging: Bool = false // 현재 페이징 중인지 체크하는 flag
+    var hasNextPage: Bool = false // 마지막 페이지 인지 체크 하는 flag
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupTableView()
     }
     
+    
     func setupTableView() {
         self.mainTableView.dataSource = self
         self.mainTableView.delegate = self
         
-        /*
-         mainViewModel.mainList.bind { (_) in
-         self.showTableView()
-         }
-         
-         self.mainViewModel.fetchMainList()
-         */
+        mainViewModel.mainList.bind { (_) in
+            self.showTableView()
+        }
+        
+        //self.mainViewModel.fetchMainList()
     }
+    
     
     func showTableView() {
         DispatchQueue.main.async {
@@ -44,10 +49,10 @@ class MainViewController: UIViewController {
             }
         }
     }
-    
 }
 
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         //return mainViewModel.mainList.value.count
@@ -56,15 +61,15 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
+        let cell: MainTableViewCell = mainTableView.dequeueTableCell(for: indexPath)
         
-        guard let cell = mainTableView.dequeueReusableCell(withIdentifier: "MainTableViewCell") as? MainTableViewCell else { return UITableViewCell() }
-        
-//        cell.setCollectionViewDataSourceDelegate(forRow: indexPath.row)
-//        cell.item = self.mainViewModel.mainList.value[indexPath.row]
+        //        cell.setCollectionViewDataSourceDelegate(forRow: indexPath.row)
+        //        cell.item = self.mainViewModel.mainList.value[indexPath.row]
         
         // 서버 통신 전 예시 코드
         cell.mainNicknameLabel.text = "오늘도 개미는 뚠뚠"
-        cell.mainDateLabel.text = "4시간 전"
+        cell.mainParticipantsLabel.text = "99명 참가중"
         cell.mainDeadlineLabel.text = "1시간 후 마감"
         cell.mainTitleLabel.text = "사진 잘 나온거 하나만 골라주세요!!"
         cell.mainProfileImageView.image = #imageLiteral(resourceName: "defalutImage")
@@ -72,5 +77,14 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         
         return cell
     }
+    
+    /*
+     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+     
+        if mainViewModel.mainList.value.count == indexPath.row - 1 {
+            mainViewModel.fetchMainList()
+        }
+     }
+     */
     
 }

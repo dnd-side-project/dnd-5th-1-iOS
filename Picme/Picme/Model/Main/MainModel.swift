@@ -12,11 +12,11 @@ struct MainListModel: Codable {
 }
 
 struct MainModel: Codable {
+    let postId: String
     let nickname: String
     let profileimageUrl: String
-    let date: String
+    let participantsNum: Int
     let deadline: String
     let title: String
-    let description: String
-    let images: [String]
+    let thumbnailUrl: [String]
 }

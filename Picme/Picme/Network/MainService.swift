@@ -11,7 +11,7 @@ import SwiftyJSON
 
 class MainService {
     
-    static func getMainList(completion: @escaping([MainModel]?) -> Void) {
+    static func getMainList(page: Int, completion: @escaping([MainModel]?) -> Void) {
         let URL = APIConstants.Post.create.urlString
         
         let dataRequest = AF.request(URL,
