@@ -37,6 +37,8 @@
 		A9C12B8D269C170C00729A74 /* Extension+CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C12B8C269C170C00729A74 /* Extension+CollectionView.swift */; };
 		A9C12B92269C1A7A00729A74 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9C12B91269C1A7A00729A74 /* Login.storyboard */; };
 		A9C12B96269C315E00729A74 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = A9C12B95269C315E00729A74 /* .swiftlint.yml */; };
+		D11C2DC126B82AA100C8EE51 /* VoteDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11C2DC026B82AA100C8EE51 /* VoteDetailViewController.swift */; };
+		D11C2DC326B947B100C8EE51 /* LoadingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11C2DC226B947B100C8EE51 /* LoadingTableViewCell.swift */; };
 		D1449D9426A845370083418D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D1449D9326A845370083418D /* Main.storyboard */; };
 		D1449D9926A848610083418D /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1449D9826A848610083418D /* MainViewController.swift */; };
 		D180456826B3E2850053430E /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D180456726B3E2850053430E /* MainTableViewCell.swift */; };
@@ -109,6 +111,8 @@
 		BB74E774F2085618C97D3804 /* Pods_Picme.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Picme.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCA73C122FAB6E7E7E132CEB /* Pods-Picme-PicmeUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Picme-PicmeUITests.release.xcconfig"; path = "Target Support Files/Pods-Picme-PicmeUITests/Pods-Picme-PicmeUITests.release.xcconfig"; sourceTree = "<group>"; };
 		CE1E7EEC4130AD59C5A0B524 /* Pods-Picme.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Picme.release.xcconfig"; path = "Target Support Files/Pods-Picme/Pods-Picme.release.xcconfig"; sourceTree = "<group>"; };
+		D11C2DC026B82AA100C8EE51 /* VoteDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteDetailViewController.swift; sourceTree = "<group>"; };
+		D11C2DC226B947B100C8EE51 /* LoadingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingTableViewCell.swift; sourceTree = "<group>"; };
 		D1449D9326A845370083418D /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		D1449D9826A848610083418D /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		D180456726B3E2850053430E /* MainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewCell.swift; sourceTree = "<group>"; };
@@ -425,6 +429,7 @@
 			children = (
 				D180457A26B423560053430E /* Cell */,
 				D1449D9826A848610083418D /* MainViewController.swift */,
+				D11C2DC026B82AA100C8EE51 /* VoteDetailViewController.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -442,6 +447,7 @@
 			children = (
 				D180456726B3E2850053430E /* MainTableViewCell.swift */,
 				D180456926B3E2940053430E /* MainCollectionViewCell.swift */,
+				D11C2DC226B947B100C8EE51 /* LoadingTableViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -764,9 +770,13 @@
 				A9C12B89269C14FF00729A74 /* Protocol+ResuableCell.swift in Sources */,
 				A9C12B8B269C158900729A74 /* Extension+UITableView.swift in Sources */,
 				A9A1AD452699FAE600169D76 /* SceneDelegate.swift in Sources */,
+				A95CD36526A30357002CCCA8 /* LoginSignUpModel.swift in Sources */,
+				A9C12B94269C1A8B00729A74 /* LoginssViewController.swift in Sources */,
+				D11C2DC326B947B100C8EE51 /* LoadingTableViewCell.swift in Sources */,
 				A95CD36526A30357002CCCA8 /* LoginModel.swift in Sources */,
 				D1449D9926A848610083418D /* MainViewController.swift in Sources */,
 				A95CD354269EB2BF002CCCA8 /* Enum+APIError.swift in Sources */,
+				D11C2DC126B82AA100C8EE51 /* VoteDetailViewController.swift in Sources */,
 				A95CD356269EB5B7002CCCA8 /* Enum+HTTPMethod.swift in Sources */,
 				D180457626B3F03B0053430E /* MainViewModel.swift in Sources */,
 			);

@@ -12,7 +12,7 @@ class MainTableViewCell: UITableViewCell {
     
     @IBOutlet weak var mainProfileImageView: UIImageView!
     @IBOutlet weak var mainNicknameLabel: UILabel!
-    @IBOutlet weak var mainDateLabel: UILabel!
+    @IBOutlet weak var mainParticipantsLabel: UILabel!
     @IBOutlet weak var mainDeadlineLabel: UILabel!
     @IBOutlet weak var mainTitleLabel: UILabel!
     
@@ -29,11 +29,13 @@ class MainTableViewCell: UITableViewCell {
             
             self.mainProfileImageView.kf.setImage(with: URL(string: mainList.profileimageUrl), placeholder: #imageLiteral(resourceName: "defalutImage"))
             self.mainNicknameLabel.text = mainList.nickname
-            self.mainDateLabel.text = mainList.date
+            self.mainParticipantsLabel.text = String(mainList.participantsNum)
             self.mainDeadlineLabel.text = mainList.deadline
             self.mainTitleLabel.text = mainList.title
             
-            self.imageData = mainList.images
+            self.imageData = mainList.thumbnailUrl
+            
+            
         }
     }
     
@@ -63,8 +65,8 @@ extension MainTableViewCell: UICollectionViewDelegate, UICollectionViewDataSourc
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        guard let cell = mainCollectionView.dequeueReusableCell(withReuseIdentifier: "MainCollectionViewCell", for: indexPath) as? MainCollectionViewCell else { return UICollectionViewCell() }
+
+        let cell: MainCollectionViewCell = mainCollectionView.dequeueCollectionCell(for: indexPath)
         
         //cell.mainPhotoImageView.kf.setImage(with: URL(string: imageData[indexPath.row]), placeholder: #imageLiteral(resourceName: "defalutImage"))
 
