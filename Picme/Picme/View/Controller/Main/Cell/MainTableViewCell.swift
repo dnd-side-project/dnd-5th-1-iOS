@@ -8,6 +8,10 @@
 import UIKit
 import Kingfisher
 
+protocol CollectionViewCellDelegate {
+    func selectedCollectionViewCell(_ index: Int)
+}
+
 class MainTableViewCell: UITableViewCell {
     
     @IBOutlet weak var mainProfileImageView: UIImageView!
@@ -18,8 +22,10 @@ class MainTableViewCell: UITableViewCell {
     
     var imageData: [String]!
     
+    var delegate: CollectionViewCellDelegate?
+    
     // 서버 통신 전 예시 이미지
-    var imageArray = [#imageLiteral(resourceName: "defalutImage"), #imageLiteral(resourceName: "defalutImage"), #imageLiteral(resourceName: "defalutImage"), #imageLiteral(resourceName: "defalutImage"), #imageLiteral(resourceName: "defalutImage")]
+    var imageArray = [#imageLiteral(resourceName: "defalutImage"), #imageLiteral(resourceName: "defalutImage"), #imageLiteral(resourceName: "defalutImage")]
     
     @IBOutlet weak var mainCollectionView: UICollectionView!
     
@@ -34,8 +40,6 @@ class MainTableViewCell: UITableViewCell {
             self.mainTitleLabel.text = mainList.title
             
             self.imageData = mainList.thumbnailUrl
-            
-            
         }
     }
     
@@ -65,14 +69,26 @@ extension MainTableViewCell: UICollectionViewDelegate, UICollectionViewDataSourc
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-
+        
         let cell: MainCollectionViewCell = mainCollectionView.dequeueCollectionCell(for: indexPath)
         
         //cell.mainPhotoImageView.kf.setImage(with: URL(string: imageData[indexPath.row]), placeholder: #imageLiteral(resourceName: "defalutImage"))
-
-        cell.mainPhotoImageView.image = imageArray[indexPath.row]
         
+        if indexPath.item == imageArray.count - 1 {
+            cell.mainPhotoImageView.image = #imageLiteral(resourceName: "defalutImage").withRenderingMode(.alwaysTemplate)
+            cell.mainPhotoImageView.tintColor = .solidColor(.solid12)
+            cell.stackView.isHidden = false
+        } else {
+            cell.mainPhotoImageView.image = imageArray[indexPath.row]
+            cell.stackView.isHidden = true
+        }
+    
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let delegate = delegate {
+            delegate.selectedCollectionViewCell(indexPath.item)
+        }
+    }
 }
