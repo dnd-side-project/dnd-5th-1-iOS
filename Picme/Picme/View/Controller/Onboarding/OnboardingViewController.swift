@@ -159,8 +159,8 @@ extension OnboardingViewController: LoginState {
     // Main 연결
     func loginSuccess() {
         let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        // Identifier 연결안됨
-        let presentVC = mainStoryboard.instantiateViewController(withIdentifier: "123")
+        let presentVC = mainStoryboard.instantiateViewController(withIdentifier: "TabBarController")
+        presentVC.modalPresentationStyle = .fullScreen
         self.present(presentVC, animated: true, completion: nil)
     }
     
