@@ -72,6 +72,11 @@ class OnboardingViewController: BaseViewContoller {
             validLabel.isHidden = true
         }
     }
+    
+    @IBAction func loginRegistAction(_ sender: UIButton) {
+        guard let nickNameText = nickNameTextfield.text else { return }
+        onboardingViewModel?.registUser(nickNameText)
+    }
 }
 
 extension OnboardingViewController: UITextFieldDelegate {

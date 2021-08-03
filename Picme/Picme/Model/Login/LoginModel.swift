@@ -14,7 +14,7 @@ struct LoginSignUpModel: Codable {
     let email: String
 }
 
-struct LoginSignUpResponseModel: Codable {
+struct LoginResponseModel: Codable {
     let profilePictureImage: String
     let nickname: String
 }

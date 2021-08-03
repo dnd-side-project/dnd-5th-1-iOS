@@ -10,11 +10,11 @@ import Alamofire
 
 struct LoginKind {
     
-    enum SignIn {
-        case kakao(userID: String, email: String)
-        case apple(userID: String, email: String)
+    enum LoginRawValue {
+        case apple
+        case kakao
         
-        var loginKindRawValue: String {
+        var vendor: String {
             switch self {
             case .apple:
                 return "Apple"
@@ -22,13 +22,23 @@ struct LoginKind {
                 return "Kakao"
             }
         }
+    }
+    
+    enum SignIn {
+        case kakao(userID: String, email: String)
+        case apple(userID: String, email: String)
         
         var loginValue: LoginSignInModel {
             switch self {
             case let .kakao(userID, email):
-                return LoginSignInModel(vendor: loginKindRawValue, vendorAccountId: userID, email: email)
+                return LoginSignInModel(vendor: LoginRawValue.kakao.vendor,
+                                        vendorAccountId: userID,
+                                        email: email)
+                
             case let .apple(userID, email):
-                return LoginSignInModel(vendor: loginKindRawValue, vendorAccountId: userID, email: email)
+                return LoginSignInModel(vendor: LoginRawValue.apple.vendor,
+                                        vendorAccountId: userID,
+                                        email: email)
             }
         }
     }
@@ -37,21 +47,19 @@ struct LoginKind {
         case kakao(userID: String, nickName: String, email: String)
         case apple(userID: String, nickName: String, email: String)
         
-        var loginKindRawValue: String {
-            switch self {
-            case .apple:
-                return "Apple"
-            case .kakao:
-                return "Kakao"
-            }
-        }
-        
         var loginValue: LoginSignUpModel {
             switch self {
             case let .kakao(userID, nickName, email):
-                return LoginSignUpModel(vendor: loginKindRawValue, vendorAccountId: userID, nickname: nickName, email: email)
+                return LoginSignUpModel(vendor: LoginRawValue.kakao.vendor,
+                                        vendorAccountId: userID,
+                                        nickname: nickName,
+                                        email: email)
+                
             case let .apple(userID, nickName, email):
-                return LoginSignUpModel(vendor: loginKindRawValue, vendorAccountId: userID, nickname: nickName, email: email)
+                return LoginSignUpModel(vendor: LoginRawValue.apple.vendor,
+                                        vendorAccountId: userID,
+                                        nickname: nickName,
+                                        email: email)
             }
         }
     }
@@ -60,7 +68,7 @@ struct LoginKind {
 struct LoginAPICenter {
     
     static func fetchSignIn(_ type: LoginSignInModel,
-                            completion: @escaping ResultModel<LoginSignUpResponseModel>) {
+                            completion: @escaping ResultModel<LoginResponseModel>) {
         
         let urlString = APIConstants.Auth.signIn.urlString
         
@@ -74,7 +82,7 @@ struct LoginAPICenter {
                    method: .post,
                    parameters: parameter,
                    encoding: JSONEncoding.default)
-            .responseDecodable(of: LoginSignUpResponseModel.self) { (response) in
+            .responseDecodable(of: LoginResponseModel.self) { (response) in
                 switch response.result {
                 case .success(let data):
                     completion(.success(data))
@@ -89,10 +97,11 @@ struct LoginAPICenter {
             }
     }
     
-    static func fetchUserData(_ type: LoginSignUpModel,
-                              completion: @escaping ResultModel<LoginSignUpResponseModel>) {
+    static func fetchSignUp(_ type: LoginSignUpModel,
+                            completion: @escaping ResultModel<LoginResponseModel>) {
         
-        let urlString = "http://2d63c4581cec.ngrok.io/v1/auth/signup"
+        let urlString = APIConstants.Auth.signUp.urlString
+//        let urlString = "http://2d63c4581cec.ngrok.io/v1/auth/signup"
         
         let parameters = type
         
@@ -111,8 +120,7 @@ struct LoginAPICenter {
         AF.request(urlString,
                    method: .post,
                    parameters: parameter,
-                   encoding: JSONEncoding.default).responseDecodable(of: LoginSignUpResponseModel.self, completionHandler: { (response) in
-                    print(response.response)
+                   encoding: JSONEncoding.default).responseDecodable(of: LoginResponseModel.self, completionHandler: { (response) in
             switch response.result {
             case .success(let data):
                 completion(.success(data))

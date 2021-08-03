@@ -46,6 +46,9 @@
                                     <constraint firstAttribute="height" constant="52" id="qsC-X4-xYa"/>
                                 </constraints>
                                 <state key="normal" title="시작하기"/>
+                                <connections>
+                                    <action selector="loginRegistAction:" destination="Tix-Us-cWh" eventType="touchUpInside" id="qRd-6R-DfP"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="영어소문자,한글,숫자로 구성된 12자까지 가능합니다!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8zv-Ri-1aJ">
                                 <rect key="frame" x="20" y="459.5" width="231.5" height="13.5"/>
