@@ -11,12 +11,16 @@ class MainViewModel {
     
     var mainList: Dynamic<[MainModel]> = Dynamic([])
     
+    private var currentPage = 1
+    
     // MARK: - 게시글 가져오기
     
     func fetchMainList() {
-        MainService.getMainList { (mainList) in
+        MainService.getMainList(page: currentPage) { (mainList) in
             if let mainList = mainList {
-                self.mainList.value = mainList
+                self.currentPage += 1
+                //self.mainList.value = mainList
+                self.mainList.value.append(contentsOf: mainList)
                 return
             }
         }
