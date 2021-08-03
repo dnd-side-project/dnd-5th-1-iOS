@@ -14,6 +14,8 @@ class OnboardingViewModel {
     let userinfo = UserInfo.shared
     var registSingUp: LoginKind.SignUp?
     
+    weak var onboardingDelegate: LoginState?
+    
     // SignIn
     func registUser(_ nickName: String) {
         
@@ -40,12 +42,13 @@ class OnboardingViewModel {
         }
         
         if let registSignUpValue = registSingUp?.loginValue {
-            LoginAPICenter.fetchSignUp(registSignUpValue) { (response) in
+            LoginAPICenter.fetchSignUp(registSignUpValue) { [weak self] (response) in
                 switch response {
                 case .success(let data):
                     print(data)
                 case .failure(let err):
                     print(err.localized)
+                    self?.onboardingDelegate?.loginSuccess()
                 }
             }
         }

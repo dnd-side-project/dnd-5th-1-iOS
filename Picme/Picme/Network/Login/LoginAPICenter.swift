@@ -129,6 +129,7 @@ struct LoginAPICenter {
                 case 400:
                     completion(.failure(.decodingFailed))
                 default:
+                    completion(.failure(.dataFailed))
                     return print(err.localizedDescription)
                 }
             }

@@ -24,7 +24,7 @@ class OnboardingViewController: BaseViewContoller {
         super.viewDidLoad()
         
         nickNameTextfield.delegate = self
-        
+        onboardingViewModel?.onboardingDelegate = self
         // 시작하기 버튼 활성화 비활성화
         onboardingViewModel?.isButtonState.bindAndFire(listener: { state in
             self.startButtonState(state)
@@ -152,4 +152,19 @@ extension OnboardingViewController {
         
         validLabel.isHidden = true
     }
+}
+
+extension OnboardingViewController: LoginState {
+    
+    // Main 연결
+    func loginSuccess() {
+        let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        // Identifier 연결안됨
+        let presentVC = mainStoryboard.instantiateViewController(withIdentifier: "123")
+        self.present(presentVC, animated: true, completion: nil)
+    }
+    
+    func loginFail(error: String) {}
+    func presentOnboarding() {}
+
 }
