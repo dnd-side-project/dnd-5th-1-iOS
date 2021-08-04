@@ -27,7 +27,6 @@ class MainViewController: UIViewController {
         setupTableView()
     }
     
-    
     func setupTableView() {
         self.mainTableView.dataSource = self
         self.mainTableView.delegate = self
@@ -61,9 +60,10 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
+        
         let cell: MainTableViewCell = mainTableView.dequeueTableCell(for: indexPath)
         
+        cell.delegate = self
         //        cell.setCollectionViewDataSourceDelegate(forRow: indexPath.row)
         //        cell.item = self.mainViewModel.mainList.value[indexPath.row]
         
@@ -81,10 +81,20 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     /*
      func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
      
-        if mainViewModel.mainList.value.count == indexPath.row - 1 {
-            mainViewModel.fetchMainList()
-        }
+     if mainViewModel.mainList.value.count == indexPath.row - 1 {
+     mainViewModel.fetchMainList()
+     }
      }
      */
+    
+}
+
+extension MainViewController: CollectionViewCellDelegate {
+    func selectedCollectionViewCell(_ index: Int) {
+        
+        guard let voteDetailVC = self.storyboard?.instantiateViewController(withIdentifier: "VoteDetailViewController") as? VoteDetailViewController else { return }
+
+        self.navigationController?.pushViewController(voteDetailVC, animated: true)
+    }
     
 }
