@@ -17,6 +17,12 @@ class BaseViewContoller: UIViewController {
         setConstraints()
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        
+        view.endEditing(true)
+    }
+    
     @objc dynamic func setConstraints() {}
     @objc dynamic func setConfiguration() {}
     @objc dynamic func setProperties() {}

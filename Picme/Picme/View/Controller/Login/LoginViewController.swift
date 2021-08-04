@@ -17,16 +17,36 @@ class LoginViewController: BaseViewContoller {
     @IBOutlet weak var mainTitleLabel: UILabel!
     @IBOutlet weak var subLable: UILabel!
     @IBOutlet weak var kakaoLoginButton: UIButton!
-    @IBOutlet weak var appleLoginButton: UIButton!
+    @IBOutlet weak var appleLoginButton: ASAuthorizationAppleIDButton!
     @IBOutlet weak var unLoginButton: UIButton!
+    
+    var loginViewModel: LoginViewModel? = LoginViewModel()
     
     // MARK: - LifeCycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        loginViewModel?.loginDelegate = self
+        appleLoginButton.cornerRadius = 10
+        
     }
 
+    @IBAction func kakaoLoginAction(_ sender: UIButton) {
+        loginViewModel?.kakaoLogin()
+    }
+    
+    @IBAction func appleLoginAction(_ sender: ASAuthorizationAppleIDButton) {
+        let appleIDProvider = ASAuthorizationAppleIDProvider()
+        let request = appleIDProvider.createRequest()
+        request.requestedScopes = [.fullName, .email]
+        
+        let authorizationController = ASAuthorizationController(authorizationRequests: [request])
+        authorizationController.delegate = loginViewModel
+        authorizationController.presentationContextProvider = loginViewModel
+        authorizationController.performRequests()
+    }
+    
     @IBAction func unLoginAction(_ sender: UIButton) {
         self.present(OnboardingViewController(), animated: true, completion: nil)
     }
@@ -57,5 +77,23 @@ extension LoginViewController {
         // String
         mainTitleLabel.attributedText = attributeString(text: mainTitleLabel.text, changeString: "인생사진")
         
+        appleLoginButton.layer.cornerRadius = 12
+    }
+}
+
+extension LoginViewController: LoginState {
+    
+    func presentOnboarding() {
+        let onBoarding = UIStoryboard(name: "Onboarding", bundle: nil)
+        let presentController = onBoarding.instantiateViewController(withIdentifier: "OnboardingViewController")
+        self.present(presentController, animated: true, completion: nil)
+    }
+    
+    func loginSuccess() {
+        print("\(Date()): Login Success")
+    }
+    
+    func loginFail(error: String) {
+        print(error)
     }
 }

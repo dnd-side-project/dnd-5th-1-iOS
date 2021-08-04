@@ -43,16 +43,22 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="g1M-eb-P1v">
                                         <rect key="frame" x="0.0" y="0.0" width="374" height="114"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AMA-Qg-pdL">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AMA-Qg-pdL">
                                                 <rect key="frame" x="0.0" y="0.0" width="374" height="52"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="52" id="YNJ-2A-BHD"/>
                                                 </constraints>
-                                                <state key="normal" title="카카오"/>
+                                                <state key="normal" title="카카오" image="kakao_login"/>
+                                                <connections>
+                                                    <action selector="kakaoLoginAction:" destination="Inh-nG-xUb" eventType="touchUpInside" id="i0r-RI-gJn"/>
+                                                </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VWu-rR-Ga7">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VWu-rR-Ga7" customClass="ASAuthorizationAppleIDButton">
                                                 <rect key="frame" x="0.0" y="62" width="374" height="52"/>
                                                 <state key="normal" title="애플"/>
+                                                <connections>
+                                                    <action selector="appleLoginAction:" destination="Inh-nG-xUb" eventType="touchUpInside" id="jtE-C9-9eL"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -90,6 +96,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="kakao_login" width="600" height="90"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

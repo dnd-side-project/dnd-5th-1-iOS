@@ -1,8 +1,8 @@
 //
-//  OnboardingViewController.swift
+//  OnboardViewController.swift
 //  Picme
 //
-//  Created by taeuk on 2021/08/01.
+//  Created by taeuk on 2021/08/02.
 //
 
 import UIKit
@@ -10,50 +10,96 @@ import UIKit
 class OnboardingViewController: BaseViewContoller {
 
     // MARK: - Properties
-//    @IBOutlet weak var nickNameLabel: UILabel!
-//    @IBOutlet weak var nickNameTextfield: UITextField!
-//    @IBOutlet weak var startButton: UIButton!
     
-    private let nickNameLable: UILabel = {
-        $0.text = "사용할 닉네임"
-        $0.textColor = .mainColor(.pink)
-        $0.font = .systemFont(ofSize: 16)
-        return $0
-    }(UILabel())
+    @IBOutlet weak var nickNameLabel: UILabel!
+    @IBOutlet weak var nickNameTextfield: UITextField!
+    @IBOutlet weak var startButton: UIButton!
+    @IBOutlet weak var validLabel: UILabel!
     
-    private let nickNameTextfield: UITextField = {
-        $0.placeholder = "최대 12자 까지 자유롭게 입력해 주세요."
-        $0.backgroundColor = .solidColor(.solid12)
-        $0.layer.cornerRadius = 10
-        $0.textColor = .white
-        $0.addLeftPadding()
-        return $0
-    }(UITextField())
-    
-    private let centerStackView: UIStackView = {
-        $0.axis = .vertical
-        $0.alignment = .center
-        $0.distribution = .fill
-        $0.spacing = 10
-        return $0
-    }(UIStackView())
-    
-    private let startButton: UIButton = {
-        $0.setTitle("시작하기", for: .normal)
-        $0.setTitleColor(.textColor(.text50), for: .normal)
-        $0.backgroundColor = .solidColor(.solid26)
-        $0.layer.cornerRadius = 10
-        return $0
-    }(UIButton(type: .system))
+    var onboardingViewModel: OnboardingViewModel? = OnboardingViewModel()
     
     // MARK: - LifeCycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        nickNameTextfield.delegate = self
+        onboardingViewModel?.onboardingDelegate = self
+        // 시작하기 버튼 활성화 비활성화
+        onboardingViewModel?.isButtonState.bindAndFire(listener: { state in
+            self.startButtonState(state)
+        })
+        
+        onboardingViewModel?.isVaildState.bindAndFire(listener: { state in
+            self.validState(state)
+        })
+        
     }
-
+    
+    @objc func textfieldDidChanged(_ textfield: UITextField) {
+        guard let text = textfield.text else { return }
+        print(text)
+        print(text.count)
+        
+        if text.count >= 12 {
+            onboardingViewModel?.isVaildState.value = true
+        } else {
+            onboardingViewModel?.isVaildState.value = false
+        }
+        
+        if !text.isEmpty {
+            onboardingViewModel?.isButtonState.value = true
+        } else {
+            onboardingViewModel?.isButtonState.value = false
+        }
+    }
+    
+    func startButtonState(_ state: Bool) {
+        
+        if state {
+            startButton.setTitleColor(.textColor(.text100), for: .normal)
+            startButton.backgroundColor = .mainColor(.pink)
+        } else {
+            startButton.setTitleColor(.textColor(.text50), for: .normal)
+            startButton.backgroundColor = .solidColor(.solid26)
+        }
+    }
+    
+    func validState(_ state: Bool) {
+        if state {
+            validLabel.isHidden = false
+        } else {
+            validLabel.isHidden = true
+        }
+    }
+    
+    @IBAction func loginRegistAction(_ sender: UIButton) {
+        guard let nickNameText = nickNameTextfield.text else { return }
+        onboardingViewModel?.registUser(nickNameText)
+    }
 }
+
+extension OnboardingViewController: UITextFieldDelegate {
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        let utf8Char = string.cString(using: .utf8)
+        let isBackSpace = strcmp(utf8Char, "\\b")
+        
+        if string.hasValidCharacter() || isBackSpace == -92 {
+            return true
+        }
+        
+        if textField.text!.count >= 12 {
+            return false
+        }
+        
+        return false
+    }
+}
+
+// MARK: - addPadding
+
 extension UITextField {
     
     func addLeftPadding() {
@@ -62,52 +108,63 @@ extension UITextField {
         self.leftViewMode = ViewMode.always
     }
 }
+
+extension String {
+    func hasValidCharacter() -> Bool {
+        do {
+            let regex = try NSRegularExpression(pattern: "^[a-z0-9가-힣ㄱ-ㅎㅏ-ㅣ\\s]$",
+                                                options: .caseInsensitive)
+            if let _ = regex.firstMatch(in: self,
+                                        options: .reportCompletion,
+                                        range: NSMakeRange(0, self.count)) {
+                return true
+            }
+        } catch let error {
+            print(error.localizedDescription)
+            return false
+        }
+        return false
+    }
+}
+
 // MARK: - UI
 
 extension OnboardingViewController {
     
+    override func setProperties() {
+        
+        nickNameTextfield.textColor = .white
+        nickNameTextfield.layer.cornerRadius = 10
+        startButton.layer.cornerRadius = 10
+        
+        nickNameTextfield.addTarget(self, action: #selector(textfieldDidChanged(_:)), for: .editingChanged)
+    }
+    
     override func setConfiguration() {
         
         view.backgroundColor = .solidColor(.solid0)
-        view.addSubview(centerStackView)
-        view.addSubview(startButton)
-        centerStackView.addArrangedSubview(nickNameLable)
-        centerStackView.addArrangedSubview(nickNameTextfield)
+        nickNameLabel.textColor = .mainColor(.pink)
+        nickNameTextfield.backgroundColor = .solidColor(.solid12)
+        startButton.setTitleColor(.textColor(.text50), for: .normal)
+        startButton.backgroundColor = .solidColor(.solid26)
         
-        // 입력시
-//        startButton.backgroundColor = .mainColor(.pink)
-//        startButton.setTitleColor(.textColor(.text100), for: .normal)
+        nickNameTextfield.addLeftPadding()
+        
+        validLabel.isHidden = true
+    }
+}
+
+extension OnboardingViewController: LoginState {
+    
+    // Main 연결
+    func loginSuccess() {
+        let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let presentVC = mainStoryboard.instantiateViewController(withIdentifier: "TabBarController")
+        presentVC.modalPresentationStyle = .fullScreen
+        self.present(presentVC, animated: true, completion: nil)
     }
     
-    override func setConstraints() {
-        
-        nickNameTextfield.translatesAutoresizingMaskIntoConstraints = false
-        nickNameTextfield.heightAnchor.constraint(equalToConstant: 52)
-            .isActive = true
-        nickNameTextfield.leadingAnchor.constraint(equalTo: centerStackView.leadingAnchor)
-            .isActive = true
-        nickNameTextfield.trailingAnchor.constraint(equalTo: centerStackView.trailingAnchor)
-            .isActive = true
-        
-        centerStackView.translatesAutoresizingMaskIntoConstraints = false
-        centerStackView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -20)
-            .isActive = true
-        centerStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
-            .isActive = true
-        centerStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20)
-            .isActive = true
-        centerStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
-            .isActive = true
-        
-        startButton.translatesAutoresizingMaskIntoConstraints = false
-        startButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20)
-            .isActive = true
-        startButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
-            .isActive = true
-        startButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -100)
-            .isActive = true
-        startButton.heightAnchor.constraint(equalToConstant: 52)
-            .isActive = true
-    }
-    
+    func loginFail(error: String) {}
+    func presentOnboarding() {}
+
 }
