@@ -770,8 +770,7 @@
 				A9C12B89269C14FF00729A74 /* Protocol+ResuableCell.swift in Sources */,
 				A9C12B8B269C158900729A74 /* Extension+UITableView.swift in Sources */,
 				A9A1AD452699FAE600169D76 /* SceneDelegate.swift in Sources */,
-				A95CD36526A30357002CCCA8 /* LoginSignUpModel.swift in Sources */,
-				A9C12B94269C1A8B00729A74 /* LoginssViewController.swift in Sources */,
+				A95CD36526A30357002CCCA8 /* LoginModel.swift in Sources */,
 				D11C2DC326B947B100C8EE51 /* LoadingTableViewCell.swift in Sources */,
 				A95CD36526A30357002CCCA8 /* LoginModel.swift in Sources */,
 				D1449D9926A848610083418D /* MainViewController.swift in Sources */,
@@ -992,14 +991,14 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = "dnd-5th-1-iOSTests/Info.plist";
+				INFOPLIST_FILE = PicmeTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.dnd-5th-1-iOSTests";
+				PRODUCT_BUNDLE_IDENTIFIER = com.PicmeDnD5;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1014,14 +1013,14 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = "dnd-5th-1-iOSTests/Info.plist";
+				INFOPLIST_FILE = PicmeTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.dnd-5th-1-iOSTests";
+				PRODUCT_BUNDLE_IDENTIFIER = com.PicmeDnD5;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1035,13 +1034,13 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = "dnd-5th-1-iOSUITests/Info.plist";
+				INFOPLIST_FILE = PicmeUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.dnd-5th-1-iOSUITests";
+				PRODUCT_BUNDLE_IDENTIFIER = com.PicmeDnD5;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1055,13 +1054,13 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = "dnd-5th-1-iOSUITests/Info.plist";
+				INFOPLIST_FILE = PicmeUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.dnd-5th-1-iOSUITests";
+				PRODUCT_BUNDLE_IDENTIFIER = com.PicmeDnD5;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
