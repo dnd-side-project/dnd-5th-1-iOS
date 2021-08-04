@@ -40,7 +40,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             tbc.tabBar.tintColor = .white
             
             // 탭바 색
-            tbc.tabBar.barTintColor = UIColor.solidColor(.solid16)
+            tbc.tabBar.barTintColor = .solidColor(.solid16)
             
             // 탭바 아이템
             if let tbItems = tbc.tabBar.items {
