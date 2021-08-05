@@ -16,7 +16,7 @@ class MainViewController: UIViewController {
     
     @IBOutlet weak var mainTableView: UITableView!
     
-    //MARK: paging
+    // MARK: - Paging
     
     var isPaging: Bool = false // 현재 페이징 중인지 체크하는 flag
     var hasNextPage: Bool = false // 마지막 페이지 인지 체크 하는 flag
@@ -31,22 +31,27 @@ class MainViewController: UIViewController {
         self.mainTableView.dataSource = self
         self.mainTableView.delegate = self
         
+        self.mainTableView.backgroundColor = .solidColor(.solid0)
+        
         mainViewModel.mainList.bind { (_) in
             self.showTableView()
         }
         
-        //self.mainViewModel.fetchMainList()
+        // self.mainViewModel.fetchMainList()
     }
-    
     
     func showTableView() {
         DispatchQueue.main.async {
             if self.mainViewModel.mainList.value.isEmpty {
-                //self.showEmptyView()
+                // self.showEmptyView()
             } else {
                 self.mainTableView.reloadData()
             }
         }
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
     }
 }
 
@@ -54,7 +59,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        //return mainViewModel.mainList.value.count
+        // return mainViewModel.mainList.value.count
         
         return 5
     }

@@ -8,7 +8,7 @@
 import UIKit
 import Kingfisher
 
-protocol CollectionViewCellDelegate {
+protocol CollectionViewCellDelegate: AnyObject {
     func selectedCollectionViewCell(_ index: Int)
 }
 
@@ -22,7 +22,7 @@ class MainTableViewCell: UITableViewCell {
     
     var imageData: [String]!
     
-    var delegate: CollectionViewCellDelegate?
+    weak var delegate: CollectionViewCellDelegate?
     
     // 서버 통신 전 예시 이미지
     var imageArray = [#imageLiteral(resourceName: "defalutImage"), #imageLiteral(resourceName: "defalutImage"), #imageLiteral(resourceName: "defalutImage")]
@@ -55,7 +55,7 @@ class MainTableViewCell: UITableViewCell {
         // 프로필 이미지 원형으로 만들기
         mainProfileImageView.layer.cornerRadius = mainProfileImageView.frame.width / 2 // 프레임 원으로 만들기
         mainProfileImageView.contentMode = UIView.ContentMode.scaleAspectFill // 이미지 비율 바로잡기
-        mainProfileImageView.clipsToBounds = true //이미지를 뷰 프레임에 맞게 clip
+        mainProfileImageView.clipsToBounds = true // 이미지를 뷰 프레임에 맞게 clip
     }
     
 }
@@ -63,7 +63,7 @@ class MainTableViewCell: UITableViewCell {
 extension MainTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        //return imageData.count
+        // return imageData.count
         
         return imageArray.count
     }
@@ -72,7 +72,7 @@ extension MainTableViewCell: UICollectionViewDelegate, UICollectionViewDataSourc
         
         let cell: MainCollectionViewCell = mainCollectionView.dequeueCollectionCell(for: indexPath)
         
-        //cell.mainPhotoImageView.kf.setImage(with: URL(string: imageData[indexPath.row]), placeholder: #imageLiteral(resourceName: "defalutImage"))
+        // cell.mainPhotoImageView.kf.setImage(with: URL(string: imageData[indexPath.row]), placeholder: #imageLiteral(resourceName: "defalutImage"))
         
         if indexPath.item == imageArray.count - 1 {
             cell.mainPhotoImageView.image = #imageLiteral(resourceName: "defalutImage").withRenderingMode(.alwaysTemplate)
