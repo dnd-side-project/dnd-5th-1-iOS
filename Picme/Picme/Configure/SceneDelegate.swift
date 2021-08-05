@@ -24,41 +24,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-        guard let scene = (scene as? UIWindowScene) else { return }
-        window = UIWindow(windowScene: scene)
-
-        let vc = OnboardingViewController()
-        window?.rootViewController = vc
-        window?.makeKeyAndVisible()
-        
-        // MARK: Init TabBar
-        
-        // 윈도우 객체와 연결된 루트뷰컨트롤러 가져오기
-        if let tbc = self.window?.rootViewController as? UITabBarController {
-            
-            // 현재 선택된 아이템 색 지정
-            tbc.tabBar.tintColor = .white
-            
-            // 탭바 색
-            tbc.tabBar.barTintColor = .solidColor(.solid16)
-            
-            // 탭바 아이템
-            if let tbItems = tbc.tabBar.items {
-                tbItems[0].title = "홈"
-                
-                // 원본 이미지 적용하기 (탭바의 이미지 디폴트는 색상은 무시되고 단순히 alpha값만 사용함)
-                let image = UIImage(named: "tabBarHome")?.withRenderingMode(.alwaysOriginal)
-                tbItems[0].image = image
-                tbItems[0].selectedImage = #imageLiteral(resourceName: "tabBarHome")
-                
-                // 탭바 아이템 타이틀 설정 - proxy객체 사용 : for문으로 접근하지 않아도 가능
-                // 탭바 아이템에 일일이 할 필요 없이, 일괄적 적용
-                let tbItemProxy = UITabBarItem.appearance()
-                tbItemProxy.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.textColor(.text100)], for: .selected)
-                tbItemProxy.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.solidColor(.solid32)], for: .disabled)
-                tbItemProxy.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15)], for: .normal)
-            }
-        }
+//        guard let scene = (scene as? UIWindowScene) else { return }
+//        window = UIWindow(windowScene: scene)
+//
+//        let vc = OnboardingViewController()
+//        window?.rootViewController = vc
+//        window?.makeKeyAndVisible()
         
         guard let _ = (scene as? UIWindowScene) else { return }
     }

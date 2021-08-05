@@ -5,29 +5,57 @@
 //  Created by taeuk on 2021/07/11.
 //
 
+import Alamofire
 import XCTest
 @testable import Picme
 
 class PicmeTests: XCTestCase {
-
+    var viewModel: MainViewModel!
+    var service: MockMainService!
+    
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        try super.setUpWithError()
+        
+        self.viewModel = MainViewModel()
+        self.service = MockMainService()
     }
 
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        self.viewModel = nil
+        self.service = nil
+        try super.tearDownWithError()
     }
+    
+    func testFetchMainService() {
+        // given
+        let expectation = XCTestExpectation(description: "MainListModel Fetch")
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        let mainModel = MainModel(postId: "123", nickname: "111", profileimageUrl: "", participantsNum: 9, deadline: "", title: "", thumbnailUrl: [])
+
+        let mainList: [MainModel] = [mainModel]
+
+        service.mainListModel = MainListModel(mainList: mainList)
+
+        // when
+        // then
+        expectation.fulfill()
+
+        viewModel.fetchMainList()
+
+        wait(for: [expectation], timeout: 5.0)
     }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+    
+    class MockMainService: MainService {
+        var mainListModel: MainListModel?
+        
+        func fetchMainModel(_ completion: @escaping ([MainModel]?) -> Void) {
+            
+            if let mainListModel = mainListModel {
+                completion(mainListModel.mainList)
+            } else {
+                print("No mainListModel")
+            }
         }
     }
-
+    
 }
