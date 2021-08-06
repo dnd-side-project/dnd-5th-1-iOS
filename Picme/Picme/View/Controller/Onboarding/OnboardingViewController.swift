@@ -24,6 +24,7 @@ class OnboardingViewController: BaseViewContoller {
         super.viewDidLoad()
         
         nickNameTextfield.delegate = self
+        nickNameTextfield.clearButtonMode = .whileEditing
         onboardingViewModel?.onboardingDelegate = self
         // 시작하기 버튼 활성화 비활성화
         onboardingViewModel?.isButtonState.bindAndFire(listener: { state in
@@ -82,18 +83,18 @@ class OnboardingViewController: BaseViewContoller {
 extension OnboardingViewController: UITextFieldDelegate {
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        
+        print(string.getArrayAfterRegex(regex: "[a-z]"))
         let utf8Char = string.cString(using: .utf8)
         let isBackSpace = strcmp(utf8Char, "\\b")
         
         if string.hasValidCharacter() || isBackSpace == -92 {
-            return true
+            
+            if textField.text!.count < 12 || isBackSpace == -92 {
+                return true
+            } else {
+                return false
+            }
         }
-        
-        if textField.text!.count >= 12 {
-            return false
-        }
-        
         return false
     }
 }
@@ -112,7 +113,8 @@ extension UITextField {
 extension String {
     func hasValidCharacter() -> Bool {
         do {
-            let regex = try NSRegularExpression(pattern: "^[a-z0-9가-힣ㄱ-ㅎㅏ-ㅣ\\s]$",
+//            let regex = try NSRegularExpression(pattern: "^[A-Z0-9가-힣ㄱ-ㅎㅏ-ㅣ\\s]$",
+            let regex = try NSRegularExpression(pattern: "^[a-z]*$",
                                                 options: .caseInsensitive)
             if let _ = regex.firstMatch(in: self,
                                         options: .reportCompletion,
@@ -125,6 +127,22 @@ extension String {
         }
         return false
     }
+    
+    func getArrayAfterRegex(regex: String) -> [String] {
+           
+           do {
+               let regex = try NSRegularExpression(pattern: regex)
+               let results = regex.matches(in: self,
+                                           range: NSRange(self.startIndex..., in: self))
+               return results.map {
+                   String(self[Range($0.range, in: self)!])
+               }
+           } catch let error {
+               print("invalid regex: \(error.localizedDescription)")
+               return []
+           }
+       }
+    
 }
 
 // MARK: - UI
