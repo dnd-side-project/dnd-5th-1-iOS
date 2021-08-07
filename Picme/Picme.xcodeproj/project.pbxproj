@@ -12,6 +12,7 @@
 		A91A904626B92BDB00C43D43 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91A904526B92BDB00C43D43 /* UserInfo.swift */; };
 		A91A907526BD516400C43D43 /* ImageUpload.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A91A907426BD516400C43D43 /* ImageUpload.storyboard */; };
 		A91A907726BD51FF00C43D43 /* ImageUploadViewContoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91A907626BD51FF00C43D43 /* ImageUploadViewContoller.swift */; };
+		A91A909026BE9D2800C43D43 /* KeyChainModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91A908F26BE9D2800C43D43 /* KeyChainModel.swift */; };
 		A91F57D426B7B261006F20AD /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91F57D326B7B261006F20AD /* OnboardingViewController.swift */; };
 		A91F57D726B7B641006F20AD /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91F57D626B7B641006F20AD /* OnboardingViewModel.swift */; };
 		A95CD34E269DA66C002CCCA8 /* Protocol+LoginState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95CD34D269DA66C002CCCA8 /* Protocol+LoginState.swift */; };
@@ -78,6 +79,7 @@
 		A91A904526B92BDB00C43D43 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		A91A907426BD516400C43D43 /* ImageUpload.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ImageUpload.storyboard; sourceTree = "<group>"; };
 		A91A907626BD51FF00C43D43 /* ImageUploadViewContoller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUploadViewContoller.swift; sourceTree = "<group>"; };
+		A91A908F26BE9D2800C43D43 /* KeyChainModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainModel.swift; sourceTree = "<group>"; };
 		A91F57D326B7B261006F20AD /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		A91F57D626B7B641006F20AD /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
 		A95CD34D269DA66C002CCCA8 /* Protocol+LoginState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Protocol+LoginState.swift"; sourceTree = "<group>"; };
@@ -187,6 +189,7 @@
 			children = (
 				A95CD36426A30357002CCCA8 /* LoginModel.swift */,
 				A91A904526B92BDB00C43D43 /* UserInfo.swift */,
+				A91A908F26BE9D2800C43D43 /* KeyChainModel.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -773,6 +776,7 @@
 				A95CD35C269EFB66002CCCA8 /* Extension+URLSession,Request.swift in Sources */,
 				A975288226B74322003EE1A9 /* LoginViewController.swift in Sources */,
 				A9C12B80269AB86A00729A74 /* Extension+UIColor.swift in Sources */,
+				A91A909026BE9D2800C43D43 /* KeyChainModel.swift in Sources */,
 				A9A1AD432699FAE600169D76 /* AppDelegate.swift in Sources */,
 				A91F57D726B7B641006F20AD /* OnboardingViewModel.swift in Sources */,
 				D180456826B3E2850053430E /* MainTableViewCell.swift in Sources */,
