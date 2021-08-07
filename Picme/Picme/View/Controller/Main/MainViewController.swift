@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MainViewController: UIViewController {
+class MainViewController: BaseViewContoller {
     
     lazy var mainViewModel: MainViewModel = {
         let mainViewModel = MainViewModel()
@@ -30,9 +30,9 @@ class MainViewController: UIViewController {
     func setupTableView() {
         self.mainTableView.dataSource = self
         self.mainTableView.delegate = self
-        
-        self.mainTableView.backgroundColor = .solidColor(.solid0)
-        
+//        
+//        self.mainTableView.backgroundColor = .solidColor(.solid0)
+//        
         mainViewModel.mainList.bind { (_) in
             self.showTableView()
         }
@@ -49,10 +49,7 @@ class MainViewController: UIViewController {
             }
         }
     }
-    
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
-    }
+
 }
 
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
@@ -78,6 +75,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         cell.mainDeadlineLabel.text = "1시간 후 마감"
         cell.mainTitleLabel.text = "사진 잘 나온거 하나만 골라주세요!!"
         cell.mainProfileImageView.image = #imageLiteral(resourceName: "defalutImage")
+        
         cell.setCollectionViewDataSourceDelegate(forRow: indexPath.row)
         
         return cell
