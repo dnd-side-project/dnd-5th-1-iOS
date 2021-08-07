@@ -54,11 +54,11 @@ struct APIConstants {
     }
     
     enum Post {
-        case create
+        case main
         
         var urlString: String {
             switch self {
-            case .create:
+            case .main:
                 return "\(APIConstants.baseURL)\(APIConstants.urlVersion)posts"
             }
         }

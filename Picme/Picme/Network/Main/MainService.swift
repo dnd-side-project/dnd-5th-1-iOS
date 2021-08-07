@@ -12,7 +12,7 @@ import SwiftyJSON
 class MainService {
     
     static func getMainList(page: Int, completion: @escaping([MainModel]?) -> Void) {
-        let URL = APIConstants.Post.create.urlString + "?page=\(page)&limit=10"
+        let URL = APIConstants.Post.main.urlString + "?page=\(page)&limit=10"
         
         let dataRequest = AF.request(URL,
                                      method: .get,
