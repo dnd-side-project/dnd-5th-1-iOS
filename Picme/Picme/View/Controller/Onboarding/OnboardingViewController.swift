@@ -60,9 +60,11 @@ class OnboardingViewController: BaseViewContoller {
         if state {
             startButton.setTitleColor(.textColor(.text100), for: .normal)
             startButton.backgroundColor = .mainColor(.pink)
+            startButton.isEnabled = state
         } else {
             startButton.setTitleColor(.textColor(.text50), for: .normal)
             startButton.backgroundColor = .solidColor(.solid26)
+            startButton.isEnabled = state
         }
     }
     
