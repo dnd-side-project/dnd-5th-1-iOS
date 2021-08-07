@@ -10,6 +10,8 @@
 		521630CB556750301749121F /* Pods_Picme.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB74E774F2085618C97D3804 /* Pods_Picme.framework */; };
 		7AA762B0B95B4242803315E5 /* Pods_PicmeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B8846FE285BDFC765A499DA /* Pods_PicmeTests.framework */; };
 		A91A904626B92BDB00C43D43 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91A904526B92BDB00C43D43 /* UserInfo.swift */; };
+		A91A907526BD516400C43D43 /* ImageUpload.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A91A907426BD516400C43D43 /* ImageUpload.storyboard */; };
+		A91A907726BD51FF00C43D43 /* ImageUploadViewContoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91A907626BD51FF00C43D43 /* ImageUploadViewContoller.swift */; };
 		A91F57D426B7B261006F20AD /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91F57D326B7B261006F20AD /* OnboardingViewController.swift */; };
 		A91F57D726B7B641006F20AD /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91F57D626B7B641006F20AD /* OnboardingViewModel.swift */; };
 		A95CD34E269DA66C002CCCA8 /* Protocol+LoginState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95CD34D269DA66C002CCCA8 /* Protocol+LoginState.swift */; };
@@ -74,6 +76,8 @@
 		95A7318E3A14E589BF7BB1AF /* Pods-PicmeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PicmeTests.debug.xcconfig"; path = "Target Support Files/Pods-PicmeTests/Pods-PicmeTests.debug.xcconfig"; sourceTree = "<group>"; };
 		99CB56FAF51F7B3577E0BB1C /* Pods_Picme_PicmeUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Picme_PicmeUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A91A904526B92BDB00C43D43 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
+		A91A907426BD516400C43D43 /* ImageUpload.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ImageUpload.storyboard; sourceTree = "<group>"; };
+		A91A907626BD51FF00C43D43 /* ImageUploadViewContoller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUploadViewContoller.swift; sourceTree = "<group>"; };
 		A91F57D326B7B261006F20AD /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		A91F57D626B7B641006F20AD /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
 		A95CD34D269DA66C002CCCA8 /* Protocol+LoginState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Protocol+LoginState.swift"; sourceTree = "<group>"; };
@@ -160,6 +164,22 @@
 				2B8846FE285BDFC765A499DA /* Pods_PicmeTests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A91A907226BD509E00C43D43 /* VoteCreate */ = {
+			isa = PBXGroup;
+			children = (
+				A91A907426BD516400C43D43 /* ImageUpload.storyboard */,
+			);
+			path = VoteCreate;
+			sourceTree = "<group>";
+		};
+		A91A907326BD510400C43D43 /* VoteCreate */ = {
+			isa = PBXGroup;
+			children = (
+				A91A907626BD51FF00C43D43 /* ImageUploadViewContoller.swift */,
+			);
+			path = VoteCreate;
 			sourceTree = "<group>";
 		};
 		A91F57D026B7740D006F20AD /* Login */ = {
@@ -280,6 +300,7 @@
 		A9C12B74269AB6C500729A74 /* Storyboard */ = {
 			isa = PBXGroup;
 			children = (
+				A91A907226BD509E00C43D43 /* VoteCreate */,
 				A975287B26B69E91003EE1A9 /* Onboarding */,
 				D1449D9226A845270083418D /* Main */,
 				A9C12B8F269C1A4000729A74 /* Login */,
@@ -290,6 +311,7 @@
 		A9C12B75269AB6CD00729A74 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				A91A907326BD510400C43D43 /* VoteCreate */,
 				A975287E26B69F05003EE1A9 /* Onboarding */,
 				D1449D9526A846460083418D /* Main */,
 				A9C12B90269C1A4C00729A74 /* Login */,
@@ -564,6 +586,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A9C12B96269C315E00729A74 /* .swiftlint.yml in Resources */,
+				A91A907526BD516400C43D43 /* ImageUpload.storyboard in Resources */,
 				D1449D9426A845370083418D /* Main.storyboard in Resources */,
 				A9C12B92269C1A7A00729A74 /* Login.storyboard in Resources */,
 				A975287D26B69EAF003EE1A9 /* Onboarding.storyboard in Resources */,
@@ -761,6 +784,7 @@
 				D180456E26B3E93C0053430E /* MainService.swift in Sources */,
 				A91A904626B92BDB00C43D43 /* UserInfo.swift in Sources */,
 				D180456C26B3E8DD0053430E /* APIConstants.swift in Sources */,
+				A91A907726BD51FF00C43D43 /* ImageUploadViewContoller.swift in Sources */,
 				A975287826B69DE1003EE1A9 /* ImageAPICenter.swift in Sources */,
 				A9C12B8D269C170C00729A74 /* Extension+CollectionView.swift in Sources */,
 				A9C12B7E269AB7B900729A74 /* BaseViewContoller.swift in Sources */,

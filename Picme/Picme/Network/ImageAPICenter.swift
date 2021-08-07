@@ -39,5 +39,35 @@ struct ImageAPICenter {
             print(response.response?.statusCode)
         }
     }
+    
+    static func createImage(_ data: [String: [PostImageData]]) {
+        
+        let urlstring = "123"
+        
+        let param = data
+        
+        AF.upload(multipartFormData: { muti in
+            
+            var count = 0
+            
+            for (key, value) in param {
+                print("key", key)
+                print("value", value)
+                
+                value.forEach {
+                    print($0)
+                    print("\($0)".data(using: .utf8)!)
+                    let timeStamp = Date().timeIntervalSince1970
+                    muti.append("\($0)".data(using: .utf8)!,
+                                withName: "files",
+                                fileName: "\(timeStamp)_123_\(count)",
+                                mimeType: "image/jpg")
+                    count += 1
+                }
+            }
+        }, to: urlstring, method: .post, headers: ["Content-type": "multipart/form-data"])
+        .response { response in
+            print(response.response?.statusCode)
+        }
+    }
 }
-
