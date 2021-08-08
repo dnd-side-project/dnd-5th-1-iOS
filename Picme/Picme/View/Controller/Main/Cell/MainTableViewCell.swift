@@ -8,11 +8,9 @@
 import UIKit
 import Kingfisher
 
-protocol CollectionViewCellDelegate: AnyObject {
-    func selectedCollectionViewCell(_ index: Int)
-}
-
 class MainTableViewCell: UITableViewCell {
+    
+    // MARK: - IBOutlets
     
     @IBOutlet weak var mainProfileImageView: UIImageView!
     @IBOutlet weak var mainNicknameLabel: UILabel!
@@ -20,14 +18,16 @@ class MainTableViewCell: UITableViewCell {
     @IBOutlet weak var mainDeadlineLabel: UILabel!
     @IBOutlet weak var mainTitleLabel: UILabel!
     
-    var imageData: [String]!
+    @IBOutlet weak var mainCollectionView: UICollectionView!
+    
+    // MARK: - Variables
     
     weak var delegate: CollectionViewCellDelegate?
     
+    var imageData: [String]!
+    
     // 서버 통신 전 예시 이미지
     var imageArray = [#imageLiteral(resourceName: "defalutImage"), #imageLiteral(resourceName: "defalutImage"), #imageLiteral(resourceName: "defalutImage")]
-    
-    @IBOutlet weak var mainCollectionView: UICollectionView!
     
     var item: MainModel? {
         didSet {
@@ -60,6 +60,8 @@ class MainTableViewCell: UITableViewCell {
     
 }
 
+// MARK: - CollectionView
+
 extension MainTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
@@ -87,6 +89,7 @@ extension MainTableViewCell: UICollectionViewDelegate, UICollectionViewDataSourc
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
         if let delegate = delegate {
             delegate.selectedCollectionViewCell(indexPath.item)
         }
