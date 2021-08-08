@@ -54,13 +54,17 @@ struct APIConstants {
     }
     
     enum Post {
-        case create
+        case main
+        case voteDetail
         
         var urlString: String {
             switch self {
-            case .create:
-                return "\(APIConstants.baseURL)\(APIConstants.urlVersion)posts"
+            case .main:
+                return "\(APIConstants.baseURL)\(APIConstants.urlVersion)/posts?page=pageNum&limit=10"
+            case .voteDetail:
+                return "\(APIConstants.baseURL)\(APIConstants.urlVersion)/posts/:post_id"
             }
+            
         }
     }
     

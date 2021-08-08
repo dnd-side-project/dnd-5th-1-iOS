@@ -7,14 +7,18 @@
 
 import UIKit
 
-class MainViewController: UIViewController {
+class MainViewController: BaseViewContoller {
+    
+    // MARK: - IBOutlets
+    
+    @IBOutlet weak var mainTableView: UITableView!
+    
+    // MARK: - Variables
     
     lazy var mainViewModel: MainViewModel = {
         let mainViewModel = MainViewModel()
         return mainViewModel
     }()
-    
-    @IBOutlet weak var mainTableView: UITableView!
     
     // MARK: - Paging
     
@@ -30,8 +34,6 @@ class MainViewController: UIViewController {
     func setupTableView() {
         self.mainTableView.dataSource = self
         self.mainTableView.delegate = self
-        
-        self.mainTableView.backgroundColor = .solidColor(.solid0)
         
         mainViewModel.mainList.bind { (_) in
             self.showTableView()
@@ -49,10 +51,7 @@ class MainViewController: UIViewController {
             }
         }
     }
-    
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
-    }
+
 }
 
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
@@ -68,9 +67,10 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         
         let cell: MainTableViewCell = mainTableView.dequeueTableCell(for: indexPath)
         
+        cell.setCollectionViewDataSourceDelegate(forRow: indexPath.row)
         cell.delegate = self
-        //        cell.setCollectionViewDataSourceDelegate(forRow: indexPath.row)
-        //        cell.item = self.mainViewModel.mainList.value[indexPath.row]
+        
+        //cell.item = self.mainViewModel.mainList.value[indexPath.row]
         
         // 서버 통신 전 예시 코드
         cell.mainNicknameLabel.text = "오늘도 개미는 뚠뚠"
@@ -78,23 +78,14 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         cell.mainDeadlineLabel.text = "1시간 후 마감"
         cell.mainTitleLabel.text = "사진 잘 나온거 하나만 골라주세요!!"
         cell.mainProfileImageView.image = #imageLiteral(resourceName: "defalutImage")
-        cell.setCollectionViewDataSourceDelegate(forRow: indexPath.row)
         
         return cell
     }
     
-    /*
-     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-     
-     if mainViewModel.mainList.value.count == indexPath.row - 1 {
-     mainViewModel.fetchMainList()
-     }
-     }
-     */
-    
 }
 
 extension MainViewController: CollectionViewCellDelegate {
+    
     func selectedCollectionViewCell(_ index: Int) {
         
         guard let voteDetailVC = self.storyboard?.instantiateViewController(withIdentifier: "VoteDetailViewController") as? VoteDetailViewController else { return }

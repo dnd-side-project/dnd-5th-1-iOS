@@ -9,11 +9,13 @@ import Foundation
 
 class MainViewModel {
     
+    // MARK: - Properties
+    
     var mainList: Dynamic<[MainModel]> = Dynamic([])
     
     private var currentPage = 1
     
-    // MARK: - 게시글 가져오기
+    // MARK: - 게시글 리스트 조회
     
     func fetchMainList() {
         MainService.getMainList(page: currentPage) { (mainList) in
