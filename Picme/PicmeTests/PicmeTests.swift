@@ -7,6 +7,8 @@
 
 import Alamofire
 import XCTest
+import Alamofire
+
 @testable import Picme
 
 class PicmeTests: XCTestCase {

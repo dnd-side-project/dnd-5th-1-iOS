@@ -12,7 +12,7 @@
         <!--Login View Controller-->
         <scene sceneID="UVd-YQ-JZi">
             <objects>
-                <viewController id="Inh-nG-xUb" customClass="LoginViewController" customModule="Picme" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" id="Inh-nG-xUb" customClass="LoginViewController" customModule="Picme" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="RrA-Xk-qBS">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -64,7 +64,7 @@
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RL0-ae-cfF">
                                         <rect key="frame" x="0.0" y="124" width="374" height="30"/>
-                                        <state key="normal" title="로그인 전에 둘러보기"/>
+                                        <state key="normal" title="서비스 둘러보기"/>
                                         <connections>
                                             <action selector="unLoginAction:" destination="Inh-nG-xUb" eventType="touchUpInside" id="rCG-Mb-jcQ"/>
                                         </connections>

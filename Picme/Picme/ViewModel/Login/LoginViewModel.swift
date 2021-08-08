@@ -92,6 +92,11 @@ extension LoginViewModel: ASAuthorizationControllerDelegate, ASAuthorizationCont
             print(appleIDCredetial.email)
             print(appleIDCredetial.fullName)
             print(appleIDCredetial.user)
+            
+            // keychain 저장용 프로퍼티
+            let saveUserInfo = KeychainUserInfo(userIdentifier: appleIDCredetial.user,
+                                                userEmail: appleIDCredetial.email)
+            
             // 초기 로그인시에만 이메일받아오기 때문에 로직 수정 필요
             if let userEmail = appleIDCredetial.email {
                 
@@ -106,6 +111,8 @@ extension LoginViewModel: ASAuthorizationControllerDelegate, ASAuthorizationCont
                     switch response {
                     case .success(let data):
                         print(data)
+
+                        _ = KeyChainModel.shared.createUserInfo(with: saveUserInfo)
                         self.loginDelegate?.loginSuccess()
                     case .failure(let err):
                         print(err.localized)
@@ -118,7 +125,7 @@ extension LoginViewModel: ASAuthorizationControllerDelegate, ASAuthorizationCont
                         print(userinfo.vendor)
                         print(userinfo.vendorID)
                         print(userinfo.userEmail)
-                        
+                        _ = KeyChainModel.shared.createUserInfo(with: saveUserInfo)
                         self.loginDelegate?.presentOnboarding()
                     }
                 }

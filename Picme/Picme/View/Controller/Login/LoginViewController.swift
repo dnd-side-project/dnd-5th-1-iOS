@@ -91,6 +91,11 @@ extension LoginViewController: LoginState {
     
     func loginSuccess() {
         print("\(Date()): Login Success")
+        let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let mainViewController = mainStoryboard.instantiateViewController(withIdentifier:
+                                                                            "TabBarController")
+        mainViewController.modalPresentationStyle = .fullScreen
+        self.present(mainViewController, animated: true, completion: nil)
     }
     
     func loginFail(error: String) {

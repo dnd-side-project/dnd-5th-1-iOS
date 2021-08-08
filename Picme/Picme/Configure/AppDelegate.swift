@@ -17,20 +17,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         KakaoSDKCommon.initSDK(appKey: "d1705396377c942afa5628eba176683f")
         
-//        let appleIDProvider = ASAuthorizationAppleIDProvider()
-//        appleIDProvider.getCredentialState(forUserID: "1") { (credentialState, error) in
-//            switch credentialState {
-//            case .authorized:
-//                print("ID연동 ok")
-//            case .revoked:
-//                print("ID연동 X")
-//            case .notFound:
-//                print("ID X")
-//            default:
-//                break
-//            }
-//        }
-        
         return true
     }
 

@@ -7,6 +7,7 @@
 
 import UIKit
 import KakaoSDKAuth
+import AuthenticationServices
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
@@ -21,17 +22,55 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+        
+        guard let scene = (scene as? UIWindowScene) else { return }
+        window = UIWindow(windowScene: scene)
+        
+        let mainStoryboard = UIStoryboard(name: "ImageUpload", bundle: nil)
+        let mainViewController = mainStoryboard.instantiateViewController(withIdentifier:
+                                                                            "ImageUploadViewContoller")
+        mainViewController.modalPresentationStyle = .fullScreen
+        self.window?.rootViewController = mainViewController
+        self.window?.makeKeyAndVisible()
+        
+//        let appleIDProvider = ASAuthorizationAppleIDProvider()
+//        guard let readKeyChain = KeyChainModel.shared.readUserInfo(),
+//              let userIdentifier = readKeyChain.userIdentifier else { return }
+//
+//        appleIDProvider.getCredentialState(forUserID: userIdentifier) { (credentialState, error) in
+//            switch credentialState {
+//            case .authorized:
+//
+//                print("Apple Login연동 OK, U go homeTab")
+//                DispatchQueue.main.async {
+//                    let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+//                    let mainViewController = mainStoryboard.instantiateViewController(withIdentifier:
+//                                                                                        "TabBarController")
+//                    mainViewController.modalPresentationStyle = .fullScreen
+//                    self.window?.rootViewController = mainViewController
+//                    self.window?.makeKeyAndVisible()
+//                }
+//
+//            case .revoked, .notFound:
+//                print("Apple Login연동 No")
+//                DispatchQueue.main.async {
+//                    let loginStoryboard = UIStoryboard(name: "Login", bundle: nil)
+//                    let loginViewController = loginStoryboard.instantiateViewController(withIdentifier:
+//                                                                                        "LoginViewController")
+//                    loginViewController.modalPresentationStyle = .fullScreen
+//                    self.window?.rootViewController = loginViewController
+//                    self.window?.makeKeyAndVisible()
+//                }
+//
+//            default:
+//                break
+//            }
+//        }
+        
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
-        // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-//        guard let scene = (scene as? UIWindowScene) else { return }
-//        window = UIWindow(windowScene: scene)
-//
-//        let vc = OnboardingViewController()
-//        window?.rootViewController = vc
-//        window?.makeKeyAndVisible()
-        
-        guard let _ = (scene as? UIWindowScene) else { return }
+        // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead)
+    
     }
     
     func sceneDidDisconnect(_ scene: UIScene) {
