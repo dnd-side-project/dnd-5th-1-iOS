@@ -54,6 +54,7 @@
 		D1B51CA126BEB56700928FF3 /* VoteDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B51CA026BEB56700928FF3 /* VoteDetailViewModel.swift */; };
 		D1B51CA426BEB72400928FF3 /* VoteDetailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B51CA326BEB72400928FF3 /* VoteDetailService.swift */; };
 		D1B51CA626BEE7B000928FF3 /* Protocol+CollectionViewCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B51CA526BEE7B000928FF3 /* Protocol+CollectionViewCellDelegate.swift */; };
+		D1B51CE826BF68CE00928FF3 /* VoteDetailListingViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B51CE726BF68CE00928FF3 /* VoteDetailListingViewModelTests.swift */; };
 		FFAF1D14C850C640DBD39898 /* Pods_Picme_PicmeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99CB56FAF51F7B3577E0BB1C /* Pods_Picme_PicmeUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -135,6 +136,7 @@
 		D1B51CA026BEB56700928FF3 /* VoteDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteDetailViewModel.swift; sourceTree = "<group>"; };
 		D1B51CA326BEB72400928FF3 /* VoteDetailService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteDetailService.swift; sourceTree = "<group>"; };
 		D1B51CA526BEE7B000928FF3 /* Protocol+CollectionViewCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Protocol+CollectionViewCellDelegate.swift"; sourceTree = "<group>"; };
+		D1B51CE726BF68CE00928FF3 /* VoteDetailListingViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteDetailListingViewModelTests.swift; sourceTree = "<group>"; };
 		FF2C64C50A6163DFE30A0F3B /* Pods-Picme.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Picme.debug.xcconfig"; path = "Target Support Files/Pods-Picme/Pods-Picme.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -277,6 +279,7 @@
 			isa = PBXGroup;
 			children = (
 				A9A1AD592699FAE800169D76 /* PicmeTests.swift */,
+				D1B51CE726BF68CE00928FF3 /* VoteDetailListingViewModelTests.swift */,
 				A9A1AD5B2699FAE800169D76 /* Info.plist */,
 			);
 			path = PicmeTests;
@@ -829,6 +832,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D1B51CE826BF68CE00928FF3 /* VoteDetailListingViewModelTests.swift in Sources */,
 				A9A1AD5A2699FAE800169D76 /* PicmeTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
