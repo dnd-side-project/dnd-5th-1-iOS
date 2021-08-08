@@ -50,6 +50,14 @@
 		D180456E26B3E93C0053430E /* MainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D180456D26B3E93C0053430E /* MainService.swift */; };
 		D180457326B3EAB90053430E /* MainModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D180457226B3EAB90053430E /* MainModel.swift */; };
 		D180457626B3F03B0053430E /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D180457526B3F03B0053430E /* MainViewModel.swift */; };
+		D1B51C9626BE9EA500928FF3 /* VoteDetailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B51C9526BE9EA500928FF3 /* VoteDetailCollectionViewCell.swift */; };
+		D1B51C9826BE9EB000928FF3 /* VoteDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B51C9726BE9EB000928FF3 /* VoteDetailTableViewCell.swift */; };
+		D1B51C9B26BEAD2C00928FF3 /* GenericDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B51C9A26BEAD2C00928FF3 /* GenericDataSource.swift */; };
+		D1B51C9F26BEB26300928FF3 /* VoteDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B51C9E26BEB26300928FF3 /* VoteDetailModel.swift */; };
+		D1B51CA126BEB56700928FF3 /* VoteDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B51CA026BEB56700928FF3 /* VoteDetailViewModel.swift */; };
+		D1B51CA426BEB72400928FF3 /* VoteDetailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B51CA326BEB72400928FF3 /* VoteDetailService.swift */; };
+		D1B51CA626BEE7B000928FF3 /* Protocol+CollectionViewCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B51CA526BEE7B000928FF3 /* Protocol+CollectionViewCellDelegate.swift */; };
+		D1B51CE826BF68CE00928FF3 /* VoteDetailListingViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B51CE726BF68CE00928FF3 /* VoteDetailListingViewModelTests.swift */; };
 		FFAF1D14C850C640DBD39898 /* Pods_Picme_PicmeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99CB56FAF51F7B3577E0BB1C /* Pods_Picme_PicmeUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -127,6 +135,14 @@
 		D180456D26B3E93C0053430E /* MainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainService.swift; sourceTree = "<group>"; };
 		D180457226B3EAB90053430E /* MainModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainModel.swift; sourceTree = "<group>"; };
 		D180457526B3F03B0053430E /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		D1B51C9526BE9EA500928FF3 /* VoteDetailCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteDetailCollectionViewCell.swift; sourceTree = "<group>"; };
+		D1B51C9726BE9EB000928FF3 /* VoteDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteDetailTableViewCell.swift; sourceTree = "<group>"; };
+		D1B51C9A26BEAD2C00928FF3 /* GenericDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericDataSource.swift; sourceTree = "<group>"; };
+		D1B51C9E26BEB26300928FF3 /* VoteDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteDetailModel.swift; sourceTree = "<group>"; };
+		D1B51CA026BEB56700928FF3 /* VoteDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteDetailViewModel.swift; sourceTree = "<group>"; };
+		D1B51CA326BEB72400928FF3 /* VoteDetailService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteDetailService.swift; sourceTree = "<group>"; };
+		D1B51CA526BEE7B000928FF3 /* Protocol+CollectionViewCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Protocol+CollectionViewCellDelegate.swift"; sourceTree = "<group>"; };
+		D1B51CE726BF68CE00928FF3 /* VoteDetailListingViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteDetailListingViewModelTests.swift; sourceTree = "<group>"; };
 		FF2C64C50A6163DFE30A0F3B /* Pods-Picme.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Picme.debug.xcconfig"; path = "Target Support Files/Pods-Picme/Pods-Picme.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -239,7 +255,7 @@
 			children = (
 				A91F57D526B7B632006F20AD /* Onboarding */,
 				A975287926B69E5B003EE1A9 /* Login */,
-				D180457526B3F03B0053430E /* MainViewModel.swift */,
+				D1B51C9926BEAB1100928FF3 /* Main */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -286,6 +302,7 @@
 			isa = PBXGroup;
 			children = (
 				A9A1AD592699FAE800169D76 /* PicmeTests.swift */,
+				D1B51CE726BF68CE00928FF3 /* VoteDetailListingViewModelTests.swift */,
 				A9A1AD5B2699FAE800169D76 /* Info.plist */,
 			);
 			path = PicmeTests;
@@ -335,7 +352,7 @@
 			isa = PBXGroup;
 			children = (
 				A975287A26B69E65003EE1A9 /* Login */,
-				D180456D26B3E93C0053430E /* MainService.swift */,
+				D1B51CA226BEB6CB00928FF3 /* Main */,
 				A975287726B69DE1003EE1A9 /* ImageAPICenter.swift */,
 			);
 			path = Network;
@@ -357,6 +374,7 @@
 				A9C12B7D269AB7B900729A74 /* BaseViewContoller.swift */,
 				A9C12B86269C137600729A74 /* Dynamic.swift */,
 				D180456B26B3E8DD0053430E /* APIConstants.swift */,
+				D1B51C9A26BEAD2C00928FF3 /* GenericDataSource.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -399,6 +417,7 @@
 			children = (
 				A9C12B88269C14FF00729A74 /* Protocol+ResuableCell.swift */,
 				A95CD34D269DA66C002CCCA8 /* Protocol+LoginState.swift */,
+				D1B51CA526BEE7B000928FF3 /* Protocol+CollectionViewCellDelegate.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -463,6 +482,7 @@
 			isa = PBXGroup;
 			children = (
 				D180457226B3EAB90053430E /* MainModel.swift */,
+				D1B51C9E26BEB26300928FF3 /* VoteDetailModel.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -473,8 +493,28 @@
 				D180456726B3E2850053430E /* MainTableViewCell.swift */,
 				D180456926B3E2940053430E /* MainCollectionViewCell.swift */,
 				D11C2DC226B947B100C8EE51 /* LoadingTableViewCell.swift */,
+				D1B51C9526BE9EA500928FF3 /* VoteDetailCollectionViewCell.swift */,
+				D1B51C9726BE9EB000928FF3 /* VoteDetailTableViewCell.swift */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		D1B51C9926BEAB1100928FF3 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				D180457526B3F03B0053430E /* MainViewModel.swift */,
+				D1B51CA026BEB56700928FF3 /* VoteDetailViewModel.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		D1B51CA226BEB6CB00928FF3 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				D180456D26B3E93C0053430E /* MainService.swift */,
+				D1B51CA326BEB72400928FF3 /* VoteDetailService.swift */,
+			);
+			path = Main;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -782,11 +822,14 @@
 				D180456826B3E2850053430E /* MainTableViewCell.swift in Sources */,
 				A91F57D426B7B261006F20AD /* OnboardingViewController.swift in Sources */,
 				A95CD34E269DA66C002CCCA8 /* Protocol+LoginState.swift in Sources */,
+				D1B51C9B26BEAD2C00928FF3 /* GenericDataSource.swift in Sources */,
 				A9C12B87269C137600729A74 /* Dynamic.swift in Sources */,
+				D1B51C9626BE9EA500928FF3 /* VoteDetailCollectionViewCell.swift in Sources */,
 				A95CD35E269EFBC8002CCCA8 /* LoginAPICenter.swift in Sources */,
 				D180456A26B3E2940053430E /* MainCollectionViewCell.swift in Sources */,
 				D180456E26B3E93C0053430E /* MainService.swift in Sources */,
 				A91A904626B92BDB00C43D43 /* UserInfo.swift in Sources */,
+				D1B51CA426BEB72400928FF3 /* VoteDetailService.swift in Sources */,
 				D180456C26B3E8DD0053430E /* APIConstants.swift in Sources */,
 				A91A907726BD51FF00C43D43 /* ImageUploadViewContoller.swift in Sources */,
 				A975287826B69DE1003EE1A9 /* ImageAPICenter.swift in Sources */,
@@ -799,7 +842,11 @@
 				A9C12B8B269C158900729A74 /* Extension+UITableView.swift in Sources */,
 				A9A1AD452699FAE600169D76 /* SceneDelegate.swift in Sources */,
 				A95CD36526A30357002CCCA8 /* LoginModel.swift in Sources */,
+				D1B51CA626BEE7B000928FF3 /* Protocol+CollectionViewCellDelegate.swift in Sources */,
+				D1B51C9826BE9EB000928FF3 /* VoteDetailTableViewCell.swift in Sources */,
+				D1B51C9F26BEB26300928FF3 /* VoteDetailModel.swift in Sources */,
 				D11C2DC326B947B100C8EE51 /* LoadingTableViewCell.swift in Sources */,
+				D1B51CA126BEB56700928FF3 /* VoteDetailViewModel.swift in Sources */,
 				A95CD36526A30357002CCCA8 /* LoginModel.swift in Sources */,
 				D1449D9926A848610083418D /* MainViewController.swift in Sources */,
 				A95CD354269EB2BF002CCCA8 /* Enum+APIError.swift in Sources */,
@@ -813,6 +860,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D1B51CE826BF68CE00928FF3 /* VoteDetailListingViewModelTests.swift in Sources */,
 				A9A1AD5A2699FAE800169D76 /* PicmeTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
