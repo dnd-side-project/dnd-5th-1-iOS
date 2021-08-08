@@ -15,6 +15,12 @@ struct PostImageData: Codable {
     let height: Int
 }
 
+struct CreateImageData: Codable {
+    let files: [Data]
+    let isFirstPick: [Bool]
+    let sizes: [Int]
+}
+
 @available(iOS 14, *)
 class ImageUploadViewContoller: UIViewController {
     
@@ -31,21 +37,32 @@ class ImageUploadViewContoller: UIViewController {
         
 //        let images = ["3","3","3","4","5","5"]
         let images = ["4","3"]
-        var imageData: [PostImageData] = []
+        var imageData: [Data] = []
+        var isFirstPick: [Bool] = []
+        var size: [Int] = []
+        var createFile: CreateImageData?
         
         images.forEach {
             let image = UIImage(named: $0)
-//            imageData.append((image?.jpegData(compressionQuality: 0.2))!)
-            imageData.append(PostImageData(imageData: (image?.jpegData(compressionQuality: 1))!,
-                                           isFirstPick: false,
-                                           width: 1000,
-                                           height: 1000))
+//            createFile?.files.append(image?.jpegData(compressionQuality: 0.2))
+            imageData.append((image?.jpegData(compressionQuality: 0.2))!)
+            isFirstPick.append(false)
+            size.append(Int((image?.size.width)!))
+            size.append(Int((image?.size.height)!))
+            
+//            imageData.append(PostImageData(imageData: (image?.jpegData(compressionQuality: 1))!,
+//                                           isFirstPick: false,
+//                                           width: 1000,
+//                                           height: 1000))
+
         }
         print(imageData)
         print(imageData.count)
         
-        let param = [
-            "files": imageData
+        let param: [String: [Any]] = [
+            "files": imageData,
+            "isFirstPick": isFirstPick,
+            "size": size
         ]
 //        ImageAPICenter.convertImage(param)
         ImageAPICenter.createImage(param)
