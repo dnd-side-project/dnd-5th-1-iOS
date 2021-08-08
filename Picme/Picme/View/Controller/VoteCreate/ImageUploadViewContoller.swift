@@ -69,12 +69,16 @@ class ImageUploadViewContoller: UIViewController {
     }
 
     @IBAction func testAction(_ sender: UIButton) {
-        configuration.filter = .images
-        configuration.selectionLimit = 0
+//        configuration.filter = .images
+//        configuration.selectionLimit = 0
+//
+//        let picker = PHPickerViewController(configuration: configuration)
+//        picker.delegate = self
+//        present(picker, animated: true)
         
-        let picker = PHPickerViewController(configuration: configuration)
-        picker.delegate = self
-        present(picker, animated: true)
+        customAlert(.declaration) {
+            print("신고하기")
+        }
     }
     
     func displayNextImage() {

@@ -15,6 +15,7 @@
 		A91A909026BE9D2800C43D43 /* KeyChainModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91A908F26BE9D2800C43D43 /* KeyChainModel.swift */; };
 		A91F57D426B7B261006F20AD /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91F57D326B7B261006F20AD /* OnboardingViewController.swift */; };
 		A91F57D726B7B641006F20AD /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91F57D626B7B641006F20AD /* OnboardingViewModel.swift */; };
+		A9322EEB26BFD81A0061EF35 /* Extension+UIAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9322EEA26BFD81A0061EF35 /* Extension+UIAlert.swift */; };
 		A95CD34E269DA66C002CCCA8 /* Protocol+LoginState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95CD34D269DA66C002CCCA8 /* Protocol+LoginState.swift */; };
 		A95CD354269EB2BF002CCCA8 /* Enum+APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95CD353269EB2BF002CCCA8 /* Enum+APIError.swift */; };
 		A95CD356269EB5B7002CCCA8 /* Enum+HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95CD355269EB5B7002CCCA8 /* Enum+HTTPMethod.swift */; };
@@ -90,6 +91,7 @@
 		A91A908F26BE9D2800C43D43 /* KeyChainModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainModel.swift; sourceTree = "<group>"; };
 		A91F57D326B7B261006F20AD /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		A91F57D626B7B641006F20AD /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
+		A9322EEA26BFD81A0061EF35 /* Extension+UIAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIAlert.swift"; sourceTree = "<group>"; };
 		A95CD34D269DA66C002CCCA8 /* Protocol+LoginState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Protocol+LoginState.swift"; sourceTree = "<group>"; };
 		A95CD353269EB2BF002CCCA8 /* Enum+APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Enum+APIError.swift"; sourceTree = "<group>"; };
 		A95CD355269EB5B7002CCCA8 /* Enum+HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Enum+HTTPMethod.swift"; sourceTree = "<group>"; };
@@ -408,6 +410,7 @@
 				A9C12B8A269C158900729A74 /* Extension+UITableView.swift */,
 				A9C12B8C269C170C00729A74 /* Extension+CollectionView.swift */,
 				A95CD35B269EFB66002CCCA8 /* Extension+URLSession,Request.swift */,
+				A9322EEA26BFD81A0061EF35 /* Extension+UIAlert.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -828,6 +831,7 @@
 				A95CD35E269EFBC8002CCCA8 /* LoginAPICenter.swift in Sources */,
 				D180456A26B3E2940053430E /* MainCollectionViewCell.swift in Sources */,
 				D180456E26B3E93C0053430E /* MainService.swift in Sources */,
+				A9322EEB26BFD81A0061EF35 /* Extension+UIAlert.swift in Sources */,
 				A91A904626B92BDB00C43D43 /* UserInfo.swift in Sources */,
 				D1B51CA426BEB72400928FF3 /* VoteDetailService.swift in Sources */,
 				D180456C26B3E8DD0053430E /* APIConstants.swift in Sources */,
