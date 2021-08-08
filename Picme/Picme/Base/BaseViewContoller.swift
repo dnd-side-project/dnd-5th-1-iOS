@@ -23,6 +23,10 @@ class BaseViewContoller: UIViewController {
         view.endEditing(true)
     }
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     @objc dynamic func setConstraints() {}
     @objc dynamic func setConfiguration() {}
     @objc dynamic func setProperties() {}
