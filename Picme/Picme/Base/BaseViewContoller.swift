@@ -15,6 +15,7 @@ class BaseViewContoller: UIViewController {
         setProperties()
         setConfiguration()
         setConstraints()
+        setBind()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -30,5 +31,5 @@ class BaseViewContoller: UIViewController {
     @objc dynamic func setConstraints() {}
     @objc dynamic func setConfiguration() {}
     @objc dynamic func setProperties() {}
-
+    @objc dynamic func setBind() {}
 }

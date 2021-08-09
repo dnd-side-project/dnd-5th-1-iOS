@@ -6,129 +6,145 @@
 //
 
 import UIKit
-import PhotosUI
 
-struct PostImageData: Codable {
-    let imageData: Data
-    let isFirstPick: Bool
-    let width: Int
-    let height: Int
-}
-
-struct CreateImageData: Codable {
-    let files: [Data]
-    let isFirstPick: [Bool]
-    let sizes: [Int]
-}
-
-@available(iOS 14, *)
-class ImageUploadViewContoller: UIViewController {
+class ImageUploadViewContoller: BaseViewContoller {
     
-    var configuration = PHPickerConfiguration()
-    var itemProviders: [NSItemProvider] = []
-    var iterator: IndexingIterator<[NSItemProvider]>?
+    // MARK: - Properties
+    var uploadViewModel: ImageUploadViewModel? = ImageUploadViewModel()
     
-    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var testButton: UIButton!
+    @IBOutlet weak var testLabel: UILabel!
+    @IBOutlet weak var stackView: UIStackView!
+    @IBOutlet weak var progressBar: UIProgressView!
     
+    let stepView = StepView(stepText: "STEP 1", title: "투표받고 싶은 사진을 올려주세요!")
+    
+    let collectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        
+        let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collection.backgroundColor = .clear
+        return collection
+    }()
+    
+    let nextButton: UIButton = {
+        $0.backgroundColor = .mainColor(.pink)
+        $0.layer.cornerRadius = 10
+        $0.setTitle("확인", for: .normal)
+        $0.setTitleColor(.textColor(.text100), for: .normal)
+        return $0
+    }(UIButton(type: .system))
+    
+    // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        imageView.contentMode = .scaleAspectFit
         
-//        let images = ["3","3","3","4","5","5"]
-        let images = ["4","3"]
-        var imageData: [Data] = []
-        var isFirstPick: [Bool] = []
-        var size: [Int] = []
-        var createFile: CreateImageData?
-        
-        images.forEach {
-            let image = UIImage(named: $0)
-//            createFile?.files.append(image?.jpegData(compressionQuality: 0.2))
-            imageData.append((image?.jpegData(compressionQuality: 0.2))!)
-            isFirstPick.append(false)
-            size.append(Int((image?.size.width)!))
-            size.append(Int((image?.size.height)!))
-            
-//            imageData.append(PostImageData(imageData: (image?.jpegData(compressionQuality: 1))!,
-//                                           isFirstPick: false,
-//                                           width: 1000,
-//                                           height: 1000))
-
-        }
-        print(imageData)
-        print(imageData.count)
-        
-        let param: [String: [Any]] = [
-            "files": imageData,
-            "isFirstPick": isFirstPick,
-            "size": size
-        ]
-//        ImageAPICenter.convertImage(param)
-        ImageAPICenter.createImage(param)
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.registerCell(ImageUploadCell.self)
     }
-
+    
     @IBAction func testAction(_ sender: UIButton) {
-        configuration.filter = .images
-        configuration.selectionLimit = 0
-        
-        let picker = PHPickerViewController(configuration: configuration)
-        picker.delegate = self
-        present(picker, animated: true)
+        uploadViewModel?.buttonState.value = true
     }
     
-    func displayNextImage() {
-        if let itemProvider = iterator?.next(), itemProvider.canLoadObject(ofClass: UIImage.self) {
-            let previousImage = imageView.image
-            itemProvider.loadObject(ofClass: UIImage.self) { [weak self] image, error in
-                DispatchQueue.main.async {
-                    guard let self = self, let image = image as? UIImage, self.imageView.image == previousImage else { return }
-//                    print(images?.size.width, images?.size.height)
-                    self.imageView.image = self.resizeImage(image: image, targetSize: CGSize(width: 1000, height: 1000))
-                }
-            }
-        }
-    }
-    
-    func resizeImage(image: UIImage, targetSize: CGSize) -> UIImage {
-        let size = image.size
-        
-        let widthRatio  = targetSize.width  / size.width
-        let heightRatio = targetSize.height / size.height
-        
-        // Figure out what our orientation is, and use that to form the rectangle
-        var newSize: CGSize
-        if(widthRatio > heightRatio) {
-            newSize = CGSize(width: size.width * heightRatio, height: size.height * heightRatio)
-        } else {
-            newSize = CGSize(width: size.width * widthRatio,  height: size.height * widthRatio)
-        }
-        
-        // This is the rect that we've calculated out and this is what is actually used below
-        let rect = CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height)
-        
-        // Actually do the resizing to the rect using the ImageContext stuff
-        UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
-        image.draw(in: rect)
-        let newImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        print(newImage?.size.width, newImage?.size.height)
-        return newImage!
-    }
-    
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        displayNextImage()
+    func viewState(_ state: Bool) {
+        self.stackView.isHidden = state
+        self.collectionView.isHidden = !state
+        self.nextButton.isHidden = !state
     }
 }
 
-@available(iOS 14, *)
-extension ImageUploadViewContoller: PHPickerViewControllerDelegate {
+// MARK: - UI
+
+extension ImageUploadViewContoller {
     
-    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
-        dismiss(animated: true)
+    override func setProperties() {
         
-        itemProviders = results.map(\.itemProvider)
-        iterator = itemProviders.makeIterator()
-        displayNextImage()
+        view.addSubview(stepView)
+        view.addSubview(collectionView)
+        view.addSubview(nextButton)
+        
+        stepView.clipsToBounds = true
+        stepView.backgroundColor = .solidColor(.solid12)
+        stepView.layer.cornerRadius = 10
+        
+        collectionView.isHidden = true
+        nextButton.isHidden = true
+        
+        // NavigationBar
+        if let navBar = navigationController?.navigationBar {
+            navBar.isTranslucent = false
+            navBar.barTintColor = .solidColor(.solid0)
+
+            navBar.topItem?.title = "사진 업로드"
+            navBar.titleTextAttributes = [.foregroundColor: UIColor.textColor(.text100)]
+        }
+        
+        nextButton.addTarget(self, action: #selector(onePickChoise(_:)), for: .touchUpInside)
+    }
+    
+    @objc func onePickChoise(_ sender: UIButton) {
+        guard let onePickVC = storyboard?.instantiateViewController(withIdentifier: "OnePickViewController") as? OnePickViewController else { return }
+        navigationController?.pushViewController(onePickVC, animated: true)
+    }
+    
+    override func setBind() {
+        
+        uploadViewModel?.buttonState.bindAndFire(listener: { state in
+            self.viewState(state)
+        })
+    }
+    
+    override func setConfiguration() {
+        
+        view.backgroundColor = .solidColor(.solid0)
+        
+        testLabel.textColor = .textColor(.text100)
+        
+        testButton.layer.cornerRadius = 10
+        testButton.setTitleColor(.textColor(.text100), for: .normal)
+        testButton.backgroundColor = .mainColor(.pink)
+        
+    }
+    
+    override func setConstraints() {
+        
+        testButton.translatesAutoresizingMaskIntoConstraints = false
+        testButton.widthAnchor.constraint(equalToConstant: view.frame.width / 2.5)
+            .isActive = true
+        testButton.heightAnchor.constraint(equalToConstant: 52)
+            .isActive = true
+        
+        stepView.translatesAutoresizingMaskIntoConstraints = false
+        stepView.topAnchor.constraint(equalTo: progressBar.bottomAnchor, constant: 14)
+            .isActive = true
+        stepView.leadingAnchor.constraint(equalTo: progressBar.leadingAnchor)
+            .isActive = true
+        stepView.trailingAnchor.constraint(equalTo: progressBar.trailingAnchor)
+            .isActive = true
+        stepView.heightAnchor.constraint(equalToConstant: 72)
+            .isActive = true
+        
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.topAnchor.constraint(equalTo: stepView.bottomAnchor, constant: 14)
+            .isActive = true
+        collectionView.leadingAnchor.constraint(equalTo: progressBar.leadingAnchor)
+            .isActive = true
+        collectionView.trailingAnchor.constraint(equalTo: progressBar.trailingAnchor)
+            .isActive = true
+        collectionView.bottomAnchor.constraint(equalTo: nextButton.topAnchor, constant: -20)
+            .isActive = true
+        
+        nextButton.translatesAutoresizingMaskIntoConstraints = false
+        nextButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -28)
+            .isActive = true
+        nextButton.leadingAnchor.constraint(equalTo: progressBar.leadingAnchor)
+            .isActive = true
+        nextButton.trailingAnchor.constraint(equalTo: progressBar.trailingAnchor)
+            .isActive = true
+        nextButton.heightAnchor.constraint(equalToConstant: 52)
+            .isActive = true
     }
 }
