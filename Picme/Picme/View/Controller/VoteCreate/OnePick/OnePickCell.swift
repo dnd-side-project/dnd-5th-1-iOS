@@ -1,5 +1,5 @@
 //
-//  ImageUploadCell.swift
+//  OnePickCell.swift
 //  Picme
 //
 //  Created by taeuk on 2021/08/09.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ImageUploadCell: UICollectionViewCell {
+class OnePickCell: UICollectionViewCell {
     
     let cellImages: UIImageView = {
         $0.contentMode = .scaleToFill
@@ -20,7 +20,6 @@ class ImageUploadCell: UICollectionViewCell {
         setConfiguration()
         cellImages.clipsToBounds = true
         cellImages.layer.cornerRadius = 10
-        
     }
     
     required init?(coder: NSCoder) {

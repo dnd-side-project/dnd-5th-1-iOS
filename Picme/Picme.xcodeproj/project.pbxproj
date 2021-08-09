@@ -20,6 +20,9 @@
 		A9322EF026C099990061EF35 /* StepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9322EEF26C099990061EF35 /* StepView.swift */; };
 		A9322EF226C0AD370061EF35 /* Extension+ImageUpload.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9322EF126C0AD370061EF35 /* Extension+ImageUpload.swift */; };
 		A9322EF426C0ADBA0061EF35 /* ImageUploadCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9322EF326C0ADBA0061EF35 /* ImageUploadCell.swift */; };
+		A9322EF726C0C38F0061EF35 /* OnePickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9322EF626C0C38F0061EF35 /* OnePickViewController.swift */; };
+		A9322EF926C0CADA0061EF35 /* OnePickCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9322EF826C0CADA0061EF35 /* OnePickCell.swift */; };
+		A9322EFC26C0D2670061EF35 /* ContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9322EFB26C0D2670061EF35 /* ContentViewController.swift */; };
 		A95CD34E269DA66C002CCCA8 /* Protocol+LoginState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95CD34D269DA66C002CCCA8 /* Protocol+LoginState.swift */; };
 		A95CD354269EB2BF002CCCA8 /* Enum+APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95CD353269EB2BF002CCCA8 /* Enum+APIError.swift */; };
 		A95CD356269EB5B7002CCCA8 /* Enum+HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95CD355269EB5B7002CCCA8 /* Enum+HTTPMethod.swift */; };
@@ -100,6 +103,9 @@
 		A9322EEF26C099990061EF35 /* StepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepView.swift; sourceTree = "<group>"; };
 		A9322EF126C0AD370061EF35 /* Extension+ImageUpload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+ImageUpload.swift"; sourceTree = "<group>"; };
 		A9322EF326C0ADBA0061EF35 /* ImageUploadCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUploadCell.swift; sourceTree = "<group>"; };
+		A9322EF626C0C38F0061EF35 /* OnePickViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnePickViewController.swift; sourceTree = "<group>"; };
+		A9322EF826C0CADA0061EF35 /* OnePickCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnePickCell.swift; sourceTree = "<group>"; };
+		A9322EFB26C0D2670061EF35 /* ContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewController.swift; sourceTree = "<group>"; };
 		A95CD34D269DA66C002CCCA8 /* Protocol+LoginState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Protocol+LoginState.swift"; sourceTree = "<group>"; };
 		A95CD353269EB2BF002CCCA8 /* Enum+APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Enum+APIError.swift"; sourceTree = "<group>"; };
 		A95CD355269EB5B7002CCCA8 /* Enum+HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Enum+HTTPMethod.swift"; sourceTree = "<group>"; };
@@ -205,6 +211,8 @@
 		A91A907326BD510400C43D43 /* VoteCreate */ = {
 			isa = PBXGroup;
 			children = (
+				A9322EFA26C0D1800061EF35 /* VoteComplete */,
+				A9322EF526C0C35A0061EF35 /* OnePick */,
 				A91A907626BD51FF00C43D43 /* ImageUploadViewContoller.swift */,
 				A9322EF126C0AD370061EF35 /* Extension+ImageUpload.swift */,
 				A9322EF326C0ADBA0061EF35 /* ImageUploadCell.swift */,
@@ -237,6 +245,23 @@
 				A9322EED26C0910C0061EF35 /* ImageUploadViewModel.swift */,
 			);
 			path = Upload;
+			sourceTree = "<group>";
+		};
+		A9322EF526C0C35A0061EF35 /* OnePick */ = {
+			isa = PBXGroup;
+			children = (
+				A9322EF626C0C38F0061EF35 /* OnePickViewController.swift */,
+				A9322EF826C0CADA0061EF35 /* OnePickCell.swift */,
+			);
+			path = OnePick;
+			sourceTree = "<group>";
+		};
+		A9322EFA26C0D1800061EF35 /* VoteComplete */ = {
+			isa = PBXGroup;
+			children = (
+				A9322EFB26C0D2670061EF35 /* ContentViewController.swift */,
+			);
+			path = VoteComplete;
 			sourceTree = "<group>";
 		};
 		A975287926B69E5B003EE1A9 /* Login */ = {
@@ -837,6 +862,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A95CD35C269EFB66002CCCA8 /* Extension+URLSession,Request.swift in Sources */,
+				A9322EF926C0CADA0061EF35 /* OnePickCell.swift in Sources */,
 				A975288226B74322003EE1A9 /* LoginViewController.swift in Sources */,
 				A9C12B80269AB86A00729A74 /* Extension+UIColor.swift in Sources */,
 				A9322EEE26C0910C0061EF35 /* ImageUploadViewModel.swift in Sources */,
@@ -850,6 +876,8 @@
 				A9C12B87269C137600729A74 /* Dynamic.swift in Sources */,
 				D1B51C9626BE9EA500928FF3 /* VoteDetailCollectionViewCell.swift in Sources */,
 				A95CD35E269EFBC8002CCCA8 /* LoginAPICenter.swift in Sources */,
+				A9322EF726C0C38F0061EF35 /* OnePickViewController.swift in Sources */,
+				A9322EFC26C0D2670061EF35 /* ContentViewController.swift in Sources */,
 				D180456A26B3E2940053430E /* MainCollectionViewCell.swift in Sources */,
 				A9322EF426C0ADBA0061EF35 /* ImageUploadCell.swift in Sources */,
 				D180456E26B3E93C0053430E /* MainService.swift in Sources */,

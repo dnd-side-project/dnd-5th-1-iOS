@@ -35,7 +35,7 @@
                                     </button>
                                 </subviews>
                             </stackView>
-                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.29999999999999999" translatesAutoresizingMaskIntoConstraints="NO" id="ga7-BC-Qia">
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.33000000000000002" translatesAutoresizingMaskIntoConstraints="NO" id="ga7-BC-Qia">
                                 <rect key="frame" x="20" y="88" width="374" height="4"/>
                                 <color key="progressTintColor" red="0.20000000000000001" green="0.80000000000000004" blue="0.5490196078431373" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <color key="trackTintColor" red="0.090196078431372548" green="0.10588235294117647" blue="0.12156862745098039" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -63,35 +63,145 @@
             </objects>
             <point key="canvasLocation" x="939.13043478260875" y="41.517857142857139"/>
         </scene>
-        <!--View Controller-->
+        <!--One Pick View Controller-->
         <scene sceneID="V9F-XC-Gul">
             <objects>
-                <viewController id="IZK-6O-b8c" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OnePickViewController" id="IZK-6O-b8c" customClass="OnePickViewController" customModule="Picme" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hVK-uN-Umk">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.66000000000000003" translatesAutoresizingMaskIntoConstraints="NO" id="epV-cx-LQS">
+                                <rect key="frame" x="20" y="44" width="374" height="4"/>
+                                <color key="progressTintColor" red="0.94117647058823528" green="0.47450980392156861" blue="0.23529411764705882" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="trackTintColor" red="0.090196078431372548" green="0.10588235294117647" blue="0.12156862745098039" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            </progressView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="DAp-f1-QvA"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="DAp-f1-QvA" firstAttribute="trailing" secondItem="epV-cx-LQS" secondAttribute="trailing" constant="20" id="1k0-2y-pbQ"/>
+                            <constraint firstItem="epV-cx-LQS" firstAttribute="leading" secondItem="DAp-f1-QvA" secondAttribute="leading" constant="20" id="Bva-Ir-Kho"/>
+                            <constraint firstItem="epV-cx-LQS" firstAttribute="top" secondItem="DAp-f1-QvA" secondAttribute="top" id="RnD-6m-OkG"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="progressBar" destination="epV-cx-LQS" id="A6y-lf-EcQ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PcG-St-zET" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1807" y="42"/>
         </scene>
-        <!--View Controller-->
+        <!--Content View Controller-->
         <scene sceneID="aLp-LE-ec8">
             <objects>
-                <viewController id="Yob-2S-kIY" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ContentViewController" id="Yob-2S-kIY" customClass="ContentViewController" customModule="Picme" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gBD-tp-GjP">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="NXa-8E-vgx">
+                                <rect key="frame" x="83" y="216" width="247.5" height="104.5"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="bottom" spacing="145" translatesAutoresizingMaskIntoConstraints="NO" id="23e-Pt-0Wy">
+                                        <rect key="frame" x="0.0" y="0.0" width="247.5" height="21.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="투표 제목" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6rb-7S-TUT">
+                                                <rect key="frame" x="0.0" y="0.0" width="67" height="21.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tt6-EQ-UfS">
+                                                <rect key="frame" x="212" y="4.5" width="35.5" height="17"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="placeHolder" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="mfT-Mr-mjH">
+                                        <rect key="frame" x="0.0" y="29.5" width="247.5" height="75"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="75" id="5lG-0o-Jkt"/>
+                                        </constraints>
+                                        <color key="textColor" systemColor="labelColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                </subviews>
+                            </stackView>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="1" translatesAutoresizingMaskIntoConstraints="NO" id="3uW-X0-OHq">
+                                <rect key="frame" x="20" y="44" width="374" height="4"/>
+                                <color key="progressTintColor" red="0.92156862745098034" green="0.28627450980392155" blue="0.60392156862745094" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            </progressView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bG3-dA-Qoj">
+                                <rect key="frame" x="184" y="739" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="registVote:" destination="Yob-2S-kIY" eventType="touchUpInside" id="P86-Ei-nQ0"/>
+                                </connections>
+                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="M06-w2-DJc">
+                                <rect key="frame" x="83" y="402" width="247.5" height="79.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="투표 마감시간" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ubj-IU-5cX">
+                                        <rect key="frame" x="0.0" y="0.0" width="87.5" height="19.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M6F-mZ-nIb">
+                                        <rect key="frame" x="0.0" y="27.5" width="247.5" height="52"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="21/07/15 00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BSQ-Rn-xIa">
+                                                <rect key="frame" x="67" y="16" width="113.5" height="20.5"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="80" id="y2J-jG-MHe"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstItem="BSQ-Rn-xIa" firstAttribute="centerY" secondItem="M6F-mZ-nIb" secondAttribute="centerY" id="Vhg-NV-PXC"/>
+                                            <constraint firstItem="BSQ-Rn-xIa" firstAttribute="centerX" secondItem="M6F-mZ-nIb" secondAttribute="centerX" id="d3J-D4-j77"/>
+                                            <constraint firstAttribute="height" constant="52" id="zRC-Pn-6gy"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                            </stackView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="D92-Mq-AvZ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="3uW-X0-OHq" firstAttribute="top" secondItem="D92-Mq-AvZ" secondAttribute="top" id="KVN-nC-fnO"/>
+                            <constraint firstItem="3uW-X0-OHq" firstAttribute="leading" secondItem="D92-Mq-AvZ" secondAttribute="leading" constant="20" id="MZa-3g-6gp"/>
+                            <constraint firstItem="M6F-mZ-nIb" firstAttribute="width" secondItem="mfT-Mr-mjH" secondAttribute="width" id="box-qF-Kwl"/>
+                            <constraint firstItem="D92-Mq-AvZ" firstAttribute="trailing" secondItem="3uW-X0-OHq" secondAttribute="trailing" constant="20" id="mff-Hh-F5H"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="bottomStackView" destination="M06-w2-DJc" id="QbV-cV-qHh"/>
+                        <outlet property="progressBar" destination="3uW-X0-OHq" id="hwz-Tt-D2K"/>
+                        <outlet property="registVoteButton" destination="bG3-dA-Qoj" id="3nI-f8-S7T"/>
+                        <outlet property="upStackView" destination="NXa-8E-vgx" id="TBh-V4-glS"/>
+                        <outlet property="voteEndDate" destination="BSQ-Rn-xIa" id="uZN-Kp-qZ4"/>
+                        <outlet property="voteEndDateTimeLabel" destination="Ubj-IU-5cX" id="MkS-PF-NhQ"/>
+                        <outlet property="voteEndView" destination="M6F-mZ-nIb" id="svS-ao-T7K"/>
+                        <outlet property="voteTextView" destination="mfT-Mr-mjH" id="Uss-Ud-oLb"/>
+                        <outlet property="voteTitle" destination="6rb-7S-TUT" id="LI8-Qu-eVe"/>
+                        <outlet property="voteTitleTextNumber" destination="Tt6-EQ-UfS" id="vDs-bj-LhU"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l31-BB-Xfn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2658" y="42"/>
+            <point key="canvasLocation" x="2657.971014492754" y="41.517857142857139"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="fIb-sM-vNi">
@@ -113,6 +223,9 @@
         </scene>
     </scenes>
     <resources>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

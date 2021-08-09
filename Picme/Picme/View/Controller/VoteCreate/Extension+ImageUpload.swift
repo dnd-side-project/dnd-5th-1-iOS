@@ -23,6 +23,7 @@ extension ImageUploadViewContoller: UICollectionViewDataSource {
         
         let cell: ImageUploadCell = collectionView.dequeueCollectionCell(for: indexPath)
         cell.cellImages.image = UIImage(named: "1")
+
         return cell
     }
     

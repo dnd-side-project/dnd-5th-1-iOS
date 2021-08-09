@@ -17,7 +17,7 @@ class ImageUploadViewContoller: BaseViewContoller {
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var progressBar: UIProgressView!
     
-    let customs = StepView(stepText: "STEP 1", title: "투표받고 싶은 사진을 올려주세요!")
+    let stepView = StepView(stepText: "STEP 1", title: "투표받고 싶은 사진을 올려주세요!")
     
     let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -62,12 +62,13 @@ extension ImageUploadViewContoller {
     
     override func setProperties() {
         
-        view.addSubview(customs)
+        view.addSubview(stepView)
         view.addSubview(collectionView)
         view.addSubview(nextButton)
         
-        customs.clipsToBounds = true
-        customs.backgroundColor = .solidColor(.solid12)
+        stepView.clipsToBounds = true
+        stepView.backgroundColor = .solidColor(.solid12)
+        stepView.layer.cornerRadius = 10
         
         collectionView.isHidden = true
         nextButton.isHidden = true
@@ -85,7 +86,8 @@ extension ImageUploadViewContoller {
     }
     
     @objc func onePickChoise(_ sender: UIButton) {
-         
+        guard let onePickVC = storyboard?.instantiateViewController(withIdentifier: "OnePickViewController") as? OnePickViewController else { return }
+        navigationController?.pushViewController(onePickVC, animated: true)
     }
     
     override func setBind() {
@@ -115,18 +117,18 @@ extension ImageUploadViewContoller {
         testButton.heightAnchor.constraint(equalToConstant: 52)
             .isActive = true
         
-        customs.translatesAutoresizingMaskIntoConstraints = false
-        customs.topAnchor.constraint(equalTo: progressBar.bottomAnchor, constant: 14)
+        stepView.translatesAutoresizingMaskIntoConstraints = false
+        stepView.topAnchor.constraint(equalTo: progressBar.bottomAnchor, constant: 14)
             .isActive = true
-        customs.leadingAnchor.constraint(equalTo: progressBar.leadingAnchor)
+        stepView.leadingAnchor.constraint(equalTo: progressBar.leadingAnchor)
             .isActive = true
-        customs.trailingAnchor.constraint(equalTo: progressBar.trailingAnchor)
+        stepView.trailingAnchor.constraint(equalTo: progressBar.trailingAnchor)
             .isActive = true
-        customs.heightAnchor.constraint(equalToConstant: 72)
+        stepView.heightAnchor.constraint(equalToConstant: 72)
             .isActive = true
         
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.topAnchor.constraint(equalTo: customs.bottomAnchor, constant: 14)
+        collectionView.topAnchor.constraint(equalTo: stepView.bottomAnchor, constant: 14)
             .isActive = true
         collectionView.leadingAnchor.constraint(equalTo: progressBar.leadingAnchor)
             .isActive = true
