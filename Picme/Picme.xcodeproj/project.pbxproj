@@ -16,6 +16,8 @@
 		A91F57D426B7B261006F20AD /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91F57D326B7B261006F20AD /* OnboardingViewController.swift */; };
 		A91F57D726B7B641006F20AD /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91F57D626B7B641006F20AD /* OnboardingViewModel.swift */; };
 		A9322EEB26BFD81A0061EF35 /* Extension+UIAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9322EEA26BFD81A0061EF35 /* Extension+UIAlert.swift */; };
+		A9322EEE26C0910C0061EF35 /* ImageUploadViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9322EED26C0910C0061EF35 /* ImageUploadViewModel.swift */; };
+		A9322EF026C099990061EF35 /* StepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9322EEF26C099990061EF35 /* StepView.swift */; };
 		A95CD34E269DA66C002CCCA8 /* Protocol+LoginState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95CD34D269DA66C002CCCA8 /* Protocol+LoginState.swift */; };
 		A95CD354269EB2BF002CCCA8 /* Enum+APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95CD353269EB2BF002CCCA8 /* Enum+APIError.swift */; };
 		A95CD356269EB5B7002CCCA8 /* Enum+HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95CD355269EB5B7002CCCA8 /* Enum+HTTPMethod.swift */; };
@@ -92,6 +94,8 @@
 		A91F57D326B7B261006F20AD /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		A91F57D626B7B641006F20AD /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
 		A9322EEA26BFD81A0061EF35 /* Extension+UIAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIAlert.swift"; sourceTree = "<group>"; };
+		A9322EED26C0910C0061EF35 /* ImageUploadViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUploadViewModel.swift; sourceTree = "<group>"; };
+		A9322EEF26C099990061EF35 /* StepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepView.swift; sourceTree = "<group>"; };
 		A95CD34D269DA66C002CCCA8 /* Protocol+LoginState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Protocol+LoginState.swift"; sourceTree = "<group>"; };
 		A95CD353269EB2BF002CCCA8 /* Enum+APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Enum+APIError.swift"; sourceTree = "<group>"; };
 		A95CD355269EB5B7002CCCA8 /* Enum+HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Enum+HTTPMethod.swift"; sourceTree = "<group>"; };
@@ -198,6 +202,7 @@
 			isa = PBXGroup;
 			children = (
 				A91A907626BD51FF00C43D43 /* ImageUploadViewContoller.swift */,
+				A9322EEF26C099990061EF35 /* StepView.swift */,
 			);
 			path = VoteCreate;
 			sourceTree = "<group>";
@@ -218,6 +223,14 @@
 				A91F57D626B7B641006F20AD /* OnboardingViewModel.swift */,
 			);
 			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		A9322EEC26C090E70061EF35 /* Upload */ = {
+			isa = PBXGroup;
+			children = (
+				A9322EED26C0910C0061EF35 /* ImageUploadViewModel.swift */,
+			);
+			path = Upload;
 			sourceTree = "<group>";
 		};
 		A975287926B69E5B003EE1A9 /* Login */ = {
@@ -505,6 +518,7 @@
 		D1B51C9926BEAB1100928FF3 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				A9322EEC26C090E70061EF35 /* Upload */,
 				D180457526B3F03B0053430E /* MainViewModel.swift */,
 				D1B51CA026BEB56700928FF3 /* VoteDetailViewModel.swift */,
 			);
@@ -819,6 +833,7 @@
 				A95CD35C269EFB66002CCCA8 /* Extension+URLSession,Request.swift in Sources */,
 				A975288226B74322003EE1A9 /* LoginViewController.swift in Sources */,
 				A9C12B80269AB86A00729A74 /* Extension+UIColor.swift in Sources */,
+				A9322EEE26C0910C0061EF35 /* ImageUploadViewModel.swift in Sources */,
 				A91A909026BE9D2800C43D43 /* KeyChainModel.swift in Sources */,
 				A9A1AD432699FAE600169D76 /* AppDelegate.swift in Sources */,
 				A91F57D726B7B641006F20AD /* OnboardingViewModel.swift in Sources */,
@@ -832,6 +847,7 @@
 				D180456A26B3E2940053430E /* MainCollectionViewCell.swift in Sources */,
 				D180456E26B3E93C0053430E /* MainService.swift in Sources */,
 				A9322EEB26BFD81A0061EF35 /* Extension+UIAlert.swift in Sources */,
+				A9322EF026C099990061EF35 /* StepView.swift in Sources */,
 				A91A904626B92BDB00C43D43 /* UserInfo.swift in Sources */,
 				D1B51CA426BEB72400928FF3 /* VoteDetailService.swift in Sources */,
 				D180456C26B3E8DD0053430E /* APIConstants.swift in Sources */,

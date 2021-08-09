@@ -26,9 +26,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let scene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: scene)
         
-        let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let mainStoryboard = UIStoryboard(name: "ImageUpload", bundle: nil)
         let mainViewController = mainStoryboard.instantiateViewController(withIdentifier:
-                                                                            "TabBarController")
+                                                                            "ImageUploadViewContoller")
         mainViewController.modalPresentationStyle = .fullScreen
         self.window?.rootViewController = mainViewController
         self.window?.makeKeyAndVisible()

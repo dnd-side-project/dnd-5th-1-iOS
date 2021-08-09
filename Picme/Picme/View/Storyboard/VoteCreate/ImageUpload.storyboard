@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="u28-bI-9p6">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -12,41 +12,74 @@
         <!--Image Upload View Contoller-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
-                <viewController storyboardIdentifier="ImageUploadViewContoller" id="Y6W-OH-hqX" customClass="ImageUploadViewContoller" customModule="Picme" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Y6W-OH-hqX" customClass="ImageUploadViewContoller" customModule="Picme" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Ib-Id-awE">
-                                <rect key="frame" x="192" y="433" width="30" height="30"/>
-                                <state key="normal" title="Test"/>
-                                <connections>
-                                    <action selector="testAction:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="gqR-OZ-SZW"/>
-                                </connections>
-                            </button>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="N4B-VR-gUZ">
-                                <rect key="frame" x="20" y="44" width="374" height="369"/>
-                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="RyO-9A-B5m">
+                                <rect key="frame" x="94.5" y="414.5" width="225.5" height="67"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="최소 2개 이상의 사진을 업로드 해주세요." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LRF-Rs-alb">
+                                        <rect key="frame" x="0.0" y="0.0" width="225.5" height="17"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Hx-29-R6J">
+                                        <rect key="frame" x="65" y="37" width="95" height="30"/>
+                                        <state key="normal" title="인생사진 업로드"/>
+                                        <connections>
+                                            <action selector="testAction:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="8qi-FR-Yij"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.29999999999999999" translatesAutoresizingMaskIntoConstraints="NO" id="ga7-BC-Qia">
+                                <rect key="frame" x="20" y="88" width="374" height="4"/>
+                                <color key="progressTintColor" red="0.20000000000000001" green="0.80000000000000004" blue="0.5490196078431373" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="trackTintColor" red="0.090196078431372548" green="0.10588235294117647" blue="0.12156862745098039" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            </progressView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="N4B-VR-gUZ" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="D4r-bD-5RP"/>
-                            <constraint firstItem="6Ib-Id-awE" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="ES7-OQ-b7z"/>
-                            <constraint firstItem="N4B-VR-gUZ" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="LKO-Kz-W0M"/>
-                            <constraint firstItem="6Ib-Id-awE" firstAttribute="centerY" secondItem="5EZ-qb-Rvc" secondAttribute="centerY" id="NFX-Uc-3ua"/>
-                            <constraint firstItem="6Ib-Id-awE" firstAttribute="top" secondItem="N4B-VR-gUZ" secondAttribute="bottom" constant="20" id="S88-H5-Gzd"/>
-                            <constraint firstItem="N4B-VR-gUZ" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="sVc-1I-7ZT"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="N4B-VR-gUZ" secondAttribute="trailing" constant="20" id="xCa-g4-UKo"/>
+                            <constraint firstItem="RyO-9A-B5m" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="Y8D-WG-GEi"/>
+                            <constraint firstItem="RyO-9A-B5m" firstAttribute="centerY" secondItem="5EZ-qb-Rvc" secondAttribute="centerY" id="g8V-3s-5gH"/>
+                            <constraint firstItem="ga7-BC-Qia" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="gRO-Ol-xJh"/>
+                            <constraint firstItem="ga7-BC-Qia" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="oyE-no-OPx"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="ga7-BC-Qia" secondAttribute="trailing" constant="20" id="sg6-Fm-XTK"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="vfz-ZG-jXL"/>
                     <connections>
-                        <outlet property="imageView" destination="N4B-VR-gUZ" id="MBn-YC-BYE"/>
+                        <outlet property="progressBar" destination="ga7-BC-Qia" id="9ht-cJ-yvC"/>
+                        <outlet property="stackView" destination="RyO-9A-B5m" id="DiB-dO-AMo"/>
+                        <outlet property="testButton" destination="3Hx-29-R6J" id="cx2-uv-4CV"/>
+                        <outlet property="testLabel" destination="LRF-Rs-alb" id="waj-gf-AMb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="30" y="42"/>
+            <point key="canvasLocation" x="939.13043478260875" y="41.517857142857139"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="fIb-sM-vNi">
+            <objects>
+                <navigationController storyboardIdentifier="ImageUploadViewContoller" automaticallyAdjustsScrollViewInsets="NO" id="u28-bI-9p6" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="iFJ-iO-blF">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Y6W-OH-hqX" kind="relationship" relationship="rootViewController" id="mnO-Ec-vxG"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hLm-C3-4G9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="28.985507246376812" y="41.517857142857139"/>
         </scene>
     </scenes>
     <resources>
