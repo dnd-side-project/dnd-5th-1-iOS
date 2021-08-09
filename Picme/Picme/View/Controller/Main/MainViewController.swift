@@ -28,7 +28,20 @@ class MainViewController: BaseViewContoller {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupTabBar()
         setupTableView()
+    }
+    
+    func setupTabBar() {
+        self.tabBarController?.delegate = UIApplication.shared.delegate as? UITabBarControllerDelegate
+        
+        // tab bar item - title 설정
+        if let downcastStrings = self.tabBarController?.tabBar.items {
+            downcastStrings[1].title = "투표만들기"
+        }
+        
+        // tab bar item - image 설정
+        self.tabBarController?.tabBar.items![1].image = #imageLiteral(resourceName: "tabBarVote")
     }
     
     func setupTableView() {
@@ -51,7 +64,7 @@ class MainViewController: BaseViewContoller {
             }
         }
     }
-
+    
 }
 
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
@@ -89,7 +102,7 @@ extension MainViewController: CollectionViewCellDelegate {
     func selectedCollectionViewCell(_ index: Int) {
         
         guard let voteDetailVC = self.storyboard?.instantiateViewController(withIdentifier: "VoteDetailViewController") as? VoteDetailViewController else { return }
-
+        
         self.navigationController?.pushViewController(voteDetailVC, animated: true)
     }
     
