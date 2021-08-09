@@ -34,18 +34,22 @@ enum TextColor {
     case text100
 }
 
-enum LogoColor {
+enum MainColor {
     /// #F21CA0, RGB(242, 28, 160, alpha: 1.0)
     case logoPink
-}
-
-enum MainColor {
     /// #EB499A, RGB(235, 73, 154, alpha: 1.0)
     case pink
     /// #F0793C, RGB(240, 121, 60, alpha: 1.0)
     case orange
     /// #33CC8C, RGB(51, 204, 140, alpha: 1.0)
     case mint
+    /// #EB499A, RGB(235, 73, 154, alpha: 0.8)
+    case pink80
+    /// #F0793C, RGB(240, 121, 60, alpha: 0.8)
+    case orange80
+    /// #33CC8C, RGB(51, 204, 140, alpha: 0.8)
+    case mint80
+    
 }
 
 extension UIColor {
@@ -80,21 +84,22 @@ extension UIColor {
         }
     }
     
-    static func logoColor(_ color: LogoColor) -> UIColor {
+    static func mainColor(_ color: MainColor) -> UIColor {
         switch color {
         case .logoPink:
             return UIColor(red: 242/255, green: 28/255, blue: 160/255, alpha: 1.0)
-        }
-    }
-    
-    static func mainColor(_ color: MainColor) -> UIColor {
-        switch color {
         case .pink:
             return UIColor(red: 235/255, green: 73/255, blue: 154/255, alpha: 1.0)
         case .orange:
             return UIColor(red: 240/255, green: 121/255, blue: 60/255, alpha: 1.0)
         case .mint:
             return UIColor(red: 51/255, green: 204/255, blue: 140/255, alpha: 1.0)
+        case .pink80:
+            return UIColor(red: 235/255, green: 73/255, blue: 154/255, alpha: 0.8)
+        case .orange80:
+            return UIColor(red: 240/255, green: 121/255, blue: 60/255, alpha: 0.8)
+        case .mint80:
+            return UIColor(red: 51/255, green: 204/255, blue: 140/255, alpha: 0.8)
         }
     }
 }

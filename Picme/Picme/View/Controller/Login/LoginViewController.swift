@@ -61,7 +61,7 @@ extension LoginViewController {
         guard let text = text else { fatalError("NSMutable Error") }
         let attributeString = NSMutableAttributedString(string: text)
         attributeString.addAttribute(.foregroundColor,
-                                     value: UIColor.logoColor(.logoPink),
+                                     value: UIColor.mainColor(.logoPink),
                                      range: (text as NSString).range(of: changeString))
         return attributeString
     }
