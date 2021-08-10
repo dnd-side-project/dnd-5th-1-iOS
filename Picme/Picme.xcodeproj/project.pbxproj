@@ -341,7 +341,6 @@
 			children = (
 				A96C9E8A26AC249C001F279B /* Picme.entitlements */,
 				A9C12B78269AB6E800729A74 /* Network */,
-				A975287726B69DE1003EE1A9 /* ImageAPICenter.swift */,
 				A98C691226AC23D500AD9191 /* ViewModel */,
 				A9C12B7C269AB72000729A74 /* View */,
 				A9C12B76269AB6D900729A74 /* Model */,
@@ -407,6 +406,7 @@
 		A9C12B78269AB6E800729A74 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				A975287726B69DE1003EE1A9 /* ImageAPICenter.swift */,
 				A975287A26B69E65003EE1A9 /* Login */,
 				D1B51CA226BEB6CB00928FF3 /* Main */,
 				D1B51E2226C3028300928FF3 /* VoteDetail */,
