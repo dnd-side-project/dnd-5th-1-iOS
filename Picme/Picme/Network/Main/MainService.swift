@@ -54,6 +54,15 @@ class MainService {
     }
     
     static func judgeStatus(by statusCode: Int, _ data: Data) -> NetworkResult<Any> {
+        switch statusCode {
+        case 200: return isValidData(data: data)
+        case 400: return .pathErr
+        case 500: return .serverErr
+        default: return .networkFail
+        }
+    }
+    
+    static func isValidData(data: Data) -> NetworkResult<Any> {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd-HH:mm"
         
@@ -63,12 +72,7 @@ class MainService {
         guard let decodedData = try? decoder.decode(MainListModel.self, from: data)
         else { return .pathErr }
         
-        switch statusCode {
-        case 200: return .success(decodedData)
-        case 400: return .pathErr
-        case 500: return .serverErr
-        default: return .networkFail
-        }
+        return .success(decodedData.mainList)
     }
     
 }
