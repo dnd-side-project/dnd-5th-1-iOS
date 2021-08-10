@@ -53,7 +53,7 @@ class MainService {
         
     }
     
-    private func judgeStatus(by statusCode: Int, _ data: Data) -> NetworkResult<Any> {
+    static func judgeStatus(by statusCode: Int, _ data: Data) -> NetworkResult<Any> {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd-HH:mm"
         
