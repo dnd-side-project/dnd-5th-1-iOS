@@ -58,13 +58,13 @@ class VoteDetailTableViewCell: UITableViewCell {
         
         if let object = model as? VoteDetailModel {
             
-            detailNicknameLabel.text = object.nickname
-            detailProfileImageView.kf.setImage(with: URL(string: object.profileImage ?? "0"), placeholder: #imageLiteral(resourceName: "defalutImage"))
-            detailParticipantsLabel.text = "\(object.participantsNum ?? 0)명 참가중"
-            detailDeadlineLabel.text = object.deadline
-            detailPageLabel.text = "currentPage/\(object.images?.count ?? 0)"
-            detailDescriptionLabel.text = object.description
-            imageData = object.images
+//            detailNicknameLabel.text = object.nickname
+//            detailProfileImageView.kf.setImage(with: URL(string: object.profileImage ?? "0"), placeholder: #imageLiteral(resourceName: "defalutImage"))
+//            detailParticipantsLabel.text = "\(object.participantsNum ?? 0)명 참가중"
+//            detailDeadlineLabel.text = object.deadline
+//            detailPageLabel.text = "currentPage/\(object.images?.count ?? 0)"
+//            detailDescriptionLabel.text = object.description
+//            imageData = object.images
         }
     }
     
