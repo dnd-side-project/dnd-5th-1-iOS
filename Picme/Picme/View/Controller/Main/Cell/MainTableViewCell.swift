@@ -17,7 +17,6 @@ class MainTableViewCell: UITableViewCell {
     @IBOutlet weak var mainParticipantsLabel: UILabel!
     @IBOutlet weak var mainDeadlineLabel: UILabel!
     @IBOutlet weak var mainTitleLabel: UILabel!
-    
     @IBOutlet weak var mainCollectionView: UICollectionView!
     
     // MARK: - Variables
@@ -33,12 +32,11 @@ class MainTableViewCell: UITableViewCell {
         didSet {
             guard let mainList = item else { return }
             
-            self.mainProfileImageView.kf.setImage(with: URL(string: mainList.profileimageUrl), placeholder: #imageLiteral(resourceName: "defalutImage"))
-            self.mainNicknameLabel.text = mainList.nickname
+            self.mainProfileImageView.kf.setImage(with: URL(string: mainList.userProfileimageUrl), placeholder: #imageLiteral(resourceName: "defalutImage"))
+            self.mainNicknameLabel.text = mainList.userNickname
             self.mainParticipantsLabel.text = String(mainList.participantsNum)
             self.mainDeadlineLabel.text = mainList.deadline
             self.mainTitleLabel.text = mainList.title
-            
             self.imageData = mainList.thumbnailUrl
         }
     }
@@ -53,7 +51,7 @@ class MainTableViewCell: UITableViewCell {
         super.awakeFromNib()
         
         // 프로필 이미지 원형으로 만들기
-        mainProfileImageView.layer.cornerRadius = mainProfileImageView.frame.width / 2 // 프레임 원으로 만들기
+        mainProfileImageView.layer.cornerRadius = mainProfileImageView.frame.width / 2 // 프레임 원으로
         mainProfileImageView.contentMode = UIView.ContentMode.scaleAspectFill // 이미지 비율 바로잡기
         mainProfileImageView.clipsToBounds = true // 이미지를 뷰 프레임에 맞게 clip
     }
@@ -64,19 +62,17 @@ class MainTableViewCell: UITableViewCell {
 
 extension MainTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
         // return imageData.count
         
         return imageArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
         let cell: MainCollectionViewCell = mainCollectionView.dequeueCollectionCell(for: indexPath)
         
         // cell.mainPhotoImageView.kf.setImage(with: URL(string: imageData[indexPath.row]), placeholder: #imageLiteral(resourceName: "defalutImage"))
         
-        if indexPath.item == imageArray.count - 1 {
+        if indexPath.item == imageArray.count - 1 { // 마지막 cell 설정
             cell.mainPhotoImageView.image = #imageLiteral(resourceName: "defalutImage").withRenderingMode(.alwaysTemplate)
             cell.mainPhotoImageView.tintColor = .solidColor(.solid12)
             cell.stackView.isHidden = false
@@ -89,9 +85,9 @@ extension MainTableViewCell: UICollectionViewDelegate, UICollectionViewDataSourc
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
         if let delegate = delegate {
             delegate.selectedCollectionViewCell(indexPath.item)
         }
     }
+    
 }

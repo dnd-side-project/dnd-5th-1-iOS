@@ -7,16 +7,22 @@
 
 import Foundation
 
-struct MainListModel: Codable {
-    let mainList: [MainModel]
-}
-
 struct MainModel: Codable {
     let postId: String
-    let nickname: String
-    let profileimageUrl: String
+    let userNickname: String
+    let userProfileimageUrl: String
     let participantsNum: Int
     let deadline: String
     let title: String
     let thumbnailUrl: [String]
+    
+    enum CodingKeys: String, CodingKey {
+        case postId = "postId"
+        case userNickname = "username"
+        case userProfileimageUrl = "userProfileImage"
+        case participantsNum = "participantsNum"
+        case deadline = "expireAt"
+        case title = "title"
+        case thumbnailUrl = "thumbnailUrl"
+    }
 }
