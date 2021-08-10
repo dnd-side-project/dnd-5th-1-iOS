@@ -38,22 +38,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
     
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
         
-//        if viewController is OnboardingViewController {
-//            if let newVC = tabBarController.storyboard?.instantiateViewController(withIdentifier: "OnBoarding") {
-//                tabBarController.present(newVC, animated: true)
-//                return false
-//            }
-//        }
+        guard let indexOfTab = tabBarController.viewControllers?.firstIndex(of: viewController) else {
+            return true
+        }
         
-        if #available(iOS 14, *) {
-            if viewController is ImageUploadViewContoller {
-                if let newVC = tabBarController.storyboard?.instantiateViewController(withIdentifier: "ImageUpload") {
-                    tabBarController.present(newVC, animated: true)
-                    return false
-                }
+        if indexOfTab == 1 {
+            if let imageUploadVC = tabBarController.storyboard?.instantiateViewController(withIdentifier: "ImageUpload") {
+                tabBarController.present(imageUploadVC, animated: true)
+                return false
             }
-        } else {
-            // Fallback on earlier versions
         }
         
         return true
