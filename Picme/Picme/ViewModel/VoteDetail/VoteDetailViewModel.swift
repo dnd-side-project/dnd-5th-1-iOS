@@ -9,6 +9,7 @@ import Alamofire
 import Foundation
 
 class VoteDetailViewModel {
+    
     // MARK: - Properties
     
     var dataSource: GenericDataSource<VoteDetailModel>?

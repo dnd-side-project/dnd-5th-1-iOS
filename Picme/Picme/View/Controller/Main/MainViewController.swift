@@ -32,6 +32,8 @@ class MainViewController: BaseViewContoller {
         setupTableView()
     }
     
+    // MARK: - Tab Bar
+    
     func setupTabBar() {
         self.tabBarController?.delegate = UIApplication.shared.delegate as? UITabBarControllerDelegate
         
@@ -43,6 +45,8 @@ class MainViewController: BaseViewContoller {
         // tab bar item - image 설정
         self.tabBarController?.tabBar.items![1].image = #imageLiteral(resourceName: "tabBarVote")
     }
+    
+    // MARK: - TableView
     
     func setupTableView() {
         self.mainTableView.dataSource = self
@@ -57,11 +61,7 @@ class MainViewController: BaseViewContoller {
     
     func showTableView() {
         DispatchQueue.main.async {
-            if self.mainViewModel.mainList.value.isEmpty {
-                // self.showEmptyView()
-            } else {
-                self.mainTableView.reloadData()
-            }
+            self.mainTableView.reloadData()
         }
     }
     
@@ -70,14 +70,12 @@ class MainViewController: BaseViewContoller {
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         // return mainViewModel.mainList.value.count
         
         return 5
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let cell: MainTableViewCell = mainTableView.dequeueTableCell(for: indexPath)
         
         cell.setCollectionViewDataSourceDelegate(forRow: indexPath.row)
@@ -100,7 +98,6 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
 extension MainViewController: CollectionViewCellDelegate {
     
     func selectedCollectionViewCell(_ index: Int) {
-        
         guard let voteDetailVC = self.storyboard?.instantiateViewController(withIdentifier: "VoteDetailViewController") as? VoteDetailViewController else { return }
         
         self.navigationController?.pushViewController(voteDetailVC, animated: true)

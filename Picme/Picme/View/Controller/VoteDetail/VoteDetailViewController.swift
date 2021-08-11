@@ -48,7 +48,6 @@ class VoteDetailViewController: BaseViewContoller {
 class VoteDetailDatasource: GenericDataSource<VoteDetailModel>, UITableViewDataSource, CollectionViewCellDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-       
         //return data.value.count
         
         return 5
@@ -65,7 +64,6 @@ class VoteDetailDatasource: GenericDataSource<VoteDetailModel>, UITableViewDataS
     }
     
     func selectedCollectionViewCell(_ index: Int) {
-        
         //        guard let voteDetailVC = self.storyboard?.instantiateViewController(withIdentifier: "VoteDetailViewController") as? VoteDetailViewController else { return }
         //
         //        self.navigationController?.pushViewController(voteDetailVC, animated: true)

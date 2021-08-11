@@ -8,7 +8,10 @@
 import UIKit
 
 class MainCollectionViewCell: UICollectionViewCell {
-    @IBOutlet weak var mainPhotoImageView: UIImageView!
     
+    // MARK: - IBOutlets
+    
+    @IBOutlet weak var mainPhotoImageView: UIImageView!
     @IBOutlet weak var stackView: UIStackView!
+    
 }

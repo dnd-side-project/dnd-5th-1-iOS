@@ -45,7 +45,6 @@ class VoteDetailTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
-        // Configure the view for the selected state
     }
     
     func setCollectionViewDataSourceDelegate(forRow row: Int) {
@@ -58,13 +57,13 @@ class VoteDetailTableViewCell: UITableViewCell {
         
         if let object = model as? VoteDetailModel {
             
-            detailNicknameLabel.text = object.nickname
-            detailProfileImageView.kf.setImage(with: URL(string: object.profileImage ?? "0"), placeholder: #imageLiteral(resourceName: "defalutImage"))
-            detailParticipantsLabel.text = "\(object.participantsNum ?? 0)명 참가중"
-            detailDeadlineLabel.text = object.deadline
-            detailPageLabel.text = "currentPage/\(object.images?.count ?? 0)"
-            detailDescriptionLabel.text = object.description
-            imageData = object.images
+//            detailNicknameLabel.text = object.nickname
+//            detailProfileImageView.kf.setImage(with: URL(string: object.profileImage ?? "0"), placeholder: #imageLiteral(resourceName: "defalutImage"))
+//            detailParticipantsLabel.text = "\(object.participantsNum ?? 0)명 참가중"
+//            detailDeadlineLabel.text = object.deadline
+//            detailPageLabel.text = "currentPage/\(object.images?.count ?? 0)"
+//            detailDescriptionLabel.text = object.description
+//            imageData = object.images
         }
     }
     
@@ -74,14 +73,12 @@ class VoteDetailTableViewCell: UITableViewCell {
 
 extension VoteDetailTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
         // return imageData.count
         
         return imageArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
         let cell: VoteDetailCollectionViewCell = detailCollectionView.dequeueCollectionCell(for: indexPath)
         
         //        cell.detailPhotoImageView.kf.setImage(with: URL(string: imageData[indexPath.row].imageUrl!), placeholder: #imageLiteral(resourceName: "defalutImage"))
@@ -92,7 +89,6 @@ extension VoteDetailTableViewCell: UICollectionViewDelegate, UICollectionViewDat
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
         if let delegate = delegate {
             delegate.selectedCollectionViewCell(indexPath.item)
         }
