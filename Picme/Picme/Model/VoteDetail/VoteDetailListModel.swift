@@ -8,14 +8,14 @@
 import Foundation
 
 struct VoteDetailListModel: Codable {
-    var detailList : [VoteDetailModel]?
+    var detailList: [VoteDetailModel]?
     
-    init(detailList : [VoteDetailModel]){
+    init(detailList: [VoteDetailModel]){
         self.detailList = detailList
     }
     
     enum CodingKeys: String, CodingKey {
-        case detailList = "detailList"
+        case detailList
     }
     
     init(from decoder: Decoder) throws {

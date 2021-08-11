@@ -44,7 +44,7 @@ struct VoteDetailModel: Codable {
     }
 }
 
-//MARK: - 투표 상세 이미지
+// MARK: - 투표 상세 이미지
 
 struct VoteDetailImage: Codable {
     var imageId: String?
@@ -68,14 +68,14 @@ struct VoteDetailImage: Codable {
     }
     
     enum CodingKeys: String, CodingKey {
-        case imageId = "imageId"
-        case imageUrl = "imageUrl"
-        case pickedNum = "pickedNum"
-        case emotion = "emotion"
-        case color = "color"
-        case composition = "composition"
-        case light = "light"
-        case skip = "skip"
+        case imageId
+        case imageUrl
+        case pickedNum
+        case emotion
+        case color
+        case composition
+        case light
+        case skip
     }
     
     init(from decoder: Decoder) throws {
