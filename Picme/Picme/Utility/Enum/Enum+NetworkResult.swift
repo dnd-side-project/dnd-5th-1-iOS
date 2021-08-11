@@ -1,8 +1,8 @@
 //
-//  NetworkResult.swift
+//  Enum+NetworkResult.swift
 //  Picme
 //
-//  Created by 권민하 on 2021/08/11.
+//  Created by 권민하 on 2021/08/12.
 //
 
 import Foundation
