@@ -16,6 +16,13 @@ class MainViewController: BaseViewContoller, TouchDelegate {
     // MARK: - IBOutlets
     
     @IBOutlet weak var mainTableView: UITableView!
+    @IBOutlet weak var emptyView: UIView!
+    
+    @IBAction func voteButtonClicked(_ sender: Any) {
+        if let imageUploadVC = tabBarController?.storyboard?.instantiateViewController(withIdentifier: "ImageUpload") {
+            tabBarController?.present(imageUploadVC, animated: true)
+        }
+    }
     
     // MARK: - Variables
     
@@ -29,6 +36,14 @@ class MainViewController: BaseViewContoller, TouchDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let leftItem = UIBarButtonItem(title: "Title",
+                                       style: UIBarButtonItem.Style.plain,
+                                       target: nil,
+                                       action: nil)
+        leftItem.tintColor = .mainColor(.logoPink)
+        leftItem.isEnabled = false
+        self.navigationItem.leftBarButtonItem = leftItem
         
         setupTabBar()
         
@@ -69,18 +84,20 @@ class MainViewController: BaseViewContoller, TouchDelegate {
     func showTableView() {
         DispatchQueue.main.async {
             if self.dataSource.data.value.isEmpty {
-                self.showEmptyView()
+                self.emptyView.isHidden = true
+                // self.showEmptyView()
             } else {
                 self.mainTableView.isHidden = false
+                self.emptyView.isHidden = true
                 self.mainTableView.reloadData()
             }
         }
     }
     
     func showEmptyView() {
-        //        self.mainTableView.isHidden = true
-        //        self.emptyView.isHidden = false
-        //        self.activityIndicator.isHidden = true
+        self.mainTableView.isHidden = true
+        self.emptyView.isHidden = false
+        // self.activityIndicator.isHidden = true
     }
     
     // MARK: - CollectionviewCellDelegate
