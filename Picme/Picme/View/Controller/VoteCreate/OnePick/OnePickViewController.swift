@@ -11,6 +11,8 @@ class OnePickViewController: BaseViewContoller {
 
     // MARK: - Properties
     
+    var userImages: [UIImage]?
+    
     @IBOutlet weak var progressBar: UIProgressView!
     
     let stepView = StepView(stepText: "STEP 2", title: "어떤 사진이 제일 마음에 드시나요?")
@@ -47,13 +49,15 @@ class OnePickViewController: BaseViewContoller {
 extension OnePickViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        guard let images = userImages else { return 0 }
+        return images.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let images = userImages else { return UICollectionViewCell() }
         
         let cell: OnePickCell = collectionView.dequeueCollectionCell(for: indexPath)
-        cell.cellImages.image = UIImage(named: "1")
+        cell.showUserImage(images[indexPath.row])
         cell.layer.cornerRadius = 10
         
         return cell

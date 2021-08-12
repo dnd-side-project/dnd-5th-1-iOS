@@ -26,6 +26,10 @@ class OnePickCell: UICollectionViewCell {
         fatalError("Image Upload Cell init?")
     }
     
+    func showUserImage(_ image: UIImage) {
+        cellImages.image = image
+    }
+    
     func setConfiguration() {
         
         self.addSubview(cellImages)
