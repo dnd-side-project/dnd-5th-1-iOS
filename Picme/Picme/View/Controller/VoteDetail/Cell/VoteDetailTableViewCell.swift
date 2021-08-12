@@ -89,9 +89,7 @@ extension VoteDetailTableViewCell: UICollectionViewDelegate, UICollectionViewDat
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if let delegate = delegate {
-            delegate.selectedCollectionViewCell(indexPath.item)
-        }
+    
     }
     
 }
