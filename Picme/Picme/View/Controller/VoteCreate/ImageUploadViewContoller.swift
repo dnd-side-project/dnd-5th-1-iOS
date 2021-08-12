@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import YPImagePicker
 
 class ImageUploadViewContoller: BaseViewContoller {
     
@@ -36,6 +37,10 @@ class ImageUploadViewContoller: BaseViewContoller {
         return $0
     }(UIButton(type: .system))
     
+    // YPImagePicker Properties
+    var selectedItems = [YPMediaItem]()
+    var userImages = [UIImage]()
+    
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,7 +51,52 @@ class ImageUploadViewContoller: BaseViewContoller {
     }
     
     @IBAction func testAction(_ sender: UIButton) {
-        uploadViewModel?.buttonState.value = true
+        var config = YPImagePickerConfiguration()
+
+        config.shouldSaveNewPicturesToAlbum = false
+        config.targetImageSize = .cappedTo(size: 1024)
+        config.onlySquareImagesFromCamera = true
+        config.startOnScreen = .library
+        config.screens = [.library]
+        config.wordings.libraryTitle = "Gallerys"
+        config.hidesStatusBar = false
+        config.hidesBottomBar = false
+        config.maxCameraZoomFactor = 5.0
+        config.overlayView = nil
+        config.gallery.hidesRemoveButton = false
+//        config.library.minNumberOfItems = 1
+        config.library.maxNumberOfItems = 6
+        config.library.preselectedItems = selectedItems
+        config.library.mediaType = .photo
+        config.library.itemOverlayType = .grid
+        config.library.defaultMultipleSelection = true
+
+        let picker = YPImagePicker(configuration: config)
+        picker.imagePickerDelegate = self
+        
+        // 멀티 사진
+        picker.didFinishPicking { [unowned picker] items, cancelled in
+            for item in items {
+                switch item {
+                case .photo(let photos):
+                    self.userImages.append(photos.image)
+                    print(photos.image)
+                    print(photos.image.size.width)
+                    print(photos.image.size.height)
+                default:
+                    return
+                }
+            }
+            picker.dismiss(animated: true) { [weak self] in
+                guard let self = self else { return }
+                
+                guard let onePickVC = self.storyboard?.instantiateViewController(withIdentifier: "OnePickViewController") as? OnePickViewController else { return }
+                onePickVC.userImages = self.userImages
+                self.navigationController?.pushViewController(onePickVC, animated: true)
+            }
+        }
+        
+        present(picker, animated: true, completion: nil)
     }
     
     func viewState(_ state: Bool) {
@@ -146,5 +196,18 @@ extension ImageUploadViewContoller {
             .isActive = true
         nextButton.heightAnchor.constraint(equalToConstant: 52)
             .isActive = true
+    }
+}
+
+// MARK: - YPImagePicker
+
+extension ImageUploadViewContoller: YPImagePickerDelegate {
+    
+    func noPhotos() {
+            
+    }
+    
+    func shouldAddToSelection(indexPath: IndexPath, numSelections: Int) -> Bool {
+        return true
     }
 }
