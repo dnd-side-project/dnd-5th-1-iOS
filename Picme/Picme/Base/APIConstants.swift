@@ -7,8 +7,6 @@
 
 import Foundation
 
-// MARK: 해당 파일 안에는 API 관련 상수들을 추가해주세요!
-
 struct APIConstants {
     
     // MARK: - Headers

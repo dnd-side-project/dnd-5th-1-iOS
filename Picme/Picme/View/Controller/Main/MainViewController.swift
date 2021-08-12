@@ -7,7 +7,11 @@
 
 import UIKit
 
-class MainViewController: BaseViewContoller {
+protocol TouchDelegate: AnyObject {
+    func pushVoteDetailView(index: Int)
+}
+
+class MainViewController: BaseViewContoller, TouchDelegate {
     
     // MARK: - IBOutlets
     
@@ -15,10 +19,8 @@ class MainViewController: BaseViewContoller {
     
     // MARK: - Variables
     
-    lazy var mainViewModel: MainViewModel = {
-        let mainViewModel = MainViewModel()
-        return mainViewModel
-    }()
+    var dataSource = MainListDatasource()
+    private var viewModel: MainViewModel!
     
     // MARK: - Paging
     
@@ -29,7 +31,10 @@ class MainViewController: BaseViewContoller {
         super.viewDidLoad()
         
         setupTabBar()
-        setupTableView()
+        
+        viewModel = MainViewModel(service: MainService(), dataSource: dataSource)
+        
+        bindViewModel()
     }
     
     // MARK: - Tab Bar
@@ -46,42 +51,67 @@ class MainViewController: BaseViewContoller {
         self.tabBarController?.tabBar.items![1].image = #imageLiteral(resourceName: "tabBarVote")
     }
     
-    // MARK: - TableView
+    // MARK: - Bind View Model
     
-    func setupTableView() {
-        self.mainTableView.dataSource = self
-        self.mainTableView.delegate = self
+    private func bindViewModel() {
+        mainTableView.dataSource = dataSource
+        dataSource.delegate = self
         
-        mainViewModel.mainList.bind { (_) in
-            self.showTableView()
+        dataSource.data.addAndNotify(observer: self) { [weak self] _ in
+            self?.showTableView()
         }
         
-        // self.mainViewModel.fetchMainList()
+        // viewModel.fetchMainList()
     }
+    
+    // MARK: - TableView
     
     func showTableView() {
         DispatchQueue.main.async {
-            self.mainTableView.reloadData()
+            if self.dataSource.data.value.isEmpty {
+                self.showEmptyView()
+            } else {
+                self.mainTableView.isHidden = false
+                self.mainTableView.reloadData()
+            }
         }
+    }
+    
+    func showEmptyView() {
+        //        self.mainTableView.isHidden = true
+        //        self.emptyView.isHidden = false
+        //        self.activityIndicator.isHidden = true
+    }
+    
+    // MARK: - CollectionviewCellDelegate
+    
+    func pushVoteDetailView(index: Int) {
+        guard let voteDetailVC = self.storyboard?.instantiateViewController(withIdentifier: "VoteDetailViewController") as? VoteDetailViewController else { return }
+        self.navigationController?.pushViewController(voteDetailVC, animated: true)
     }
     
 }
 
-extension MainViewController: UITableViewDelegate, UITableViewDataSource {
+class MainListDatasource: GenericDataSource<MainModel>, UITableViewDataSource, CollectionViewCellDelegate {
+    
+    weak var delegate: TouchDelegate?
+    
+    func selectedCVCell(_ index: Int) {
+        delegate?.pushVoteDetailView(index: index)
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // return mainViewModel.mainList.value.count
+        // return data.value.count
         
         return 5
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: MainTableViewCell = mainTableView.dequeueTableCell(for: indexPath)
+        let cell: MainTableViewCell = tableView.dequeueTableCell(for: indexPath)
         
         cell.setCollectionViewDataSourceDelegate(forRow: indexPath.row)
-        cell.delegate = self
-        
-        //cell.item = self.mainViewModel.mainList.value[indexPath.row]
+        cell.cellDelegate = self
+        // cell.updateCell(model: data.value[indexPath.row])
         
         // 서버 통신 전 예시 코드
         cell.mainNicknameLabel.text = "오늘도 개미는 뚠뚠"
@@ -91,16 +121,6 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         cell.mainProfileImageView.image = #imageLiteral(resourceName: "defalutImage")
         
         return cell
-    }
-    
-}
-
-extension MainViewController: CollectionViewCellDelegate {
-    
-    func selectedCollectionViewCell(_ index: Int) {
-        guard let voteDetailVC = self.storyboard?.instantiateViewController(withIdentifier: "VoteDetailViewController") as? VoteDetailViewController else { return }
-        
-        self.navigationController?.pushViewController(voteDetailVC, animated: true)
     }
     
 }
