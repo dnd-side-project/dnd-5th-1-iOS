@@ -47,6 +47,7 @@
 		A9C12B92269C1A7A00729A74 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9C12B91269C1A7A00729A74 /* Login.storyboard */; };
 		A9C12B96269C315E00729A74 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = A9C12B95269C315E00729A74 /* .swiftlint.yml */; };
 		A9E72E2C26C527D3003C98A0 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = A9E72E2B26C527D3003C98A0 /* SnapKit */; };
+		A9E72E2F26C52F62003C98A0 /* YPImagePicker in Frameworks */ = {isa = PBXBuildFile; productRef = A9E72E2E26C52F62003C98A0 /* YPImagePicker */; };
 		D1103F6226C46AE4002D1E78 /* Enum+NetworkResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1103F6126C46AE4002D1E78 /* Enum+NetworkResult.swift */; };
 		D1103F6426C46B44002D1E78 /* MainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1103F6326C46B44002D1E78 /* MainService.swift */; };
 		D11C2DC126B82AA100C8EE51 /* VoteDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11C2DC026B82AA100C8EE51 /* VoteDetailTableViewController.swift */; };
@@ -171,6 +172,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				521630CB556750301749121F /* Pods_Picme.framework in Frameworks */,
+				A9E72E2F26C52F62003C98A0 /* YPImagePicker in Frameworks */,
 				A9E72E2C26C527D3003C98A0 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -632,6 +634,7 @@
 			name = Picme;
 			packageProductDependencies = (
 				A9E72E2B26C527D3003C98A0 /* SnapKit */,
+				A9E72E2E26C52F62003C98A0 /* YPImagePicker */,
 			);
 			productName = "dnd-5th-1-iOS";
 			productReference = A9A1AD3F2699FAE600169D76 /* Picme.app */;
@@ -710,6 +713,7 @@
 			mainGroup = A9A1AD362699FAE600169D76;
 			packageReferences = (
 				A9E72E2A26C527D3003C98A0 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				A9E72E2D26C52F62003C98A0 /* XCRemoteSwiftPackageReference "YPImagePicker" */,
 			);
 			productRefGroup = A9A1AD402699FAE600169D76 /* Products */;
 			projectDirPath = "";
@@ -1302,6 +1306,14 @@
 				minimumVersion = 5.0.1;
 			};
 		};
+		A9E72E2D26C52F62003C98A0 /* XCRemoteSwiftPackageReference "YPImagePicker" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Yummypets/YPImagePicker";
+			requirement = {
+				branch = spm;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1309,6 +1321,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = A9E72E2A26C527D3003C98A0 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		A9E72E2E26C52F62003C98A0 /* YPImagePicker */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A9E72E2D26C52F62003C98A0 /* XCRemoteSwiftPackageReference "YPImagePicker" */;
+			productName = YPImagePicker;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
