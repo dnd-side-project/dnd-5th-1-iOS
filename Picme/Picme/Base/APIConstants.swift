@@ -32,7 +32,7 @@ struct APIConstants {
     // MARK: - URLs
     
     // Base URL
-    private static let baseURL = "http://2d63c4581cec.ngrok.io/"
+    private static let baseURL = "http://6e2d8cc751e9.ngrok.io"
     private static let urlVersion = "v1/"
     
     // MARK: - /Main URLs
