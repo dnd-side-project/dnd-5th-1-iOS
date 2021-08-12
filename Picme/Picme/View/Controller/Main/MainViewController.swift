@@ -84,7 +84,8 @@ class MainViewController: BaseViewContoller, TouchDelegate {
     func showTableView() {
         DispatchQueue.main.async {
             if self.dataSource.data.value.isEmpty {
-                self.showEmptyView()
+                self.emptyView.isHidden = true
+                // self.showEmptyView()
             } else {
                 self.mainTableView.isHidden = false
                 self.emptyView.isHidden = true
