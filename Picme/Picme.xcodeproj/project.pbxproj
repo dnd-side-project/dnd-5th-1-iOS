@@ -49,6 +49,7 @@
 		A9C12B92269C1A7A00729A74 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9C12B91269C1A7A00729A74 /* Login.storyboard */; };
 		A9C12B96269C315E00729A74 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = A9C12B95269C315E00729A74 /* .swiftlint.yml */; };
 		D1103F6226C46AE4002D1E78 /* Enum+NetworkResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1103F6126C46AE4002D1E78 /* Enum+NetworkResult.swift */; };
+		D1103F6426C46B44002D1E78 /* MainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1103F6326C46B44002D1E78 /* MainService.swift */; };
 		D11C2DC126B82AA100C8EE51 /* VoteDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11C2DC026B82AA100C8EE51 /* VoteDetailViewController.swift */; };
 		D11C2DC326B947B100C8EE51 /* LoadingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11C2DC226B947B100C8EE51 /* LoadingTableViewCell.swift */; };
 		D1449D9426A845370083418D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D1449D9326A845370083418D /* Main.storyboard */; };
@@ -56,7 +57,6 @@
 		D180456826B3E2850053430E /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D180456726B3E2850053430E /* MainTableViewCell.swift */; };
 		D180456A26B3E2940053430E /* MainCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D180456926B3E2940053430E /* MainCollectionViewCell.swift */; };
 		D180456C26B3E8DD0053430E /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D180456B26B3E8DD0053430E /* APIConstants.swift */; };
-		D180456E26B3E93C0053430E /* MainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D180456D26B3E93C0053430E /* MainService.swift */; };
 		D180457326B3EAB90053430E /* MainModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D180457226B3EAB90053430E /* MainModel.swift */; };
 		D180457626B3F03B0053430E /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D180457526B3F03B0053430E /* MainViewModel.swift */; };
 		D1B51C9626BE9EA500928FF3 /* VoteDetailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B51C9526BE9EA500928FF3 /* VoteDetailCollectionViewCell.swift */; };
@@ -64,7 +64,6 @@
 		D1B51C9B26BEAD2C00928FF3 /* GenericDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B51C9A26BEAD2C00928FF3 /* GenericDataSource.swift */; };
 		D1B51C9F26BEB26300928FF3 /* VoteDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B51C9E26BEB26300928FF3 /* VoteDetailModel.swift */; };
 		D1B51CA426BEB72400928FF3 /* VoteDetailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B51CA326BEB72400928FF3 /* VoteDetailService.swift */; };
-		D1B51CA626BEE7B000928FF3 /* Protocol+CollectionViewCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B51CA526BEE7B000928FF3 /* Protocol+CollectionViewCellDelegate.swift */; };
 		D1B51CE826BF68CE00928FF3 /* VoteDetailListingViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B51CE726BF68CE00928FF3 /* VoteDetailListingViewModelTests.swift */; };
 		D1B51E2526C302E800928FF3 /* VoteDetailListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B51E2426C302E800928FF3 /* VoteDetailListModel.swift */; };
 		D1B51E2726C3090400928FF3 /* MainListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B51E2626C3090400928FF3 /* MainListModel.swift */; };
@@ -145,6 +144,7 @@
 		CCA73C122FAB6E7E7E132CEB /* Pods-Picme-PicmeUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Picme-PicmeUITests.release.xcconfig"; path = "Target Support Files/Pods-Picme-PicmeUITests/Pods-Picme-PicmeUITests.release.xcconfig"; sourceTree = "<group>"; };
 		CE1E7EEC4130AD59C5A0B524 /* Pods-Picme.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Picme.release.xcconfig"; path = "Target Support Files/Pods-Picme/Pods-Picme.release.xcconfig"; sourceTree = "<group>"; };
 		D1103F6126C46AE4002D1E78 /* Enum+NetworkResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Enum+NetworkResult.swift"; sourceTree = "<group>"; };
+		D1103F6326C46B44002D1E78 /* MainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainService.swift; sourceTree = "<group>"; };
 		D11C2DC026B82AA100C8EE51 /* VoteDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteDetailViewController.swift; sourceTree = "<group>"; };
 		D11C2DC226B947B100C8EE51 /* LoadingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingTableViewCell.swift; sourceTree = "<group>"; };
 		D1449D9326A845370083418D /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -152,7 +152,6 @@
 		D180456726B3E2850053430E /* MainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewCell.swift; sourceTree = "<group>"; };
 		D180456926B3E2940053430E /* MainCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionViewCell.swift; sourceTree = "<group>"; };
 		D180456B26B3E8DD0053430E /* APIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConstants.swift; sourceTree = "<group>"; };
-		D180456D26B3E93C0053430E /* MainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainService.swift; sourceTree = "<group>"; };
 		D180457226B3EAB90053430E /* MainModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainModel.swift; sourceTree = "<group>"; };
 		D180457526B3F03B0053430E /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		D1B51C9526BE9EA500928FF3 /* VoteDetailCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteDetailCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -160,7 +159,6 @@
 		D1B51C9A26BEAD2C00928FF3 /* GenericDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericDataSource.swift; sourceTree = "<group>"; };
 		D1B51C9E26BEB26300928FF3 /* VoteDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteDetailModel.swift; sourceTree = "<group>"; };
 		D1B51CA326BEB72400928FF3 /* VoteDetailService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteDetailService.swift; sourceTree = "<group>"; };
-		D1B51CA526BEE7B000928FF3 /* Protocol+CollectionViewCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Protocol+CollectionViewCellDelegate.swift"; sourceTree = "<group>"; };
 		D1B51CE726BF68CE00928FF3 /* VoteDetailListingViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteDetailListingViewModelTests.swift; sourceTree = "<group>"; };
 		D1B51E2426C302E800928FF3 /* VoteDetailListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteDetailListModel.swift; sourceTree = "<group>"; };
 		D1B51E2626C3090400928FF3 /* MainListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainListModel.swift; sourceTree = "<group>"; };
@@ -474,7 +472,6 @@
 			children = (
 				A9C12B88269C14FF00729A74 /* Protocol+ResuableCell.swift */,
 				A95CD34D269DA66C002CCCA8 /* Protocol+LoginState.swift */,
-				D1B51CA526BEE7B000928FF3 /* Protocol+CollectionViewCellDelegate.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -566,7 +563,7 @@
 		D1B51CA226BEB6CB00928FF3 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				D180456D26B3E93C0053430E /* MainService.swift */,
+				D1103F6326C46B44002D1E78 /* MainService.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -931,7 +928,6 @@
 				A9322EFC26C0D2670061EF35 /* ContentViewController.swift in Sources */,
 				D180456A26B3E2940053430E /* MainCollectionViewCell.swift in Sources */,
 				A9322EF426C0ADBA0061EF35 /* ImageUploadCell.swift in Sources */,
-				D180456E26B3E93C0053430E /* MainService.swift in Sources */,
 				A9322EEB26BFD81A0061EF35 /* Extension+UIAlert.swift in Sources */,
 				A9322EF026C099990061EF35 /* StepView.swift in Sources */,
 				A91A904626B92BDB00C43D43 /* UserInfo.swift in Sources */,
@@ -951,10 +947,10 @@
 				A9C12B8B269C158900729A74 /* Extension+UITableView.swift in Sources */,
 				A9A1AD452699FAE600169D76 /* SceneDelegate.swift in Sources */,
 				A95CD36526A30357002CCCA8 /* LoginModel.swift in Sources */,
-				D1B51CA626BEE7B000928FF3 /* Protocol+CollectionViewCellDelegate.swift in Sources */,
 				D1B51C9826BE9EB000928FF3 /* VoteDetailTableViewCell.swift in Sources */,
 				D1B51C9F26BEB26300928FF3 /* VoteDetailModel.swift in Sources */,
 				D11C2DC326B947B100C8EE51 /* LoadingTableViewCell.swift in Sources */,
+				D1103F6426C46B44002D1E78 /* MainService.swift in Sources */,
 				A95CD36526A30357002CCCA8 /* LoginModel.swift in Sources */,
 				D1449D9926A848610083418D /* MainViewController.swift in Sources */,
 				A95CD354269EB2BF002CCCA8 /* Enum+APIError.swift in Sources */,

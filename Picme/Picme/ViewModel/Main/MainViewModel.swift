@@ -11,40 +11,46 @@ class MainViewModel {
     
     // MARK: - Properties
     
-    var mainList: Dynamic<[MainModel]> = Dynamic([])
+    var service: MainServiceProtocol?
+    var dataSource: GenericDataSource<MainModel>?
+    var onErrorHandling: ((APIError?) -> Void)?
     
     var currentPage = 1
+    
+    // MARK: - Initializer
+    
+    init(service: MainServiceProtocol, dataSource: GenericDataSource<MainModel>?) {
+        self.service = service
+        self.dataSource = dataSource
+    }
     
     // MARK: - 게시글 리스트 조회
     
     func fetchMainList() {
-        MainService.getMainList(page: currentPage) { (response) in
-            if let mainData = response {
-                self.currentPage += 1
-                //self.mainList.value = mainList
-                self.mainList.value.append(contentsOf: mainData)
-                return
-            }
+        
+        guard let service = service else {
+            onErrorHandling?(APIError.networkFailed)
+            return
         }
-    }
-    
-    func fetchMainList2() {
-        MainService.getMainList2(page: currentPage) { (response) in
-            switch(response) {
-            case .success(let data):
-                if let mainData = data as? MainListModel {
-                    self.mainList.value.append(contentsOf: mainData.mainList)
+        
+        service.getMainList(page: currentPage, completion: { (response) in
+            DispatchQueue.main.async {
+                switch (response) {
+                case .success(let data):
+                    if let mainData = data as? [MainModel] {
+                        self.dataSource?.data.value = mainData
+                    }
+                case .requestErr(let message):
+                    print("requestERR", message)
+                case .pathErr:
+                    print("pathERR")
+                case .serverErr:
+                    print("serverERR")
+                case .networkFail:
+                    print("networkERR")
                 }
-            case .requestErr(let message):
-                print("requestERR", message)
-            case .pathErr:
-                print("pathERR")
-            case .serverErr:
-                print("serverERR")
-            case .networkFail:
-                print("networkERR")
             }
-        }
+        })
     }
     
 }

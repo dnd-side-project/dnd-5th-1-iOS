@@ -8,6 +8,12 @@
 import UIKit
 import Kingfisher
 
+// MARK: - CollectionviewCellDelegate
+
+protocol CollectionViewCellDelegate: AnyObject {
+    func selectedCVCell(_ index: Int)
+}
+
 class MainTableViewCell: UITableViewCell {
     
     // MARK: - IBOutlets
@@ -21,23 +27,18 @@ class MainTableViewCell: UITableViewCell {
     
     // MARK: - Variables
     
-    weak var delegate: CollectionViewCellDelegate?
+    weak var cellDelegate: CollectionViewCellDelegate?
     
     var imageData: [String]!
     
     // 서버 통신 전 예시 이미지
     var imageArray = [#imageLiteral(resourceName: "defalutImage"), #imageLiteral(resourceName: "defalutImage"), #imageLiteral(resourceName: "defalutImage")]
     
-    var item: MainModel? {
-        didSet {
-            guard let mainList = item else { return }
-            
-            self.mainProfileImageView.kf.setImage(with: URL(string: mainList.userProfileimageUrl), placeholder: #imageLiteral(resourceName: "defalutImage"))
-            self.mainNicknameLabel.text = mainList.userNickname
-            self.mainParticipantsLabel.text = String(mainList.participantsNum)
-            self.mainDeadlineLabel.text = mainList.deadline
-            self.mainTitleLabel.text = mainList.title
-            self.imageData = mainList.thumbnailUrl
+    func updateCell(model: Any) {
+        if let object = model as? MainModel {
+            mainProfileImageView.kf.setImage(with: URL(string: object.userProfileimageUrl), placeholder: #imageLiteral(resourceName: "defalutImage"))
+//            tableTitleLabel.text = object.title
+//            tableDescriptionLabel.text = object.description
         }
     }
     
@@ -85,8 +86,9 @@ extension MainTableViewCell: UICollectionViewDelegate, UICollectionViewDataSourc
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if let delegate = delegate {
-            delegate.selectedCollectionViewCell(indexPath.item)
+        if let cellDelegate = cellDelegate {
+            cellDelegate.selectedCVCell(indexPath.item)
+            
         }
     }
     
