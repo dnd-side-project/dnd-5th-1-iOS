@@ -44,6 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         
         if indexOfTab == 1 {
             if let uploadImageVC = tabBarController.storyboard?.instantiateViewController(withIdentifier: "UploadImage") {
+                uploadImageVC.modalPresentationStyle = .fullScreen
                 tabBarController.present(uploadImageVC, animated: true)
                 return false
             }

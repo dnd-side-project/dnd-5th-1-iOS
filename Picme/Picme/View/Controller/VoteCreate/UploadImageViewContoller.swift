@@ -80,6 +80,10 @@ class UploadImageViewContoller: BaseViewContoller {
         
         present(picker, animated: true, completion: nil)
     }
+    
+    @objc func navBackAction(_ sender: UIBarButtonItem) {
+        self.dismiss(animated: true, completion: nil)
+    }
 }
 
 // MARK: - UI
@@ -88,11 +92,22 @@ extension UploadImageViewContoller {
     
     override func setProperties() {
         
-        view.addSubview(stepView)
+        uploadLabel.textColor = .textColor(.text100)
+        
+        uploadButton.layer.cornerRadius = 10
+        uploadButton.setTitleColor(.textColor(.text100), for: .normal)
+        uploadButton.backgroundColor = .mainColor(.pink)
         
         stepView.clipsToBounds = true
         stepView.backgroundColor = .solidColor(.solid12)
         stepView.layer.cornerRadius = 10
+    }
+    
+    override func setConfiguration() {
+        
+        view.addSubview(stepView)
+        
+        view.backgroundColor = .solidColor(.solid0)
         
         // NavigationBar
         if let navBar = navigationController?.navigationBar {
@@ -101,19 +116,12 @@ extension UploadImageViewContoller {
 
             navBar.topItem?.title = "사진 업로드"
             navBar.titleTextAttributes = [.foregroundColor: UIColor.textColor(.text100)]
+            let backButton = UIBarButtonItem(image: UIImage(named: "navigationBackBtn"),
+                                             style: .done,
+                                             target: self,
+                                             action: #selector(navBackAction(_:)))
+            navigationItem.leftBarButtonItem = backButton
         }
-    }
-    
-    override func setConfiguration() {
-        
-        view.backgroundColor = .solidColor(.solid0)
-        
-        uploadLabel.textColor = .textColor(.text100)
-        
-        uploadButton.layer.cornerRadius = 10
-        uploadButton.setTitleColor(.textColor(.text100), for: .normal)
-        uploadButton.backgroundColor = .mainColor(.pink)
-        
     }
     
     override func setConstraints() {
