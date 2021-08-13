@@ -14,6 +14,12 @@ class ContentViewController: BaseViewContoller {
     @IBOutlet weak var progressBar: UIProgressView!
     let stepView = StepView(stepText: "STEP 3", title: "마지막으로 제목과 마감시간을 설정해 주세요!")
     
+    var textCount: Int = 0 {
+        didSet {
+            voteTitleTextNumber.text = "\(String(textCount))/45"
+        }
+    }
+    
     // 투표 제목적는 곳
     @IBOutlet weak var voteTitle: UILabel!
     @IBOutlet weak var voteTitleTextNumber: UILabel!
@@ -48,7 +54,9 @@ class ContentViewController: BaseViewContoller {
         voteEndDateTextfield.inputView = datePicker
         datePicker.addTarget(self, action: #selector(dateChanged(_:)), for: .valueChanged)
 //        datePickerToolBar()
+        voteTextView.delegate = self
     }
+    
     @objc func dateChanged(_ sender: UIDatePicker) {
         let dateformatter = DateFormatter()
         dateformatter.locale = Locale(identifier: "ko_KR")
@@ -87,6 +95,21 @@ class ContentViewController: BaseViewContoller {
     @objc func toolBarCancelButton(_ sender: UIButton) {
         voteEndDateTextfield.text = nil
         voteEndDateTextfield.resignFirstResponder()
+    }
+}
+
+extension ContentViewController: UITextViewDelegate {
+    
+    func textViewDidChange(_ textView: UITextView) {
+        
+        if textView.text.count >= 46 {
+            textView.text.removeLast()
+            voteTitleTextNumber.textColor = .mainColor(.pink)
+        } else {
+            voteTitleTextNumber.textColor = .textColor(.text71)
+        }
+        
+        textCount = textView.text.count
     }
 }
 

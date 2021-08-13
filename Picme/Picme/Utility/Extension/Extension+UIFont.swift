@@ -8,14 +8,20 @@
 import UIKit
 
 enum NotoSans: String {
+    /// Weight 700
     case bold = "NotoSansCJKkr-Bold"
+    /// Weight 500
     case medium = "NotoSansCJKkr-Medium"
+    /// Weight 400
     case regular = "NotoSansCJKkr-Regular"
 }
 
 enum Montserrat: String {
+    /// Weight 700
     case bold = "Montserrat-Bold"
+    /// Weight 600
     case medium = "Montserrat-Medium"
+    /// Weight 500
     case semiBold = "Montserrat-SemiBold"
 }
 
