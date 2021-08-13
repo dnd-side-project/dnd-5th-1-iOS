@@ -52,14 +52,23 @@
                                 <color key="progressTintColor" red="0.20000000000000001" green="0.80000000000000004" blue="0.5490196078431373" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <color key="trackTintColor" red="0.090196078431372548" green="0.10588235294117647" blue="0.12156862745098039" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </progressView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sensitivity" translatesAutoresizingMaskIntoConstraints="NO" id="B62-7H-NGf">
+                                <rect key="frame" x="199" y="383" width="16" height="16"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="B62-7H-NGf" secondAttribute="height" multiplier="1:1" id="NCi-Jp-yJ2"/>
+                                    <constraint firstAttribute="width" constant="16" id="gE4-4G-v8J"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="RyO-9A-B5m" firstAttribute="top" secondItem="B62-7H-NGf" secondAttribute="bottom" constant="12" id="4bg-g1-7sx"/>
                             <constraint firstItem="RyO-9A-B5m" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="Y8D-WG-GEi"/>
                             <constraint firstItem="RyO-9A-B5m" firstAttribute="centerY" secondItem="5EZ-qb-Rvc" secondAttribute="centerY" id="g8V-3s-5gH"/>
                             <constraint firstItem="ga7-BC-Qia" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="gRO-Ol-xJh"/>
                             <constraint firstItem="ga7-BC-Qia" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="oyE-no-OPx"/>
+                            <constraint firstItem="B62-7H-NGf" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="rGv-XR-HBt"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="ga7-BC-Qia" secondAttribute="trailing" constant="20" id="sg6-Fm-XTK"/>
                         </constraints>
                     </view>
@@ -223,6 +232,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="sensitivity" width="24" height="24"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
