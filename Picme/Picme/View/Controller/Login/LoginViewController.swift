@@ -15,7 +15,6 @@ class LoginViewController: BaseViewContoller {
     // MARK: - Properties
     
     @IBOutlet weak var mainTitleLabel: UILabel!
-    @IBOutlet weak var subLable: UILabel!
     @IBOutlet weak var kakaoLoginButton: UIButton!
     @IBOutlet weak var appleLoginButton: ASAuthorizationAppleIDButton!
     @IBOutlet weak var unLoginButton: UIButton!
@@ -71,7 +70,6 @@ extension LoginViewController {
         // Color
         view.backgroundColor = .solidColor(.solid0)
         mainTitleLabel.textColor = .textColor(.text100)
-        subLable.textColor = .textColor(.text71)
         unLoginButton.setTitleColor(.textColor(.text91), for: .normal)
         
         // String

@@ -17,6 +17,11 @@ class ContentViewController: BaseViewContoller {
     var textCount: Int = 0 {
         didSet {
             voteTitleTextNumber.text = "\(String(textCount))/45"
+            if textCount >= 45 {
+                voteTitleTextNumber.textColor = .mainColor(.pink)
+            } else {
+                voteTitleTextNumber.textColor = .textColor(.text71)
+            }
         }
     }
     
@@ -104,9 +109,6 @@ extension ContentViewController: UITextViewDelegate {
         
         if textView.text.count >= 46 {
             textView.text.removeLast()
-            voteTitleTextNumber.textColor = .mainColor(.pink)
-        } else {
-            voteTitleTextNumber.textColor = .textColor(.text71)
         }
         
         textCount = textView.text.count

@@ -28,6 +28,7 @@ class OnePickViewController: BaseViewContoller {
     
     let nextButton: UIButton = {
         $0.layer.cornerRadius = 10
+        $0.titleLabel?.font = .kr(.bold, size: 16)
         $0.setTitle("내 원픽은 이거에요!", for: .normal)
         $0.setTitleColor(.textColor(.text50), for: .normal)
         $0.backgroundColor = .solidColor(.solid26)
