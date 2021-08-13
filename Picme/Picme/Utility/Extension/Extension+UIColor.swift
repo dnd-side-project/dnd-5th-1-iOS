@@ -43,13 +43,17 @@ enum MainColor {
     case orange
     /// #33CC8C, RGB(51, 204, 140, alpha: 1.0)
     case mint
+}
+
+enum OpacityColor {
+    /// #000000, RGB(0, 0, 0, alpha: 0.5)
+    case solid0
     /// #EB499A, RGB(235, 73, 154, alpha: 0.8)
     case pink80
     /// #F0793C, RGB(240, 121, 60, alpha: 0.8)
     case orange80
     /// #33CC8C, RGB(51, 204, 140, alpha: 0.8)
     case mint80
-    
 }
 
 extension UIColor {
@@ -94,6 +98,12 @@ extension UIColor {
             return UIColor(red: 240/255, green: 121/255, blue: 60/255, alpha: 1.0)
         case .mint:
             return UIColor(red: 51/255, green: 204/255, blue: 140/255, alpha: 1.0)
+        }
+    }
+    static func opacityColor(_ color: OpacityColor) -> UIColor {
+        switch color {
+        case .solid0:
+            return UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 0.5)
         case .pink80:
             return UIColor(red: 235/255, green: 73/255, blue: 154/255, alpha: 0.8)
         case .orange80:

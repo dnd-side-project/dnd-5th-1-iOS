@@ -34,6 +34,9 @@ class OnePickViewController: BaseViewContoller {
         return $0
     }(UIButton(type: .system))
     
+    var selectIndex: Int?
+    var isSelectPick: Bool?
+    
     // MARK: - LifeCycle
     
     override func viewDidLoad() {
@@ -58,9 +61,29 @@ extension OnePickViewController: UICollectionViewDataSource {
         
         let cell: OnePickCell = collectionView.dequeueCollectionCell(for: indexPath)
         cell.showUserImage(images[indexPath.row])
-        cell.layer.cornerRadius = 10
         
+        if isSelectPick == true {
+            if indexPath.item == selectIndex {
+                cell.pickImage.image = UIImage(named: "onepick")
+                cell.pickLayer.backgroundColor = .opacityColor(.pink80)
+                nextButton.backgroundColor = .mainColor(.pink)
+                nextButton.setTitleColor(.white, for: .normal)
+            } else {
+                cell.pickImage.image = UIImage(named: "notonepick")
+                cell.pickLayer.backgroundColor = .opacityColor(.solid0)
+                
+            }
+        }
+
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        selectIndex = indexPath.row
+        isSelectPick = true
+
+        collectionView.reloadData()
     }
     
 }
