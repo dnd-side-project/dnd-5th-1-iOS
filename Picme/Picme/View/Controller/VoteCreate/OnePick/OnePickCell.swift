@@ -65,6 +65,7 @@ class OnePickCell: UICollectionViewCell {
         pickLayer.snp.makeConstraints {
             $0.edges.equalTo(cellImages)
         }
+        
         pickImage.snp.makeConstraints {
             $0.top.equalTo(cellImages).offset(10)
             $0.trailing.equalTo(cellImages).offset(-10)

@@ -6,7 +6,9 @@
 //
 
 import UIKit
+import SnapKit
 import YPImagePicker
+
 
 class ImageUploadViewContoller: BaseViewContoller {
     
@@ -116,21 +118,17 @@ extension ImageUploadViewContoller {
     
     override func setConstraints() {
         
-        uploadButton.translatesAutoresizingMaskIntoConstraints = false
-        uploadButton.widthAnchor.constraint(equalToConstant: view.frame.width / 2.5)
-            .isActive = true
-        uploadButton.heightAnchor.constraint(equalToConstant: 52)
-            .isActive = true
+        uploadButton.snp.makeConstraints {
+            $0.width.equalTo(view.frame.width / 2.5)
+            $0.height.equalTo(52)
+        }
         
-        stepView.translatesAutoresizingMaskIntoConstraints = false
-        stepView.topAnchor.constraint(equalTo: progressBar.bottomAnchor, constant: 14)
-            .isActive = true
-        stepView.leadingAnchor.constraint(equalTo: progressBar.leadingAnchor)
-            .isActive = true
-        stepView.trailingAnchor.constraint(equalTo: progressBar.trailingAnchor)
-            .isActive = true
-        stepView.heightAnchor.constraint(equalToConstant: 72)
-            .isActive = true
+        stepView.snp.makeConstraints {
+            $0.top.equalTo(progressBar.snp.bottom).offset(14)
+            $0.leading.equalTo(progressBar.snp.leading)
+            $0.trailing.equalTo(progressBar.snp.trailing)
+            $0.height.equalTo(72)
+        }
     }
 }
 
