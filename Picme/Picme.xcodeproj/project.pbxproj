@@ -10,13 +10,13 @@
 		521630CB556750301749121F /* Pods_Picme.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB74E774F2085618C97D3804 /* Pods_Picme.framework */; };
 		7AA762B0B95B4242803315E5 /* Pods_PicmeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B8846FE285BDFC765A499DA /* Pods_PicmeTests.framework */; };
 		A91A904626B92BDB00C43D43 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91A904526B92BDB00C43D43 /* UserInfo.swift */; };
-		A91A907526BD516400C43D43 /* ImageUpload.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A91A907426BD516400C43D43 /* ImageUpload.storyboard */; };
-		A91A907726BD51FF00C43D43 /* ImageUploadViewContoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91A907626BD51FF00C43D43 /* ImageUploadViewContoller.swift */; };
+		A91A907526BD516400C43D43 /* UploadImage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A91A907426BD516400C43D43 /* UploadImage.storyboard */; };
+		A91A907726BD51FF00C43D43 /* UploadImageViewContoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91A907626BD51FF00C43D43 /* UploadImageViewContoller.swift */; };
 		A91A909026BE9D2800C43D43 /* KeyChainModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91A908F26BE9D2800C43D43 /* KeyChainModel.swift */; };
 		A91F57D426B7B261006F20AD /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91F57D326B7B261006F20AD /* OnboardingViewController.swift */; };
 		A91F57D726B7B641006F20AD /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91F57D626B7B641006F20AD /* OnboardingViewModel.swift */; };
 		A9322EEB26BFD81A0061EF35 /* Extension+UIAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9322EEA26BFD81A0061EF35 /* Extension+UIAlert.swift */; };
-		A9322EEE26C0910C0061EF35 /* ImageUploadViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9322EED26C0910C0061EF35 /* ImageUploadViewModel.swift */; };
+		A9322EEE26C0910C0061EF35 /* UploadImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9322EED26C0910C0061EF35 /* UploadImageViewModel.swift */; };
 		A9322EF026C099990061EF35 /* StepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9322EEF26C099990061EF35 /* StepView.swift */; };
 		A9322EF726C0C38F0061EF35 /* OnePickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9322EF626C0C38F0061EF35 /* OnePickViewController.swift */; };
 		A9322EF926C0CADA0061EF35 /* OnePickCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9322EF826C0CADA0061EF35 /* OnePickCell.swift */; };
@@ -102,13 +102,13 @@
 		95A7318E3A14E589BF7BB1AF /* Pods-PicmeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PicmeTests.debug.xcconfig"; path = "Target Support Files/Pods-PicmeTests/Pods-PicmeTests.debug.xcconfig"; sourceTree = "<group>"; };
 		99CB56FAF51F7B3577E0BB1C /* Pods_Picme_PicmeUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Picme_PicmeUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A91A904526B92BDB00C43D43 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
-		A91A907426BD516400C43D43 /* ImageUpload.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ImageUpload.storyboard; sourceTree = "<group>"; };
-		A91A907626BD51FF00C43D43 /* ImageUploadViewContoller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUploadViewContoller.swift; sourceTree = "<group>"; };
+		A91A907426BD516400C43D43 /* UploadImage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = UploadImage.storyboard; sourceTree = "<group>"; };
+		A91A907626BD51FF00C43D43 /* UploadImageViewContoller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadImageViewContoller.swift; sourceTree = "<group>"; };
 		A91A908F26BE9D2800C43D43 /* KeyChainModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainModel.swift; sourceTree = "<group>"; };
 		A91F57D326B7B261006F20AD /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		A91F57D626B7B641006F20AD /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
 		A9322EEA26BFD81A0061EF35 /* Extension+UIAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIAlert.swift"; sourceTree = "<group>"; };
-		A9322EED26C0910C0061EF35 /* ImageUploadViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUploadViewModel.swift; sourceTree = "<group>"; };
+		A9322EED26C0910C0061EF35 /* UploadImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadImageViewModel.swift; sourceTree = "<group>"; };
 		A9322EEF26C099990061EF35 /* StepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepView.swift; sourceTree = "<group>"; };
 		A9322EF626C0C38F0061EF35 /* OnePickViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnePickViewController.swift; sourceTree = "<group>"; };
 		A9322EF826C0CADA0061EF35 /* OnePickCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnePickCell.swift; sourceTree = "<group>"; };
@@ -221,7 +221,7 @@
 		A91A907226BD509E00C43D43 /* VoteCreate */ = {
 			isa = PBXGroup;
 			children = (
-				A91A907426BD516400C43D43 /* ImageUpload.storyboard */,
+				A91A907426BD516400C43D43 /* UploadImage.storyboard */,
 			);
 			path = VoteCreate;
 			sourceTree = "<group>";
@@ -231,7 +231,7 @@
 			children = (
 				A9322EFA26C0D1800061EF35 /* VoteComplete */,
 				A9322EF526C0C35A0061EF35 /* OnePick */,
-				A91A907626BD51FF00C43D43 /* ImageUploadViewContoller.swift */,
+				A91A907626BD51FF00C43D43 /* UploadImageViewContoller.swift */,
 				A9322EEF26C099990061EF35 /* StepView.swift */,
 			);
 			path = VoteCreate;
@@ -258,7 +258,7 @@
 		A9322EEC26C090E70061EF35 /* Upload */ = {
 			isa = PBXGroup;
 			children = (
-				A9322EED26C0910C0061EF35 /* ImageUploadViewModel.swift */,
+				A9322EED26C0910C0061EF35 /* UploadImageViewModel.swift */,
 			);
 			path = Upload;
 			sourceTree = "<group>";
@@ -758,7 +758,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A9C12B96269C315E00729A74 /* .swiftlint.yml in Resources */,
-				A91A907526BD516400C43D43 /* ImageUpload.storyboard in Resources */,
+				A91A907526BD516400C43D43 /* UploadImage.storyboard in Resources */,
 				D1449D9426A845370083418D /* Main.storyboard in Resources */,
 				A9C12B92269C1A7A00729A74 /* Login.storyboard in Resources */,
 				A9DF3F8726C6684200DB81DB /* Montserrat-Bold.ttf in Resources */,
@@ -952,7 +952,7 @@
 				A9322EF926C0CADA0061EF35 /* OnePickCell.swift in Sources */,
 				A975288226B74322003EE1A9 /* LoginViewController.swift in Sources */,
 				A9C12B80269AB86A00729A74 /* Extension+UIColor.swift in Sources */,
-				A9322EEE26C0910C0061EF35 /* ImageUploadViewModel.swift in Sources */,
+				A9322EEE26C0910C0061EF35 /* UploadImageViewModel.swift in Sources */,
 				D173CD9F26C50E2F00468D52 /* VoteDetailViewController.swift in Sources */,
 				D1EC0C6326C30D2000387F1B /* VoteDetailViewModel.swift in Sources */,
 				A91A909026BE9D2800C43D43 /* KeyChainModel.swift in Sources */,
@@ -975,7 +975,7 @@
 				D1B51CA426BEB72400928FF3 /* VoteDetailService.swift in Sources */,
 				D180456C26B3E8DD0053430E /* APIConstants.swift in Sources */,
 				D1103F6226C46AE4002D1E78 /* Enum+NetworkResult.swift in Sources */,
-				A91A907726BD51FF00C43D43 /* ImageUploadViewContoller.swift in Sources */,
+				A91A907726BD51FF00C43D43 /* UploadImageViewContoller.swift in Sources */,
 				A975287826B69DE1003EE1A9 /* ImageAPICenter.swift in Sources */,
 				A9C12B8D269C170C00729A74 /* Extension+CollectionView.swift in Sources */,
 				A9C12B7E269AB7B900729A74 /* BaseViewContoller.swift in Sources */,

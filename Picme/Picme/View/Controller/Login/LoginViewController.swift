@@ -47,7 +47,11 @@ class LoginViewController: BaseViewContoller {
     }
     
     @IBAction func unLoginAction(_ sender: UIButton) {
-        self.present(OnboardingViewController(), animated: true, completion: nil)
+        let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let mainViewController = mainStoryboard.instantiateViewController(withIdentifier:
+                                                                            "TabBarController")
+        self.present(mainViewController, animated: true, completion: nil)
+//        self.present(OnboardingViewController(), animated: true, completion: nil)
     }
 }
 

@@ -1,5 +1,5 @@
 //
-//  ImageUploadViewModel.swift
+//  UploadImageViewModel.swift
 //  Picme
 //
 //  Created by taeuk on 2021/08/09.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ImageUploadViewModel {
+class UploadImageViewModel {
     
     var buttonState: Dynamic<Bool> = Dynamic(false)
     

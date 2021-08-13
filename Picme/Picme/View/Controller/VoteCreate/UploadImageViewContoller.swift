@@ -1,5 +1,5 @@
 //
-//  ImageUploadViewContoller.swift
+//  UploadImageViewContoller.swift
 //  Picme
 //
 //  Created by taeuk on 2021/08/06.
@@ -10,10 +10,10 @@ import SnapKit
 import YPImagePicker
 
 
-class ImageUploadViewContoller: BaseViewContoller {
+class UploadImageViewContoller: BaseViewContoller {
     
     // MARK: - Properties
-    var uploadViewModel: ImageUploadViewModel? = ImageUploadViewModel()
+    var uploadViewModel: UploadImageViewModel? = UploadImageViewModel()
     
     @IBOutlet weak var uploadButton: UIButton!
     @IBOutlet weak var uploadLabel: UILabel!
@@ -84,7 +84,7 @@ class ImageUploadViewContoller: BaseViewContoller {
 
 // MARK: - UI
 
-extension ImageUploadViewContoller {
+extension UploadImageViewContoller {
     
     override func setProperties() {
         
@@ -134,7 +134,7 @@ extension ImageUploadViewContoller {
 
 // MARK: - YPImagePicker
 
-extension ImageUploadViewContoller: YPImagePickerDelegate {
+extension UploadImageViewContoller: YPImagePickerDelegate {
     
     func noPhotos() {
             

@@ -19,8 +19,8 @@ class MainViewController: BaseViewContoller, TouchDelegate {
     @IBOutlet weak var emptyView: UIView!
     
     @IBAction func voteButtonClicked(_ sender: Any) {
-        if let imageUploadVC = tabBarController?.storyboard?.instantiateViewController(withIdentifier: "ImageUpload") {
-            tabBarController?.present(imageUploadVC, animated: true)
+        if let uploadImageVC = tabBarController?.storyboard?.instantiateViewController(withIdentifier: "UploadImage") {
+            tabBarController?.present(uploadImageVC, animated: true)
         }
     }
     
