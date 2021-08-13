@@ -46,6 +46,12 @@
 		A9C12B8D269C170C00729A74 /* Extension+CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C12B8C269C170C00729A74 /* Extension+CollectionView.swift */; };
 		A9C12B92269C1A7A00729A74 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9C12B91269C1A7A00729A74 /* Login.storyboard */; };
 		A9C12B96269C315E00729A74 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = A9C12B95269C315E00729A74 /* .swiftlint.yml */; };
+		A9DF3F7F26C6681C00DB81DB /* NotoSansCJKkr-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = A9DF3F7C26C6681A00DB81DB /* NotoSansCJKkr-Bold.otf */; };
+		A9DF3F8026C6681C00DB81DB /* NotoSansCJKkr-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = A9DF3F7D26C6681B00DB81DB /* NotoSansCJKkr-Medium.otf */; };
+		A9DF3F8126C6681C00DB81DB /* NotoSansCJKkr-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = A9DF3F7E26C6681C00DB81DB /* NotoSansCJKkr-Regular.otf */; };
+		A9DF3F8526C6684200DB81DB /* Montserrat-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A9DF3F8226C6684200DB81DB /* Montserrat-Medium.ttf */; };
+		A9DF3F8626C6684200DB81DB /* Montserrat-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A9DF3F8326C6684200DB81DB /* Montserrat-SemiBold.ttf */; };
+		A9DF3F8726C6684200DB81DB /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A9DF3F8426C6684200DB81DB /* Montserrat-Bold.ttf */; };
 		A9E72E2C26C527D3003C98A0 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = A9E72E2B26C527D3003C98A0 /* SnapKit */; };
 		A9E72E2F26C52F62003C98A0 /* YPImagePicker in Frameworks */ = {isa = PBXBuildFile; productRef = A9E72E2E26C52F62003C98A0 /* YPImagePicker */; };
 		D1103F6226C46AE4002D1E78 /* Enum+NetworkResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1103F6126C46AE4002D1E78 /* Enum+NetworkResult.swift */; };
@@ -139,6 +145,12 @@
 		A9C12B8C269C170C00729A74 /* Extension+CollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+CollectionView.swift"; sourceTree = "<group>"; };
 		A9C12B91269C1A7A00729A74 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		A9C12B95269C315E00729A74 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		A9DF3F7C26C6681A00DB81DB /* NotoSansCJKkr-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansCJKkr-Bold.otf"; sourceTree = "<group>"; };
+		A9DF3F7D26C6681B00DB81DB /* NotoSansCJKkr-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansCJKkr-Medium.otf"; sourceTree = "<group>"; };
+		A9DF3F7E26C6681C00DB81DB /* NotoSansCJKkr-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansCJKkr-Regular.otf"; sourceTree = "<group>"; };
+		A9DF3F8226C6684200DB81DB /* Montserrat-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Medium.ttf"; sourceTree = "<group>"; };
+		A9DF3F8326C6684200DB81DB /* Montserrat-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-SemiBold.ttf"; sourceTree = "<group>"; };
+		A9DF3F8426C6684200DB81DB /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Bold.ttf"; sourceTree = "<group>"; };
 		BB74E774F2085618C97D3804 /* Pods_Picme.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Picme.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCA73C122FAB6E7E7E132CEB /* Pods-Picme-PicmeUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Picme-PicmeUITests.release.xcconfig"; path = "Target Support Files/Pods-Picme-PicmeUITests/Pods-Picme-PicmeUITests.release.xcconfig"; sourceTree = "<group>"; };
 		CE1E7EEC4130AD59C5A0B524 /* Pods-Picme.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Picme.release.xcconfig"; path = "Target Support Files/Pods-Picme/Pods-Picme.release.xcconfig"; sourceTree = "<group>"; };
@@ -436,6 +448,7 @@
 		A9C12B7B269AB70F00729A74 /* Configure */ = {
 			isa = PBXGroup;
 			children = (
+				A9DF3F7B26C663A600DB81DB /* Font */,
 				A9A1AD422699FAE600169D76 /* AppDelegate.swift */,
 				A9A1AD442699FAE600169D76 /* SceneDelegate.swift */,
 				A9A1AD4B2699FAE800169D76 /* Assets.xcassets */,
@@ -500,6 +513,19 @@
 				A975288126B74322003EE1A9 /* LoginViewController.swift */,
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		A9DF3F7B26C663A600DB81DB /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				A9DF3F7C26C6681A00DB81DB /* NotoSansCJKkr-Bold.otf */,
+				A9DF3F7D26C6681B00DB81DB /* NotoSansCJKkr-Medium.otf */,
+				A9DF3F7E26C6681C00DB81DB /* NotoSansCJKkr-Regular.otf */,
+				A9DF3F8426C6684200DB81DB /* Montserrat-Bold.ttf */,
+				A9DF3F8226C6684200DB81DB /* Montserrat-Medium.ttf */,
+				A9DF3F8326C6684200DB81DB /* Montserrat-SemiBold.ttf */,
+			);
+			path = Font;
 			sourceTree = "<group>";
 		};
 		B479A2B92118C2749B552FBB /* Pods */ = {
@@ -735,9 +761,15 @@
 				A91A907526BD516400C43D43 /* ImageUpload.storyboard in Resources */,
 				D1449D9426A845370083418D /* Main.storyboard in Resources */,
 				A9C12B92269C1A7A00729A74 /* Login.storyboard in Resources */,
+				A9DF3F8726C6684200DB81DB /* Montserrat-Bold.ttf in Resources */,
 				A975287D26B69EAF003EE1A9 /* Onboarding.storyboard in Resources */,
+				A9DF3F8126C6681C00DB81DB /* NotoSansCJKkr-Regular.otf in Resources */,
+				A9DF3F8626C6684200DB81DB /* Montserrat-SemiBold.ttf in Resources */,
+				A9DF3F7F26C6681C00DB81DB /* NotoSansCJKkr-Bold.otf in Resources */,
 				A9A1AD4F2699FAE800169D76 /* LaunchScreen.storyboard in Resources */,
 				A9A1AD4C2699FAE800169D76 /* Assets.xcassets in Resources */,
+				A9DF3F8526C6684200DB81DB /* Montserrat-Medium.ttf in Resources */,
+				A9DF3F8026C6681C00DB81DB /* NotoSansCJKkr-Medium.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -15,12 +15,14 @@ class StepView: UIView {
     var stepTitleText: String = ""
     
     let stepLabel: UILabel = {
-        $0.textColor = .white
+        $0.textColor = .textColor(.text71)
+        $0.font = .kr(.regular, size: 12)
         return $0
     }(UILabel())
     
     let titleLable: UILabel = {
         $0.textColor = .textColor(.text100)
+        $0.font = .kr(.bold, size: 16)
         return $0
     }(UILabel())
     
