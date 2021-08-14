@@ -24,6 +24,7 @@ class ContentViewController: BaseViewContoller {
             }
         }
     }
+    let expirationDate: [String] = ["1시간", "2시간" ,"6시간"]
     
     // 투표 제목적는 곳
     @IBOutlet weak var voteTitle: UILabel!
@@ -39,36 +40,21 @@ class ContentViewController: BaseViewContoller {
     
     @IBOutlet weak var registVoteButton: UIButton!
     
-    lazy var datePicker: UIDatePicker = {
-        $0.locale = Locale(identifier: "en_kr")
-        $0.datePickerMode = .dateAndTime
-        $0.backgroundColor = .white
-        
-        if #available(iOS 13.4, *) {
-            $0.preferredDatePickerStyle = .wheels
-        } else {
-            // Fallback on earlier versions
-        }
+    let pickerView: UIPickerView = {
         return $0
-    }(UIDatePicker())
+    }(UIPickerView())
+    
     // MARK: - LifeCycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        voteEndDateTextfield.inputView = datePicker
-        datePicker.addTarget(self, action: #selector(dateChanged(_:)), for: .valueChanged)
-//        datePickerToolBar()
+        pickerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 200)
+        voteEndDateTextfield.inputView = pickerView
+        datePickerToolBar()
         voteTextView.delegate = self
-    }
-    
-    @objc func dateChanged(_ sender: UIDatePicker) {
-        let dateformatter = DateFormatter()
-        dateformatter.locale = Locale(identifier: "ko_KR")
-        dateformatter.dateFormat = "yy/MM/dd hh:mm"
+        pickerView.delegate = self
         
-        let selectDate: String = dateformatter.string(from: sender.date)
-        voteEndDateTextfield.text = selectDate
     }
 
     @IBAction func registVote(_ sender: UIButton) {
@@ -76,20 +62,21 @@ class ContentViewController: BaseViewContoller {
     }
     
     func datePickerToolBar() {
-        let toolbar = UIToolbar()
-        toolbar.barStyle = .default
-        toolbar.isTranslucent = true
-        toolbar.tintColor = .white
-        toolbar.sizeToFit()
+        let toolBar = UIToolbar()
+        toolBar.barStyle = UIBarStyle.default
+        toolBar.isTranslucent = true
+        toolBar.tintColor = .white
+        toolBar.sizeToFit()
         
-        let done = UIBarButtonItem(title: "완료", style: .done, target: self, action: #selector(toolBarDoneButton(_:)))
-        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let cancel = UIBarButtonItem(title: "취소", style: .plain, target: self, action: #selector(toolBarCancelButton(_:)))
+        let doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItem.Style.done, target: self, action: #selector(toolBarDoneButton(_:)))
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
+        let cancelButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItem.Style.plain, target: self, action: #selector(toolBarCancelButton(_:)))
+
+        toolBar.setItems([cancelButton,spaceButton, spaceButton, spaceButton, doneButton], animated: false)
+        toolBar.isUserInteractionEnabled = true
         
-        toolbar.setItems([cancel, flexibleSpace, done], animated: true)
-        toolbar.isUserInteractionEnabled = true
+        voteEndDateTextfield.inputAccessoryView = toolBar
         
-        voteEndDateTextfield.inputAccessoryView = toolbar
     }
     
     @objc func toolBarDoneButton(_ sender: UIButton) {
@@ -103,6 +90,8 @@ class ContentViewController: BaseViewContoller {
     }
 }
 
+// MARK: - TextViewDelegate
+
 extension ContentViewController: UITextViewDelegate {
     
     func textViewDidChange(_ textView: UITextView) {
@@ -112,6 +101,27 @@ extension ContentViewController: UITextViewDelegate {
         }
         
         textCount = textView.text.count
+    }
+}
+
+// MARK: - PickerViewDelegate
+
+extension ContentViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return expirationDate.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return expirationDate[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        voteEndDateTextfield.text = expirationDate[row]
     }
 }
 
