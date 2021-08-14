@@ -315,6 +315,7 @@
 		A98C691226AC23D500AD9191 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				A9E6DD6A26C88D85006155F3 /* VoteCreate */,
 				A91F57D526B7B632006F20AD /* Onboarding */,
 				A975287926B69E5B003EE1A9 /* Login */,
 				D1B51C9926BEAB1100928FF3 /* Main */,
@@ -528,6 +529,14 @@
 			path = Font;
 			sourceTree = "<group>";
 		};
+		A9E6DD6A26C88D85006155F3 /* VoteCreate */ = {
+			isa = PBXGroup;
+			children = (
+				A9322EEC26C090E70061EF35 /* Upload */,
+			);
+			path = VoteCreate;
+			sourceTree = "<group>";
+		};
 		B479A2B92118C2749B552FBB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -580,7 +589,6 @@
 		D1B51C9926BEAB1100928FF3 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				A9322EEC26C090E70061EF35 /* Upload */,
 				D180457526B3F03B0053430E /* MainViewModel.swift */,
 			);
 			path = Main;
