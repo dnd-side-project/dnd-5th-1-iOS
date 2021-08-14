@@ -75,6 +75,9 @@
 		D1B51E2526C302E800928FF3 /* VoteDetailListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B51E2426C302E800928FF3 /* VoteDetailListModel.swift */; };
 		D1B51E2726C3090400928FF3 /* MainListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B51E2626C3090400928FF3 /* MainListModel.swift */; };
 		D1EC0C6326C30D2000387F1B /* VoteDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1EC0C6226C30D2000387F1B /* VoteDetailViewModel.swift */; };
+		D1F173F526C867560069C42E /* AlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1F173F426C867560069C42E /* AlertView.xib */; };
+		D1F173F726C8675C0069C42E /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F173F626C8675C0069C42E /* AlertView.swift */; };
+		D1F173F926C86A0A0069C42E /* Extension+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F173F826C86A0A0069C42E /* Extension+UIView.swift */; };
 		FFAF1D14C850C640DBD39898 /* Pods_Picme_PicmeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99CB56FAF51F7B3577E0BB1C /* Pods_Picme_PicmeUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -175,6 +178,9 @@
 		D1B51E2426C302E800928FF3 /* VoteDetailListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteDetailListModel.swift; sourceTree = "<group>"; };
 		D1B51E2626C3090400928FF3 /* MainListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainListModel.swift; sourceTree = "<group>"; };
 		D1EC0C6226C30D2000387F1B /* VoteDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteDetailViewModel.swift; sourceTree = "<group>"; };
+		D1F173F426C867560069C42E /* AlertView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlertView.xib; sourceTree = "<group>"; };
+		D1F173F626C8675C0069C42E /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
+		D1F173F826C86A0A0069C42E /* Extension+UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIView.swift"; sourceTree = "<group>"; };
 		FF2C64C50A6163DFE30A0F3B /* Pods-Picme.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Picme.debug.xcconfig"; path = "Target Support Files/Pods-Picme/Pods-Picme.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -394,6 +400,7 @@
 		A9C12B75269AB6CD00729A74 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				D1F173E526C8664F0069C42E /* Alert */,
 				A9C12B90269C1A4C00729A74 /* Login */,
 				A975287E26B69F05003EE1A9 /* Onboarding */,
 				D1449D9526A846460083418D /* Main */,
@@ -476,6 +483,7 @@
 				A9C12B8C269C170C00729A74 /* Extension+CollectionView.swift */,
 				A95CD35B269EFB66002CCCA8 /* Extension+URLSession,Request.swift */,
 				A9322EEA26BFD81A0061EF35 /* Extension+UIAlert.swift */,
+				D1F173F826C86A0A0069C42E /* Extension+UIView.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -638,6 +646,15 @@
 			path = VoteDetail;
 			sourceTree = "<group>";
 		};
+		D1F173E526C8664F0069C42E /* Alert */ = {
+			isa = PBXGroup;
+			children = (
+				D1F173F426C867560069C42E /* AlertView.xib */,
+				D1F173F626C8675C0069C42E /* AlertView.swift */,
+			);
+			path = Alert;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -764,6 +781,7 @@
 				A9DF3F8726C6684200DB81DB /* Montserrat-Bold.ttf in Resources */,
 				A975287D26B69EAF003EE1A9 /* Onboarding.storyboard in Resources */,
 				A9DF3F8126C6681C00DB81DB /* NotoSansCJKkr-Regular.otf in Resources */,
+				D1F173F526C867560069C42E /* AlertView.xib in Resources */,
 				A9DF3F8626C6684200DB81DB /* Montserrat-SemiBold.ttf in Resources */,
 				A9DF3F7F26C6681C00DB81DB /* NotoSansCJKkr-Bold.otf in Resources */,
 				A9A1AD4F2699FAE800169D76 /* LaunchScreen.storyboard in Resources */,
@@ -953,6 +971,7 @@
 				A975288226B74322003EE1A9 /* LoginViewController.swift in Sources */,
 				A9C12B80269AB86A00729A74 /* Extension+UIColor.swift in Sources */,
 				A9322EEE26C0910C0061EF35 /* UploadImageViewModel.swift in Sources */,
+				D1F173F726C8675C0069C42E /* AlertView.swift in Sources */,
 				D173CD9F26C50E2F00468D52 /* VoteDetailViewController.swift in Sources */,
 				D1EC0C6326C30D2000387F1B /* VoteDetailViewModel.swift in Sources */,
 				A91A909026BE9D2800C43D43 /* KeyChainModel.swift in Sources */,
@@ -982,6 +1001,7 @@
 				A96C9E8926AC2451001F279B /* LoginViewModel.swift in Sources */,
 				D1B51E2726C3090400928FF3 /* MainListModel.swift in Sources */,
 				D180457326B3EAB90053430E /* MainModel.swift in Sources */,
+				D1F173F926C86A0A0069C42E /* Extension+UIView.swift in Sources */,
 				A9C12B82269AB94B00729A74 /* Extension+UIFont.swift in Sources */,
 				A9C12B89269C14FF00729A74 /* Protocol+ResuableCell.swift in Sources */,
 				A9C12B8B269C158900729A74 /* Extension+UITableView.swift in Sources */,

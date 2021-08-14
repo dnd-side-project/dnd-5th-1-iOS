@@ -38,7 +38,7 @@ class VoteDetailTableViewController: BaseViewContoller {
         
         dataSource.data.addAndNotify(observer: self) { [weak self] _ in
             self?.detailTableView.reloadData()
-            //self?.showTableView()
+            // self?.showTableView()
         }
         
         viewModel.fetchVoteDetail(postId: "1")
@@ -55,9 +55,9 @@ class VoteDetailTableViewController: BaseViewContoller {
     }
     
     func showEmptyView() {
-        //        self.detailTableView.isHidden = true
-        //        self.emptyView.isHidden = false
-        //        self.activityIndicator.isHidden = true
+        // self.detailTableView.isHidden = true
+        // self.emptyView.isHidden = false
+        // self.activityIndicator.isHidden = true
     }
     
 }
@@ -65,7 +65,7 @@ class VoteDetailTableViewController: BaseViewContoller {
 class VoteDetailDatasource: GenericDataSource<VoteDetailModel>, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //return data.value.count
+        // return data.value.count
         
         return 5
     }
@@ -74,8 +74,8 @@ class VoteDetailDatasource: GenericDataSource<VoteDetailModel>, UITableViewDataS
         let cell: VoteDetailTableViewCell = tableView.dequeueTableCell(for: indexPath)
    
         cell.setCollectionViewDataSourceDelegate(forRow: indexPath.row)
-        //cell.delegate = self
-        //cell.updateCell(model: data.value[indexPath.row])
+        // cell.delegate = self
+        // cell.updateCell(model: data.value[indexPath.row])
        
         return cell
     }
