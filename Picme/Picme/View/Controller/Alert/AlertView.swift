@@ -34,6 +34,7 @@ class AlertView: UIView {
     private func commonInit() {
         rootView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
         rootView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+        alertView.layer.cornerRadius = 10
         
         XButton.addTarget(self, action: #selector(removeButtonClicked), for: UIControl.Event.touchUpInside)
         denyButton.addTarget(self, action: #selector(removeButtonClicked), for: UIControl.Event.touchUpInside)

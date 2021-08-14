@@ -27,7 +27,7 @@ class LoginViewController: BaseViewContoller {
         super.viewDidLoad()
         
         loginViewModel?.loginDelegate = self
-        appleLoginButton.layer.cornerRadius = 10
+        appleLoginButton.cornerRadius = 10
         
     }
 
