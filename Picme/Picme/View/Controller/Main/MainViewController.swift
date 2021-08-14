@@ -7,6 +7,8 @@
 
 import UIKit
 
+// MARK: - Collection View Cell 클릭 시 실행할 프로토콜
+
 protocol TouchDelegate: AnyObject {
     func pushVoteDetailView(index: Int)
 }
@@ -17,6 +19,8 @@ class MainViewController: BaseViewContoller, TouchDelegate {
     
     @IBOutlet weak var mainTableView: UITableView!
     @IBOutlet weak var emptyView: UIView!
+    
+    // MARK: - IBActions
     
     @IBAction func voteButtonClicked(_ sender: Any) {
         if let uploadImageVC = tabBarController?.storyboard?.instantiateViewController(withIdentifier: "UploadImage") {
@@ -36,14 +40,6 @@ class MainViewController: BaseViewContoller, TouchDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let leftItem = UIBarButtonItem(title: "Title",
-                                       style: UIBarButtonItem.Style.plain,
-                                       target: nil,
-                                       action: nil)
-        leftItem.tintColor = .mainColor(.logoPink)
-        leftItem.isEnabled = false
-        self.navigationItem.leftBarButtonItem = leftItem
         
         setupTabBar()
         
@@ -76,10 +72,11 @@ class MainViewController: BaseViewContoller, TouchDelegate {
             self?.showTableView()
         }
         
+        // 서버 통신
         // viewModel.fetchMainList()
     }
     
-    // MARK: - TableView
+    // MARK: - Table View
     
     func showTableView() {
         DispatchQueue.main.async {
@@ -100,22 +97,37 @@ class MainViewController: BaseViewContoller, TouchDelegate {
         // self.activityIndicator.isHidden = true
     }
     
-    // MARK: - CollectionviewCellDelegate
+    // MARK: - Collection View Cell 클릭 시 투표 상세 뷰로 이동
     
     func pushVoteDetailView(index: Int) {
+        
+        // 미로그인 사용자 - Alert
+        
+        // 로그인한 사용자 - pushViewController
+        
         guard let voteDetailVC = self.storyboard?.instantiateViewController(withIdentifier: "VoteDetailViewController") as? VoteDetailViewController else { return }
+        voteDetailVC.postId = 1
+        voteDetailVC.userNickname = ""
+        voteDetailVC.userProfileimageUrl = ""
         self.navigationController?.pushViewController(voteDetailVC, animated: true)
     }
     
 }
 
+// MARK: - Table View Data Source / Collection View Cell Delegate
+
 class MainListDatasource: GenericDataSource<MainModel>, UITableViewDataSource, CollectionViewCellDelegate {
+    
+    // MARK: - CollectionV View Cell Delegate
     
     weak var delegate: TouchDelegate?
     
+    // Collection View Cell 클릭시 실행할 함수
     func selectedCVCell(_ index: Int) {
         delegate?.pushVoteDetailView(index: index)
     }
+    
+    // MARK: - Table View Data Source
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // return data.value.count
