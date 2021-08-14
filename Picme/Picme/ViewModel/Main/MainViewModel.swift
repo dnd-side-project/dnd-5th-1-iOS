@@ -35,7 +35,7 @@ class MainViewModel {
         
         service.getMainList(page: currentPage, completion: { (response) in
             DispatchQueue.main.async {
-                switch (response) {
+                switch response {
                 case .success(let data):
                     if let mainData = data as? [MainModel] {
                         self.dataSource?.data.value = mainData
