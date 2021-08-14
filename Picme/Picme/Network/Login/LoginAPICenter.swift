@@ -71,12 +71,14 @@ struct LoginAPICenter {
                             completion: @escaping ResultModel<LoginResponseModel>) {
         
         let urlString = APIConstants.Auth.signIn.urlString
+        print(urlString)
         
         let parameter = [
             "vendor": type.vendor,
             "vendorAccountId": type.vendorAccountId,
             "email": type.email ?? ""
         ]
+        print(parameter)
         
         AF.request(urlString,
                    method: .post,
@@ -85,8 +87,17 @@ struct LoginAPICenter {
             .responseDecodable(of: LoginResponseModel.self) { (response) in
                 switch response.result {
                 case .success(let data):
+                    print(data)
+                    
+                    if let headers = response.response?.allHeaderFields as? [String: String] {
+                        guard let header = headers["Authorization"] else { return }
+                        print(header)
+                        APIConstants.jwtToken = header
+                    }
+                    
                     completion(.success(data))
                 case .failure(let err):
+                    print(response.response?.statusCode)
                     switch response.response?.statusCode {
                     case 404:
                         completion(.failure(.requestFailed))
@@ -101,7 +112,6 @@ struct LoginAPICenter {
                             completion: @escaping ResultModel<LoginResponseModel>) {
         
         let urlString = APIConstants.Auth.signUp.urlString
-//        let urlString = "http://2d63c4581cec.ngrok.io/v1/auth/signup"
         
         let parameters = type
         
@@ -123,6 +133,15 @@ struct LoginAPICenter {
                    encoding: JSONEncoding.default).responseDecodable(of: LoginResponseModel.self, completionHandler: { (response) in
             switch response.result {
             case .success(let data):
+                print(data)
+                print(response.response?.statusCode)
+                
+                if let headers = response.response?.allHeaderFields as? [String: String] {
+                    guard let header = headers["Authorization"] else { return }
+                    print(header)
+                    APIConstants.jwtToken = header
+                }
+                
                 completion(.success(data))
             case .failure(let err):
                 switch response.response?.statusCode {
@@ -134,6 +153,5 @@ struct LoginAPICenter {
                 }
             }
         })
-        
     }
 }

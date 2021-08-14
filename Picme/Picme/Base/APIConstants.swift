@@ -27,13 +27,13 @@ struct APIConstants {
 
     // MARK: - Keys
     
-    static let jwtToken = ""
+    static var jwtToken = ""
     
     // MARK: - URLs
     
     // Base URL
-    private static let baseURL = "http://6e2d8cc751e9.ngrok.io"
-    private static let urlVersion = "v1/"
+    private static let baseURL = "http://4f6e573df140.ngrok.io"
+    private static let urlVersion = "/v1"
     
     // MARK: - /Main URLs
     
