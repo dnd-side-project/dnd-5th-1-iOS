@@ -401,9 +401,6 @@
                                                                     </imageView>
                                                                 </subviews>
                                                             </collectionViewCellContentView>
-                                                            <connections>
-                                                                <outlet property="detailPhotoImageView" destination="nxZ-1P-vrT" id="tgI-nh-Eyz"/>
-                                                            </connections>
                                                         </collectionViewCell>
                                                     </cells>
                                                 </collectionView>
@@ -563,9 +560,6 @@
                                     <navigationItem title="인생샷 투표" id="hDB-LP-KvE">
                                         <barButtonItem key="leftBarButtonItem" image="navigationBackBtn" id="Irt-dw-Le6">
                                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <connections>
-                                                <action selector="backButtonClickAction:" destination="Lyc-AD-nId" id="ypF-Vs-MHt"/>
-                                            </connections>
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" image="trashcan" id="ALU-4F-MJG">
                                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -616,7 +610,7 @@
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <connections>
-                                            <outlet property="detailPhotoImageView" destination="Jbb-qT-GJn" id="V8M-Kv-C6C"/>
+                                            <outlet property="detailPhotoImageView" destination="Jbb-qT-GJn" id="VjJ-Dt-TCG"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -905,6 +899,26 @@
                             <constraint firstItem="4oQ-Hg-wQt" firstAttribute="top" secondItem="vlC-pT-r26" secondAttribute="top" id="vY2-Ps-7gB"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="backButton" destination="Irt-dw-Le6" id="x2A-iP-Vwx"/>
+                        <outlet property="colorButton" destination="HzQ-kV-XRq" id="A2J-pM-6ou"/>
+                        <outlet property="compositionButton" destination="YTj-AY-mbZ" id="Rep-X0-SdR"/>
+                        <outlet property="detailCollectionview" destination="lrh-RB-zgb" id="i3o-RF-3P9"/>
+                        <outlet property="detailDeadlineLabel" destination="zv1-Px-PD4" id="BXp-M2-fhu"/>
+                        <outlet property="detailNicknameLabel" destination="xcI-fx-oFf" id="SGV-e6-KQN"/>
+                        <outlet property="detailPageControl" destination="1hK-7q-nex" id="bbS-CU-nSs"/>
+                        <outlet property="detailPageLabel" destination="DLK-JD-wXx" id="PSp-9W-Dgt"/>
+                        <outlet property="detailParticipantsLabel" destination="Ltx-EX-QXk" id="5Vb-0J-6bA"/>
+                        <outlet property="detailProfileImageView" destination="Lge-DT-c9U" id="ycE-ex-tGo"/>
+                        <outlet property="detailTitleLabel" destination="mmd-Ur-e39" id="kMI-pL-9pa"/>
+                        <outlet property="feedbackView" destination="nM7-Ii-Esh" id="lnF-8K-q2g"/>
+                        <outlet property="lightButton" destination="RdS-rt-ngV" id="ONz-60-JbJ"/>
+                        <outlet property="pickButton" destination="otq-hq-BSA" id="1bt-qc-G8b"/>
+                        <outlet property="pickView" destination="Lbn-9o-aCP" id="fg8-Q6-MDt"/>
+                        <outlet property="rightBarButton" destination="ALU-4F-MJG" id="Y3t-ph-76r"/>
+                        <outlet property="sensitivityButton" destination="BPK-dL-bcq" id="BDT-mS-pRT"/>
+                        <outlet property="skipButton" destination="pnA-WO-wYb" id="v15-4u-sMt"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3If-2U-gSy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
