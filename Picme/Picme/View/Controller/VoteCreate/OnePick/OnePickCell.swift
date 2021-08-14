@@ -6,18 +6,38 @@
 //
 
 import UIKit
+import SnapKit
 
 class OnePickCell: UICollectionViewCell {
     
-    let cellImages: UIImageView = {
+    // MARK: - Properties
+    
+    private let cellImages: UIImageView = {
         $0.contentMode = .scaleToFill
         return $0
     }(UIImageView())
+    
+    let pickImage: UIImageView = {
+        $0.backgroundColor = .clear
+        $0.contentMode = .scaleAspectFit
+        $0.image = UIImage(named: "notonepick")
+        return $0
+    }(UIImageView())
+    
+    let pickLayer: UIView = {
+        $0.backgroundColor = .clear
+        return $0
+    }(UIView())
+    
+    // MARK: - LifeCycle
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         setConfiguration()
+        contentView.clipsToBounds = true
+        contentView.layer.cornerRadius = 10
+        
         cellImages.clipsToBounds = true
         cellImages.layer.cornerRadius = 10
     }
@@ -26,6 +46,8 @@ class OnePickCell: UICollectionViewCell {
         fatalError("Image Upload Cell init?")
     }
     
+    // MARK: - Method
+    
     func showUserImage(_ image: UIImage) {
         cellImages.image = image
     }
@@ -33,15 +55,21 @@ class OnePickCell: UICollectionViewCell {
     func setConfiguration() {
         
         self.addSubview(cellImages)
-        cellImages.translatesAutoresizingMaskIntoConstraints = false
-        cellImages.topAnchor.constraint(equalTo: contentView.topAnchor)
-            .isActive = true
-        cellImages.leadingAnchor.constraint(equalTo: contentView.leadingAnchor)
-            .isActive = true
-        cellImages.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
-            .isActive = true
-        cellImages.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
-            .isActive = true
+        cellImages.addSubview(pickLayer)
+        cellImages.addSubview(pickImage)
         
+        cellImages.snp.makeConstraints {
+            $0.edges.equalTo(contentView)
+        }
+        
+        pickLayer.snp.makeConstraints {
+            $0.edges.equalTo(cellImages)
+        }
+        
+        pickImage.snp.makeConstraints {
+            $0.top.equalTo(cellImages).offset(10)
+            $0.trailing.equalTo(cellImages).offset(-10)
+            $0.width.equalTo(pickImage.snp.height).multipliedBy(1/1)
+        }
     }
 }

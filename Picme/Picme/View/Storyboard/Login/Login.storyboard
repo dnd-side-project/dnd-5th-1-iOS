@@ -8,6 +8,14 @@
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="NotoSansCJKkr-Bold.otf">
+            <string>NotoSansCJKkr-Bold</string>
+        </array>
+        <array key="NotoSansCJKkr-Medium.otf">
+            <string>NotoSansCJKkr-Medium</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Login View Controller-->
         <scene sceneID="UVd-YQ-JZi">
@@ -18,20 +26,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="qAK-pE-jJK">
-                                <rect key="frame" x="20" y="144" width="194" height="153.5"/>
+                                <rect key="frame" x="20" y="144" width="232.5" height="204.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Zs-zn-2Rq">
-                                        <rect key="frame" x="0.0" y="0.0" width="171.5" height="129"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="232.5" height="204.5"/>
                                         <string key="text">너도 
 인생사진 
 건질 수 있어</string>
-                                        <fontDescription key="fontDescription" type="system" pointSize="36"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="투표를 하기 위해서는 로그인이 필요해요!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MSC-5m-x7I">
-                                        <rect key="frame" x="0.0" y="139" width="194" height="14.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <fontDescription key="fontDescription" name="NotoSansCJKkr-Bold" family="Noto Sans CJK KR" pointSize="46"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -64,6 +66,7 @@
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RL0-ae-cfF">
                                         <rect key="frame" x="0.0" y="124" width="374" height="30"/>
+                                        <fontDescription key="fontDescription" name="NotoSansCJKkr-Medium" family="Noto Sans CJK KR" pointSize="12"/>
                                         <state key="normal" title="서비스 둘러보기"/>
                                         <connections>
                                             <action selector="unLoginAction:" destination="Inh-nG-xUb" eventType="touchUpInside" id="rCG-Mb-jcQ"/>
@@ -86,7 +89,6 @@
                         <outlet property="appleLoginButton" destination="VWu-rR-Ga7" id="UjN-1Q-wZ5"/>
                         <outlet property="kakaoLoginButton" destination="AMA-Qg-pdL" id="zqw-Hf-Gfa"/>
                         <outlet property="mainTitleLabel" destination="0Zs-zn-2Rq" id="VIW-rO-I0i"/>
-                        <outlet property="subLable" destination="MSC-5m-x7I" id="zgQ-ld-dCY"/>
                         <outlet property="unLoginButton" destination="RL0-ae-cfF" id="x2P-VH-AVL"/>
                     </connections>
                 </viewController>

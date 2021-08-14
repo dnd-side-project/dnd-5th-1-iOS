@@ -43,8 +43,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         }
         
         if indexOfTab == 1 {
-            if let imageUploadVC = tabBarController.storyboard?.instantiateViewController(withIdentifier: "ImageUpload") {
-                tabBarController.present(imageUploadVC, animated: true)
+            if let uploadImageVC = tabBarController.storyboard?.instantiateViewController(withIdentifier: "UploadImage") {
+                tabBarController.present(uploadImageVC, animated: true)
                 return false
             }
         }

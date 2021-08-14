@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class StepView: UIView {
     
@@ -15,12 +16,14 @@ class StepView: UIView {
     var stepTitleText: String = ""
     
     let stepLabel: UILabel = {
-        $0.textColor = .white
+        $0.textColor = .textColor(.text71)
+        $0.font = .kr(.regular, size: 12)
         return $0
     }(UILabel())
     
     let titleLable: UILabel = {
         $0.textColor = .textColor(.text100)
+        $0.font = .kr(.bold, size: 16)
         return $0
     }(UILabel())
     
@@ -57,14 +60,11 @@ class StepView: UIView {
         stepLabel.text = stepText
         titleLable.text = stepTitleText
         
-        labelStackView.translatesAutoresizingMaskIntoConstraints = false
-        labelStackView.topAnchor.constraint(equalTo: self.topAnchor, constant: 10)
-            .isActive = true
-        labelStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16)
-            .isActive = true
-        labelStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16)
-            .isActive = true
-        labelStackView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -16)
-            .isActive = true
+        labelStackView.snp.makeConstraints {
+            $0.top.equalTo(self.snp.top).offset(10)
+            $0.leading.equalTo(self.snp.leading).offset(16)
+            $0.trailing.equalTo(self.snp.trailing).offset(-16)
+            $0.bottom.equalTo(self.snp.bottom).offset(-16)
+        }
     }
 }

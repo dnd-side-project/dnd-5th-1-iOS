@@ -7,19 +7,51 @@
 
 import UIKit
 
-enum MainFont: String {
-    case sampleFont = "HelveticaNeue-Bold"
+enum NotoSans: String {
+    /// Weight 700
+    case bold = "NotoSansCJKkr-Bold"
+    /// Weight 500
+    case medium = "NotoSansCJKkr-Medium"
+    /// Weight 400
+    case regular = "NotoSansCJKkr-Regular"
 }
 
-extension UIColor {
+enum Montserrat: String {
+    /// Weight 700
+    case bold = "Montserrat-Bold"
+    /// Weight 600
+    case medium = "Montserrat-Medium"
+    /// Weight 500
+    case semiBold = "Montserrat-SemiBold"
+}
+
+extension UIFont {
     
-    static func appMainFont(_ font: MainFont) -> UIFont {
+    static func kr(_ font: NotoSans, size: CGFloat) -> UIFont {
         switch font {
-        case .sampleFont:
-            guard let font = UIFont(name: font.rawValue, size: 18) else { return UIFont() }
+        case .bold:
+            guard let font = UIFont(name: font.rawValue, size: size) else { return UIFont() }
             return font
-        @unknown default:
-            return UIFont()
+        case .medium:
+            guard let font = UIFont(name: font.rawValue, size: size) else { return UIFont() }
+            return font
+        case .regular:
+            guard let font = UIFont(name: font.rawValue, size: size) else { return UIFont() }
+            return font
+        }
+    }
+    
+    static func eng(_ font: Montserrat, size: CGFloat) -> UIFont {
+        switch font {
+        case .bold:
+            guard let font = UIFont(name: font.rawValue, size: size) else { return UIFont() }
+            return font
+        case .medium:
+            guard let font = UIFont(name: font.rawValue, size: size) else { return UIFont() }
+            return font
+        case .semiBold:
+            guard let font = UIFont(name: font.rawValue, size: size) else { return UIFont() }
+            return font
         }
     }
 }

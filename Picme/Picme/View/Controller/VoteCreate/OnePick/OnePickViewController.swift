@@ -28,11 +28,15 @@ class OnePickViewController: BaseViewContoller {
     
     let nextButton: UIButton = {
         $0.layer.cornerRadius = 10
+        $0.titleLabel?.font = .kr(.bold, size: 16)
         $0.setTitle("내 원픽은 이거에요!", for: .normal)
         $0.setTitleColor(.textColor(.text50), for: .normal)
         $0.backgroundColor = .solidColor(.solid26)
         return $0
     }(UIButton(type: .system))
+    
+    var selectIndex: Int?
+    var isSelectPick: Bool?
     
     // MARK: - LifeCycle
     
@@ -58,9 +62,29 @@ extension OnePickViewController: UICollectionViewDataSource {
         
         let cell: OnePickCell = collectionView.dequeueCollectionCell(for: indexPath)
         cell.showUserImage(images[indexPath.row])
-        cell.layer.cornerRadius = 10
         
+        if isSelectPick == true {
+            if indexPath.item == selectIndex {
+                cell.pickImage.image = UIImage(named: "onepick")
+                cell.pickLayer.backgroundColor = .opacityColor(.pink80)
+                nextButton.backgroundColor = .mainColor(.pink)
+                nextButton.setTitleColor(.white, for: .normal)
+            } else {
+                cell.pickImage.image = UIImage(named: "notonepick")
+                cell.pickLayer.backgroundColor = .opacityColor(.solid0)
+                
+            }
+        }
+
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        selectIndex = indexPath.row
+        isSelectPick = true
+
+        collectionView.reloadData()
     }
     
 }
@@ -112,35 +136,25 @@ extension OnePickViewController {
     
     override func setConstraints() {
         
-        stepView.translatesAutoresizingMaskIntoConstraints = false
-        stepView.topAnchor.constraint(equalTo: progressBar.bottomAnchor, constant: 14)
-            .isActive = true
-        stepView.leadingAnchor.constraint(equalTo: progressBar.leadingAnchor)
-            .isActive = true
-        stepView.trailingAnchor.constraint(equalTo: progressBar.trailingAnchor)
-            .isActive = true
-        stepView.heightAnchor.constraint(equalToConstant: 72)
-            .isActive = true
-
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.topAnchor.constraint(equalTo: stepView.bottomAnchor, constant: 14)
-            .isActive = true
-        collectionView.leadingAnchor.constraint(equalTo: progressBar.leadingAnchor)
-            .isActive = true
-        collectionView.trailingAnchor.constraint(equalTo: progressBar.trailingAnchor)
-            .isActive = true
-        collectionView.bottomAnchor.constraint(equalTo: nextButton.topAnchor, constant: -20)
-            .isActive = true
+        stepView.snp.makeConstraints {
+            $0.top.equalTo(progressBar.snp.bottom).offset(14)
+            $0.leading.equalTo(progressBar.snp.leading)
+            $0.trailing.equalTo(progressBar.snp.trailing)
+            $0.height.equalTo(72)
+        }
         
-        nextButton.translatesAutoresizingMaskIntoConstraints = false
-        nextButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -28)
-            .isActive = true
-        nextButton.leadingAnchor.constraint(equalTo: progressBar.leadingAnchor)
-            .isActive = true
-        nextButton.trailingAnchor.constraint(equalTo: progressBar.trailingAnchor)
-            .isActive = true
-        nextButton.heightAnchor.constraint(equalToConstant: 52)
-            .isActive = true
+        collectionView.snp.makeConstraints {
+            $0.top.equalTo(stepView.snp.bottom).offset(14)
+            $0.leading.equalTo(progressBar.snp.leading)
+            $0.trailing.equalTo(progressBar.snp.trailing)
+            $0.bottom.equalTo(nextButton.snp.top).offset(-20)
+        }
         
+        nextButton.snp.makeConstraints {
+            $0.bottom.equalTo(view.snp.bottom).offset(-20)
+            $0.leading.equalTo(progressBar.snp.leading)
+            $0.trailing.equalTo(progressBar.snp.trailing)
+            $0.height.equalTo(52)
+        }
     }
 }
