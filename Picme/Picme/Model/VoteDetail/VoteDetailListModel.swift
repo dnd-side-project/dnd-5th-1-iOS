@@ -10,7 +10,7 @@ import Foundation
 struct VoteDetailListModel: Codable {
     var detailList: [VoteDetailModel]?
     
-    init(detailList: [VoteDetailModel]){
+    init(detailList: [VoteDetailModel]) {
         self.detailList = detailList
     }
     
