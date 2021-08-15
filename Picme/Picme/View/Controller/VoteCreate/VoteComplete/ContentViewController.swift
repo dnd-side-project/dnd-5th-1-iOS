@@ -11,7 +11,8 @@ import SnapKit
 class ContentViewController: BaseViewContoller {
 
     // MARK: - Properties
-    @IBOutlet weak var progressBar: UIProgressView!
+    
+    var contentViewModel: ContentViewModel? = ContentViewModel()
     let stepView = StepView(stepText: "STEP 3", title: "마지막으로 제목과 마감시간을 설정해 주세요!")
     
     var textCount: Int = 0 {
@@ -24,6 +25,8 @@ class ContentViewController: BaseViewContoller {
             }
         }
     }
+    
+    @IBOutlet weak var progressBar: UIProgressView!
     
     // 투표 제목적는 곳
     @IBOutlet weak var voteTitle: UILabel!
@@ -39,36 +42,21 @@ class ContentViewController: BaseViewContoller {
     
     @IBOutlet weak var registVoteButton: UIButton!
     
-    lazy var datePicker: UIDatePicker = {
-        $0.locale = Locale(identifier: "en_kr")
-        $0.datePickerMode = .dateAndTime
-        $0.backgroundColor = .white
-        
-        if #available(iOS 13.4, *) {
-            $0.preferredDatePickerStyle = .wheels
-        } else {
-            // Fallback on earlier versions
-        }
+    let pickerView: UIPickerView = {
         return $0
-    }(UIDatePicker())
+    }(UIPickerView())
+    
     // MARK: - LifeCycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        voteEndDateTextfield.inputView = datePicker
-        datePicker.addTarget(self, action: #selector(dateChanged(_:)), for: .valueChanged)
-//        datePickerToolBar()
+        pickerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 200)
+        voteEndDateTextfield.inputView = pickerView
+        datePickerToolBar()
         voteTextView.delegate = self
-    }
-    
-    @objc func dateChanged(_ sender: UIDatePicker) {
-        let dateformatter = DateFormatter()
-        dateformatter.locale = Locale(identifier: "ko_KR")
-        dateformatter.dateFormat = "yy/MM/dd hh:mm"
+        pickerView.delegate = self
         
-        let selectDate: String = dateformatter.string(from: sender.date)
-        voteEndDateTextfield.text = selectDate
     }
 
     @IBAction func registVote(_ sender: UIButton) {
@@ -76,20 +64,21 @@ class ContentViewController: BaseViewContoller {
     }
     
     func datePickerToolBar() {
-        let toolbar = UIToolbar()
-        toolbar.barStyle = .default
-        toolbar.isTranslucent = true
-        toolbar.tintColor = .white
-        toolbar.sizeToFit()
+        let toolBar = UIToolbar()
+        toolBar.barStyle = UIBarStyle.default
+        toolBar.isTranslucent = true
+        toolBar.tintColor = .white
+        toolBar.sizeToFit()
         
-        let done = UIBarButtonItem(title: "완료", style: .done, target: self, action: #selector(toolBarDoneButton(_:)))
-        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let cancel = UIBarButtonItem(title: "취소", style: .plain, target: self, action: #selector(toolBarCancelButton(_:)))
+        let doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItem.Style.done, target: self, action: #selector(toolBarDoneButton(_:)))
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
+        let cancelButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItem.Style.plain, target: self, action: #selector(toolBarCancelButton(_:)))
+
+        toolBar.setItems([cancelButton, spaceButton, doneButton], animated: false)
+        toolBar.isUserInteractionEnabled = true
         
-        toolbar.setItems([cancel, flexibleSpace, done], animated: true)
-        toolbar.isUserInteractionEnabled = true
+        voteEndDateTextfield.inputAccessoryView = toolBar
         
-        voteEndDateTextfield.inputAccessoryView = toolbar
     }
     
     @objc func toolBarDoneButton(_ sender: UIButton) {
@@ -101,17 +90,68 @@ class ContentViewController: BaseViewContoller {
         voteEndDateTextfield.text = nil
         voteEndDateTextfield.resignFirstResponder()
     }
+    
+    func isRegistButtonState(state: Bool) {
+        
+        if state {
+            self.registVoteButton.backgroundColor = .mainColor(.pink)
+            self.registVoteButton.setTitleColor(.textColor(.text100), for: .normal)
+            self.registVoteButton.isEnabled = true
+        } else {
+            self.registVoteButton.backgroundColor = .solidColor(.solid26)
+            self.registVoteButton.setTitleColor(.textColor(.text50), for: .normal)
+            self.registVoteButton.isEnabled = false
+        }
+    }
 }
+
+// MARK: - TextViewDelegate
 
 extension ContentViewController: UITextViewDelegate {
     
     func textViewDidChange(_ textView: UITextView) {
+        
+        if textView.text != "" {
+            contentViewModel?.hasTitleText.value = true
+        } else {
+            contentViewModel?.hasTitleText.value = false
+        }
         
         if textView.text.count >= 46 {
             textView.text.removeLast()
         }
         
         textCount = textView.text.count
+        contentViewModel?.completeCheck()
+    }
+}
+
+// MARK: - PickerViewDelegate
+
+extension ContentViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return ExpirationDate.allCases.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return ExpirationDate.allCases[row].rawValue
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        
+        guard let contentVM = contentViewModel else { return }
+        
+        voteEndDateTextfield.text = contentVM.stringConvertDate(ExpirationDate.allCases[row])
+        
+        if voteEndDateTextfield.text != "" {
+            contentViewModel?.hasVoteEndDate.value = true
+        }
+        contentViewModel?.completeCheck()
     }
 }
 
@@ -119,6 +159,13 @@ extension ContentViewController: UITextViewDelegate {
 
 extension ContentViewController {
 
+    override func setBind() {
+        
+        contentViewModel?.isCompleteState.bindAndFire(listener: { [weak self] state in
+            self?.isRegistButtonState(state: state)
+        })
+    }
+    
     override func setProperties() {
         
         stepView.clipsToBounds = true
@@ -134,7 +181,7 @@ extension ContentViewController {
         voteEndDateTextLabel.textColor = .mainColor(.pink)
         voteEndDateTextfield.backgroundColor = .solidColor(.solid12)
         voteEndDateTextfield.textAlignment = .center
-        voteEndDateTextfield.text = "21/07/15 00:00"
+        voteEndDateTextfield.text = contentViewModel?.addDate(0)
         voteEndDateTextfield.textColor = .white
         
         registVoteButton.backgroundColor = .solidColor(.solid26)
@@ -148,6 +195,20 @@ extension ContentViewController {
         view.addSubview(stepView)
         view.backgroundColor = .solidColor(.solid0)
         
+        //navigation
+        navigationController?.navigationBar.tintColor = .white
+        navigationItem.title = "제목/마감시간 설정"
+        navigationItem.hidesBackButton = true
+        
+        let customBackButton = UIBarButtonItem(image: UIImage(named: "navigationBackBtn"),
+                                               style: .done,
+                                               target: self,
+                                               action: #selector(backAction(_:)))
+        navigationItem.leftBarButtonItem = customBackButton
+    }
+    
+    @objc func backAction(_ sender: UIBarButtonItem) {
+        self.navigationController?.popViewController(animated: true)
     }
     
     override func setConstraints() {
