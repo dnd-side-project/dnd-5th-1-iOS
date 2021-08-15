@@ -50,7 +50,7 @@ class UploadImageViewContoller: BaseViewContoller {
         config.maxCameraZoomFactor = 5.0
         config.overlayView = nil
         config.gallery.hidesRemoveButton = false
-//        config.library.minNumberOfItems = 1
+        config.library.minNumberOfItems = 2
         config.library.maxNumberOfItems = 6
         config.library.preselectedItems = selectedItems
         config.library.mediaType = .photo
@@ -134,7 +134,7 @@ extension UploadImageViewContoller {
 
             navBar.topItem?.title = "사진 업로드"
             navBar.titleTextAttributes = [.foregroundColor: UIColor.textColor(.text100)]
-            let backButton = UIBarButtonItem(image: UIImage(named: "navigationBackBtn"),
+            let backButton = UIBarButtonItem(image: UIImage(named: "x28"),
                                              style: .done,
                                              target: self,
                                              action: #selector(navBackAction(_:)))
