@@ -73,13 +73,18 @@ class UploadImageViewContoller: BaseViewContoller {
                     return
                 }
             }
-            picker.dismiss(animated: true) { [weak self] in
-                guard let self = self else { return }
-                
-                guard let onePickVC = self.storyboard?.instantiateViewController(withIdentifier: "OnePickViewController") as? OnePickViewController else { return }
-                onePickVC.userImages = self.userImages
-                onePickVC.imageDelegate = self
-                self.navigationController?.pushViewController(onePickVC, animated: true)
+            
+            if cancelled {
+                self.dismiss(animated: true, completion: nil)
+            } else {
+                picker.dismiss(animated: true) { [weak self] in
+                    guard let self = self else { return }
+                    
+                    guard let onePickVC = self.storyboard?.instantiateViewController(withIdentifier: "OnePickViewController") as? OnePickViewController else { return }
+                    onePickVC.userImages = self.userImages
+                    onePickVC.imageDelegate = self
+                    self.navigationController?.pushViewController(onePickVC, animated: true)
+                }
             }
         }
         
