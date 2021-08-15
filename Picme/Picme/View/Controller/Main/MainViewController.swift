@@ -56,10 +56,12 @@ class MainViewController: BaseViewContoller, TouchDelegate {
         // tab bar item - title 설정
         if let downcastStrings = self.tabBarController?.tabBar.items {
             downcastStrings[1].title = "투표만들기"
+            downcastStrings[2].title = "마이페이지"
         }
         
         // tab bar item - image 설정
         self.tabBarController?.tabBar.items![1].image = #imageLiteral(resourceName: "tabBarVote")
+        self.tabBarController?.tabBar.items![2].image = #imageLiteral(resourceName: "mypageWhite")
     }
     
     // MARK: - Bind View Model

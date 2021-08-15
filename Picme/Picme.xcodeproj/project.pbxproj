@@ -54,6 +54,8 @@
 		A9DF3F8726C6684200DB81DB /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A9DF3F8426C6684200DB81DB /* Montserrat-Bold.ttf */; };
 		A9E6DD6D26C89064006155F3 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E6DD6C26C89064006155F3 /* ContentViewModel.swift */; };
 		A9E6DD7026C8AABA006155F3 /* OnePickViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E6DD6F26C8AABA006155F3 /* OnePickViewModel.swift */; };
+		A9E6DD7326C8E8D7006155F3 /* MyPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9E6DD7226C8E8D7006155F3 /* MyPage.storyboard */; };
+		A9E6DD7626C8E8F4006155F3 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E6DD7526C8E8F4006155F3 /* MyPageViewController.swift */; };
 		A9E72E2C26C527D3003C98A0 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = A9E72E2B26C527D3003C98A0 /* SnapKit */; };
 		A9E72E2F26C52F62003C98A0 /* YPImagePicker in Frameworks */ = {isa = PBXBuildFile; productRef = A9E72E2E26C52F62003C98A0 /* YPImagePicker */; };
 		D1103F6226C46AE4002D1E78 /* Enum+NetworkResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1103F6126C46AE4002D1E78 /* Enum+NetworkResult.swift */; };
@@ -158,6 +160,8 @@
 		A9DF3F8426C6684200DB81DB /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Bold.ttf"; sourceTree = "<group>"; };
 		A9E6DD6C26C89064006155F3 /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
 		A9E6DD6F26C8AABA006155F3 /* OnePickViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnePickViewModel.swift; sourceTree = "<group>"; };
+		A9E6DD7226C8E8D7006155F3 /* MyPage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MyPage.storyboard; sourceTree = "<group>"; };
+		A9E6DD7526C8E8F4006155F3 /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		BB74E774F2085618C97D3804 /* Pods_Picme.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Picme.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCA73C122FAB6E7E7E132CEB /* Pods-Picme-PicmeUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Picme-PicmeUITests.release.xcconfig"; path = "Target Support Files/Pods-Picme-PicmeUITests/Pods-Picme-PicmeUITests.release.xcconfig"; sourceTree = "<group>"; };
 		CE1E7EEC4130AD59C5A0B524 /* Pods-Picme.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Picme.release.xcconfig"; path = "Target Support Files/Pods-Picme/Pods-Picme.release.xcconfig"; sourceTree = "<group>"; };
@@ -394,6 +398,7 @@
 		A9C12B74269AB6C500729A74 /* Storyboard */ = {
 			isa = PBXGroup;
 			children = (
+				A9E6DD7126C8E8C4006155F3 /* MyPage */,
 				A975287B26B69E91003EE1A9 /* Onboarding */,
 				D1449D9226A845270083418D /* Main */,
 				A91A907226BD509E00C43D43 /* VoteCreate */,
@@ -405,6 +410,7 @@
 		A9C12B75269AB6CD00729A74 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				A9E6DD7426C8E8E5006155F3 /* MyPage */,
 				D1F173E526C8664F0069C42E /* Alert */,
 				A9C12B90269C1A4C00729A74 /* Login */,
 				A975287E26B69F05003EE1A9 /* Onboarding */,
@@ -565,6 +571,22 @@
 				A9E6DD6F26C8AABA006155F3 /* OnePickViewModel.swift */,
 			);
 			path = STEP2;
+			sourceTree = "<group>";
+		};
+		A9E6DD7126C8E8C4006155F3 /* MyPage */ = {
+			isa = PBXGroup;
+			children = (
+				A9E6DD7226C8E8D7006155F3 /* MyPage.storyboard */,
+			);
+			path = MyPage;
+			sourceTree = "<group>";
+		};
+		A9E6DD7426C8E8E5006155F3 /* MyPage */ = {
+			isa = PBXGroup;
+			children = (
+				A9E6DD7526C8E8F4006155F3 /* MyPageViewController.swift */,
+			);
+			path = MyPage;
 			sourceTree = "<group>";
 		};
 		B479A2B92118C2749B552FBB /* Pods */ = {
@@ -805,6 +827,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A9C12B96269C315E00729A74 /* .swiftlint.yml in Resources */,
+				A9E6DD7326C8E8D7006155F3 /* MyPage.storyboard in Resources */,
 				A91A907526BD516400C43D43 /* UploadImage.storyboard in Resources */,
 				D1449D9426A845370083418D /* Main.storyboard in Resources */,
 				A9C12B92269C1A7A00729A74 /* Login.storyboard in Resources */,
@@ -1033,6 +1056,7 @@
 				D180457326B3EAB90053430E /* MainModel.swift in Sources */,
 				A9E6DD6D26C89064006155F3 /* ContentViewModel.swift in Sources */,
 				D1F173F926C86A0A0069C42E /* Extension+UIView.swift in Sources */,
+				A9E6DD7626C8E8F4006155F3 /* MyPageViewController.swift in Sources */,
 				A9C12B82269AB94B00729A74 /* Extension+UIFont.swift in Sources */,
 				A9C12B89269C14FF00729A74 /* Protocol+ResuableCell.swift in Sources */,
 				A9C12B8B269C158900729A74 /* Extension+UITableView.swift in Sources */,
