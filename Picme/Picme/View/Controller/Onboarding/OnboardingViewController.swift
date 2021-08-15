@@ -115,8 +115,8 @@ extension UITextField {
 extension String {
     func hasValidCharacter() -> Bool {
         do {
-//            let regex = try NSRegularExpression(pattern: "^[A-Z0-9가-힣ㄱ-ㅎㅏ-ㅣ\\s]$",
-            let regex = try NSRegularExpression(pattern: "^[a-z]*$",
+            let regex = try NSRegularExpression(pattern: "^[A-Z0-9가-힣ㄱ-ㅎㅏ-ㅣ\\s]$",
+//            let regex = try NSRegularExpression(pattern: "^[a-z]*$",
                                                 options: .caseInsensitive)
             if let _ = regex.firstMatch(in: self,
                                         options: .reportCompletion,

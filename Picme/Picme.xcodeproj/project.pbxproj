@@ -52,6 +52,8 @@
 		A9DF3F8526C6684200DB81DB /* Montserrat-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A9DF3F8226C6684200DB81DB /* Montserrat-Medium.ttf */; };
 		A9DF3F8626C6684200DB81DB /* Montserrat-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A9DF3F8326C6684200DB81DB /* Montserrat-SemiBold.ttf */; };
 		A9DF3F8726C6684200DB81DB /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A9DF3F8426C6684200DB81DB /* Montserrat-Bold.ttf */; };
+		A9E6DD6D26C89064006155F3 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E6DD6C26C89064006155F3 /* ContentViewModel.swift */; };
+		A9E6DD7026C8AABA006155F3 /* OnePickViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E6DD6F26C8AABA006155F3 /* OnePickViewModel.swift */; };
 		A9E72E2C26C527D3003C98A0 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = A9E72E2B26C527D3003C98A0 /* SnapKit */; };
 		A9E72E2F26C52F62003C98A0 /* YPImagePicker in Frameworks */ = {isa = PBXBuildFile; productRef = A9E72E2E26C52F62003C98A0 /* YPImagePicker */; };
 		D1103F6226C46AE4002D1E78 /* Enum+NetworkResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1103F6126C46AE4002D1E78 /* Enum+NetworkResult.swift */; };
@@ -154,6 +156,8 @@
 		A9DF3F8226C6684200DB81DB /* Montserrat-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Medium.ttf"; sourceTree = "<group>"; };
 		A9DF3F8326C6684200DB81DB /* Montserrat-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-SemiBold.ttf"; sourceTree = "<group>"; };
 		A9DF3F8426C6684200DB81DB /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Bold.ttf"; sourceTree = "<group>"; };
+		A9E6DD6C26C89064006155F3 /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
+		A9E6DD6F26C8AABA006155F3 /* OnePickViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnePickViewModel.swift; sourceTree = "<group>"; };
 		BB74E774F2085618C97D3804 /* Pods_Picme.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Picme.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCA73C122FAB6E7E7E132CEB /* Pods-Picme-PicmeUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Picme-PicmeUITests.release.xcconfig"; path = "Target Support Files/Pods-Picme-PicmeUITests/Pods-Picme-PicmeUITests.release.xcconfig"; sourceTree = "<group>"; };
 		CE1E7EEC4130AD59C5A0B524 /* Pods-Picme.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Picme.release.xcconfig"; path = "Target Support Files/Pods-Picme/Pods-Picme.release.xcconfig"; sourceTree = "<group>"; };
@@ -261,12 +265,12 @@
 			path = Onboarding;
 			sourceTree = "<group>";
 		};
-		A9322EEC26C090E70061EF35 /* Upload */ = {
+		A9322EEC26C090E70061EF35 /* STEP1 */ = {
 			isa = PBXGroup;
 			children = (
 				A9322EED26C0910C0061EF35 /* UploadImageViewModel.swift */,
 			);
-			path = Upload;
+			path = STEP1;
 			sourceTree = "<group>";
 		};
 		A9322EF526C0C35A0061EF35 /* OnePick */ = {
@@ -321,6 +325,7 @@
 		A98C691226AC23D500AD9191 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				A9E6DD6A26C88D85006155F3 /* VoteCreate */,
 				A91F57D526B7B632006F20AD /* Onboarding */,
 				A975287926B69E5B003EE1A9 /* Login */,
 				D1B51C9926BEAB1100928FF3 /* Main */,
@@ -536,6 +541,32 @@
 			path = Font;
 			sourceTree = "<group>";
 		};
+		A9E6DD6A26C88D85006155F3 /* VoteCreate */ = {
+			isa = PBXGroup;
+			children = (
+				A9E6DD6B26C89045006155F3 /* STEP3 */,
+				A9E6DD6E26C8AAA9006155F3 /* STEP2 */,
+				A9322EEC26C090E70061EF35 /* STEP1 */,
+			);
+			path = VoteCreate;
+			sourceTree = "<group>";
+		};
+		A9E6DD6B26C89045006155F3 /* STEP3 */ = {
+			isa = PBXGroup;
+			children = (
+				A9E6DD6C26C89064006155F3 /* ContentViewModel.swift */,
+			);
+			path = STEP3;
+			sourceTree = "<group>";
+		};
+		A9E6DD6E26C8AAA9006155F3 /* STEP2 */ = {
+			isa = PBXGroup;
+			children = (
+				A9E6DD6F26C8AABA006155F3 /* OnePickViewModel.swift */,
+			);
+			path = STEP2;
+			sourceTree = "<group>";
+		};
 		B479A2B92118C2749B552FBB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -588,7 +619,6 @@
 		D1B51C9926BEAB1100928FF3 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				A9322EEC26C090E70061EF35 /* Upload */,
 				D180457526B3F03B0053430E /* MainViewModel.swift */,
 			);
 			path = Main;
@@ -1001,6 +1031,7 @@
 				A96C9E8926AC2451001F279B /* LoginViewModel.swift in Sources */,
 				D1B51E2726C3090400928FF3 /* MainListModel.swift in Sources */,
 				D180457326B3EAB90053430E /* MainModel.swift in Sources */,
+				A9E6DD6D26C89064006155F3 /* ContentViewModel.swift in Sources */,
 				D1F173F926C86A0A0069C42E /* Extension+UIView.swift in Sources */,
 				A9C12B82269AB94B00729A74 /* Extension+UIFont.swift in Sources */,
 				A9C12B89269C14FF00729A74 /* Protocol+ResuableCell.swift in Sources */,
@@ -1016,6 +1047,7 @@
 				A95CD354269EB2BF002CCCA8 /* Enum+APIError.swift in Sources */,
 				D11C2DC126B82AA100C8EE51 /* VoteDetailTableViewController.swift in Sources */,
 				A95CD356269EB5B7002CCCA8 /* Enum+HTTPMethod.swift in Sources */,
+				A9E6DD7026C8AABA006155F3 /* OnePickViewModel.swift in Sources */,
 				D180457626B3F03B0053430E /* MainViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

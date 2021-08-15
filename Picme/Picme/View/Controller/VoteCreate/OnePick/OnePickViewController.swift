@@ -38,6 +38,8 @@ class OnePickViewController: BaseViewContoller {
     var selectIndex: Int?
     var isSelectPick: Bool?
     
+    weak var imageDelegate: ImageDelete?
+    
     // MARK: - LifeCycle
     
     override func viewDidLoad() {
@@ -132,6 +134,24 @@ extension OnePickViewController {
         stepView.clipsToBounds = true
         stepView.backgroundColor = .solidColor(.solid12)
         stepView.layer.cornerRadius = 10
+        
+        // Navigation
+        navigationController?.navigationBar.tintColor = .white
+        navigationItem.title = "원픽 선택"
+        navigationItem.hidesBackButton = true
+        
+        let customBackButton = UIBarButtonItem(image: UIImage(named: "navigationBackBtn"),
+                                               style: .done,
+                                               target: self,
+                                               action: #selector(backAction(_:)))
+        navigationItem.leftBarButtonItem = customBackButton
+    }
+    
+    @objc func backAction(_ sender: UIBarButtonItem) {
+        customAlert(.inputDataCancel) {
+            self.imageDelegate?.removeALLImage()
+            self.navigationController?.popViewController(animated: true)
+        }
     }
     
     override func setConstraints() {
