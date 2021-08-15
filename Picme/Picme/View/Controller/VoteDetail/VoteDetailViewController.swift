@@ -39,6 +39,11 @@ class VoteDetailViewController: BaseViewContoller {
     @IBOutlet weak var colorButton: UIButton!
     @IBOutlet weak var skipButton: UIButton!
     
+    @IBAction func pageChanged(_ sender: UIPageControl) {
+        let indexPath = IndexPath(item: sender.currentPage, section: 0)
+              detailCollectionview.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+    }
+    
     // MARK: - Properties
     
     var currentImageId: Int?
@@ -79,7 +84,7 @@ class VoteDetailViewController: BaseViewContoller {
         }
         
         // viewModel.fetchVoteDetail(postId: postId)
-
+        
     }
     
 }
@@ -237,5 +242,11 @@ extension VoteDetailViewController {
         }
         
     }
+    
+}
+
+// MARK: - Collection View Delegate
+
+extension VoteDetailViewController: UIScrollViewDelegate, UICollectionViewDelegateFlowLayout {
     
 }
