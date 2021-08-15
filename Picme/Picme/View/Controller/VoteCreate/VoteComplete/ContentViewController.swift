@@ -195,6 +195,18 @@ extension ContentViewController {
         view.addSubview(stepView)
         view.backgroundColor = .solidColor(.solid0)
         
+        navigationItem.title = "제목/마감시간 설정"
+        navigationItem.hidesBackButton = true
+        
+        let customBackButton = UIBarButtonItem(image: UIImage(named: "navigationBackBtn"),
+                                               style: .done,
+                                               target: self,
+                                               action: #selector(backAction(_:)))
+        navigationItem.leftBarButtonItem = customBackButton
+    }
+    
+    @objc func backAction(_ sender: UIBarButtonItem) {
+        self.navigationController?.popViewController(animated: true)
     }
     
     override func setConstraints() {

@@ -135,7 +135,10 @@ extension OnePickViewController {
         stepView.backgroundColor = .solidColor(.solid12)
         stepView.layer.cornerRadius = 10
         
+        // NavigationBar
+        navigationItem.title = "원픽 선택"
         navigationItem.hidesBackButton = true
+        
         let customBackButton = UIBarButtonItem(image: UIImage(named: "navigationBackBtn"),
                                                style: .done,
                                                target: self,

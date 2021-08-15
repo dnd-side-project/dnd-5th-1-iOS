@@ -106,6 +106,7 @@
                             <constraint firstItem="epV-cx-LQS" firstAttribute="top" secondItem="DAp-f1-QvA" secondAttribute="top" id="RnD-6m-OkG"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="liT-vt-bPH"/>
                     <connections>
                         <outlet property="progressBar" destination="epV-cx-LQS" id="A6y-lf-EcQ"/>
                     </connections>
