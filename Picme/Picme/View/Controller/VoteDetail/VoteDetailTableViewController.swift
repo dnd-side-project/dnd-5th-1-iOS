@@ -28,7 +28,7 @@ class VoteDetailTableViewController: BaseViewContoller {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        viewModel = VoteDetailViewModel(dataSource: dataSource)
+        viewModel = VoteDetailViewModel(service: VoteDetailService(), dataSource: dataSource)
         
         bindViewModel()
     }
@@ -41,7 +41,7 @@ class VoteDetailTableViewController: BaseViewContoller {
             // self?.showTableView()
         }
         
-        viewModel.fetchVoteDetail(postId: "1")
+        // viewModel.fetchVoteDetail(postId: 1)
     }
     
     func showTableView() {

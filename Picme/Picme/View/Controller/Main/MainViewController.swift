@@ -119,7 +119,7 @@ class MainViewController: BaseViewContoller, TouchDelegate {
         
         guard let voteDetailVC = self.storyboard?.instantiateViewController(withIdentifier: "VoteDetailViewController") as? VoteDetailViewController else { return }
         voteDetailVC.postId = 1
-        voteDetailVC.userNickname = ""
+        voteDetailVC.userNickname = "minha"
         voteDetailVC.userProfileimageUrl = ""
         self.navigationController?.pushViewController(voteDetailVC, animated: true)
  
@@ -151,13 +151,13 @@ class MainViewController: BaseViewContoller, TouchDelegate {
             
             cell.setCollectionViewDataSourceDelegate(forRow: indexPath.row)
             cell.cellDelegate = self
-            // cell.updateCell(model: data.value[indexPath.row])
+//            cell.updateCell(model: data.value[indexPath.row])
             
             // 서버 통신 전 예시 코드
             cell.mainNicknameLabel.text = "오늘도 개미는 뚠뚠"
             cell.mainParticipantsLabel.text = "99명 참가중"
             cell.mainTitleLabel.text = "사진 잘 나온거 하나만 골라주세요!!"
-            cell.mainProfileImageView.image = #imageLiteral(resourceName: "defalutImage")
+            cell.mainProfileImageView.image = #imageLiteral(resourceName: "profilePink")
             cell.mainDeadlineLabel.text = "00:00:00"
             
             return cell
