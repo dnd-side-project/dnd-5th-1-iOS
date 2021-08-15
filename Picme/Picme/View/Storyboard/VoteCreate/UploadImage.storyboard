@@ -215,7 +215,7 @@
         <!--Navigation Controller-->
         <scene sceneID="fIb-sM-vNi">
             <objects>
-                <navigationController storyboardIdentifier="UploadImageViewContoller" automaticallyAdjustsScrollViewInsets="NO" id="u28-bI-9p6" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="UploadImageViewController" automaticallyAdjustsScrollViewInsets="NO" id="u28-bI-9p6" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="iFJ-iO-blF">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>

@@ -9,6 +9,9 @@ import UIKit
 import SnapKit
 import YPImagePicker
 
+protocol ImageDelete: AnyObject {
+    func removeALLImage()
+}
 
 class UploadImageViewContoller: BaseViewContoller {
     
@@ -27,6 +30,7 @@ class UploadImageViewContoller: BaseViewContoller {
     var userImages = [UIImage]()
     
     // MARK: - LifeCycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -74,6 +78,7 @@ class UploadImageViewContoller: BaseViewContoller {
                 
                 guard let onePickVC = self.storyboard?.instantiateViewController(withIdentifier: "OnePickViewController") as? OnePickViewController else { return }
                 onePickVC.userImages = self.userImages
+                onePickVC.imageDelegate = self
                 self.navigationController?.pushViewController(onePickVC, animated: true)
             }
         }
@@ -83,6 +88,13 @@ class UploadImageViewContoller: BaseViewContoller {
     
     @objc func navBackAction(_ sender: UIBarButtonItem) {
         self.dismiss(animated: true, completion: nil)
+    }
+}
+
+extension UploadImageViewContoller: ImageDelete {
+    
+    func removeALLImage() {
+        self.userImages.removeAll()
     }
 }
 
