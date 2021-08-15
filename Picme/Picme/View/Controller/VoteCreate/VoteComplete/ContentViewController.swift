@@ -14,7 +14,6 @@ class ContentViewController: BaseViewContoller {
     
     var contentViewModel: ContentViewModel? = ContentViewModel()
     let stepView = StepView(stepText: "STEP 3", title: "마지막으로 제목과 마감시간을 설정해 주세요!")
-    let expirationDate: [String] = ["1시간", "2시간", "6시간"]
     
     var textCount: Int = 0 {
         didSet {
@@ -136,15 +135,18 @@ extension ContentViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return expirationDate.count
+        return ExpirationDate.allCases.count
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return expirationDate[row]
+        return ExpirationDate.allCases[row].rawValue
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        voteEndDateTextfield.text = expirationDate[row]
+        
+        guard let contentVM = contentViewModel else { return }
+        
+        voteEndDateTextfield.text = contentVM.stringConvertDate(ExpirationDate.allCases[row])
         
         if voteEndDateTextfield.text != "" {
             contentViewModel?.hasVoteEndDate.value = true
@@ -179,7 +181,7 @@ extension ContentViewController {
         voteEndDateTextLabel.textColor = .mainColor(.pink)
         voteEndDateTextfield.backgroundColor = .solidColor(.solid12)
         voteEndDateTextfield.textAlignment = .center
-        voteEndDateTextfield.text = "21/07/15 00:00"
+        voteEndDateTextfield.text = contentViewModel?.addDate(0)
         voteEndDateTextfield.textColor = .white
         
         registVoteButton.backgroundColor = .solidColor(.solid26)
