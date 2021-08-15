@@ -125,43 +125,44 @@ class MainViewController: BaseViewContoller, TouchDelegate {
  
     }
     
-    // MARK: - Table View Data Source / Collection View Cell Delegate
+}
+
+// MARK: - Table View Data Source / Collection View Cell Delegate
+
+class MainListDatasource: GenericDataSource<MainModel>, UITableViewDataSource, CollectionViewCellDelegate {
     
-    class MainListDatasource: GenericDataSource<MainModel>, UITableViewDataSource, CollectionViewCellDelegate {
-        
-        // MARK: - CollectionV View Cell Delegate
-        
-        weak var delegate: TouchDelegate?
-        
-        // Collection View Cell 클릭시 실행할 함수
-        func selectedCVCell(_ index: Int) {
-            delegate?.pushVoteDetailView(index: index)
-        }
-        
-        // MARK: - Table View Data Source
-        
-        func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            // return data.value.count
-            
-            return 5
-        }
-        
-        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            let cell: MainTableViewCell = tableView.dequeueTableCell(for: indexPath)
-            
-            cell.setCollectionViewDataSourceDelegate(forRow: indexPath.row)
-            cell.cellDelegate = self
-//            cell.updateCell(model: data.value[indexPath.row])
-            
-            // 서버 통신 전 예시 코드
-            cell.mainNicknameLabel.text = "오늘도 개미는 뚠뚠"
-            cell.mainParticipantsLabel.text = "99명 참가중"
-            cell.mainTitleLabel.text = "사진 잘 나온거 하나만 골라주세요!!"
-            cell.mainProfileImageView.image = #imageLiteral(resourceName: "profilePink")
-            cell.mainDeadlineLabel.text = "00:00:00"
-            
-            return cell
-        }
-        
+    // MARK: - CollectionV View Cell Delegate
+    
+    weak var delegate: TouchDelegate?
+    
+    // Collection View Cell 클릭시 실행할 함수
+    func selectedCVCell(_ index: Int) {
+        delegate?.pushVoteDetailView(index: index)
     }
+    
+    // MARK: - Table View Data Source
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // return data.value.count
+        
+        return 5
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell: MainTableViewCell = tableView.dequeueTableCell(for: indexPath)
+        
+        cell.setCollectionViewDataSourceDelegate(forRow: indexPath.row)
+        cell.cellDelegate = self
+//            cell.updateCell(model: data.value[indexPath.row])
+        
+        // 서버 통신 전 예시 코드
+        cell.mainNicknameLabel.text = "오늘도 개미는 뚠뚠"
+        cell.mainParticipantsLabel.text = "99명 참가중"
+        cell.mainTitleLabel.text = "사진 잘 나온거 하나만 골라주세요!!"
+        cell.mainProfileImageView.image = #imageLiteral(resourceName: "profilePink")
+        cell.mainDeadlineLabel.text = "00:00:00"
+        
+        return cell
+    }
+    
 }
