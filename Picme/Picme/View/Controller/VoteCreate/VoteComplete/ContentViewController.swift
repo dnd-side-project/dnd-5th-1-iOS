@@ -11,8 +11,10 @@ import SnapKit
 class ContentViewController: BaseViewContoller {
 
     // MARK: - Properties
-    @IBOutlet weak var progressBar: UIProgressView!
+    
+    var contentViewModel: ContentViewModel? = ContentViewModel()
     let stepView = StepView(stepText: "STEP 3", title: "마지막으로 제목과 마감시간을 설정해 주세요!")
+    let expirationDate: [String] = ["1시간", "2시간", "6시간"]
     
     var textCount: Int = 0 {
         didSet {
@@ -24,7 +26,8 @@ class ContentViewController: BaseViewContoller {
             }
         }
     }
-    let expirationDate: [String] = ["1시간", "2시간" ,"6시간"]
+    
+    @IBOutlet weak var progressBar: UIProgressView!
     
     // 투표 제목적는 곳
     @IBOutlet weak var voteTitle: UILabel!
@@ -72,7 +75,7 @@ class ContentViewController: BaseViewContoller {
         let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
         let cancelButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItem.Style.plain, target: self, action: #selector(toolBarCancelButton(_:)))
 
-        toolBar.setItems([cancelButton,spaceButton, spaceButton, spaceButton, doneButton], animated: false)
+        toolBar.setItems([cancelButton, spaceButton, doneButton], animated: false)
         toolBar.isUserInteractionEnabled = true
         
         voteEndDateTextfield.inputAccessoryView = toolBar
@@ -88,6 +91,19 @@ class ContentViewController: BaseViewContoller {
         voteEndDateTextfield.text = nil
         voteEndDateTextfield.resignFirstResponder()
     }
+    
+    func isRegistButtonState(state: Bool) {
+        
+        if state {
+            self.registVoteButton.backgroundColor = .mainColor(.pink)
+            self.registVoteButton.setTitleColor(.textColor(.text100), for: .normal)
+            self.registVoteButton.isEnabled = true
+        } else {
+            self.registVoteButton.backgroundColor = .solidColor(.solid26)
+            self.registVoteButton.setTitleColor(.textColor(.text50), for: .normal)
+            self.registVoteButton.isEnabled = false
+        }
+    }
 }
 
 // MARK: - TextViewDelegate
@@ -96,11 +112,18 @@ extension ContentViewController: UITextViewDelegate {
     
     func textViewDidChange(_ textView: UITextView) {
         
+        if textView.text != "" {
+            contentViewModel?.hasTitleText.value = true
+        } else {
+            contentViewModel?.hasTitleText.value = false
+        }
+        
         if textView.text.count >= 46 {
             textView.text.removeLast()
         }
         
         textCount = textView.text.count
+        contentViewModel?.completeCheck()
     }
 }
 
@@ -122,6 +145,11 @@ extension ContentViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         voteEndDateTextfield.text = expirationDate[row]
+        
+        if voteEndDateTextfield.text != "" {
+            contentViewModel?.hasVoteEndDate.value = true
+        }
+        contentViewModel?.completeCheck()
     }
 }
 
@@ -129,6 +157,13 @@ extension ContentViewController: UIPickerViewDelegate, UIPickerViewDataSource {
 
 extension ContentViewController {
 
+    override func setBind() {
+        
+        contentViewModel?.isCompleteState.bindAndFire(listener: { [weak self] state in
+            self?.isRegistButtonState(state: state)
+        })
+    }
+    
     override func setProperties() {
         
         stepView.clipsToBounds = true
