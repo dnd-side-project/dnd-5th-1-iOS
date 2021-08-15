@@ -95,7 +95,7 @@ extension VoteDetailViewController {
         detailNicknameLabel.text = userNickname
         detailProfileImageView.kf.setImage(with: URL(string: userProfileimageUrl), placeholder: #imageLiteral(resourceName: "profilePink"))
         // detailTitleLabel.text = dataSource.data.value[0].title
-        detailParticipantsLabel.text = String(dataSource.data.value[0].participantsNum!)
+        // detailParticipantsLabel.text = String(dataSource.data.value[0].participantsNum!)
         
         if loginUserNickName == userNickname { // 1. 투표 작성자인 경우 - Feedback View + 원픽 이미지
             print("투표 작성자인 경우")

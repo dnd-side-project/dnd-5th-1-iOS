@@ -60,7 +60,7 @@ class MainViewController: BaseViewContoller, TouchDelegate {
         }
         
         // tab bar item - image 설정
-        self.tabBarController?.tabBar.items![1].image = #imageLiteral(resourceName: "tabBarVote")
+        self.tabBarController?.tabBar.items![1].image = #imageLiteral(resourceName: "plusPink")
         self.tabBarController?.tabBar.items![2].image = #imageLiteral(resourceName: "mypageWhite")
     }
     
