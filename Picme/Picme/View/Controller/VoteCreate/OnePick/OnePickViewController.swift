@@ -135,7 +135,8 @@ extension OnePickViewController {
         stepView.backgroundColor = .solidColor(.solid12)
         stepView.layer.cornerRadius = 10
         
-        // NavigationBar
+        // Navigation
+        navigationController?.navigationBar.tintColor = .white
         navigationItem.title = "원픽 선택"
         navigationItem.hidesBackButton = true
         

@@ -127,6 +127,7 @@ extension UploadImageViewContoller {
         view.backgroundColor = .solidColor(.solid0)
         
         // NavigationBar
+        navigationController?.navigationBar.tintColor = .white
         if let navBar = navigationController?.navigationBar {
             navBar.isTranslucent = false
             navBar.barTintColor = .solidColor(.solid0)

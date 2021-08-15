@@ -195,6 +195,8 @@ extension ContentViewController {
         view.addSubview(stepView)
         view.backgroundColor = .solidColor(.solid0)
         
+        //navigation
+        navigationController?.navigationBar.tintColor = .white
         navigationItem.title = "제목/마감시간 설정"
         navigationItem.hidesBackButton = true
         
