@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ffY-RN-Zyu">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -8,24 +8,107 @@
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="NotoSansCJKkr-Bold.otf">
+            <string>NotoSansCJKkr-Bold</string>
+        </array>
+    </customFonts>
     <scenes>
-        <!--My Page View Controller-->
+        <!--마이페이지-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
-                <viewController storyboardIdentifier="MyPageViewController" id="Y6W-OH-hqX" customClass="MyPageViewController" customModule="Picme" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Y6W-OH-hqX" customClass="MyPageViewController" customModule="Picme" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qDv-K4-IEZ">
+                                <rect key="frame" x="20" y="778" width="374" height="52"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="52" id="urC-Ck-clU"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="NotoSansCJKkr-Bold" family="Noto Sans CJK KR" pointSize="16"/>
+                                <state key="normal" title="로그아웃"/>
+                                <connections>
+                                    <action selector="logOutAction:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="JCz-Dv-Pqh"/>
+                                </connections>
+                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="XT4-YP-LJ2">
+                                <rect key="frame" x="20" y="108" width="374" height="44"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profilePink" translatesAutoresizingMaskIntoConstraints="NO" id="mKm-lU-WoF">
+                                        <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="mKm-lU-WoF" secondAttribute="height" multiplier="1:1" id="Px5-Hs-jc4"/>
+                                            <constraint firstAttribute="height" constant="44" id="ibO-4B-gKQ"/>
+                                        </constraints>
+                                    </imageView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="124" translatesAutoresizingMaskIntoConstraints="NO" id="k79-Uc-ekC">
+                                        <rect key="frame" x="54" y="11" width="320" height="22"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="97g-wD-k1L">
+                                                <rect key="frame" x="0.0" y="0.0" width="174" height="22"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d1q-mG-sA1">
+                                                <rect key="frame" x="298" y="0.0" width="22" height="22"/>
+                                                <state key="normal" image="homeWhite"/>
+                                                <connections>
+                                                    <action selector="userSettingAction:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="aIn-89-mlX"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="qDv-K4-IEZ" secondAttribute="trailing" constant="20" id="N56-Fk-GRU"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="XT4-YP-LJ2" secondAttribute="trailing" constant="20" id="Owt-1w-ZKr"/>
+                            <constraint firstItem="XT4-YP-LJ2" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="kgR-aw-Xcx"/>
+                            <constraint firstItem="qDv-K4-IEZ" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="l7A-kf-4Ib"/>
+                            <constraint firstItem="XT4-YP-LJ2" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="20" id="rEx-4K-TMN"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="qDv-K4-IEZ" secondAttribute="bottom" constant="32" id="yjg-5q-8D8"/>
+                        </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="마이페이지" id="523-q1-Mlb"/>
+                    <connections>
+                        <outlet property="logOutButton" destination="qDv-K4-IEZ" id="57R-pY-FnY"/>
+                        <outlet property="userIdentifierLabel" destination="97g-wD-k1L" id="SaP-VT-i6Y"/>
+                        <outlet property="userImage" destination="mKm-lU-WoF" id="Rb3-gR-bUN"/>
+                        <outlet property="userStackView" destination="XT4-YP-LJ2" id="tTQ-eA-n35"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="30" y="42"/>
+            <point key="canvasLocation" x="934.78260869565224" y="41.517857142857139"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="cRK-7o-e5d">
+            <objects>
+                <navigationController storyboardIdentifier="MyPageViewController" automaticallyAdjustsScrollViewInsets="NO" id="ffY-RN-Zyu" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="vRo-K2-ZZk">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Y6W-OH-hqX" kind="relationship" relationship="rootViewController" id="Svv-6w-FaI"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YDr-ef-PtX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="28.985507246376812" y="41.517857142857139"/>
         </scene>
     </scenes>
     <resources>
+        <image name="homeWhite" width="22" height="20"/>
+        <image name="profilePink" width="44" height="44"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

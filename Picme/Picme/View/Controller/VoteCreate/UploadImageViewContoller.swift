@@ -133,7 +133,8 @@ extension UploadImageViewContoller {
             navBar.barTintColor = .solidColor(.solid0)
 
             navBar.topItem?.title = "사진 업로드"
-            navBar.titleTextAttributes = [.foregroundColor: UIColor.textColor(.text100)]
+            navBar.titleTextAttributes = [.foregroundColor: UIColor.textColor(.text100),
+                                          NSAttributedString.Key.font: UIFont.kr(.bold, size: 16)]
             let backButton = UIBarButtonItem(image: UIImage(named: "x28"),
                                              style: .done,
                                              target: self,
