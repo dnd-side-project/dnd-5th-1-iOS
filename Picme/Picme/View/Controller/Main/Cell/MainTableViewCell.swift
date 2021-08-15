@@ -47,11 +47,6 @@ class MainTableViewCell: UITableViewCell {
             mainProfileImageView.kf.setImage(with: URL(string: object.userProfileimageUrl), placeholder: #imageLiteral(resourceName: "defalutImage"))
 //            tableTitleLabel.text = object.title
             
-            // startTime -> object.deadline 로 변경해야 함
-            guard let startTime = startTime else {
-                setTimer(startTime: Date())
-                return
-            }
             setTimer(startTime: object.deadline)
         }
     }
@@ -73,7 +68,7 @@ class MainTableViewCell: UITableViewCell {
                 let minutes = Int(remainSeconds) / 60 % 60
                 let seconds = Int(remainSeconds) % 60
                 
-                self?.mainDeadlineLabel.text = String(format:"%02i:%02i:%02i", hours, minutes, seconds)
+                self?.mainDeadlineLabel.text = String(format: "%02i:%02i:%02i", hours, minutes, seconds)
             }
         }
     }
