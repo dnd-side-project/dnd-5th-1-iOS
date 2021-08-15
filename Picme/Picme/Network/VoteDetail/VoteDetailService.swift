@@ -8,10 +8,13 @@
 import Foundation
 import Alamofire
 
-class VoteDetailService {
-    
-    static func getVoteDetailList(postId: String, completion: @escaping([VoteDetailModel]?) -> Void) {
-        let URL = APIConstants.Post.voteDetail.urlString.replacingOccurrences(of: ":post_id", with: postId)
+protocol VoteDetailServiceProtocol: AnyObject {
+    func getVoteDetail(postId: Int, completion: @escaping ((NetworkResult<Any>) -> Void))
+}
+
+class VoteDetailService: VoteDetailServiceProtocol {
+    func getVoteDetail(postId: Int, completion: @escaping ((NetworkResult<Any>) -> Void)) {
+        let URL = APIConstants.Post.voteDetail.urlString.replacingOccurrences(of: ":post_id", with: String(postId))
         
         let dataRequest = AF.request(URL,
                                      method: .get,
@@ -22,13 +25,35 @@ class VoteDetailService {
         dataRequest.responseData { dataResponse in
             switch dataResponse.result {
             case .success:
-                guard let value = dataResponse.value else { return }
-                let voteDetailData = try? JSONDecoder().decode(VoteDetailListModel.self, from: value)
-                completion(voteDetailData?.detailList)
-            case .failure(let error):
-                print(error.errorDescription ?? "")
+                guard let statusCode = dataResponse.response?.statusCode else {return}
+                guard let value = dataResponse.value else {return}
+                let networkResult = self.judgeStatus(by: statusCode, value)
+                completion(networkResult)
+            case .failure: completion(.pathErr)
             }
         }
+    }
+    
+    func judgeStatus(by statusCode: Int, _ data: Data) -> NetworkResult<Any> {
+        switch statusCode {
+        case 200: return isValidData(data: data)
+        case 400: return .pathErr
+        case 500: return .serverErr
+        default: return .networkFail
+        }
+    }
+    
+    func isValidData(data: Data) -> NetworkResult<Any> {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH:mm:ss"
+        
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .formatted(dateFormatter)
+        
+        guard let decodedData = try? decoder.decode(VoteDetailModel.self, from: data)
+        else { return .pathErr }
+        
+        return .success(decodedData)
     }
     
 }

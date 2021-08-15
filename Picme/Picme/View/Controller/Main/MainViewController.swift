@@ -60,7 +60,7 @@ class MainViewController: BaseViewContoller, TouchDelegate {
         }
         
         // tab bar item - image 설정
-        self.tabBarController?.tabBar.items![1].image = #imageLiteral(resourceName: "tabBarVote")
+        self.tabBarController?.tabBar.items![1].image = #imageLiteral(resourceName: "plusPink")
         self.tabBarController?.tabBar.items![2].image = #imageLiteral(resourceName: "mypageWhite")
     }
     
@@ -105,6 +105,7 @@ class MainViewController: BaseViewContoller, TouchDelegate {
         
         // 미로그인 사용자 - Alert
         
+        /*
         let alertTitle = """
             로그인 해야 투표를 할 수 있어요.
             로그인을 해주시겠어요?
@@ -112,54 +113,56 @@ class MainViewController: BaseViewContoller, TouchDelegate {
         
         AlertView.instance.showAlert(
             title: alertTitle, denyButtonTitle: "더 둘러보기", doneButtonTitle: "로그인하기", image: #imageLiteral(resourceName: "eyeLarge"), alertType: .login)
+        */
         
         // 로그인한 사용자 - pushViewController
-        /*
+        
         guard let voteDetailVC = self.storyboard?.instantiateViewController(withIdentifier: "VoteDetailViewController") as? VoteDetailViewController else { return }
         voteDetailVC.postId = 1
-        voteDetailVC.userNickname = ""
+        voteDetailVC.userNickname = "minha"
         voteDetailVC.userProfileimageUrl = ""
         self.navigationController?.pushViewController(voteDetailVC, animated: true)
- */
+ 
     }
     
-    // MARK: - Table View Data Source / Collection View Cell Delegate
+}
+
+// MARK: - Table View Data Source / Collection View Cell Delegate
+
+class MainListDatasource: GenericDataSource<MainModel>, UITableViewDataSource, CollectionViewCellDelegate {
     
-    class MainListDatasource: GenericDataSource<MainModel>, UITableViewDataSource, CollectionViewCellDelegate {
-        
-        // MARK: - CollectionV View Cell Delegate
-        
-        weak var delegate: TouchDelegate?
-        
-        // Collection View Cell 클릭시 실행할 함수
-        func selectedCVCell(_ index: Int) {
-            delegate?.pushVoteDetailView(index: index)
-        }
-        
-        // MARK: - Table View Data Source
-        
-        func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            // return data.value.count
-            
-            return 5
-        }
-        
-        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            let cell: MainTableViewCell = tableView.dequeueTableCell(for: indexPath)
-            
-            cell.setCollectionViewDataSourceDelegate(forRow: indexPath.row)
-            cell.cellDelegate = self
-            // cell.updateCell(model: data.value[indexPath.row])
-            
-            // 서버 통신 전 예시 코드
-            cell.mainNicknameLabel.text = "오늘도 개미는 뚠뚠"
-            cell.mainParticipantsLabel.text = "99명 참가중"
-            cell.mainDeadlineLabel.text = "1시간 후 마감"
-            cell.mainTitleLabel.text = "사진 잘 나온거 하나만 골라주세요!!"
-            cell.mainProfileImageView.image = #imageLiteral(resourceName: "defalutImage")
-            
-            return cell
-        }
-        
+    // MARK: - CollectionV View Cell Delegate
+    
+    weak var delegate: TouchDelegate?
+    
+    // Collection View Cell 클릭시 실행할 함수
+    func selectedCVCell(_ index: Int) {
+        delegate?.pushVoteDetailView(index: index)
     }
+    
+    // MARK: - Table View Data Source
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // return data.value.count
+        
+        return 5
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell: MainTableViewCell = tableView.dequeueTableCell(for: indexPath)
+        
+        cell.setCollectionViewDataSourceDelegate(forRow: indexPath.row)
+        cell.cellDelegate = self
+//            cell.updateCell(model: data.value[indexPath.row])
+        
+        // 서버 통신 전 예시 코드
+        cell.mainNicknameLabel.text = "오늘도 개미는 뚠뚠"
+        cell.mainParticipantsLabel.text = "99명 참가중"
+        cell.mainTitleLabel.text = "사진 잘 나온거 하나만 골라주세요!!"
+        cell.mainProfileImageView.image = #imageLiteral(resourceName: "profilePink")
+        cell.mainDeadlineLabel.text = "00:00:00"
+        
+        return cell
+    }
+    
 }

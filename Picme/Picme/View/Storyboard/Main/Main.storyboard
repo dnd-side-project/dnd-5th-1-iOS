@@ -346,7 +346,7 @@
                                 </textAttributes>
                                 <items>
                                     <navigationItem title="인생샷 투표" id="6FN-1p-HBS">
-                                        <barButtonItem key="leftBarButtonItem" image="navigationBackBtn" id="WYp-Hz-Qjp">
+                                        <barButtonItem key="leftBarButtonItem" image="leftArrow28" id="WYp-Hz-Qjp">
                                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <connections>
                                                 <action selector="backButtonClickAction:" destination="Lyc-AD-nId" id="4GT-OI-qpj"/>
@@ -558,7 +558,7 @@
                                 </textAttributes>
                                 <items>
                                     <navigationItem title="인생샷 투표" id="hDB-LP-KvE">
-                                        <barButtonItem key="leftBarButtonItem" image="navigationBackBtn" id="Irt-dw-Le6">
+                                        <barButtonItem key="leftBarButtonItem" image="leftArrow28" id="Irt-dw-Le6">
                                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" image="trashcan" id="ALU-4F-MJG">
@@ -705,6 +705,9 @@
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="pageIndicatorTintColor" red="0.2156862745" green="0.23529411759999999" blue="0.25882352939999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <color key="currentPageIndicatorTintColor" red="0.69803921570000005" green="0.70588235290000001" blue="0.71372549019999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <connections>
+                                            <action selector="pageChanged:" destination="hjh-eJ-59M" eventType="valueChanged" id="bXa-rZ-dTd"/>
+                                        </connections>
                                     </pageControl>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -751,7 +754,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nM7-Ii-Esh" userLabel="Feedback View">
-                                <rect key="frame" x="0.0" y="639" width="414" height="100"/>
+                                <rect key="frame" x="0.0" y="539" width="414" height="100"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="eFd-LK-A9A" userLabel="Feedback Stack View">
                                         <rect key="frame" x="67" y="18" width="280" height="64"/>
@@ -851,10 +854,10 @@
                                                             <color key="titleColor" red="0.92156862750000001" green="0.28627450980000002" blue="0.60392156860000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                         </state>
                                                     </button>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="감성" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pyd-JN-cK4">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Skip" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pyd-JN-cK4">
                                                         <rect key="frame" x="0.0" y="52" width="48" height="12"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                                                        <color key="textColor" red="0.90196078430000004" green="0.90588235289999997" blue="0.91372549020000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
@@ -890,7 +893,7 @@
                             <constraint firstItem="Lge-DT-c9U" firstAttribute="top" secondItem="4oQ-Hg-wQt" secondAttribute="bottom" constant="12" id="ecY-Lu-eaQ"/>
                             <constraint firstItem="Lbn-9o-aCP" firstAttribute="leading" secondItem="vlC-pT-r26" secondAttribute="leading" id="fCL-p8-pjM"/>
                             <constraint firstItem="vTV-am-Nmy" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Khk-tx-YN4" secondAttribute="trailing" constant="60" id="fUH-jh-GRf"/>
-                            <constraint firstItem="nM7-Ii-Esh" firstAttribute="top" secondItem="lrh-RB-zgb" secondAttribute="bottom" constant="100" id="gtt-kO-e1j"/>
+                            <constraint firstItem="nM7-Ii-Esh" firstAttribute="top" secondItem="lrh-RB-zgb" secondAttribute="bottom" id="gtt-kO-e1j"/>
                             <constraint firstItem="nM7-Ii-Esh" firstAttribute="leading" secondItem="vlC-pT-r26" secondAttribute="leading" id="n5w-OV-ioU"/>
                             <constraint firstItem="Khk-tx-YN4" firstAttribute="centerY" secondItem="Lge-DT-c9U" secondAttribute="centerY" id="oeF-LL-oJl"/>
                             <constraint firstItem="4oQ-Hg-wQt" firstAttribute="trailing" secondItem="vlC-pT-r26" secondAttribute="trailing" id="sQf-gh-PqZ"/>
@@ -1017,7 +1020,7 @@
         <scene sceneID="34U-si-WzT">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="0Qc-AS-ark" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="홈" image="tabBarHome" id="EZh-le-hEG"/>
+                    <tabBarItem key="tabBarItem" title="홈" image="homeGray" id="EZh-le-hEG"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="0Fn-4q-8jc">
                         <autoresizingMask key="autoresizingMask"/>
@@ -1090,14 +1093,14 @@
         <image name="diamonds" width="65" height="71"/>
         <image name="eyeSmall" width="24" height="24"/>
         <image name="hmm" width="48" height="48"/>
+        <image name="homeGray" width="22" height="20"/>
+        <image name="leftArrow28" width="8.5" height="14"/>
         <image name="light" width="24" height="24"/>
-        <image name="navigationBackBtn" width="8.5" height="14"/>
         <image name="navigationMoreBtn" width="5" height="19"/>
         <image name="nextButton" width="24" height="24"/>
         <image name="profilePink" width="44" height="44"/>
         <image name="rankingBox" width="35" height="26"/>
         <image name="sensitivity" width="24" height="24"/>
-        <image name="tabBarHome" width="22" height="20"/>
         <image name="time" width="16" height="16"/>
         <image name="trashcan" width="17" height="21"/>
     </resources>

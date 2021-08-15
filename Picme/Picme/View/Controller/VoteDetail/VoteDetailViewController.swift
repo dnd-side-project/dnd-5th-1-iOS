@@ -39,35 +39,52 @@ class VoteDetailViewController: BaseViewContoller {
     @IBOutlet weak var colorButton: UIButton!
     @IBOutlet weak var skipButton: UIButton!
     
-    // MARK: - Properties
+    @IBAction func pageChanged(_ sender: UIPageControl) {
+        let indexPath = IndexPath(item: sender.currentPage, section: 0)
+              detailCollectionview.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+    }
     
-    var postId: Int = 0
-    var userNickname: String = ""
-    var userProfileimageUrl: String = ""
+    // MARK: - Properties
     
     var currentImageId: Int?
     var selectedImageId: Int?
+    var onePickImageId: Int?
     
     var dataSource = VoteDetailDatasource()
     var viewModel: VoteDetailViewModel!
     
+    // 테스트 코드
+    var postId: Int = 1
+    var userNickname: String = "minha"
+    var userProfileimageUrl: String = ""
+    var loginUserNickName: String = "minha222"
+    var isVoted: Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        viewModel = VoteDetailViewModel(dataSource: dataSource)
+        viewModel = VoteDetailViewModel(service: VoteDetailService(), dataSource: dataSource)
         
         bindViewModel()
         
         setupButtonTag()
         setupButtonAction()
+        setupView()
         
     }
     
     // MARK: - Bind View Model
     
     private func bindViewModel() {
-
-        // viewModel.fetchVoteDetail(postId: "1")
+        
+        detailCollectionview.dataSource = dataSource
+        
+        dataSource.data.addAndNotify(observer: self) { [weak self] _ in
+            self?.detailCollectionview.reloadData()
+        }
+        
+        // viewModel.fetchVoteDetail(postId: postId)
+        
     }
     
 }
@@ -80,11 +97,42 @@ extension VoteDetailViewController {
     
     private func setupView() {
         
-        // 투표 작성자 - Feedback View + 원픽 이미지
+        detailNicknameLabel.text = userNickname
+        detailProfileImageView.kf.setImage(with: URL(string: userProfileimageUrl), placeholder: #imageLiteral(resourceName: "profilePink"))
+        // detailTitleLabel.text = dataSource.data.value[0].title
+        // detailParticipantsLabel.text = String(dataSource.data.value[0].participantsNum!)
         
-        // 투표하지 않은 사용자 - Pick View
+        if loginUserNickName == userNickname { // 1. 투표 작성자인 경우 - Feedback View + 원픽 이미지
+            print("투표 작성자인 경우")
+            rightBarButton.setBackgroundImage(#imageLiteral(resourceName: "trashcan"), for: .normal, barMetrics: .default)
+            rightBarButton.tag = 0
+            setupResultView(isVoted: true)
+        } else { // 2. 투표 작성자가 아닐 경우
+            rightBarButton.setBackgroundImage(#imageLiteral(resourceName: "megaphone"), for: .normal, barMetrics: .default)
+            rightBarButton.tag = 1
+            
+            if !isVoted { // 투표하지 않은 사용자 - Pick View
+                print("사용자 투표 X")
+                pickView.isHidden = false
+                feedbackView.isHidden = true
+            } else { // 3. 투표한 사용자 - Feedback View + 투표 이미지
+                print("사용자 투표 O")
+                setupResultView(isVoted: true)
+            }
+        }
         
-        // 투표한 사용자 - Feedback View + 투표 이미지
+    }
+    
+    private func setupResultView(isVoted: Bool) {
+        pickView.isHidden = true
+        feedbackView.isHidden = false
+        
+        if isVoted {
+            skipButton.setImage(#imageLiteral(resourceName: "profilePink"), for: .normal)
+            skipButton.setTitle("", for: .normal)
+            skipButton.tag = 7
+        }
+        
     }
     
     // MARK: - Button Tag
@@ -130,8 +178,24 @@ extension VoteDetailViewController {
         switch sender.tag {
         case 0:
             print("trash")
+            
+            let alertTitle = """
+                게시글을 삭제하면 다시 업로드해야해요.
+                정말 삭제하시겠어요?
+                """
+            
+            AlertView.instance.showAlert(
+                title: alertTitle, denyButtonTitle: "아니요", doneButtonTitle: "삭제하기", image: #imageLiteral(resourceName: "trash"), alertType: .delete)
         case 1:
             print("report")
+            
+            let alertTitle = """
+                게시글에 문제가 있나요?
+                신고를 하면 더 이상 게시글이 안보여요.
+                """
+            
+            AlertView.instance.showAlert(
+                title: alertTitle, denyButtonTitle: "아니요", doneButtonTitle: "신고하기", image: #imageLiteral(resourceName: "report"), alertType: .report)
         default:
             print("error")
         }
@@ -139,6 +203,8 @@ extension VoteDetailViewController {
     
     @objc func pickButtonClicked(_ sender: UIButton) {
         print("pickButton")
+        selectedImageId = currentImageId
+        setupResultView(isVoted: false)
     }
     
     @objc func feedbackButtonClicked(_ sender: UIButton) {
@@ -153,24 +219,34 @@ extension VoteDetailViewController {
             print("colorButton")
         case 6:
             print("skipButton")
+        case 7:
+            print("onePickButton")
         default:
             print("error")
         }
     }
     
-}
-
-// MARK: - Collection View Data Source
-
-extension VoteDetailViewController: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
+    // MARK: - Collection View Data Source
+    
+    class VoteDetailDatasource: GenericDataSource<VoteDetailModel>, UICollectionViewDataSource {
+        
+        func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+            return 5
+        }
+        
+        func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+            
+            let cell: VoteDetailCollectionViewCell = collectionView.dequeueCollectionCell(for: indexPath)
+            cell.detailPhotoImageView.image = #imageLiteral(resourceName: "defalutImage")
+            return cell
+        }
+        
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell: VoteDetailCollectionViewCell = detailCollectionview.dequeueCollectionCell(for: indexPath)
-        
-        return cell
-    }
+}
+
+// MARK: - Collection View Delegate
+
+extension VoteDetailViewController: UIScrollViewDelegate, UICollectionViewDelegateFlowLayout {
     
 }

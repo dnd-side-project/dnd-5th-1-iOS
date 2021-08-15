@@ -12,7 +12,7 @@ struct MainModel: Codable {
     let userNickname: String
     let userProfileimageUrl: String
     let participantsNum: Int
-    let deadline: String
+    let deadline: Date
     let title: String
     let thumbnailUrl: [String]
     

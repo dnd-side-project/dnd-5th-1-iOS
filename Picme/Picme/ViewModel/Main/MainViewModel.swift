@@ -33,12 +33,12 @@ class MainViewModel {
             return
         }
         
-        service.getMainList(page: currentPage, completion: { (response) in
+        service.getMainList(page: currentPage, completion: { [weak self] (response) in
             DispatchQueue.main.async {
                 switch response {
                 case .success(let data):
                     if let mainData = data as? [MainModel] {
-                        self.dataSource?.data.value = mainData
+                        self?.dataSource?.data.value = mainData
                     }
                 case .requestErr(let message):
                     print("requestERR", message)
