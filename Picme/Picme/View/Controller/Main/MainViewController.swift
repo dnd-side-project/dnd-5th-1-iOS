@@ -105,6 +105,7 @@ class MainViewController: BaseViewContoller, TouchDelegate {
         
         // 미로그인 사용자 - Alert
         
+        /*
         let alertTitle = """
             로그인 해야 투표를 할 수 있어요.
             로그인을 해주시겠어요?
@@ -112,15 +113,16 @@ class MainViewController: BaseViewContoller, TouchDelegate {
         
         AlertView.instance.showAlert(
             title: alertTitle, denyButtonTitle: "더 둘러보기", doneButtonTitle: "로그인하기", image: #imageLiteral(resourceName: "eyeLarge"), alertType: .login)
+        */
         
         // 로그인한 사용자 - pushViewController
-        /*
+        
         guard let voteDetailVC = self.storyboard?.instantiateViewController(withIdentifier: "VoteDetailViewController") as? VoteDetailViewController else { return }
         voteDetailVC.postId = 1
         voteDetailVC.userNickname = ""
         voteDetailVC.userProfileimageUrl = ""
         self.navigationController?.pushViewController(voteDetailVC, animated: true)
- */
+ 
     }
     
     // MARK: - Table View Data Source / Collection View Cell Delegate
@@ -154,9 +156,9 @@ class MainViewController: BaseViewContoller, TouchDelegate {
             // 서버 통신 전 예시 코드
             cell.mainNicknameLabel.text = "오늘도 개미는 뚠뚠"
             cell.mainParticipantsLabel.text = "99명 참가중"
-            cell.mainDeadlineLabel.text = "1시간 후 마감"
             cell.mainTitleLabel.text = "사진 잘 나온거 하나만 골라주세요!!"
             cell.mainProfileImageView.image = #imageLiteral(resourceName: "defalutImage")
+            cell.mainDeadlineLabel.text = "00:00:00"
             
             return cell
         }

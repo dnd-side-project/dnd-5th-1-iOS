@@ -34,11 +34,47 @@ class MainTableViewCell: UITableViewCell {
     // 서버 통신 전 예시 이미지
     var imageArray = [#imageLiteral(resourceName: "defalutImage"), #imageLiteral(resourceName: "defalutImage"), #imageLiteral(resourceName: "defalutImage")]
     
+    // MARK: - Timer
+    var startTime: Date?
+    var timer = Timer()
+    
+    deinit {
+        timer.invalidate()
+    }
+    
     func updateCell(model: Any) {
         if let object = model as? MainModel {
             mainProfileImageView.kf.setImage(with: URL(string: object.userProfileimageUrl), placeholder: #imageLiteral(resourceName: "defalutImage"))
 //            tableTitleLabel.text = object.title
-//            tableDescriptionLabel.text = object.description
+            
+            // startTime -> object.deadline 로 변경해야 함
+            guard let startTime = startTime else {
+                setTimer(startTime: Date())
+                return
+            }
+            setTimer(startTime: object.deadline)
+        }
+    }
+    
+    func setTimer(startTime: Date) {
+        DispatchQueue.main.async { [weak self] in
+            self?.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] timer in
+                let elapsedTimeSeconds = Int(Date().timeIntervalSince(startTime))
+                let expireLimit = 86400
+                
+                guard elapsedTimeSeconds <= expireLimit else { // 시간 초과한 경우
+                    timer.invalidate()
+                    return
+                }
+
+                let remainSeconds = expireLimit - elapsedTimeSeconds
+                
+                let hours   = Int(remainSeconds) / 3600
+                let minutes = Int(remainSeconds) / 60 % 60
+                let seconds = Int(remainSeconds) % 60
+                
+                self?.mainDeadlineLabel.text = String(format:"%02i:%02i:%02i", hours, minutes, seconds)
+            }
         }
     }
     
