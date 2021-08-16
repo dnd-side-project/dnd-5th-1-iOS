@@ -28,7 +28,7 @@ class UploadImageViewContoller: BaseViewContoller {
     // YPImagePicker Properties
     var selectedItems = [YPMediaItem]()
     var userImages = [UIImage]()
-    
+    var config = YPImagePickerConfiguration()
     // MARK: - LifeCycle
     
     override func viewDidLoad() {
@@ -38,26 +38,7 @@ class UploadImageViewContoller: BaseViewContoller {
     }
     
     @IBAction func testAction(_ sender: UIButton) {
-        var config = YPImagePickerConfiguration()
-
-        config.shouldSaveNewPicturesToAlbum = false
-        config.targetImageSize = .cappedTo(size: 1024)
-        config.onlySquareImagesFromCamera = true
-        config.startOnScreen = .library
-        config.screens = [.library]
-        config.wordings.libraryTitle = "Gallerys"
-        config.hidesStatusBar = false
-        config.hidesBottomBar = false
-        config.maxCameraZoomFactor = 5.0
-        config.overlayView = nil
-        config.gallery.hidesRemoveButton = false
-        config.library.minNumberOfItems = 2
-        config.library.maxNumberOfItems = 6
-        config.library.preselectedItems = selectedItems
-        config.library.mediaType = .photo
-        config.library.itemOverlayType = .grid
-        config.library.defaultMultipleSelection = true
-
+        
         let picker = YPImagePicker(configuration: config)
         picker.imagePickerDelegate = self
         
@@ -126,6 +107,24 @@ extension UploadImageViewContoller {
         stepView.clipsToBounds = true
         stepView.backgroundColor = .solidColor(.solid12)
         stepView.layer.cornerRadius = 10
+        
+        config.shouldSaveNewPicturesToAlbum = false
+        config.targetImageSize = .cappedTo(size: 1024)
+        config.onlySquareImagesFromCamera = true
+        config.startOnScreen = .library
+        config.screens = [.library]
+        config.wordings.libraryTitle = "Gallerys"
+        config.hidesStatusBar = false
+        config.hidesBottomBar = false
+        config.maxCameraZoomFactor = 5.0
+        config.overlayView = nil
+        config.gallery.hidesRemoveButton = false
+        config.library.minNumberOfItems = 2
+        config.library.maxNumberOfItems = 6
+        config.library.preselectedItems = selectedItems
+        config.library.mediaType = .photo
+        config.library.itemOverlayType = .grid
+        config.library.defaultMultipleSelection = true
     }
     
     override func setConfiguration() {
