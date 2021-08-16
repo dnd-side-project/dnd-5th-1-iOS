@@ -58,6 +58,7 @@
 		A9E6DD7626C8E8F4006155F3 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E6DD7526C8E8F4006155F3 /* MyPageViewController.swift */; };
 		A9E6DD7A26C9F63D006155F3 /* CreateListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E6DD7926C9F63D006155F3 /* CreateListModel.swift */; };
 		A9E6DD7C26C9F855006155F3 /* CreateVoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E6DD7B26C9F855006155F3 /* CreateVoteService.swift */; };
+		A9E6DD7E26CA1AD6006155F3 /* CreateUserImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E6DD7D26CA1AD6006155F3 /* CreateUserImages.swift */; };
 		A9E72E2C26C527D3003C98A0 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = A9E72E2B26C527D3003C98A0 /* SnapKit */; };
 		A9E72E2F26C52F62003C98A0 /* YPImagePicker in Frameworks */ = {isa = PBXBuildFile; productRef = A9E72E2E26C52F62003C98A0 /* YPImagePicker */; };
 		D1103F6226C46AE4002D1E78 /* Enum+NetworkResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1103F6126C46AE4002D1E78 /* Enum+NetworkResult.swift */; };
@@ -166,6 +167,7 @@
 		A9E6DD7526C8E8F4006155F3 /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		A9E6DD7926C9F63D006155F3 /* CreateListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateListModel.swift; sourceTree = "<group>"; };
 		A9E6DD7B26C9F855006155F3 /* CreateVoteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateVoteService.swift; sourceTree = "<group>"; };
+		A9E6DD7D26CA1AD6006155F3 /* CreateUserImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateUserImages.swift; sourceTree = "<group>"; };
 		BB74E774F2085618C97D3804 /* Pods_Picme.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Picme.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCA73C122FAB6E7E7E132CEB /* Pods-Picme-PicmeUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Picme-PicmeUITests.release.xcconfig"; path = "Target Support Files/Pods-Picme-PicmeUITests/Pods-Picme-PicmeUITests.release.xcconfig"; sourceTree = "<group>"; };
 		CE1E7EEC4130AD59C5A0B524 /* Pods-Picme.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Picme.release.xcconfig"; path = "Target Support Files/Pods-Picme/Pods-Picme.release.xcconfig"; sourceTree = "<group>"; };
@@ -607,6 +609,7 @@
 			isa = PBXGroup;
 			children = (
 				A9E6DD7926C9F63D006155F3 /* CreateListModel.swift */,
+				A9E6DD7D26CA1AD6006155F3 /* CreateUserImages.swift */,
 			);
 			path = VoteCreate;
 			sourceTree = "<group>";
@@ -1051,6 +1054,7 @@
 				D1EC0C6326C30D2000387F1B /* VoteDetailViewModel.swift in Sources */,
 				A91A909026BE9D2800C43D43 /* KeyChainModel.swift in Sources */,
 				A9A1AD432699FAE600169D76 /* AppDelegate.swift in Sources */,
+				A9E6DD7E26CA1AD6006155F3 /* CreateUserImages.swift in Sources */,
 				A91F57D726B7B641006F20AD /* OnboardingViewModel.swift in Sources */,
 				D180456826B3E2850053430E /* MainTableViewCell.swift in Sources */,
 				A91F57D426B7B261006F20AD /* OnboardingViewController.swift in Sources */,

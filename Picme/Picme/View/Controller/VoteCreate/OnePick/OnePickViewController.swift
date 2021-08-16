@@ -12,6 +12,7 @@ class OnePickViewController: BaseViewContoller {
     // MARK: - Properties
     
     var userImages: [UIImage]?
+    var createUserImges: CreateUserImages?
     
     @IBOutlet weak var progressBar: UIProgressView!
     
@@ -45,7 +46,7 @@ class OnePickViewController: BaseViewContoller {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print(APIConstants.jwtToken)
+        print(createUserImges)
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.registerCell(OnePickCell.self)
@@ -122,6 +123,10 @@ extension OnePickViewController {
     
     @objc func nextView(_ sender: UIButton) {
         guard let contentVC = storyboard?.instantiateViewController(withIdentifier: "ContentViewController") else { return }
+        createUserImges?.isFirstPick = selectIndex!
+        print(createUserImges)
+        ContentViewModel.imageMetaData = CreateCase.userImageMetadata(data: createUserImges!)
+        
         navigationController?.pushViewController(contentVC, animated: true)
     }
     

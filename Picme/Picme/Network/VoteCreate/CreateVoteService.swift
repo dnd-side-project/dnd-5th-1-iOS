@@ -49,4 +49,42 @@ struct CreateVoteService {
                 }
             }
     }
+    
+    static func fetchCreateMetaData(_ configure: CreateCase,
+                                completion: @escaping ResultModel<CreateListReponseModel>) {
+        
+        let url = APIConstants.Post.main.urlString
+        
+        var parameter: [String: Any]?
+        let header: HTTPHeaders = [
+            "Authorization": APIConstants.jwtToken
+        ]
+        
+        switch configure {
+        case let .userImageMetadata(data):
+            parameter = [
+                "isFirstPick": data.isFirstPick,
+                "metadata": data.metaData
+            ]
+            for iasd in 0..<data.metaData.count{
+                print(data.metaData[iasd].width)
+            }
+        default:
+            return
+        }
+        
+        print(url)
+        print(parameter)
+        print(header)
+        
+        AF.request(url,
+                   method: .post,
+                   parameters: parameter,
+                   encoding: JSONEncoding.default,
+                   headers: header)
+            .responseString { response in
+                print("Success", response)
+            }
+    }
+    
 }

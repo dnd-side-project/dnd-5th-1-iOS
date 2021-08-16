@@ -18,6 +18,10 @@ enum ExpirationDate: String, CaseIterable {
 
 class ContentViewModel {
     
+    static var imagesData: CreateCase = .userImage(date: [])
+    static var imageMetaData: CreateCase = .userImageMetadata(data: CreateUserImages(isFirstPick: 0,
+                                                                                     metaData: []))
+    
     var hasTitleText: Dynamic<Bool> = Dynamic(false)
     var hasVoteEndDate: Dynamic<Bool> = Dynamic(false)
     var isCompleteState: Dynamic<Bool> = Dynamic(false)
@@ -74,7 +78,10 @@ class ContentViewModel {
             
             let createList = CreateCase.listConfigure(title: title, endDate: stringConvertDate)
             
-            CreateVoteService.fetchCreateList(createList) { (response) in
+//            CreateVoteService.fetchCreateList(createList) { (response) in
+//                print(response)
+//            }
+            CreateVoteService.fetchCreateMetaData(ContentViewModel.imageMetaData) { response in
                 print(response)
             }
         }
@@ -82,7 +89,7 @@ class ContentViewModel {
 }
 
 enum CreateCase {
-    case userImage(date: [Data])
-    case userImageMetadata(data: CreateListModel)
+    case userImage(date: [String])
+    case userImageMetadata(data: CreateUserImages)
     case listConfigure(title: String, endDate: Date)
 }

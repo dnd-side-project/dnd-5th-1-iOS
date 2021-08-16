@@ -16,7 +16,7 @@ protocol ImageDelete: AnyObject {
 class UploadImageViewContoller: BaseViewContoller {
     
     // MARK: - Properties
-    var uploadViewModel: UploadImageViewModel? = UploadImageViewModel()
+    var userimage = CreateUserImages(isFirstPick: 0, metaData: [])
     
     @IBOutlet weak var uploadButton: UIButton!
     @IBOutlet weak var uploadLabel: UILabel!
@@ -61,15 +61,21 @@ class UploadImageViewContoller: BaseViewContoller {
         let picker = YPImagePicker(configuration: config)
         picker.imagePickerDelegate = self
         
+        var count = 0
+        
         // 멀티 사진
         picker.didFinishPicking { [unowned picker] items, cancelled in
             for item in items {
                 switch item {
                 case .photo(let photos):
                     self.userImages.append(photos.image)
+                    
                     print(photos.image)
                     print(photos.image.size.width)
                     print(photos.image.size.height)
+                    self.userimage.metaData.append(UserImageSize(width: Int(photos.image.size.width),
+                                                      height: Int(photos.image.size.width)))
+                    count += 1
                 default:
                     return
                 }
@@ -84,6 +90,7 @@ class UploadImageViewContoller: BaseViewContoller {
                     guard let onePickVC = self.storyboard?.instantiateViewController(withIdentifier: "OnePickViewController") as? OnePickViewController else { return }
                     onePickVC.userImages = self.userImages
                     onePickVC.imageDelegate = self
+                    onePickVC.createUserImges = self.userimage
                     self.navigationController?.pushViewController(onePickVC, animated: true)
                 }
             }
