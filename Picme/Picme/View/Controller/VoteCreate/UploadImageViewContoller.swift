@@ -16,6 +16,7 @@ protocol ImageDelete: AnyObject {
 class UploadImageViewContoller: BaseViewContoller {
     
     // MARK: - Properties
+    var st: [Data] = []
     var userimage = CreateUserImages(isFirstPick: 0, metaData: [])
     
     @IBOutlet weak var uploadButton: UIButton!
@@ -34,7 +35,6 @@ class UploadImageViewContoller: BaseViewContoller {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        APIConstants.jwtToken = "123"
     }
     
     @IBAction func testAction(_ sender: UIButton) {
@@ -50,7 +50,7 @@ class UploadImageViewContoller: BaseViewContoller {
                 switch item {
                 case .photo(let photos):
                     self.userImages.append(photos.image)
-                    
+                    self.st.append(photos.image.jpegData(compressionQuality: 1.0)!)
                     print(photos.image)
                     print(photos.image.size.width)
                     print(photos.image.size.height)
@@ -61,7 +61,7 @@ class UploadImageViewContoller: BaseViewContoller {
                     return
                 }
             }
-            
+            ContentViewModel.imagesData = .userImage(date: self.st)
             if cancelled {
                 self.dismiss(animated: true, completion: nil)
             } else {

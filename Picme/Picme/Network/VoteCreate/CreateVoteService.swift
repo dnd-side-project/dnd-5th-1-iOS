@@ -87,4 +87,48 @@ struct CreateVoteService {
             }
     }
     
+    static func fetchCreateImage(_ configure: CreateCase,
+                                completion: @escaping ResultModel<CreateListReponseModel>) {
+        
+        let url = APIConstants.Post.main.urlString
+        
+        var parameter: [String: [Data]]?
+        let header: HTTPHeaders = [
+            "Authorization": APIConstants.jwtToken
+        ]
+        
+        switch configure {
+        case let .userImage(date):
+            parameter = [
+                "files": date
+            ]
+        default:
+            return
+        }
+        
+        print(url)
+        print(parameter)
+        print(header)
+        
+        AF.upload(multipartFormData: { muti in
+            
+            var count = 0
+            for (key, value) in parameter! {
+                print("key", key)
+                print("value", value)
+                
+                value.forEach {
+                    print($0)
+                    let timeStamp = Date().timeIntervalSince1970
+                    muti.append($0, withName: "files", fileName: "\(timeStamp)_123_\(count)", mimeType: "image/jpg")
+                    count += 1
+                }
+            }
+        }, to: url,
+        method: .post, headers: ["Content-type": "multipart/form-data"])
+        .response { response in
+            print(response.response?.statusCode)
+        }
+    }
+    
 }

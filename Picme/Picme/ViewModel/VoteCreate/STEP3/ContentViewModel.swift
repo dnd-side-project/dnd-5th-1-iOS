@@ -81,7 +81,10 @@ class ContentViewModel {
 //            CreateVoteService.fetchCreateList(createList) { (response) in
 //                print(response)
 //            }
-            CreateVoteService.fetchCreateMetaData(ContentViewModel.imageMetaData) { response in
+//            CreateVoteService.fetchCreateMetaData(ContentViewModel.imageMetaData) { response in
+//                print(response)
+//            }
+            CreateVoteService.fetchCreateImage(ContentViewModel.imagesData) { response in
                 print(response)
             }
         }
@@ -89,7 +92,7 @@ class ContentViewModel {
 }
 
 enum CreateCase {
-    case userImage(date: [String])
+    case userImage(date: [Data])
     case userImageMetadata(data: CreateUserImages)
     case listConfigure(title: String, endDate: Date)
 }
