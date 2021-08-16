@@ -31,17 +31,17 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="rEi-E4-sTz">
                                 <rect key="frame" x="20" y="360" width="374" height="86"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="bottom" spacing="240" translatesAutoresizingMaskIntoConstraints="NO" id="yif-Lw-UC4">
-                                        <rect key="frame" x="0.0" y="0.0" width="362.5" height="24"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="bottom" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="yif-Lw-UC4">
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="24"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="사용할 닉네임" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tsT-Wz-jQA">
-                                                <rect key="frame" x="0.0" y="0.0" width="93" height="24"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="262.5" height="24"/>
                                                 <fontDescription key="fontDescription" name="NotoSansCJKkr-Bold" family="Noto Sans CJK KR" pointSize="16"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="0/12" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BYv-ip-3Mc">
-                                                <rect key="frame" x="333" y="3" width="29.5" height="21"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="0/12" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BYv-ip-3Mc">
+                                                <rect key="frame" x="272.5" y="3" width="101.5" height="21"/>
                                                 <fontDescription key="fontDescription" name="NotoSansCJKkr-Medium" family="Noto Sans CJK KR" pointSize="14"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -59,7 +59,9 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="MV1-QW-HEj" firstAttribute="leading" secondItem="rEi-E4-sTz" secondAttribute="leading" id="2aE-4X-9Al"/>
+                                    <constraint firstItem="yif-Lw-UC4" firstAttribute="leading" secondItem="MV1-QW-HEj" secondAttribute="leading" id="VfC-BE-LiA"/>
                                     <constraint firstAttribute="trailing" secondItem="MV1-QW-HEj" secondAttribute="trailing" id="dHg-S8-WUF"/>
+                                    <constraint firstItem="yif-Lw-UC4" firstAttribute="trailing" secondItem="MV1-QW-HEj" secondAttribute="trailing" id="hdo-oE-Rab"/>
                                 </constraints>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yWE-gL-B7I">
@@ -73,12 +75,6 @@
                                     <action selector="loginRegistAction:" destination="Tix-Us-cWh" eventType="touchUpInside" id="qRd-6R-DfP"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="영어소문자,한글,숫자로 구성된 12자까지 가능합니다!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8zv-Ri-1aJ">
-                                <rect key="frame" x="20" y="461" width="231.5" height="13.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                <color key="textColor" systemColor="systemRedColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="N7R-cJ-07Q"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -88,17 +84,15 @@
                             <constraint firstItem="yWE-gL-B7I" firstAttribute="leading" secondItem="N7R-cJ-07Q" secondAttribute="leading" constant="20" id="Gde-AS-Woe"/>
                             <constraint firstItem="N7R-cJ-07Q" firstAttribute="trailing" secondItem="yWE-gL-B7I" secondAttribute="trailing" constant="20" id="KWi-9b-Rpe"/>
                             <constraint firstItem="rEi-E4-sTz" firstAttribute="centerX" secondItem="dML-5c-3ro" secondAttribute="centerX" id="Sfb-lE-apW"/>
-                            <constraint firstItem="8zv-Ri-1aJ" firstAttribute="leading" secondItem="rEi-E4-sTz" secondAttribute="leading" id="T0d-in-k2n"/>
                             <constraint firstItem="N7R-cJ-07Q" firstAttribute="bottom" secondItem="yWE-gL-B7I" secondAttribute="bottom" constant="100" id="UNv-7N-HMu"/>
                             <constraint firstItem="N7R-cJ-07Q" firstAttribute="trailing" secondItem="rEi-E4-sTz" secondAttribute="trailing" constant="20" id="jDc-Lx-OyT"/>
-                            <constraint firstItem="8zv-Ri-1aJ" firstAttribute="top" secondItem="rEi-E4-sTz" secondAttribute="bottom" constant="15" id="xuk-Fx-Otb"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="nickNameCountLabel" destination="BYv-ip-3Mc" id="QRk-Qf-BZ0"/>
                         <outlet property="nickNameLabel" destination="tsT-Wz-jQA" id="0sC-cg-KT3"/>
                         <outlet property="nickNameTextfield" destination="MV1-QW-HEj" id="rG7-rX-4Yt"/>
                         <outlet property="startButton" destination="yWE-gL-B7I" id="aS8-pD-bKc"/>
-                        <outlet property="validLabel" destination="8zv-Ri-1aJ" id="gMI-4t-Y0g"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CyN-as-qAb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -109,9 +103,6 @@
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

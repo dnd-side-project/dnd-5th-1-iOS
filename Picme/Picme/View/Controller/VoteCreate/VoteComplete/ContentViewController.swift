@@ -50,7 +50,7 @@ class ContentViewController: BaseViewContoller {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         pickerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 200)
         voteEndDateTextfield.inputView = pickerView
         datePickerToolBar()
@@ -61,6 +61,10 @@ class ContentViewController: BaseViewContoller {
 
     @IBAction func registVote(_ sender: UIButton) {
         print("Regist")
+        if let voteText = voteTextView.text, let voteEndDate = voteEndDateTextfield.text {
+            contentViewModel?.createList(title: voteText, endDate: voteEndDate)
+        }
+        
     }
     
     func datePickerToolBar() {
@@ -195,7 +199,7 @@ extension ContentViewController {
         view.addSubview(stepView)
         view.backgroundColor = .solidColor(.solid0)
         
-        //navigation
+        // navigation
         navigationController?.navigationBar.tintColor = .white
         navigationItem.title = "제목/마감시간 설정"
         navigationItem.hidesBackButton = true

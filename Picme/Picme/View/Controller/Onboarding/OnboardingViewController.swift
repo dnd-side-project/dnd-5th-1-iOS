@@ -12,12 +12,22 @@ class OnboardingViewController: BaseViewContoller {
     // MARK: - Properties
     
     @IBOutlet weak var nickNameLabel: UILabel!
+    @IBOutlet weak var nickNameCountLabel: UILabel!
     @IBOutlet weak var nickNameTextfield: UITextField!
     @IBOutlet weak var startButton: UIButton!
-    @IBOutlet weak var validLabel: UILabel!
     
     var onboardingViewModel: OnboardingViewModel? = OnboardingViewModel()
     
+    var nickNameTextCount: Int = 0 {
+        didSet {
+            nickNameCountLabel.text = "\(nickNameTextCount)/12"
+            if nickNameTextCount >= 12 {
+                nickNameCountLabel.textColor = .mainColor(.pink)
+            } else {
+                nickNameCountLabel.textColor = .textColor(.text71)
+            }
+        }
+    }
     // MARK: - LifeCycle
     
     override func viewDidLoad() {
@@ -31,16 +41,13 @@ class OnboardingViewController: BaseViewContoller {
             self.startButtonState(state)
         })
         
-        onboardingViewModel?.isVaildState.bindAndFire(listener: { state in
-            self.validState(state)
-        })
-        
     }
     
     @objc func textfieldDidChanged(_ textfield: UITextField) {
         guard let text = textfield.text else { return }
         print(text)
-        print(text.count)
+        
+        nickNameTextCount = text.count
         
         if text.count >= 12 {
             onboardingViewModel?.isVaildState.value = true
@@ -65,14 +72,6 @@ class OnboardingViewController: BaseViewContoller {
             startButton.setTitleColor(.textColor(.text50), for: .normal)
             startButton.backgroundColor = .solidColor(.solid26)
             startButton.isEnabled = state
-        }
-    }
-    
-    func validState(_ state: Bool) {
-        if state {
-            validLabel.isHidden = false
-        } else {
-            validLabel.isHidden = true
         }
     }
     
@@ -113,6 +112,7 @@ extension UITextField {
 }
 
 extension String {
+    
     func hasValidCharacter() -> Bool {
         do {
             let regex = try NSRegularExpression(pattern: "^[A-Z0-9가-힣ㄱ-ㅎㅏ-ㅣ\\s]$",
@@ -153,8 +153,11 @@ extension OnboardingViewController {
     
     override func setProperties() {
         
-        nickNameTextfield.textColor = .white
+        nickNameTextfield.textColor = .textColor(.text100)
         nickNameTextfield.layer.cornerRadius = 10
+        
+        nickNameCountLabel.textColor = .textColor(.text71)
+        
         startButton.layer.cornerRadius = 10
         
         nickNameTextfield.addTarget(self, action: #selector(textfieldDidChanged(_:)), for: .editingChanged)
@@ -169,8 +172,7 @@ extension OnboardingViewController {
         startButton.backgroundColor = .solidColor(.solid26)
         
         nickNameTextfield.addLeftPadding()
-        
-        validLabel.isHidden = true
+
     }
 }
 
