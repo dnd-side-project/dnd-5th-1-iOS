@@ -45,6 +45,7 @@ class OnePickViewController: BaseViewContoller {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print(APIConstants.jwtToken)
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.registerCell(OnePickCell.self)

@@ -30,6 +30,7 @@ class ContentViewModel {
         }
     }
     
+    // 마감 시간
     func stringConvertDate(_ hour: ExpirationDate) -> String? {
         
         switch hour {
@@ -59,4 +60,29 @@ class ContentViewModel {
         
         return dateForMatter.string(from: addingDate)
     }
+    
+    // 투표 만들기
+    func createVote() {
+        
+    }
+    
+    func createList(title: String, endDate: String) {
+        
+        let dateformatter = DateFormatter()
+        dateformatter.dateFormat = "yy/MM/dd HH:mm"
+        if let stringConvertDate = dateformatter.date(from: endDate) {
+            
+            let createList = CreateCase.listConfigure(title: title, endDate: stringConvertDate)
+            
+            CreateVoteService.fetchCreateList(createList) { (response) in
+                print(response)
+            }
+        }
+    }
+}
+
+enum CreateCase {
+    case userImage(date: [Data])
+    case userImageMetadata(data: CreateListModel)
+    case listConfigure(title: String, endDate: Date)
 }

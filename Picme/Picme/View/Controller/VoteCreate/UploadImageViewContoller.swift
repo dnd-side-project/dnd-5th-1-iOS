@@ -34,6 +34,7 @@ class UploadImageViewContoller: BaseViewContoller {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        APIConstants.jwtToken = "123"
     }
     
     @IBAction func testAction(_ sender: UIButton) {

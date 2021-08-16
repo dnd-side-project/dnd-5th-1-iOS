@@ -61,6 +61,10 @@ class ContentViewController: BaseViewContoller {
 
     @IBAction func registVote(_ sender: UIButton) {
         print("Regist")
+        if let voteText = voteTextView.text, let voteEndDate = voteEndDateTextfield.text {
+            contentViewModel?.createList(title: voteText, endDate: voteEndDate)
+        }
+        
     }
     
     func datePickerToolBar() {
