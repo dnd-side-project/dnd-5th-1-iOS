@@ -9,4 +9,6 @@ import Foundation
 
 class OnePickViewModel {
     
+    var createUserMetadata: CreateUserImages?
+    
 }

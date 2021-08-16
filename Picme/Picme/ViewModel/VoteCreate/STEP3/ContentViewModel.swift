@@ -18,6 +18,10 @@ enum ExpirationDate: String, CaseIterable {
 
 class ContentViewModel {
     
+    static var imagesData: CreateCase = .userImage(date: [])
+    static var imageMetaData: CreateCase = .userImageMetadata(data: CreateUserImages(isFirstPick: 0,
+                                                                                     metaData: []))
+    
     var hasTitleText: Dynamic<Bool> = Dynamic(false)
     var hasVoteEndDate: Dynamic<Bool> = Dynamic(false)
     var isCompleteState: Dynamic<Bool> = Dynamic(false)
@@ -30,6 +34,7 @@ class ContentViewModel {
         }
     }
     
+    // 마감 시간
     func stringConvertDate(_ hour: ExpirationDate) -> String? {
         
         switch hour {
@@ -59,4 +64,35 @@ class ContentViewModel {
         
         return dateForMatter.string(from: addingDate)
     }
+    
+    // 투표 만들기
+    func createVote() {
+        
+    }
+    
+    func createList(title: String, endDate: String) {
+        
+        let dateformatter = DateFormatter()
+        dateformatter.dateFormat = "yy/MM/dd HH:mm"
+        if let stringConvertDate = dateformatter.date(from: endDate) {
+            
+            let createList = CreateCase.listConfigure(title: title, endDate: stringConvertDate)
+            
+//            CreateVoteService.fetchCreateList(createList) { (response) in
+//                print(response)
+//            }
+//            CreateVoteService.fetchCreateMetaData(ContentViewModel.imageMetaData) { response in
+//                print(response)
+//            }
+            CreateVoteService.fetchCreateImage(ContentViewModel.imagesData) { response in
+                print(response)
+            }
+        }
+    }
+}
+
+enum CreateCase {
+    case userImage(date: [Data])
+    case userImageMetadata(data: CreateUserImages)
+    case listConfigure(title: String, endDate: Date)
 }
