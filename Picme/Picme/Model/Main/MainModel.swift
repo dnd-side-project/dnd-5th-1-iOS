@@ -9,20 +9,40 @@ import Foundation
 
 struct MainModel: Codable {
     let postId: String
-    let userNickname: String
-    let userProfileimageUrl: String
-    let participantsNum: Int
-    let deadline: Date
+//    let userNickname: String
+//    let userProfileimageUrl: String
+    let deadline: String
     let title: String
-    let thumbnailUrl: [String]
+    let user: User
+    let images: [Images]
+    let participantsNum: Int
     
     enum CodingKeys: String, CodingKey {
-        case postId = "postId"
-        case userNickname = "username"
-        case userProfileimageUrl = "userProfileImage"
+        case postId = "id"
+//        case userNickname = "username"
+//        case userProfileimageUrl = "userProfileImage"
+        case user = "user"
         case participantsNum = "participantsNum"
-        case deadline = "expireAt"
+        case deadline = "expiredAt"
         case title = "title"
+        case images = "images"
+    }
+}
+
+struct User: Codable {
+    let nickname: String
+    let profileImageUrl: String
+    
+    enum CodingKeys: String, CodingKey {
+        case nickname = "nickname"
+        case profileImageUrl = "imageUrl"
+    }
+}
+
+struct Images: Codable {
+    let thumbnailUrl: String
+    
+    enum CodingKeys: String, CodingKey {
         case thumbnailUrl = "thumbnailUrl"
     }
 }

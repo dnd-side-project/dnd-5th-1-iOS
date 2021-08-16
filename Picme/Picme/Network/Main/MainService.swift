@@ -45,11 +45,7 @@ class MainService: MainServiceProtocol {
     }
     
     func isValidData(data: Data) -> NetworkResult<Any> {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "HH:mm:ss"
-        
         let decoder = JSONDecoder()
-        decoder.dateDecodingStrategy = .formatted(dateFormatter)
         
         guard let decodedData = try? decoder.decode(MainListModel.self, from: data)
         else { return .pathErr }
