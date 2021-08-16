@@ -54,9 +54,9 @@ class VoteDetailViewController: BaseViewContoller {
     var viewModel: VoteDetailViewModel!
     
     // 테스트 코드
-    var postId: Int = 1
-    var userNickname: String = "minha"
-    var userProfileimageUrl: String = ""
+    var postId: String?
+    var userNickname: String?
+    var userProfileimageUrl: String?
     var loginUserNickName: String = "minha222"
     var isVoted: Bool = false
     
@@ -70,7 +70,6 @@ class VoteDetailViewController: BaseViewContoller {
         setupButtonTag()
         setupButtonAction()
         setupView()
-        
     }
     
     // MARK: - Bind View Model
@@ -98,9 +97,10 @@ extension VoteDetailViewController {
     private func setupView() {
         
         detailNicknameLabel.text = userNickname
-        detailProfileImageView.kf.setImage(with: URL(string: userProfileimageUrl), placeholder: #imageLiteral(resourceName: "profilePink"))
+        detailProfileImageView.kf.setImage(with: URL(string: userProfileimageUrl!), placeholder: #imageLiteral(resourceName: "profilePink"))
         // detailTitleLabel.text = dataSource.data.value[0].title
         // detailParticipantsLabel.text = String(dataSource.data.value[0].participantsNum!)
+        // Timer 설정 
         
         if loginUserNickName == userNickname { // 1. 투표 작성자인 경우 - Feedback View + 원픽 이미지
             print("투표 작성자인 경우")
