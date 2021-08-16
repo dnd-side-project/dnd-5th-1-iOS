@@ -33,11 +33,6 @@ class MainViewController: BaseViewContoller, TouchDelegate {
     var dataSource = MainListDatasource()
     private var viewModel: MainViewModel!
     
-    // MARK: - Paging
-    
-    var isPaging: Bool = false // 현재 페이징 중인지 체크하는 flag
-    var hasNextPage: Bool = false // 마지막 페이지 인지 체크 하는 flag
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
