@@ -78,15 +78,11 @@ class ContentViewModel {
             
             let createList = CreateCase.listConfigure(title: title, endDate: stringConvertDate)
             
-//            CreateVoteService.fetchCreateList(createList) { (response) in
-//                print(response)
-//            }
-//            CreateVoteService.fetchCreateMetaData(ContentViewModel.imageMetaData) { response in
-//                print(response)
-//            }
-            CreateVoteService.fetchCreateImage(ContentViewModel.imagesData) { response in
+            CreateVoteService.fetchCreateList(createList) { response in
                 print(response)
             }
+            
+            CreateVoteService.fetchCreateImage(ContentViewModel.imagesData, ContentViewModel.imageMetaData)
         }
     }
 }

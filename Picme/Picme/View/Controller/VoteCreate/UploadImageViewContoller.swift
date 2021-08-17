@@ -16,8 +16,8 @@ protocol ImageDelete: AnyObject {
 class UploadImageViewContoller: BaseViewContoller {
     
     // MARK: - Properties
-    var st: [Data] = []
-    var userimage = CreateUserImages(isFirstPick: 0, metaData: [])
+    var userImagesData: [Data] = []
+    var userimagesMeta = CreateUserImages(isFirstPick: 0, metaData: [])
     
     @IBOutlet weak var uploadButton: UIButton!
     @IBOutlet weak var uploadLabel: UILabel!
@@ -50,18 +50,18 @@ class UploadImageViewContoller: BaseViewContoller {
                 switch item {
                 case .photo(let photos):
                     self.userImages.append(photos.image)
-                    self.st.append(photos.image.jpegData(compressionQuality: 1.0)!)
+                    self.userImagesData.append(photos.image.jpegData(compressionQuality: 1.0)!)
                     print(photos.image)
                     print(photos.image.size.width)
                     print(photos.image.size.height)
-                    self.userimage.metaData.append(UserImageSize(width: Int(photos.image.size.width),
+                    self.userimagesMeta.metaData.append(UserImageSize(width: Int(photos.image.size.width),
                                                       height: Int(photos.image.size.width)))
                     count += 1
                 default:
                     return
                 }
             }
-            ContentViewModel.imagesData = .userImage(date: self.st)
+            ContentViewModel.imagesData = .userImage(date: self.userImagesData)
             if cancelled {
                 self.dismiss(animated: true, completion: nil)
             } else {
@@ -71,7 +71,7 @@ class UploadImageViewContoller: BaseViewContoller {
                     guard let onePickVC = self.storyboard?.instantiateViewController(withIdentifier: "OnePickViewController") as? OnePickViewController else { return }
                     onePickVC.userImages = self.userImages
                     onePickVC.imageDelegate = self
-                    onePickVC.createUserImges = self.userimage
+                    onePickVC.createUserImges = self.userimagesMeta
                     self.navigationController?.pushViewController(onePickVC, animated: true)
                 }
             }

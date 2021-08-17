@@ -15,21 +15,20 @@ struct CreateVoteService {
         
         let url = APIConstants.Post.main.urlString
         
-        var parameter: [String: Any]?
+        var parameter: CreateListModel?
         let header: HTTPHeaders = [
             "Authorization": APIConstants.jwtToken
         ]
         
         switch configure {
         case let .listConfigure(title, endDate):
-            parameter = [
-                "title": title,
-                "expireAt": endDate
-            ]
+            parameter = CreateListModel(title: title, expireAt: endDate)
+            
         default:
-            return 
+            return
         }
         
+        guard let parameter = parameter else { return }
         print(url)
         print(parameter)
         print(header)
@@ -37,7 +36,7 @@ struct CreateVoteService {
         AF.request(url,
                    method: .post,
                    parameters: parameter,
-                   encoding: JSONEncoding.default,
+                   encoder: JSONParameterEncoder.default,
                    headers: header)
             .responseDecodable(of: CreateListReponseModel.self) { (response) in
                 switch response.result {
@@ -49,9 +48,9 @@ struct CreateVoteService {
                 }
             }
     }
-    
+
     static func fetchCreateMetaData(_ configure: CreateCase,
-                                completion: @escaping ResultModel<CreateListReponseModel>) {
+                                    completion: @escaping ResultModel<CreateListReponseModel>) {
         
         let url = APIConstants.Post.main.urlString
         
@@ -66,13 +65,12 @@ struct CreateVoteService {
                 "isFirstPick": data.isFirstPick,
                 "metadata": data.metaData
             ]
-            for iasd in 0..<data.metaData.count{
-                print(data.metaData[iasd].width)
-            }
+            
         default:
             return
         }
         
+        guard let parameter = parameter else { return }
         print(url)
         print(parameter)
         print(header)
@@ -87,48 +85,66 @@ struct CreateVoteService {
             }
     }
     
-    static func fetchCreateImage(_ configure: CreateCase,
-                                completion: @escaping ResultModel<CreateListReponseModel>) {
-        
-        let url = APIConstants.Post.main.urlString
-        
-        var parameter: [String: [Data]]?
-        let header: HTTPHeaders = [
-            "Authorization": APIConstants.jwtToken
-        ]
-        
-        switch configure {
-        case let .userImage(date):
-            parameter = [
-                "files": date
-            ]
-        default:
-            return
-        }
-        
-        print(url)
-        print(parameter)
-        print(header)
-        
-        AF.upload(multipartFormData: { muti in
+    static func fetchCreateImage(_ configure: CreateCase, _ configureCase: CreateCase) {
             
-            var count = 0
-            for (key, value) in parameter! {
-                print("key", key)
-                print("value", value)
+            let url = APIConstants.Post.main.urlString
+            
+            var parameter: [String: Any]?
+            
+            let header: HTTPHeaders = [
+                "Authorization": APIConstants.jwtToken
+            ]
+            
+            if case let .userImage(date) = configure,
+               case let .userImageMetadata(data) = configureCase {
                 
-                value.forEach {
-                    print($0)
-                    let timeStamp = Date().timeIntervalSince1970
-                    muti.append($0, withName: "files", fileName: "\(timeStamp)_123_\(count)", mimeType: "image/jpg")
-                    count += 1
-                }
+                parameter = [
+                    "files": date,
+                    "isFirstPick": data.isFirstPick,
+                    "metadata": data.metaData
+                ]
             }
-        }, to: url,
-        method: .post, headers: ["Content-type": "multipart/form-data"])
-        .response { response in
-            print(response.response?.statusCode)
+            
+            guard let parameter = parameter else { return }
+            
+            print(url)
+            print(parameter)
+            print(header)
+            
+            AF.upload(multipartFormData: { muti in
+                
+                var count = 0
+                for (key, value) in parameter {
+                    print("key", key)
+                    print("value", value)
+                    
+                    switch key {
+                    case "files":
+                        if let value = value as? [Data] {
+                            value.forEach {
+                                print($0)
+                                let timeStamp = Date().timeIntervalSince1970
+                                muti.append($0, withName: "files", fileName: "\(timeStamp)_123_\(count)", mimeType: "image/jpg")
+                                count += 1
+                            }
+                        }
+                    case "isFirstPick":
+                        if let value = value as? Int {
+                            muti.append("\(value)".data(using: .utf8)!, withName: key)
+                        }
+                    case "metadata":
+                        if let value = value as? [UserImageSize] {
+                            muti.append("\(value)".data(using: .utf8)!, withName: key)
+                        }
+                    default:
+                        return
+                    }
+                    
+                }
+            }, to: url,
+            method: .post, headers: ["Content-type": "multipart/form-data"])
+            .response { response in
+                print(response.response?.statusCode)
+            }
         }
-    }
-    
 }
