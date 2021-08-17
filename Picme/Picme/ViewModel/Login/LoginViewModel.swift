@@ -21,53 +21,72 @@ class LoginViewModel: NSObject {
 extension LoginViewModel {
     
     func kakaoLogin() {
-        UserApi.shared.loginWithKakaoAccount { [weak self] (_ oauthToken, error) in
-            guard let self = self else { return }
-            
-            if let error = error {
-                self.loginDelegate?.loginFail(error: "kakao Login Error: \(error.localizedDescription)")
-            } else {
-                print("loginWithKakaoAccount() success.")
+        if UserApi.isKakaoTalkLoginAvailable() {
+            UserApi.shared.loginWithKakaoTalk {[weak self] (_ oauthToken, error) in
+                guard let self = self else { return }
                 
-                UserApi.shared.me { user, error in
-                    if let error = error {
-                        print("Kakao user get info Error, \(error.localizedDescription)")
-                    } else {
+                if let error = error {
+                    print(error)
+                } else {
+                    print("loginWithKakaoTalk() success.")
+                    self.requestKakaoLogin()
+                }
+            }
+        } else {
+            UserApi.shared.loginWithKakaoAccount { [weak self] (_ oauthToken, error) in
+                guard let self = self else { return }
+                
+                if let error = error {
+                    self.loginDelegate?.loginFail(error: "kakao Login Error: \(error.localizedDescription)")
+                } else {
+                    print("loginWithKakaoAccount() success.")
+                    self.requestKakaoLogin()
+                }
+            }
+        }
+    }
+    
+    private func requestKakaoLogin() {
+        
+        // do something
+        UserApi.shared.me { user, error in
+            if let error = error {
+                print("Kakao user get info Error, \(error.localizedDescription)")
+            } else {
+                guard let kakaoUser = user,
+                      let kakaoUserId = kakaoUser.id,
+                      let kakaoUserEmail = kakaoUser.kakaoAccount?.email else { return }
+                
+                print(kakaoUserId)
+                print(kakaoUserEmail)
+                
+                let kakaoUserInfo = LoginKind.SignIn.kakao(userID: String(kakaoUserId),
+                                                           email: kakaoUserEmail)
+                
+                LoginAPICenter.fetchSignIn(kakaoUserInfo.loginValue) { [weak self] (response) in
+                    guard let self = self else { return }
+                    
+                    switch response {
+                    case .success(let data):
+                        // home으로 이동
+                        print(data)
+                        self.loginDelegate?.loginSuccess()
+                    case .failure(let err):
+                        // onboarding으로 이동
+                        print(err.localized)
+                        // user정보 싱글턴에 저장
+                        let userinfo = UserInfo.shared
+                        userinfo.vendor = LoginKind.LoginRawValue.kakao.vendor
+                        userinfo.vendorID = String(kakaoUserId)
+                        userinfo.userEmail = kakaoUserEmail
                         
-                        guard let kakaoUser = user,
-                              let kakaoUserId = kakaoUser.id,
-                              let kakaoUserEmail = kakaoUser.kakaoAccount?.email else { return }
+                        print("=======================")
+                        print(userinfo.vendor)
+                        print(userinfo.vendorID)
+                        print(userinfo.userEmail)
+                        print("=======================")
                         
-                        print(kakaoUserId)
-                        print(kakaoUserEmail)
-                        
-                        let kakaoUserInfo = LoginKind.SignIn.kakao(userID: String(kakaoUserId),
-                                                                   email: kakaoUserEmail)
-                        
-                        LoginAPICenter.fetchSignIn(kakaoUserInfo.loginValue) { [weak self] (response) in
-                            guard let self = self else { return }
-                            
-                            switch response {
-                            case .success(let data):
-                                // home으로 이동
-                                print(data)
-                                self.loginDelegate?.loginSuccess()
-                            case .failure(let err):
-                                // onboarding으로 이동
-                                print(err.localized)
-                                // user정보 싱글턴에 저장
-                                let userinfo = UserInfo.shared
-                                userinfo.vendor = LoginKind.LoginRawValue.kakao.vendor
-                                userinfo.vendorID = String(kakaoUserId)
-                                userinfo.userEmail = kakaoUserEmail
-                                
-                                print(userinfo.vendor)
-                                print(userinfo.vendorID)
-                                print(userinfo.userEmail)
-                                
-                                self.loginDelegate?.presentOnboarding()
-                            }
-                        }
+                        self.loginDelegate?.presentOnboarding()
                     }
                 }
             }
