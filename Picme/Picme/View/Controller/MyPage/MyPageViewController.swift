@@ -6,19 +6,25 @@
 //
 
 import UIKit
+import AuthenticationServices
 
 class MyPageViewController: BaseViewContoller {
 
+    // MARK: - Properties
+    
     @IBOutlet weak var logOutButton: UIButton!
     
     @IBOutlet weak var userIdentifierLabel: UILabel!
     @IBOutlet weak var userImage: UIImageView!
     @IBOutlet weak var userStackView: UIStackView!
+    var mypageViewModel: MyPageViewModel?
+    
+    // MARK: - LifeCycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        mypageViewModel?.logOutDelegate = self
     }
     
     @IBAction func userSettingAction(_ sender: UIButton) {
@@ -26,7 +32,20 @@ class MyPageViewController: BaseViewContoller {
     }
     
     @IBAction func logOutAction(_ sender: UIButton) {
+        mypageViewModel?.logOutAction()
         print("LogOut")
+    }
+}
+
+// 로그아웃
+
+extension MyPageViewController: LogOutProtocol {
+    
+    func logoutFromMain() {
+        let presentLogin = UIStoryboard(name: "Login", bundle: nil)
+        let loginVC = presentLogin.instantiateViewController(withIdentifier: "LoginViewController")
+        loginVC.modalPresentationStyle = .fullScreen
+        self.present(loginVC, animated: true, completion: nil)
     }
 }
 
