@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "Left Black Logo Large.svg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

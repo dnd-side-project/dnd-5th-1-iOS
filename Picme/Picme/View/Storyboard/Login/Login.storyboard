@@ -55,9 +55,10 @@
                                                     <action selector="kakaoLoginAction:" destination="Inh-nG-xUb" eventType="touchUpInside" id="i0r-RI-gJn"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VWu-rR-Ga7" customClass="ASAuthorizationAppleIDButton">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VWu-rR-Ga7">
                                                 <rect key="frame" x="0.0" y="62" width="374" height="52"/>
-                                                <state key="normal" title="애플"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                <state key="normal" title="Apple로 로그인"/>
                                                 <connections>
                                                     <action selector="appleLoginAction:" destination="Inh-nG-xUb" eventType="touchUpInside" id="jtE-C9-9eL"/>
                                                 </connections>
