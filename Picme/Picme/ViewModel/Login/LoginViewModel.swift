@@ -112,6 +112,8 @@ extension LoginViewModel: ASAuthorizationControllerDelegate, ASAuthorizationCont
             print(appleIDCredetial.fullName)
             print(appleIDCredetial.user)
             
+            let tokenString = String(data: appleIDCredetial.identityToken!, encoding: .utf8)
+            print(tokenString)
             // keychain 저장용 프로퍼티
             let saveUserInfo = KeychainUserInfo(userIdentifier: appleIDCredetial.user,
                                                 userEmail: appleIDCredetial.email)
