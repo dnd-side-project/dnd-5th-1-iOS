@@ -11,7 +11,7 @@ import Kingfisher
 // MARK: - CollectionviewCellDelegate
 
 protocol CollectionViewCellDelegate: AnyObject {
-    func selectedCVCell(_ index: Int)
+    func selectedCVCell(_ index: Int, _ postId: String)
 }
 
 class MainTableViewCell: UITableViewCell {
@@ -28,14 +28,13 @@ class MainTableViewCell: UITableViewCell {
     // MARK: - Variables
     
     weak var cellDelegate: CollectionViewCellDelegate?
-    
-    var imageData: [String]!
+    var imageData: [Images]!
+    var postId: String!
     
     // 서버 통신 전 예시 이미지
     var imageArray = [#imageLiteral(resourceName: "defalutImage"), #imageLiteral(resourceName: "defalutImage"), #imageLiteral(resourceName: "defalutImage")]
     
     // MARK: - Timer
-    var startTime: Date?
     var timer = Timer()
     
     deinit {
@@ -44,18 +43,26 @@ class MainTableViewCell: UITableViewCell {
     
     func updateCell(model: Any) {
         if let object = model as? MainModel {
-            mainProfileImageView.kf.setImage(with: URL(string: object.userProfileimageUrl), placeholder: #imageLiteral(resourceName: "defalutImage"))
-//            tableTitleLabel.text = object.title
-            
-            setTimer(startTime: object.deadline)
+            mainProfileImageView.kf.setImage(with: URL(string: object.user.profileImageUrl), placeholder: #imageLiteral(resourceName: "profilePink"))
+            mainNicknameLabel.text = object.user.nickname
+            mainParticipantsLabel.text = String(object.participantsNum)
+            mainTitleLabel.text = object.title
+            imageData = object.images
+            setTimer(endTime: object.deadline)
+            postId = object.postId
         }
     }
     
-    func setTimer(startTime: Date) {
+    func setTimer(endTime: String) {
         DispatchQueue.main.async { [weak self] in
             self?.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] timer in
-                let elapsedTimeSeconds = Int(Date().timeIntervalSince(startTime))
-                let expireLimit = 86400
+                
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+                let convertDate = dateFormatter.date(from: endTime)
+                
+                let elapsedTimeSeconds = Int(Date().timeIntervalSince(convertDate!))
+                let expireLimit = Int(Date().timeIntervalSince(Date()))
                 
                 guard elapsedTimeSeconds <= expireLimit else { // 시간 초과한 경우
                     timer.invalidate()
@@ -102,9 +109,18 @@ extension MainTableViewCell: UICollectionViewDelegate, UICollectionViewDataSourc
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: MainCollectionViewCell = mainCollectionView.dequeueCollectionCell(for: indexPath)
         
-        // cell.mainPhotoImageView.kf.setImage(with: URL(string: imageData[indexPath.row]), placeholder: #imageLiteral(resourceName: "defalutImage"))
+        /*
+        if indexPath.item == imageData.count - 1 {
+            cell.mainPhotoImageView.image = #imageLiteral(resourceName: "defalutImage").withRenderingMode(.alwaysTemplate)
+            cell.mainPhotoImageView.tintColor = .solidColor(.solid12)
+            cell.stackView.isHidden = false
+        } else {
+            cell.mainPhotoImageView.kf.setImage(with: URL(string: imageData[indexPath.row].thumbnailUrl), placeholder: #imageLiteral(resourceName: "defalutImage"))
+            cell.stackView.isHidden = true
+        }
+        */
         
-        if indexPath.item == imageArray.count - 1 { // 마지막 cell 설정
+        if indexPath.item == imageArray.count - 1 {
             cell.mainPhotoImageView.image = #imageLiteral(resourceName: "defalutImage").withRenderingMode(.alwaysTemplate)
             cell.mainPhotoImageView.tintColor = .solidColor(.solid12)
             cell.stackView.isHidden = false
@@ -118,8 +134,8 @@ extension MainTableViewCell: UICollectionViewDelegate, UICollectionViewDataSourc
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let cellDelegate = cellDelegate {
-            cellDelegate.selectedCVCell(indexPath.item)
-            
+            // cellDelegate.selectedCVCell(indexPath.item, postId)
+            cellDelegate.selectedCVCell(indexPath.item, "1")
         }
     }
     

@@ -15,4 +15,5 @@ class UserInfo {
     var vendor: String?
     var vendorID: String?
     var userEmail: String?
+    var userNickname: String?
 }

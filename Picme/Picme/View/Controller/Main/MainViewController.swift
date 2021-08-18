@@ -10,7 +10,7 @@ import UIKit
 // MARK: - Collection View Cell 클릭 시 실행할 프로토콜
 
 protocol TouchDelegate: AnyObject {
-    func pushVoteDetailView(index: Int)
+    func pushVoteDetailView(index: Int, postId: String)
 }
 
 class MainViewController: BaseViewContoller, TouchDelegate {
@@ -32,11 +32,6 @@ class MainViewController: BaseViewContoller, TouchDelegate {
     
     var dataSource = MainListDatasource()
     private var viewModel: MainViewModel!
-    
-    // MARK: - Paging
-    
-    var isPaging: Bool = false // 현재 페이징 중인지 체크하는 flag
-    var hasNextPage: Bool = false // 마지막 페이지 인지 체크 하는 flag
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -96,33 +91,27 @@ class MainViewController: BaseViewContoller, TouchDelegate {
     func showEmptyView() {
         self.mainTableView.isHidden = true
         self.emptyView.isHidden = false
-        // self.activityIndicator.isHidden = true
     }
     
-    // MARK: - Collection View Cell 클릭 시 투표 상세 뷰로 이동
+    // MARK: - Collection View Cell 클릭시
     
-    func pushVoteDetailView(index: Int) {
+    func pushVoteDetailView(index: Int, postId: String) {
         
-        // 미로그인 사용자 - Alert
-        
-        /*
-        let alertTitle = """
+        if APIConstants.jwtToken != "" { // 미로그인 사용자
+            let alertTitle = """
             로그인 해야 투표를 할 수 있어요.
             로그인을 해주시겠어요?
             """
-        
-        AlertView.instance.showAlert(
+            
+            AlertView.instance.showAlert(
             title: alertTitle, denyButtonTitle: "더 둘러보기", doneButtonTitle: "로그인하기", image: #imageLiteral(resourceName: "eyeLarge"), alertType: .login)
-        */
-        
-        // 로그인한 사용자 - pushViewController
-        
-        guard let voteDetailVC = self.storyboard?.instantiateViewController(withIdentifier: "VoteDetailViewController") as? VoteDetailViewController else { return }
-        voteDetailVC.postId = 1
-        voteDetailVC.userNickname = "minha"
-        voteDetailVC.userProfileimageUrl = ""
-        self.navigationController?.pushViewController(voteDetailVC, animated: true)
- 
+        } else { // 로그인한 사용자
+            guard let voteDetailVC = self.storyboard?.instantiateViewController(withIdentifier: "VoteDetailViewController") as? VoteDetailViewController else { return }
+            voteDetailVC.postId = "1"
+            voteDetailVC.userNickname = "minha"
+            voteDetailVC.userProfileimageUrl = ""
+            self.navigationController?.pushViewController(voteDetailVC, animated: true)
+        }
     }
     
 }
@@ -136,16 +125,15 @@ class MainListDatasource: GenericDataSource<MainModel>, UITableViewDataSource, C
     weak var delegate: TouchDelegate?
     
     // Collection View Cell 클릭시 실행할 함수
-    func selectedCVCell(_ index: Int) {
-        delegate?.pushVoteDetailView(index: index)
+    func selectedCVCell(_ index: Int, _ postId: String) {
+        delegate?.pushVoteDetailView(index: index, postId: postId)
     }
     
     // MARK: - Table View Data Source
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // return data.value.count
-        
-        return 5
+        return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -153,14 +141,7 @@ class MainListDatasource: GenericDataSource<MainModel>, UITableViewDataSource, C
         
         cell.setCollectionViewDataSourceDelegate(forRow: indexPath.row)
         cell.cellDelegate = self
-//            cell.updateCell(model: data.value[indexPath.row])
-        
-        // 서버 통신 전 예시 코드
-        cell.mainNicknameLabel.text = "오늘도 개미는 뚠뚠"
-        cell.mainParticipantsLabel.text = "99명 참가중"
-        cell.mainTitleLabel.text = "사진 잘 나온거 하나만 골라주세요!!"
-        cell.mainProfileImageView.image = #imageLiteral(resourceName: "profilePink")
-        cell.mainDeadlineLabel.text = "00:00:00"
+        // cell.updateCell(model: data.value[indexPath.row])
         
         return cell
     }
