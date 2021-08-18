@@ -140,6 +140,9 @@ struct LoginAPICenter {
                     guard let header = headers["Authorization"] else { return }
                     print(header)
                     APIConstants.jwtToken = header
+                    
+                    let userInfo = UserInfo.shared
+                    userInfo.userNickname = data.nickname
                 }
                 
                 completion(.success(data))
