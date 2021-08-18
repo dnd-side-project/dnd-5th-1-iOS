@@ -141,8 +141,8 @@ struct LoginAPICenter {
                     print(header)
                     APIConstants.jwtToken = header
                     
-                    let userInfo = UserInfo.shared
-                    userInfo.userNickname = data.nickname
+                    let loginUser = LoginUser.shared
+                    loginUser.userNickname = data.nickname
                 }
                 
                 completion(.success(data))

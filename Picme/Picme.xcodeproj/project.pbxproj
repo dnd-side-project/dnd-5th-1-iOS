@@ -64,6 +64,7 @@
 		D1103F6426C46B44002D1E78 /* MainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1103F6326C46B44002D1E78 /* MainService.swift */; };
 		D11C2DC126B82AA100C8EE51 /* VoteDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11C2DC026B82AA100C8EE51 /* VoteDetailTableViewController.swift */; };
 		D12B119A26CD057B00777498 /* Extension+UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D12B119926CD057B00777498 /* Extension+UIViewController.swift */; };
+		D12B119C26CD924200777498 /* LoginUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D12B119B26CD924200777498 /* LoginUser.swift */; };
 		D1449D9426A845370083418D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D1449D9326A845370083418D /* Main.storyboard */; };
 		D1449D9926A848610083418D /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1449D9826A848610083418D /* MainViewController.swift */; };
 		D173CD9F26C50E2F00468D52 /* VoteDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D173CD9E26C50E2F00468D52 /* VoteDetailViewController.swift */; };
@@ -173,6 +174,7 @@
 		D1103F6326C46B44002D1E78 /* MainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainService.swift; sourceTree = "<group>"; };
 		D11C2DC026B82AA100C8EE51 /* VoteDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteDetailTableViewController.swift; sourceTree = "<group>"; };
 		D12B119926CD057B00777498 /* Extension+UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIViewController.swift"; sourceTree = "<group>"; };
+		D12B119B26CD924200777498 /* LoginUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUser.swift; sourceTree = "<group>"; };
 		D1449D9326A845370083418D /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		D1449D9826A848610083418D /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		D173CD9E26C50E2F00468D52 /* VoteDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteDetailViewController.swift; sourceTree = "<group>"; };
@@ -261,6 +263,7 @@
 				A95CD36426A30357002CCCA8 /* LoginModel.swift */,
 				A91A904526B92BDB00C43D43 /* UserInfo.swift */,
 				A91A908F26BE9D2800C43D43 /* KeyChainModel.swift */,
+				D12B119B26CD924200777498 /* LoginUser.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -1095,6 +1098,7 @@
 				A95CD354269EB2BF002CCCA8 /* Enum+APIError.swift in Sources */,
 				D11C2DC126B82AA100C8EE51 /* VoteDetailTableViewController.swift in Sources */,
 				A95CD356269EB5B7002CCCA8 /* Enum+HTTPMethod.swift in Sources */,
+				D12B119C26CD924200777498 /* LoginUser.swift in Sources */,
 				A9E6DD7026C8AABA006155F3 /* OnePickViewModel.swift in Sources */,
 				D180457626B3F03B0053430E /* MainViewModel.swift in Sources */,
 			);
