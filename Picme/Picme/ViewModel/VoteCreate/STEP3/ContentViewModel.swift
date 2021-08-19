@@ -8,23 +8,43 @@
 import Foundation
 
 enum ExpirationDate: String, CaseIterable {
-    case zero   = "0 시간"
+    
+    case half   = "30 분"
     case one    = "1 시간"
     case two    = "2 시간"
     case three  = "3 시간"
     case six    = "6 시간"
     case twelve = "12 시간"
+    case day    = "24 시간"
+    
+    var timeValue: Int {
+        switch self {
+        case .half:     return 30
+        case .one:      return 1
+        case .two:      return 2
+        case .three:    return 3
+        case .six:      return 6
+        case .twelve:   return 12
+        case .day:      return 24
+        }
+    }
 }
 
 class ContentViewModel {
     
     static var imagesData: CreateCase = .userImage(date: [])
     static var imageMetaData: CreateCase = .userImageMetadata(data: CreateUserImages(isFirstPick: 0,
-                                                                                     metaData: []))
+                                                                                     sizes: []))
     
     var hasTitleText: Dynamic<Bool> = Dynamic(false)
     var hasVoteEndDate: Dynamic<Bool> = Dynamic(false)
     var isCompleteState: Dynamic<Bool> = Dynamic(false)
+    
+    
+    // 투표 통신완료시 홈화면으로 이동
+    var isCreateListComplete: Dynamic<Bool> = Dynamic(false)
+    var isCreateImageComplete: Dynamic<Bool> = Dynamic(false)
+    var isCreateComplete: Dynamic<Bool> = Dynamic(false)
     
     func completeCheck() {
         if hasTitleText.value == true && hasVoteEndDate.value == true {
@@ -36,32 +56,29 @@ class ContentViewModel {
     
     // 마감 시간
     func stringConvertDate(_ hour: ExpirationDate) -> String? {
-        
+    
         switch hour {
-        case .zero:
-            return addDate(0)
-        case .one:
-            return addDate(1)
-        case .two:
-            return addDate(2)
-        case .three:
-            return addDate(3)
-        case .six:
-            return addDate(6)
-        case .twelve:
-            return addDate(12)
+        case .half, .one, .two, .three, .six, .twelve, .day:
+            return addDate(hour.timeValue)
         }
     }
     
     func addDate(_ value: Int) -> String {
         let date = Date()
         
-        guard let addingDate = Calendar.current.date(byAdding: .hour, value: value, to: date) else { return "NULL"
-        }
-        
         let dateForMatter = DateFormatter()
         dateForMatter.dateFormat = "yy/MM/dd HH:mm"
         
+        var addingDate: Date?
+        
+        switch value {
+        case 30:
+            addingDate = Calendar.current.date(byAdding: .minute, value: value, to: date)
+        default:
+            addingDate = Calendar.current.date(byAdding: .hour, value: value, to: date)
+        }
+    
+        guard let addingDate = addingDate else { return "Null"}
         return dateForMatter.string(from: addingDate)
     }
     
@@ -70,7 +87,7 @@ class ContentViewModel {
         
     }
     
-    func createList(title: String, endDate: String) {
+    func createList(title: String, endDate: String, completion: @escaping () -> Void) {
         
         let dateformatter = DateFormatter()
         dateformatter.dateFormat = "yy/MM/dd HH:mm"
@@ -78,11 +95,18 @@ class ContentViewModel {
             
             let createList = CreateCase.listConfigure(title: title, endDate: stringConvertDate)
             
-            CreateVoteService.fetchCreateList(createList) { response in
+            CreateVoteService.fetchCreateList(createList) { [weak self] response in
                 print(response)
+                self?.isCreateListComplete.value = true
             }
             
-            CreateVoteService.fetchCreateImage(ContentViewModel.imagesData, ContentViewModel.imageMetaData)
+            CreateVoteService.fetchCreateImage(ContentViewModel.imagesData, ContentViewModel.imageMetaData) { [weak self] in
+                self?.isCreateImageComplete.value = true
+            }
+            
+            if isCreateListComplete.value == true && isCreateImageComplete.value == true {
+                completion()
+            }
         }
     }
 }

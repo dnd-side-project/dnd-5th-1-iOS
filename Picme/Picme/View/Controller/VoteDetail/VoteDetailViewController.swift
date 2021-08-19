@@ -1,10 +1,3 @@
-//
-//  VoteDetailViewController.swift
-//  Picme
-//
-//  Created by 권민하 on 2021/08/12.
-//
-
 import UIKit
 import ScalingCarousel
 
@@ -121,7 +114,6 @@ class VoteDetailViewController: BaseViewContoller {
 }
 
 // MARK: - Collection View Data Source
-
 typealias CarouselDatasource = VoteDetailViewController
 
 extension CarouselDatasource: UICollectionViewDataSource {
@@ -268,7 +260,6 @@ extension CarouselDatasource: UICollectionViewDataSource {
 }
 
 // MARK: - Collection View Delegate
-
 typealias CarouselDelegate = VoteDetailViewController
 
 extension VoteDetailViewController: UICollectionViewDelegate {
@@ -301,7 +292,6 @@ extension VoteDetailViewController: UICollectionViewDelegate {
 }
 
 // MARK: - Collection View Delegate Flow Layout
-
 private typealias ScalingCarouselFlowDelegate = VoteDetailViewController
 
 extension ScalingCarouselFlowDelegate: UICollectionViewDelegateFlowLayout {
@@ -318,7 +308,6 @@ extension ScalingCarouselFlowDelegate: UICollectionViewDelegateFlowLayout {
 }
 
 // MARK: - Helpers
-
 extension VoteDetailViewController {
     
     // MARK: - Set Up View
@@ -333,7 +322,7 @@ extension VoteDetailViewController {
         detailProfileImageView.kf.setImage(with: URL(string: userProfileimageUrl!), placeholder: #imageLiteral(resourceName: "profilePink"))
         // detailTitleLabel.text = dataSource.data.value[0].title
         // detailParticipantsLabel.text = String(dataSource.data.value[0].participantsNum!)
-        // Timer 설정 
+        // Timer 설정
         
         if loginUserNickName == userNickname { // 1. 투표 작성자인 경우 - Feedback View + 원픽 이미지
             print("투표 작성자인 경우")

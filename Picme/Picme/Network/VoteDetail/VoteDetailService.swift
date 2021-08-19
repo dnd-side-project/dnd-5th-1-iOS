@@ -14,7 +14,7 @@ protocol VoteDetailServiceProtocol: AnyObject {
 
 class VoteDetailService: VoteDetailServiceProtocol {
     func getVoteDetail(postId: Int, completion: @escaping ((NetworkResult<Any>) -> Void)) {
-        let URL = APIConstants.Post.voteDetail.urlString.replacingOccurrences(of: ":post_id", with: String(postId))
+        let URL = APIConstants.Post.postRetrieve(postID: String(postId)).urlString
         
         let dataRequest = AF.request(URL,
                                      method: .get,

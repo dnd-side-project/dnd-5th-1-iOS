@@ -32,13 +32,15 @@ struct APIConstants {
     // MARK: - URLs
     
     // Base URL
-    private static let baseURL = "http://4f6e573df140.ngrok.io"
+    private static let baseURL = "http://infra-pickm-cqhjwtrlxm6c-370004496.ap-northeast-2.elb.amazonaws.com"
     private static let urlVersion = "/v1"
     
     // MARK: - /Main URLs
     
     enum Auth {
+        /// 로그인 URL
         case signIn
+        /// 회원가입 URL
         case signUp
         
         var urlString: String {
@@ -52,18 +54,63 @@ struct APIConstants {
     }
     
     enum Post {
-        case main
-        case voteDetail
+        /// 게시글 생성 URL
+        case createPost
+        /// 게시글 리스트 조회 URL
+        case postListRetrieve
+        /// 게시글 조회 URL
+        case postRetrieve(postID: String)
+        /// 게시글 삭제 URL
+        case deletePost(postID: String)
         
         var urlString: String {
             switch self {
-            case .main:
+            case .createPost:
+                return "\(APIConstants.baseURL)\(APIConstants.urlVersion)/posts"
+            case .postListRetrieve:
                 return "\(APIConstants.baseURL)\(APIConstants.urlVersion)/posts?page=pageNum&limit=10"
-            case .voteDetail:
-                return "\(APIConstants.baseURL)\(APIConstants.urlVersion)/posts/:post_id"
+            case .postRetrieve(let postID):
+                return "\(APIConstants.baseURL)\(APIConstants.urlVersion)/posts/:\(postID)"
+            case .deletePost(let postID):
+                return "\(APIConstants.baseURL)\(APIConstants.urlVersion)/posts/:\(postID)"
             }
-            
         }
+    }
+    
+    enum Vote {
+        /// 투표 생성 URL
+        case createVote(postID: String, postImgeID: String)
+        /// 투표 삭제 URL
+        case deleteVote(postID: String, postImgeID: String)
+        
+        var urlString: String {
+            switch self {
+            case let .createVote(postID, postImageID):
+                return "\(APIConstants.baseURL)\(APIConstants.urlVersion)/votes/:\(postID)/:\(postImageID)"
+            case let .deleteVote(postID, postImageID):
+                return "\(APIConstants.baseURL)\(APIConstants.urlVersion)/votes/:\(postID)/:\(postImageID)"
+            }
+        }
+    }
+    
+    enum Image {
+        /// 이미지 생성 URL
+        case createImage(postID: String)
+        /// 이미지 삭제 URL
+        case deleteImage(postID: String)
+        
+        var urlString: String {
+            switch self {
+            case .createImage(let postID):
+                return "\(APIConstants.baseURL)\(APIConstants.urlVersion)/post-images/:\(postID)"
+            case .deleteImage(let postID):
+                return "\(APIConstants.baseURL)\(APIConstants.urlVersion)/post-images/:\(postID)"
+            }
+        }
+    }
+    
+    enum MyPage {
+        
     }
     
 }

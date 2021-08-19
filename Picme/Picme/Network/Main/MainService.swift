@@ -15,7 +15,7 @@ protocol MainServiceProtocol: AnyObject {
 class MainService: MainServiceProtocol {
     
     func getMainList(page: Int, completion: @escaping ((NetworkResult<Any>) -> Void)) {
-        let URL = APIConstants.Post.main.urlString.replacingOccurrences(of: "pageNum", with: String(page))
+        let URL = APIConstants.Post.postListRetrieve.urlString.replacingOccurrences(of: "pageNum", with: String(page))
         
         let dataRequest = AF.request(URL,
                                      method: .get,
