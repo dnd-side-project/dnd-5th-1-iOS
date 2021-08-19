@@ -7,9 +7,15 @@
 
 import UIKit
 
+protocol AlertViewwDelegate: AnyObject {
+    func loginButtonTapped()
+}
+
 class AlertView: UIView {
     
     static let instance = AlertView()
+    
+    var delegate: AlertViewwDelegate?
     
     @IBOutlet var rootView: UIView!
     @IBOutlet weak var alertView: UIView!
@@ -67,11 +73,11 @@ class AlertView: UIView {
     }
     
     @objc func doneButtonClicked(_ sender: UIButton) {
-        print("doneButton")
-
+        
         switch sender.tag {
         case 1:
-            print("login")
+            delegate?.loginButtonTapped()
+            rootView.removeFromSuperview()
         case 2:
             print("delete")
         case 3:
