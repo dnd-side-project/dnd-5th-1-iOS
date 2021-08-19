@@ -84,7 +84,7 @@ class OnboardingViewController: BaseViewContoller {
 extension OnboardingViewController: UITextFieldDelegate {
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        print(string.getArrayAfterRegex(regex: "[a-z]"))
+        
         let utf8Char = string.cString(using: .utf8)
         let isBackSpace = strcmp(utf8Char, "\\b")
         
@@ -115,8 +115,7 @@ extension String {
     
     func hasValidCharacter() -> Bool {
         do {
-            let regex = try NSRegularExpression(pattern: "^[A-Z0-9가-힣ㄱ-ㅎㅏ-ㅣ\\s]$",
-//            let regex = try NSRegularExpression(pattern: "^[a-z]*$",
+            let regex = try NSRegularExpression(pattern: "^[a-z0-9가-힣ㄱ-ㅎㅏ-ㅣ]$",
                                                 options: .caseInsensitive)
             if let _ = regex.firstMatch(in: self,
                                         options: .reportCompletion,
@@ -129,22 +128,6 @@ extension String {
         }
         return false
     }
-    
-    func getArrayAfterRegex(regex: String) -> [String] {
-           
-           do {
-               let regex = try NSRegularExpression(pattern: regex)
-               let results = regex.matches(in: self,
-                                           range: NSRange(self.startIndex..., in: self))
-               return results.map {
-                   String(self[Range($0.range, in: self)!])
-               }
-           } catch let error {
-               print("invalid regex: \(error.localizedDescription)")
-               return []
-           }
-       }
-    
 }
 
 // MARK: - UI

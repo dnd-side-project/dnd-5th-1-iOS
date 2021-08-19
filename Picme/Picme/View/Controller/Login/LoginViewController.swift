@@ -16,10 +16,17 @@ class LoginViewController: BaseViewContoller {
     
     @IBOutlet weak var mainTitleLabel: UILabel!
     @IBOutlet weak var kakaoLoginButton: UIButton!
-    @IBOutlet weak var appleLoginButton: ASAuthorizationAppleIDButton!
+    @IBOutlet weak var appleLoginButton: UIButton!
     @IBOutlet weak var unLoginButton: UIButton!
     
     var loginViewModel: LoginViewModel? = LoginViewModel()
+    
+    // 애플 로고
+    let appleLogoImage: UIImageView = {
+        $0.image = UIImage(named: "Black Logo Large")
+        $0.contentMode = .scaleAspectFill
+        return $0
+    }(UIImageView())
     
     // MARK: - LifeCycle
     
@@ -27,7 +34,6 @@ class LoginViewController: BaseViewContoller {
         super.viewDidLoad()
         
         loginViewModel?.loginDelegate = self
-        appleLoginButton.cornerRadius = 10
         
     }
 
@@ -51,7 +57,6 @@ class LoginViewController: BaseViewContoller {
         let mainViewController = mainStoryboard.instantiateViewController(withIdentifier:
                                                                             "TabBarController")
         self.present(mainViewController, animated: true, completion: nil)
-//        self.present(OnboardingViewController(), animated: true, completion: nil)
     }
 }
 
@@ -69,6 +74,15 @@ extension LoginViewController {
         return attributeString
     }
     
+    override func setProperties() {
+        
+        appleLoginButton.layer.cornerRadius = 10
+        appleLoginButton.backgroundColor = .white
+        appleLoginButton.setTitleColor(.solidColor(.solid0), for: .normal)
+        appleLoginButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 0)
+        appleLoginButton.addSubview(appleLogoImage)
+    }
+    
     override func setConfiguration() {
         
         // Color
@@ -80,6 +94,15 @@ extension LoginViewController {
         mainTitleLabel.attributedText = attributeString(text: mainTitleLabel.text, changeString: "인생사진")
         
         appleLoginButton.layer.cornerRadius = 12
+    }
+    
+    override func setConstraints() {
+        
+        appleLogoImage.snp.makeConstraints {
+            $0.leading.equalTo(appleLoginButton.snp.leading).offset(15)
+            $0.centerY.equalTo(appleLoginButton.snp.centerY)
+            $0.width.equalTo(24)
+        }
     }
 }
 
