@@ -251,7 +251,7 @@ extension ContentViewController {
         navigationItem.title = "제목/마감시간 설정"
         navigationItem.hidesBackButton = true
         
-        let customBackButton = UIBarButtonItem(image: UIImage(named: "navigationBackBtn"),
+        let customBackButton = UIBarButtonItem(image: UIImage(named: "leftArrow28"),
                                                style: .done,
                                                target: self,
                                                action: #selector(backAction(_:)))
