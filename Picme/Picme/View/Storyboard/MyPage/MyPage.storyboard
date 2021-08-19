@@ -47,14 +47,14 @@
                                         <rect key="frame" x="54" y="11" width="320" height="22"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="97g-wD-k1L">
-                                                <rect key="frame" x="0.0" y="0.0" width="174" height="22"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="176" height="22"/>
+                                                <fontDescription key="fontDescription" name="NotoSansCJKkr-Bold" family="Noto Sans CJK KR" pointSize="14"/>
+                                                <color key="textColor" red="0.90196078431372551" green="0.90588235294117647" blue="0.9137254901960784" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d1q-mG-sA1">
-                                                <rect key="frame" x="298" y="0.0" width="22" height="22"/>
-                                                <state key="normal" image="homeWhite"/>
+                                                <rect key="frame" x="300" y="0.0" width="20" height="22"/>
+                                                <state key="normal" image="configure"/>
                                                 <connections>
                                                     <action selector="userSettingAction:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="aIn-89-mlX"/>
                                                 </connections>
@@ -107,7 +107,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="homeWhite" width="22" height="20"/>
+        <image name="configure" width="20" height="20"/>
         <image name="profilePink" width="44" height="44"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

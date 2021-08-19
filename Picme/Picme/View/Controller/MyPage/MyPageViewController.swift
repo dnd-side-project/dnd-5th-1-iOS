@@ -19,6 +19,8 @@ class MyPageViewController: BaseViewContoller {
     @IBOutlet weak var userStackView: UIStackView!
     var mypageViewModel: MyPageViewModel?
     
+    let loginUserInfo = LoginUser.shared
+    
     // MARK: - LifeCycle
     
     override func viewDidLoad() {
@@ -27,13 +29,31 @@ class MyPageViewController: BaseViewContoller {
         mypageViewModel?.logOutDelegate = self
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if let nickName = loginUserInfo.userNickname,
+           let userImageUrl = loginUserInfo.userProfileImageUrl {
+            myPageSetting(name: nickName, image: userImageUrl)
+        } else {
+            myPageSetting(name: "로그인 전", image: "mypageWhite")
+        }
+    }
+    
     @IBAction func userSettingAction(_ sender: UIButton) {
         
     }
     
     @IBAction func logOutAction(_ sender: UIButton) {
-        mypageViewModel?.logOutAction()
         print("LogOut")
+        mypageViewModel?.logOutAction(from: loginUserInfo.vendor)
+        // 로그인 뷰로 이동 ( 초기화면으로 이동?)
+    }
+    
+    func myPageSetting(name: String, image: String) {
+        userIdentifierLabel.text = name
+        // 수정전
+        userImage.image = UIImage(named: image)
     }
 }
 
