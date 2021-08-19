@@ -68,6 +68,7 @@ class VoteDetailViewController: BaseViewContoller {
     var isPicked: Bool = false
     var firstRankSet: Set<Int> = []
     var isFirstRank: Bool = false
+    var isFirstSetUpResultPercent: Bool = false
     
     var dataSource = VoteDetailDatasource()
     var viewModel: VoteDetailViewModel!
@@ -85,13 +86,13 @@ class VoteDetailViewController: BaseViewContoller {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // 테스트 코드
         let image1 = VoteDetailImage(imageId: "0", imageUrl: "", pickedNum: 0, emotion: 0, composition: 0, light: 0, color: 0, skip: 0)
         let image2: VoteDetailImage = VoteDetailImage(imageId: "1", imageUrl: "", pickedNum: 8, emotion: 1, composition: 1, light: 4, color: 1, skip: 1)
         let image3: VoteDetailImage = VoteDetailImage(imageId: "2", imageUrl: "", pickedNum: 3, emotion: 1, composition: 0, light: 1, color: 0, skip: 1)
         let image4: VoteDetailImage = VoteDetailImage(imageId: "3", imageUrl: "", pickedNum: 4, emotion: 2, composition: 0, light: 0, color: 2, skip: 0)
         let image5: VoteDetailImage = VoteDetailImage(imageId: "4", imageUrl: "", pickedNum: 3, emotion: 1, composition: 0, light: 0, color: 1, skip: 1)
         
-        // 테스트 코드
         voteDetailImages = [image1, image2, image3, image4, image5]
         
         voteDetailModel = VoteDetailModel(onePickImageId: 2, isVoted: false, votedImageId: 0, title: "minha", participantsNum: 18, deadline: Date(), images: voteDetailImages!)
@@ -148,11 +149,10 @@ extension CarouselDatasource: UICollectionViewDataSource {
             let participantsNum = gino(voteDetailModel?.participantsNum)
             let count = gino(voteDetailModel?.images?.count)
             
-            print("partifcipantsNum : \(participantsNum), count : \(count)")
-            
             var pickedNums = [Int](repeating: 0, count: count)
             var percents = [Double](repeating: 0, count: count)
             
+            // 피드백 퍼센트 구하기
             for index in 0..<count {
                 let sensitivityCount = gino(voteDetailModel?.images?[index].emotion)
                 let compositionCount = gino(voteDetailModel?.images?[index].composition)
@@ -162,24 +162,25 @@ extension CarouselDatasource: UICollectionViewDataSource {
                 
                 let total = sensitivityCount + compositionCount + lightCount + colorCount + skipCount
                 
-                print("\(sensitivityCount) , \(compositionCount) , \(lightCount) , \(colorCount) , \(skipCount) , total : \(total)")
+                if total == 0 { // total이 0일 경우 0 / 0 = nan이니 예외처리
+                    voteDetailModel?.images?[index].sensitivityPercent = 0.0
+                    voteDetailModel?.images?[index].compositionPercent = 0.0
+                    voteDetailModel?.images?[index].lightPercent = 0.0
+                    voteDetailModel?.images?[index].colorPercent = 0.0
+                } else {
+                    voteDetailModel?.images?[index].sensitivityPercent = round((Double(sensitivityCount) / Double(total) * 100) * 10) / 10
+                    voteDetailModel?.images?[index].compositionPercent = round((Double(compositionCount) / Double(total) * 100) * 10) / 10
+                    voteDetailModel?.images?[index].lightPercent = round((Double(lightCount) / Double(total) * 100) * 10) / 10
+                    voteDetailModel?.images?[index].colorPercent = round((Double(colorCount) / Double(total) * 100) * 10) / 10
+                }
                 
-                voteDetailModel?.images?[index].sensitivityPercent = round(Double(sensitivityCount) / Double(total) * 100 * 10) / 10
-                voteDetailModel?.images?[index].compositionPercent = round(Double(compositionCount) / Double(total) * 100 * 10) / 10
-                voteDetailModel?.images?[index].lightPercent = round(Double(lightCount) / Double(total) * 100 * 10) / 10
-                voteDetailModel?.images?[index].colorPercent = round(Double(colorCount) / Double(total) * 100 * 10) / 10
-                
-                print("percet")
-                print("\(voteDetailModel?.images?[index].sensitivityPercent) , \(voteDetailModel?.images?[index].compositionPercent) , \(voteDetailModel?.images?[index].lightPercent) , \(voteDetailModel?.images?[index].colorPercent)")
-                
+                // 이미지 퍼센트 구하기
                 pickedNums[index] = gino(voteDetailModel?.images?[index].pickedNum)
                 percents[index] = round((Double(pickedNums[index]) / Double(participantsNum) * 100) * 10) / 10
                 voteDetailModel?.images?[index].percent = percents[index]
-                
-                print("percent : \(percents[index])")
             }
             
-            // percent 순위별 내림차순 정렬
+            // 이미지 percent 순위별 내림차순 정렬
             var dictionary = [Int: Double]()
             
             for index in 0..<percents.count {
@@ -187,10 +188,6 @@ extension CarouselDatasource: UICollectionViewDataSource {
             }
             
             let sortedDitionary = dictionary.sorted { $0.1 > $1.1 }
-            
-            for index in 0..<sortedDitionary.count {
-                print("index : \(index), per : \(sortedDitionary[index].key)")
-            }
             
             // 공동 순위 정리
             var rank = 1
@@ -222,28 +219,37 @@ extension CarouselDatasource: UICollectionViewDataSource {
                 cell.viewWidthConstraint.constant = 301
                 cell.resultColorView.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.5)
             } else {
-                let size = 100 / 237 * Int((voteDetailModel?.images?[indexPath.row].percent)!) + 62
+                let size = 239 * 0.01 * (voteDetailModel?.images?[indexPath.row].percent)! + 62
                 cell.viewWidthConstraint.constant = CGFloat(size)
                 
                 // 1위 이미지일 경우
                 if firstRankSet.contains(indexPath.row) {
+                    // 작성자 원픽이 1위 or 투표자 투표 이미지가 1위
                     if (loginUserNickName == userNickname && voteDetailModel?.onePickImageId == indexPath.row) || (loginUserNickName != userNickname && voteDetailModel?.votedImageId == indexPath.row) {
                         cell.resultColorView.backgroundColor = #colorLiteral(red: 0.9215686275, green: 0.2862745098, blue: 0.6039215686, alpha: 0.8)
                         isFirstRank = true
-                    } else {
+                    } else { // 1위가 다르면
                         cell.resultColorView.backgroundColor = #colorLiteral(red: 0.9411764706, green: 0.4745098039, blue: 0.2352941176, alpha: 0.8)
                         isFirstRank = false
                     }
-                } else {
+                } else { // 그 외
                     cell.resultColorView.backgroundColor = #colorLiteral(red: 0.2, green: 0.8, blue: 0.5490196078, alpha: 0.8)
                 }
             }
+            
+            // Pick View에서 투표시 바로 피드백 퍼센트가 반영되지 않기 때문에 투표 완료후 한 번 setupResultViewPercent 호출
+            if isFirstSetUpResultPercent {
+                setupResultViewPercent()
+                isFirstSetUpResultPercent = false
+            }
+
         } else { // 투표 선택 화면
             if isPicked {
+                // 선택한 이미지 핑크 뷰
                 if indexPath.item == selectedImageId {
-                    cell.viewWidthConstraint.constant = 301
+                    cell.viewWidthConstraint.constant = 301 // 300 말고 301로 해야 모서리가 꽉 채워짐
                     cell.diamondsImageView.isHidden = false
-                } else {
+                } else { // 나머지 이미지는 그대로
                     cell.viewWidthConstraint.constant = 0
                     cell.diamondsImageView.isHidden = true
                 }
@@ -278,90 +284,18 @@ extension VoteDetailViewController: UICollectionViewDelegate {
         detailPageControl.currentPage = currentPage
         
         if !isVoted {
+            // 투표 시작 뷰
             if isPicked {
-                if currentPage != selectedImageId {
+                if currentPage != selectedImageId { // pick 선택 전
                     pickView.isHidden = false
                     feedbackView.isHidden = true
-                } else {
+                } else { // pick 선택 후
                     pickView.isHidden = true
                     feedbackView.isHidden = false
                 }
             }
         } else {
-            /*
-            sensitivityPercentLabel.text = "\(gdno(voteDetailModel?.images?[currentPage].sensitivityPercent))%"
-            compositionPercentLabel.text = "\(gdno(voteDetailModel?.images?[currentPage].compositionPercent))%"
-            lightPercentLabel.text = "\(gdno(voteDetailModel?.images?[currentPage].lightPercent))%"
-            colorPercentLabel.text = "\(gdno(voteDetailModel?.images?[currentPage].colorPercent))%"
-            
-            // 감성
-            if sensitivityPercentLabel.text == "0.0%" {
-                sensitivityResultView.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.5)
-                sensitivityHeightConstraint.constant = 48
-            } else {
-                if firstRankSet.contains(currentPage) && isFirstRank {
-                    sensitivityResultView.backgroundColor = #colorLiteral(red: 0.9215686275, green: 0.2862745098, blue: 0.6039215686, alpha: 0.8)
-                } else if firstRankSet.contains(currentPage) && !isFirstRank {
-                    sensitivityResultView.backgroundColor = #colorLiteral(red: 0.9411764706, green: 0.4745098039, blue: 0.2352941176, alpha: 0.8)
-                } else {
-                    sensitivityResultView.backgroundColor = #colorLiteral(red: 0.2, green: 0.8, blue: 0.5490196078, alpha: 0.8)
-                }
-                
-                let size = 100 / 46 * Int((voteDetailModel?.images?[currentPage].sensitivityPercent)!) + 4
-                sensitivityHeightConstraint.constant = CGFloat(size)
-            }
-            
-            // 구도
-            if compositionPercentLabel.text == "0.0%" {
-                compositionResultView.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.5)
-                compositionHeightConstraint.constant = 48
-            } else {
-                if firstRankSet.contains(currentPage) && isFirstRank {
-                    compositionResultView.backgroundColor = #colorLiteral(red: 0.9215686275, green: 0.2862745098, blue: 0.6039215686, alpha: 0.8)
-                } else if firstRankSet.contains(currentPage) && !isFirstRank {
-                    compositionResultView.backgroundColor = #colorLiteral(red: 0.9411764706, green: 0.4745098039, blue: 0.2352941176, alpha: 0.8)
-                } else {
-                    compositionResultView.backgroundColor = #colorLiteral(red: 0.2, green: 0.8, blue: 0.5490196078, alpha: 0.8)
-                }
-                
-                let size = 100 / 46 * Int((voteDetailModel?.images?[currentPage].compositionPercent)!) + 4
-                compositionHeightConstraint.constant = CGFloat(size)
-            }
-            
-            // 조명
-            if lightPercentLabel.text == "0.0%" {
-                lightResultView.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.5)
-                lightHeightConstraint.constant = 48
-            } else {
-                if firstRankSet.contains(currentPage) && isFirstRank {
-                    lightResultView.backgroundColor = #colorLiteral(red: 0.9215686275, green: 0.2862745098, blue: 0.6039215686, alpha: 0.8)
-                } else if firstRankSet.contains(currentPage) && !isFirstRank {
-                    lightResultView.backgroundColor = #colorLiteral(red: 0.9411764706, green: 0.4745098039, blue: 0.2352941176, alpha: 0.8)
-                } else {
-                    lightResultView.backgroundColor = #colorLiteral(red: 0.2, green: 0.8, blue: 0.5490196078, alpha: 0.8)
-                }
-                
-                let size = 100 / 46 * Int((voteDetailModel?.images?[currentPage].lightPercent)!) + 4
-                lightHeightConstraint.constant = CGFloat(size)
-            }
-            
-            // 색감
-            if colorPercentLabel.text == "0.0%" {
-                colorResultView.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.5)
-                colorHeightConstraint.constant = 48
-            } else {
-                if firstRankSet.contains(currentPage) && isFirstRank {
-                    colorResultView.backgroundColor = #colorLiteral(red: 0.9215686275, green: 0.2862745098, blue: 0.6039215686, alpha: 0.8)
-                } else if firstRankSet.contains(currentPage) && !isFirstRank {
-                    colorResultView.backgroundColor = #colorLiteral(red: 0.9411764706, green: 0.4745098039, blue: 0.2352941176, alpha: 0.8)
-                } else {
-                    colorResultView.backgroundColor = #colorLiteral(red: 0.2, green: 0.8, blue: 0.5490196078, alpha: 0.8)
-                }
-                
-                let size = 100 / 46 * Int((voteDetailModel?.images?[currentPage].colorPercent)!) + 4
-                colorHeightConstraint.constant = CGFloat(size)
-            }
-            */
+            setupResultViewPercent()
         }
     }
 }
@@ -422,6 +356,8 @@ extension VoteDetailViewController {
         
     }
     
+    // MARK: - Set Up Result View(Feedback View)
+    
     private func setupResultView(isVoted: Bool) {
         pickView.isHidden = true
         feedbackView.isHidden = false
@@ -446,12 +382,95 @@ extension VoteDetailViewController {
         
     }
     
-    // MARK: - Button Tag
-    private func setupButtonTag() {
-        rightBarButton.tag = 0
-        // rightBarButton.tag = 1
+    // MARK: - Set Up Result View Percent
+    
+    private func setupResultViewPercent() {
+        // 투표 결과 뷰
+        sensitivityPercentLabel.text = "\(gdno(voteDetailModel?.images?[currentPage].sensitivityPercent))%"
+        compositionPercentLabel.text = "\(gdno(voteDetailModel?.images?[currentPage].compositionPercent))%"
+        lightPercentLabel.text = "\(gdno(voteDetailModel?.images?[currentPage].lightPercent))%"
+        colorPercentLabel.text = "\(gdno(voteDetailModel?.images?[currentPage].colorPercent))%"
         
-        rightBarButton.image = #imageLiteral(resourceName: "megaphone")
+        // 감성
+        if sensitivityPercentLabel.text == "0.0%" { // 0%
+            sensitivityResultView.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.5)
+            sensitivityHeightConstraint.constant = 48
+        } else {
+            if firstRankSet.contains(currentPage) && isFirstRank { // 1위 = 원픽 or 투표이미지
+                sensitivityResultView.backgroundColor = #colorLiteral(red: 0.9215686275, green: 0.2862745098, blue: 0.6039215686, alpha: 0.8)
+            } else if firstRankSet.contains(currentPage) && !isFirstRank { // 1위 != 원픽 or 투표이미지
+                sensitivityResultView.backgroundColor = #colorLiteral(red: 0.9411764706, green: 0.4745098039, blue: 0.2352941176, alpha: 0.8)
+            } else { // 그 외
+                sensitivityResultView.backgroundColor = #colorLiteral(red: 0.2, green: 0.8, blue: 0.5490196078, alpha: 0.8)
+            }
+            
+            // 뷰 사이즈 조정
+            let size = 44 * 0.01 * (voteDetailModel?.images?[currentPage].sensitivityPercent)! + 4
+            sensitivityHeightConstraint.constant = CGFloat(size)
+        }
+        
+        // 구도
+        if compositionPercentLabel.text == "0.0%" {
+            compositionResultView.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.5)
+            compositionHeightConstraint.constant = 48
+        } else {
+            if firstRankSet.contains(currentPage) && isFirstRank {
+                compositionResultView.backgroundColor = #colorLiteral(red: 0.9215686275, green: 0.2862745098, blue: 0.6039215686, alpha: 0.8)
+            } else if firstRankSet.contains(currentPage) && !isFirstRank {
+                compositionResultView.backgroundColor = #colorLiteral(red: 0.9411764706, green: 0.4745098039, blue: 0.2352941176, alpha: 0.8)
+            } else {
+                compositionResultView.backgroundColor = #colorLiteral(red: 0.2, green: 0.8, blue: 0.5490196078, alpha: 0.8)
+            }
+            
+            let size = 44 * 0.01 * (voteDetailModel?.images?[currentPage].compositionPercent)! + 4
+            compositionHeightConstraint.constant = CGFloat(size)
+        }
+        
+        // 조명
+        if lightPercentLabel.text == "0.0%" {
+            lightResultView.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.5)
+            lightHeightConstraint.constant = 48
+        } else {
+            if firstRankSet.contains(currentPage) && isFirstRank {
+                lightResultView.backgroundColor = #colorLiteral(red: 0.9215686275, green: 0.2862745098, blue: 0.6039215686, alpha: 0.8)
+            } else if firstRankSet.contains(currentPage) && !isFirstRank {
+                lightResultView.backgroundColor = #colorLiteral(red: 0.9411764706, green: 0.4745098039, blue: 0.2352941176, alpha: 0.8)
+            } else {
+                lightResultView.backgroundColor = #colorLiteral(red: 0.2, green: 0.8, blue: 0.5490196078, alpha: 0.8)
+            }
+            
+            let size = 44 * 0.01 * (voteDetailModel?.images?[currentPage].lightPercent)! + 4
+            lightHeightConstraint.constant = CGFloat(size)
+        }
+        
+        // 색감
+        if colorPercentLabel.text == "0.0%" {
+            colorResultView.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.5)
+            colorHeightConstraint.constant = 48
+        } else {
+            if firstRankSet.contains(currentPage) && isFirstRank {
+                colorResultView.backgroundColor = #colorLiteral(red: 0.9215686275, green: 0.2862745098, blue: 0.6039215686, alpha: 0.8)
+            } else if firstRankSet.contains(currentPage) && !isFirstRank {
+                colorResultView.backgroundColor = #colorLiteral(red: 0.9411764706, green: 0.4745098039, blue: 0.2352941176, alpha: 0.8)
+            } else {
+                colorResultView.backgroundColor = #colorLiteral(red: 0.2, green: 0.8, blue: 0.5490196078, alpha: 0.8)
+            }
+            
+            let size = 44 * 0.01 * (voteDetailModel?.images?[currentPage].colorPercent)! + 4
+            colorHeightConstraint.constant = CGFloat(size)
+        }
+    }
+    
+    // MARK: - Button Tag
+    
+    private func setupButtonTag() {
+        if userNickname == loginUserNickName { // 투표 작성자 - 삭제하기
+            rightBarButton.image = #imageLiteral(resourceName: "trashcan")
+            rightBarButton.tag = 0
+        } else { // 투표자 - 신고하기
+            rightBarButton.image = #imageLiteral(resourceName: "megaphone")
+            rightBarButton.tag = 1
+        }
         
         // Feedback Button
         sensitivityButton.tag = 2
@@ -459,7 +478,6 @@ extension VoteDetailViewController {
         lightButton.tag = 4
         colorButton.tag = 5
         skipButton.tag = 6
-        
     }
     
     // MARK: - Button Actions
@@ -481,9 +499,13 @@ extension VoteDetailViewController {
         skipButton.addTarget(self, action: #selector(feedbackButtonClicked), for: UIControl.Event.touchUpInside)
     }
     
+    // MARK: - Back Button Actions
+    
     @objc func backButtonClicked(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
     }
+    
+    // MARK: - Right Button Actions - Alert View
     
     @objc func rightButtonClicked(_ sender: UIButton) {
         switch sender.tag {
@@ -512,6 +534,8 @@ extension VoteDetailViewController {
         }
     }
     
+    // MARK: - Pick Button Actions
+    
     @objc func pickButtonClicked(_ sender: UIButton) {
         print("pickButton")
         
@@ -521,10 +545,11 @@ extension VoteDetailViewController {
         
         //        let indexPath = IndexPath(item: currentPage, section: 0)
         //        carouselCollectionView.reloadItems(at: [indexPath])
-        carouselCollectionView.reloadData()
         
-        print("select image id : \(selectedImageId)")
+        carouselCollectionView.reloadData()
     }
+    
+    // MARK: - Feedback Button Actions
     
     @objc func feedbackButtonClicked(_ sender: UIButton) {
         if !isVoted {
@@ -549,18 +574,22 @@ extension VoteDetailViewController {
                 print("error")
             }
             
-            // 투표 생성 서버 통신
+            // 투표 생성 서버 통신 작성 필요
             
             isVoted = true
             setupResultView(isVoted: true)
             voteDetailModel?.votedImageId = currentPage
+            isFirstSetUpResultPercent = true
             carouselCollectionView.reloadData()
-            
         } else {
             if sender.tag == 7 {
                 print("onePickButton")
                 
-                carouselCollectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+                if userNickname == loginUserNickName { // 투표 작성자 - 원픽 이미지로 이동
+                    carouselCollectionView.scrollToItem(at: IndexPath(row: voteDetailModel?.onePickImageId ?? 0, section: 0), at: .top, animated: true)
+                } else { // 투표자 - 투표한 이미지로 이동
+                    carouselCollectionView.scrollToItem(at: IndexPath(row: voteDetailModel?.votedImageId ?? 0, section: 0), at: .top, animated: true)
+                }
             }
         }
         
