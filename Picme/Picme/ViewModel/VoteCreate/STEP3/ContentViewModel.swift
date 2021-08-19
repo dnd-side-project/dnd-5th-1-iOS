@@ -34,7 +34,7 @@ class ContentViewModel {
     
     static var imagesData: CreateCase = .userImage(date: [])
     static var imageMetaData: CreateCase = .userImageMetadata(data: CreateUserImages(isFirstPick: 0,
-                                                                                     metaData: []))
+                                                                                     sizes: []))
     
     var hasTitleText: Dynamic<Bool> = Dynamic(false)
     var hasVoteEndDate: Dynamic<Bool> = Dynamic(false)
@@ -100,7 +100,7 @@ class ContentViewModel {
                 self?.isCreateListComplete.value = true
             }
             
-            CreateVoteService.fetchCreateImage(ContentViewModel.imagesData, ContentViewModel.imagesData) { [weak self] in
+            CreateVoteService.fetchCreateImage(ContentViewModel.imagesData, ContentViewModel.imageMetaData) { [weak self] in
                 self?.isCreateImageComplete.value = true
             }
             

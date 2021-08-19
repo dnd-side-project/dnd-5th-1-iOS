@@ -62,27 +62,27 @@ class ContentViewController: BaseViewContoller {
     @IBAction func registVote(_ sender: UIButton) {
         print("Regist")
         
-        self.dismiss(animated: true) {
-            
-            //
-            if let sceneDelegate = UIApplication.shared.connectedScenes.first!.delegate as? SceneDelegate, let initVC = sceneDelegate.window?.rootViewController {
-                    
-                Toast.show(using: .voteUpload, controller: initVC)
-            }
-        }
-        
-//        if let voteText = voteTextView.text, let voteEndDate = voteEndDateTextfield.text {
-//            contentViewModel?.createList(title: voteText, endDate: voteEndDate, completion: {
-//                self.dismiss(animated: true) {
-//
-//                    //
-//                    if let sceneDelegate = UIApplication.shared.connectedScenes.first!.delegate as? SceneDelegate, let initVC = sceneDelegate.window?.rootViewController {
-//
-//                        Toast.show(using: .voteComplete, controller: initVC)
-//                    }
-//                }
-//            })
+//        self.dismiss(animated: true) {
+//            
+//            //
+//            if let sceneDelegate = UIApplication.shared.connectedScenes.first!.delegate as? SceneDelegate, let initVC = sceneDelegate.window?.rootViewController {
+//                    
+//                Toast.show(using: .voteUpload, controller: initVC)
+//            }
 //        }
+        
+        if let voteText = voteTextView.text, let voteEndDate = voteEndDateTextfield.text {
+            contentViewModel?.createList(title: voteText, endDate: voteEndDate, completion: {
+                self.dismiss(animated: true) {
+
+                    //
+                    if let sceneDelegate = UIApplication.shared.connectedScenes.first!.delegate as? SceneDelegate, let initVC = sceneDelegate.window?.rootViewController {
+
+                        Toast.show(using: .voteComplete, controller: initVC)
+                    }
+                }
+            })
+        }
         
     }
     

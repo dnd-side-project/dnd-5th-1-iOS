@@ -63,7 +63,7 @@ struct CreateVoteService {
         case let .userImageMetadata(data):
             parameter = [
                 "isFirstPick": data.isFirstPick,
-                "metadata": data.metaData
+                "metadata": data.sizes
             ]
             
         default:
@@ -99,11 +99,15 @@ struct CreateVoteService {
             
             if case let .userImage(date) = configure,
                case let .userImageMetadata(data) = configureCase {
-                
+                print(data)
+//                parameter = [
+//                    "files": date,
+//                    "isFirstPick": data.isFirstPick,
+//                    "metadata": data.metaData
+//                ]
                 parameter = [
                     "files": date,
-                    "isFirstPick": data.isFirstPick,
-                    "metadata": data.metaData
+                    "metaData": data
                 ]
             }
             
@@ -130,17 +134,36 @@ struct CreateVoteService {
                                 count += 1
                             }
                         }
-                    case "isFirstPick":
-                        if let value = value as? Int {
-                            muti.append("\(value)".data(using: .utf8)!, withName: key)
-                        }
-                    case "metadata":
-                        if let value = value as? [UserImageSize] {
+                    case "metaData":
+                        if let value = value as? CreateUserImages {
+                            print(value)
                             muti.append("\(value)".data(using: .utf8)!, withName: key)
                         }
                     default:
                         return
                     }
+                    
+//                    switch key {
+//                    case "files":
+//                        if let value = value as? [Data] {
+//                            value.forEach {
+//                                print($0)
+//                                let timeStamp = Date().timeIntervalSince1970
+//                                muti.append($0, withName: "files", fileName: "\(timeStamp)_123_\(count)", mimeType: "image/jpg")
+//                                count += 1
+//                            }
+//                        }
+//                    case "isFirstPick":
+//                        if let value = value as? Int {
+//                            muti.append("\(value)".data(using: .utf8)!, withName: key)
+//                        }
+//                    case "metadata":
+//                        if let value = value as? [UserImageSize] {
+//                            muti.append("\(value)".data(using: .utf8)!, withName: key)
+//                        }
+//                    default:
+//                        return
+//                    }
                     
                 }
             }, to: url,
