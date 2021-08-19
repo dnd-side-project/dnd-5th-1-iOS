@@ -10,9 +10,13 @@ import SnapKit
 
 enum ToastKind: String {
     
-    case voteUpload = "내가 만든 투표가 업로드 되었어요."
+    /// 게시글 제거
     case remove = "게시글이 삭제되었어요."
+    /// 게시글 삭제
     case report = "게시글이 신고되었어요."
+    /// 투표 생성 완료시
+    case voteUpload = "내가 만든 투표가 업로드 되었어요."
+    /// 투표했을 때
     case voteComplete = "투표가 완료되었어요."
     
     var image: UIImage? {
@@ -20,7 +24,7 @@ enum ToastKind: String {
         case .report:
             return UIImage(named: "bangPink")
         case .remove, .voteComplete, .voteUpload:
-            return UIImage(named: "checkPinkSVG")
+            return UIImage(named: "checkPink")
         }
     }
 }

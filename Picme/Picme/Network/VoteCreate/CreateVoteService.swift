@@ -85,7 +85,9 @@ struct CreateVoteService {
             }
     }
     
-    static func fetchCreateImage(_ configure: CreateCase, _ configureCase: CreateCase) {
+    static func fetchCreateImage(_ configure: CreateCase,
+                                 _ configureCase: CreateCase,
+                                 completion: @escaping () -> Void) {
             
             let url = APIConstants.Post.main.urlString
             
@@ -145,6 +147,7 @@ struct CreateVoteService {
             method: .post, headers: ["Content-type": "multipart/form-data"])
             .response { response in
                 print(response.response?.statusCode)
+                completion()
             }
         }
 }

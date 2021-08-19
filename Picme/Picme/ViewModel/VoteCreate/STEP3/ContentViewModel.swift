@@ -40,6 +40,12 @@ class ContentViewModel {
     var hasVoteEndDate: Dynamic<Bool> = Dynamic(false)
     var isCompleteState: Dynamic<Bool> = Dynamic(false)
     
+    
+    // 투표 통신완료시 홈화면으로 이동
+    var isCreateListComplete: Dynamic<Bool> = Dynamic(false)
+    var isCreateImageComplete: Dynamic<Bool> = Dynamic(false)
+    var isCreateComplete: Dynamic<Bool> = Dynamic(false)
+    
     func completeCheck() {
         if hasTitleText.value == true && hasVoteEndDate.value == true {
             isCompleteState.value = true
@@ -81,7 +87,7 @@ class ContentViewModel {
         
     }
     
-    func createList(title: String, endDate: String) {
+    func createList(title: String, endDate: String, completion: @escaping () -> Void) {
         
         let dateformatter = DateFormatter()
         dateformatter.dateFormat = "yy/MM/dd HH:mm"
@@ -89,11 +95,18 @@ class ContentViewModel {
             
             let createList = CreateCase.listConfigure(title: title, endDate: stringConvertDate)
             
-            CreateVoteService.fetchCreateList(createList) { response in
+            CreateVoteService.fetchCreateList(createList) { [weak self] response in
                 print(response)
+                self?.isCreateListComplete.value = true
             }
             
-            CreateVoteService.fetchCreateImage(ContentViewModel.imagesData, ContentViewModel.imageMetaData)
+            CreateVoteService.fetchCreateImage(ContentViewModel.imagesData, ContentViewModel.imagesData) { [weak self] in
+                self?.isCreateImageComplete.value = true
+            }
+            
+            if isCreateListComplete.value == true && isCreateImageComplete.value == true {
+                completion()
+            }
         }
     }
 }
