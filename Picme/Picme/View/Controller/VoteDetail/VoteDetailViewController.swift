@@ -1,10 +1,3 @@
-//
-//  VoteDetailViewController.swift
-//  Picme
-//
-//  Created by 권민하 on 2021/08/12.
-//
-
 import UIKit
 import ScalingCarousel
 
@@ -121,7 +114,6 @@ class VoteDetailViewController: BaseViewContoller {
 }
 
 // MARK: - Collection View Data Source
-
 typealias CarouselDatasource = VoteDetailViewController
 
 extension CarouselDatasource: UICollectionViewDataSource {
@@ -268,7 +260,6 @@ extension CarouselDatasource: UICollectionViewDataSource {
 }
 
 // MARK: - Collection View Delegate
-
 typealias CarouselDelegate = VoteDetailViewController
 
 extension VoteDetailViewController: UICollectionViewDelegate {
@@ -301,7 +292,6 @@ extension VoteDetailViewController: UICollectionViewDelegate {
 }
 
 // MARK: - Collection View Delegate Flow Layout
-
 private typealias ScalingCarouselFlowDelegate = VoteDetailViewController
 
 extension ScalingCarouselFlowDelegate: UICollectionViewDelegateFlowLayout {
@@ -318,7 +308,6 @@ extension ScalingCarouselFlowDelegate: UICollectionViewDelegateFlowLayout {
 }
 
 // MARK: - Helpers
-
 extension VoteDetailViewController {
     
     // MARK: - Set Up View
@@ -333,7 +322,7 @@ extension VoteDetailViewController {
         detailProfileImageView.kf.setImage(with: URL(string: userProfileimageUrl!), placeholder: #imageLiteral(resourceName: "profilePink"))
         // detailTitleLabel.text = dataSource.data.value[0].title
         // detailParticipantsLabel.text = String(dataSource.data.value[0].participantsNum!)
-        // Timer 설정 
+        // Timer 설정
         
         if loginUserNickName == userNickname { // 1. 투표 작성자인 경우 - Feedback View + 원픽 이미지
             print("투표 작성자인 경우")
@@ -518,8 +507,8 @@ extension VoteDetailViewController {
                 정말 삭제하시겠어요?
                 """
             
-//            AlertView.instance.showAlert(
-//                title: alertTitle, denyButtonTitle: "아니요", doneButtonTitle: "삭제하기", image: #imageLiteral(resourceName: "trash"), alertType: .delete)
+            AlertView.instance.showAlert(
+                title: alertTitle, denyButtonTitle: "아니요", doneButtonTitle: "삭제하기", image: #imageLiteral(resourceName: "trash"), alertType: .delete)
         case 1:
             print("report")
             
@@ -528,8 +517,8 @@ extension VoteDetailViewController {
                 신고를 하면 더 이상 게시글이 안보여요.
                 """
             
-//            AlertView.instance.showAlert(
-//                title: alertTitle, denyButtonTitle: "아니요", doneButtonTitle: "신고하기", image: #imageLiteral(resourceName: "report"), alertType: .report)
+            AlertView.instance.showAlert(
+                title: alertTitle, denyButtonTitle: "아니요", doneButtonTitle: "신고하기", image: #imageLiteral(resourceName: "report"), alertType: .report)
         default:
             print("error")
         }
