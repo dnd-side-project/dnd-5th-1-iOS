@@ -13,7 +13,7 @@ struct CreateVoteService {
     static func fetchCreateList(_ configure: CreateCase,
                                 completion: @escaping ResultModel<CreateListReponseModel>) {
         
-        let url = APIConstants.Post.main.urlString
+        let url = APIConstants.Post.postListRetrieve.urlString
         
         var parameter: CreateListModel?
         let header: HTTPHeaders = [
@@ -52,7 +52,7 @@ struct CreateVoteService {
     static func fetchCreateMetaData(_ configure: CreateCase,
                                     completion: @escaping ResultModel<CreateListReponseModel>) {
         
-        let url = APIConstants.Post.main.urlString
+        let url = APIConstants.Post.postListRetrieve.urlString
         
         var parameter: [String: Any]?
         let header: HTTPHeaders = [
@@ -89,7 +89,7 @@ struct CreateVoteService {
                                  _ configureCase: CreateCase,
                                  completion: @escaping () -> Void) {
             
-            let url = APIConstants.Post.main.urlString
+            let url = APIConstants.Post.postListRetrieve.urlString
             
             var parameter: [String: Any]?
             
