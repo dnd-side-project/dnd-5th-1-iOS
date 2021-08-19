@@ -8,12 +8,26 @@
 import Foundation
 
 enum ExpirationDate: String, CaseIterable {
-    case zero   = "0 시간"
+    
+    case half   = "30 분"
     case one    = "1 시간"
     case two    = "2 시간"
     case three  = "3 시간"
     case six    = "6 시간"
     case twelve = "12 시간"
+    case day    = "24 시간"
+    
+    var timeValue: Int {
+        switch self {
+        case .half:     return 30
+        case .one:      return 1
+        case .two:      return 2
+        case .three:    return 3
+        case .six:      return 6
+        case .twelve:   return 12
+        case .day:      return 24
+        }
+    }
 }
 
 class ContentViewModel {
@@ -36,32 +50,29 @@ class ContentViewModel {
     
     // 마감 시간
     func stringConvertDate(_ hour: ExpirationDate) -> String? {
-        
+    
         switch hour {
-        case .zero:
-            return addDate(0)
-        case .one:
-            return addDate(1)
-        case .two:
-            return addDate(2)
-        case .three:
-            return addDate(3)
-        case .six:
-            return addDate(6)
-        case .twelve:
-            return addDate(12)
+        case .half, .one, .two, .three, .six, .twelve, .day:
+            return addDate(hour.timeValue)
         }
     }
     
     func addDate(_ value: Int) -> String {
         let date = Date()
         
-        guard let addingDate = Calendar.current.date(byAdding: .hour, value: value, to: date) else { return "NULL"
-        }
-        
         let dateForMatter = DateFormatter()
         dateForMatter.dateFormat = "yy/MM/dd HH:mm"
         
+        var addingDate: Date?
+        
+        switch value {
+        case 30:
+            addingDate = Calendar.current.date(byAdding: .minute, value: value, to: date)
+        default:
+            addingDate = Calendar.current.date(byAdding: .hour, value: value, to: date)
+        }
+    
+        guard let addingDate = addingDate else { return "Null"}
         return dateForMatter.string(from: addingDate)
     }
     

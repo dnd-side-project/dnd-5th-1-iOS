@@ -74,9 +74,9 @@ class ContentViewController: BaseViewContoller {
         toolBar.tintColor = .white
         toolBar.sizeToFit()
         
-        let doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItem.Style.done, target: self, action: #selector(toolBarDoneButton(_:)))
+        let doneButton = UIBarButtonItem(title: "완료", style: UIBarButtonItem.Style.done, target: self, action: #selector(toolBarDoneButton(_:)))
         let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
-        let cancelButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItem.Style.plain, target: self, action: #selector(toolBarCancelButton(_:)))
+        let cancelButton = UIBarButtonItem(title: "취소", style: UIBarButtonItem.Style.plain, target: self, action: #selector(toolBarCancelButton(_:)))
 
         toolBar.setItems([cancelButton, spaceButton, doneButton], animated: false)
         toolBar.isUserInteractionEnabled = true
@@ -87,11 +87,19 @@ class ContentViewController: BaseViewContoller {
     
     @objc func toolBarDoneButton(_ sender: UIButton) {
         print("DONE")
+        if voteEndDateTextfield.text == contentViewModel?.addDate(0) {
+            contentViewModel?.hasVoteEndDate.value = false
+        }
+        
+        contentViewModel?.completeCheck()
         voteEndDateTextfield.resignFirstResponder()
     }
     
     @objc func toolBarCancelButton(_ sender: UIButton) {
-        voteEndDateTextfield.text = nil
+        voteEndDateTextfield.text = contentViewModel?.addDate(0)
+        contentViewModel?.hasVoteEndDate.value = false
+        
+        contentViewModel?.completeCheck()
         voteEndDateTextfield.resignFirstResponder()
     }
     
@@ -152,9 +160,10 @@ extension ContentViewController: UIPickerViewDelegate, UIPickerViewDataSource {
         
         voteEndDateTextfield.text = contentVM.stringConvertDate(ExpirationDate.allCases[row])
         
-        if voteEndDateTextfield.text != "" {
+        if voteEndDateTextfield.text != "" && voteEndDateTextfield.text != contentViewModel?.addDate(0) {
             contentViewModel?.hasVoteEndDate.value = true
         }
+        
         contentViewModel?.completeCheck()
     }
 }
