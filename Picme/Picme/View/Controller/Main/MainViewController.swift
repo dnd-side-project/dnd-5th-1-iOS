@@ -97,7 +97,7 @@ class MainViewController: BaseViewContoller, TouchDelegate {
     
     func pushVoteDetailView(index: Int, postId: String) {
         
-        //if APIConstants.jwtToken != "" { // 미로그인 사용자
+        if APIConstants.jwtToken != "" { // 미로그인 사용자
         let alertTitle = """
             로그인 해야 투표를 할 수 있어요.
             로그인을 해주시겠어요?
@@ -106,13 +106,13 @@ class MainViewController: BaseViewContoller, TouchDelegate {
         AlertView.instance.showAlert(
             title: alertTitle, denyButtonTitle: "더 둘러보기", doneButtonTitle: "로그인하기", image: #imageLiteral(resourceName: "eyeLarge"), alertType: .login)
         AlertView.instance.delegate = self
-        //        } else { // 로그인한 사용자
-        //            guard let voteDetailVC = self.storyboard?.instantiateViewController(withIdentifier: "VoteDetailViewController") as? VoteDetailViewController else { return }
-        //            voteDetailVC.postId = "1"
-        //            voteDetailVC.userNickname = "minha"
-        //            voteDetailVC.userProfileimageUrl = ""
-        //            self.navigationController?.pushViewController(voteDetailVC, animated: true)
-        //        }
+                } else { // 로그인한 사용자
+                    guard let voteDetailVC = self.storyboard?.instantiateViewController(withIdentifier: "VoteDetailViewController") as? VoteDetailViewController else { return }
+                    voteDetailVC.postId = "1"
+                    voteDetailVC.userNickname = "minha"
+                    voteDetailVC.userProfileimageUrl = ""
+                    self.navigationController?.pushViewController(voteDetailVC, animated: true)
+                }
     }
     
 }
@@ -125,7 +125,8 @@ extension MainViewController: AlertViewwDelegate {
             let storyboard = UIStoryboard(name: "Login", bundle: nil)
             let loginVC = storyboard.instantiateViewController(withIdentifier: "LoginViewController")
             loginVC.modalPresentationStyle = .fullScreen
-            UIApplication.shared.keyWindow?.rootViewController = loginVC
+            let window = UIApplication.shared.windows.first { $0.isKeyWindow }
+            window?.rootViewController = loginVC
         })
     }
 }
