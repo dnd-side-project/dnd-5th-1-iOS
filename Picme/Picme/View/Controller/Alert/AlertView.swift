@@ -88,7 +88,7 @@ class AlertView: UIView {
     }
     
     @objc func removeButtonClicked(_ sender: UIButton) {
-
+        rootView.removeFromSuperview()
     }
     
 }
