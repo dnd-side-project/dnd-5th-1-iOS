@@ -102,17 +102,16 @@ class MainViewController: BaseViewContoller, TouchDelegate {
             로그인 해야 투표를 할 수 있어요.
             로그인을 해주시겠어요?
             """
-        
-        AlertView.instance.showAlert(
-            title: alertTitle, denyButtonTitle: "더 둘러보기", doneButtonTitle: "로그인하기", image: #imageLiteral(resourceName: "eyeLarge"), alertType: .login)
-        AlertView.instance.delegate = self
-        //        } else { // 로그인한 사용자
-        //            guard let voteDetailVC = self.storyboard?.instantiateViewController(withIdentifier: "VoteDetailViewController") as? VoteDetailViewController else { return }
-        //            voteDetailVC.postId = "1"
-        //            voteDetailVC.userNickname = "minha"
-        //            voteDetailVC.userProfileimageUrl = ""
-        //            self.navigationController?.pushViewController(voteDetailVC, animated: true)
-        //        }
+            
+//            AlertView.instance.showAlert(
+//            title: alertTitle, denyButtonTitle: "더 둘러보기", doneButtonTitle: "로그인하기", image: #imageLiteral(resourceName: "eyeLarge"), alertType: .login)
+        } else { // 로그인한 사용자
+            guard let voteDetailVC = self.storyboard?.instantiateViewController(withIdentifier: "VoteDetailViewController") as? VoteDetailViewController else { return }
+            voteDetailVC.postId = "1"
+            voteDetailVC.userNickname = "minha"
+            voteDetailVC.userProfileimageUrl = ""
+            self.navigationController?.pushViewController(voteDetailVC, animated: true)
+        }
     }
     
 }
@@ -141,6 +140,10 @@ class MainListDatasource: GenericDataSource<MainModel>, UITableViewDataSource, C
     // Collection View Cell 클릭시 실행할 함수
     func selectedCVCell(_ index: Int, _ postId: String) {
         delegate?.pushVoteDetailView(index: index, postId: postId)
+        
+        AlertView().showAlert(title: "1", denyButtonTitle: "2", doneButtonTitle: "3", image: UIImage(named: "buttonBG")!, alertType: .login) {
+            print("Lets login")
+        }
     }
     
     // MARK: - Table View Data Source

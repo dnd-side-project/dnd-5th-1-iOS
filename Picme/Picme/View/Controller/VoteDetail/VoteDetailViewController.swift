@@ -518,8 +518,8 @@ extension VoteDetailViewController {
                 정말 삭제하시겠어요?
                 """
             
-            AlertView.instance.showAlert(
-                title: alertTitle, denyButtonTitle: "아니요", doneButtonTitle: "삭제하기", image: #imageLiteral(resourceName: "trash"), alertType: .delete)
+//            AlertView.instance.showAlert(
+//                title: alertTitle, denyButtonTitle: "아니요", doneButtonTitle: "삭제하기", image: #imageLiteral(resourceName: "trash"), alertType: .delete)
         case 1:
             print("report")
             
@@ -528,8 +528,8 @@ extension VoteDetailViewController {
                 신고를 하면 더 이상 게시글이 안보여요.
                 """
             
-            AlertView.instance.showAlert(
-                title: alertTitle, denyButtonTitle: "아니요", doneButtonTitle: "신고하기", image: #imageLiteral(resourceName: "report"), alertType: .report)
+//            AlertView.instance.showAlert(
+//                title: alertTitle, denyButtonTitle: "아니요", doneButtonTitle: "신고하기", image: #imageLiteral(resourceName: "report"), alertType: .report)
         default:
             print("error")
         }
