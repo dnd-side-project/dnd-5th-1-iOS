@@ -324,7 +324,7 @@ extension VoteDetailViewController {
     // MARK: - Set Up View
     
     private func setupView() {
-        
+    
         // Page Control
         detailPageControl.numberOfPages = voteDetailModel?.images?.count ?? 0
         detailPageControl.currentPage = 0
@@ -363,7 +363,8 @@ extension VoteDetailViewController {
         feedbackView.isHidden = false
         
         if isVoted {
-            skipButton.setImage(#imageLiteral(resourceName: "profilePink"), for: .normal)
+            skipButton.setImage(#imageLiteral(resourceName: "onePickButton"), for: .normal)
+            skipButton.setImage(#imageLiteral(resourceName: "onePickButtonDisabled"), for: .highlighted)
             skipButton.setTitle("", for: .normal)
             skipButton.tag = 7
             onePickLabel.text = "내 원픽!"
