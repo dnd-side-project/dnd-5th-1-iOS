@@ -14,6 +14,8 @@ import UIKit
     @objc optional func listRemoveTapped()
     @objc optional func reportTapped()
     @objc optional func serviceTapped()
+    
+    @objc optional func moveToHomeTab()
 }
 
 class AlertView: UIView {
@@ -59,23 +61,29 @@ class AlertView: UIView {
     }
     
     enum AlertType: Int {
-        /// 로그인, Tag = 0
-        case logIn = 0
-        /// 로그아웃, Tag = 1
+        /// 로그인, Tag = 0, 1, 2
+        case logInDetail
+        case logInVote
+        case logInMypage
+        /// 로그아웃, Tag = 3
         case logOut
-        /// 입력중인 데이터 취소, Tag = 2
+        /// 입력중인 데이터 취소, Tag = 4
         case inputDataCencel
-        /// 리스트 제거, Tag = 3
+        /// 리스트 제거, Tag = 5
         case listRemove
-        /// 신고하기, Tag = 4
+        /// 신고하기, Tag = 6
         case report
-        /// 서비스 준비중, Tag = 5
+        /// 서비스 준비중, Tag = 7
         case service
         
         fileprivate var title: String {
             switch self {
-            case .logIn:
+            case .logInDetail:
                 return "로그인을 해야 투표를 볼 수 있어요.\n로그인을 해주시겠어요?"
+            case .logInVote:
+                return "로그인을 해야 투표를 만들 수 있어요.\n로그인을 해주시겠어요?"
+            case .logInMypage:
+                return "로그인을 해야 투표를 이용할 수 있어요.\n로그인을 해주시겠어요?"
             case .logOut:
                 return "정말 로그아웃 하시겠어요?"
             case .inputDataCencel:
@@ -93,7 +101,7 @@ class AlertView: UIView {
             switch self {
             case .logOut, .inputDataCencel, .listRemove, .report:
                 return "아니요"
-            case .logIn:
+            case .logInDetail, .logInVote, .logInMypage:
                 return "더 둘러볼래요"
             case .service:
                 return ""
@@ -102,7 +110,7 @@ class AlertView: UIView {
         
         fileprivate var doneButtonText: String {
             switch self {
-            case .logIn:
+            case .logInDetail, .logInVote, .logInMypage:
                 return "로그인하기"
             case .logOut:
                 return "로그아웃"
@@ -119,7 +127,7 @@ class AlertView: UIView {
         
         fileprivate var image: UIImage? {
             switch self {
-            case .logIn, .logOut:
+            case .logInDetail, .logInVote, .logInMypage, .logOut:
                 return UIImage(named: "eyeLarge")
             case .inputDataCencel, .listRemove:
                 return UIImage(named: "trash")
@@ -132,13 +140,13 @@ class AlertView: UIView {
     }
     
     func showAlert(using type: AlertType) {
-        
         titleLabel.text = type.title
         imageView.image = type.image
         denyButton.setTitle(type.cancelButtonText, for: .normal)
         doneButton.setTitle(type.doneButtonText, for: .normal)
         
         doneButton.tag = type.rawValue
+        denyButton.tag = type.rawValue
         
         if type == .service {
             buttonStackView.isHidden = true
@@ -150,7 +158,6 @@ class AlertView: UIView {
     }
     
     @objc func doneButtonClicked(_ sender: UIButton) {
-        
         switch sender.tag {
         case 0:
             actionDelegate?.loginTapped?()
@@ -172,6 +179,10 @@ class AlertView: UIView {
     }
     
     @objc func removeButtonClicked(_ sender: UIButton) {
+        // 로그인 Alert창에서 둘러보기를 누르면 홈 탭으로 이동
+        if sender.tag == 0 || sender.tag == 1 || sender.tag == 2 {
+            actionDelegate?.moveToHomeTab?()
+        }
         rootView.removeFromSuperview()
     }
 }

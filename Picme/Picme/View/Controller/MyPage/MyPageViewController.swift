@@ -37,9 +37,9 @@ class MyPageViewController: BaseViewContoller {
         
         mypageViewModel?.logOutDelegate = self
         
-        userIdentifierLabel.text = loginUserInfo.userNickname
-        userImage.kf.setImage(with: URL(string: loginUserInfo.userProfileImageUrl!), placeholder: #imageLiteral(resourceName: "progressCircle"))
-        
+//        userIdentifierLabel.text = loginUserInfo.userNickname
+//        userImage.kf.setImage(with: URL(string: loginUserInfo.userProfileImageUrl!), placeholder: #imageLiteral(resourceName: "progressCircle"))
+//        
         setupButtons()
     }
     

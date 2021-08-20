@@ -115,7 +115,7 @@ class MainViewController: BaseViewContoller, TouchDelegate {
     
     func pushVoteDetailView(index: Int, postId: String, postNickname: String, postProfileUrl: String) {
         if APIConstants.jwtToken == "" { // 미로그인 사용자
-            AlertView.instance.showAlert(using: .logIn)
+            AlertView.instance.showAlert(using: .logInDetail)
             AlertView.instance.actionDelegate = self
         } else { // 로그인한 사용자
             guard let voteDetailVC = self.storyboard?.instantiateViewController(withIdentifier: "VoteDetailViewController") as? VoteDetailViewController else { return }
