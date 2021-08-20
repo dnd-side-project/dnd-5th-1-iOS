@@ -7,8 +7,8 @@
 
 import Foundation
 
-class UserInfo {
-    static let shared: UserInfo = UserInfo()
+class OnboardingUserInfo {
+    static let shared: OnboardingUserInfo = OnboardingUserInfo()
     
     private init() {}
     

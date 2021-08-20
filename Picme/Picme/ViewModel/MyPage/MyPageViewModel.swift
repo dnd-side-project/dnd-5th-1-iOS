@@ -18,6 +18,8 @@ class MyPageViewModel {
     
     weak var logOutDelegate: LogOutProtocol?
     
+    let loginUserInfo = LoginUser.shared
+    
     func logOutAction(from kind: String?) {
         
         guard let kind = kind else { return }
@@ -29,16 +31,31 @@ class MyPageViewModel {
                 if let err = error {
                     print(err.localizedDescription)
                 } else {
-                    self?.logOutDelegate?.logoutFromMain()
+                    
                     print("Kakao Log Out Success")
+                    
+                    self?.userInfoRemove()
+                    self?.logOutDelegate?.logoutFromMain()
+                    
                 }
             }
             
         case "Apple":
             // 키체인 제거
-            print("Apple")
+            if KeyChainModel.shared.deleteUserinfo() {
+                print("Keychain Remove")
+                
+                userInfoRemove()
+                logOutDelegate?.logoutFromMain()
+            }
         default:
             return
         }
+    }
+    
+    func userInfoRemove() {
+        loginUserInfo.vendor = nil
+        loginUserInfo.userNickname = nil
+        loginUserInfo.userProfileImageUrl = nil
     }
 }

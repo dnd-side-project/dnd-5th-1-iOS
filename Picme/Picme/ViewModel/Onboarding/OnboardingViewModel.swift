@@ -11,10 +11,14 @@ class OnboardingViewModel {
     
     var isButtonState: Dynamic<Bool> = Dynamic(false)
     var isVaildState: Dynamic<Bool> = Dynamic(false)
-    let userinfo = UserInfo.shared
+    let userinfo = OnboardingUserInfo.shared
     var registSingUp: LoginKind.SignUp?
     
     weak var onboardingDelegate: LoginState?
+    
+    var saveUserInfo: KeychainUserInfo?
+    
+    let loginUserInfo = LoginUser.shared
     
     // SignIn
     func registUser(_ nickName: String) {
@@ -37,6 +41,9 @@ class OnboardingViewModel {
             registSingUp = LoginKind.SignUp.apple(userID: useridentifier,
                                                   nickName: nickName,
                                                   email: userEmail)
+            
+            saveUserInfo = KeychainUserInfo(userIdentifier: useridentifier,
+                                            userEmail: userEmail)
         default:
             return
         }
@@ -46,9 +53,19 @@ class OnboardingViewModel {
                 switch response {
                 case .success(let data):
                     print(data)
+                    
+                    self?.loginUserInfo.userNickname = data.nickname
+                    self?.loginUserInfo.userProfileImageUrl = data.profilePictureImage
+                    self?.loginUserInfo.vendor = data.nickname
+                    
+                    if let saveUserInfo = self?.saveUserInfo {
+                        _ = KeyChainModel.shared.createUserInfo(with: saveUserInfo)
+                    }
+                    
+                    self?.onboardingDelegate?.loginSuccess()
                 case .failure(let err):
                     print(err.localized)
-                    self?.onboardingDelegate?.loginSuccess()
+                    
                 }
             }
         }

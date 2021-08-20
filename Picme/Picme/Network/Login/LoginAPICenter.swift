@@ -131,11 +131,13 @@ struct LoginAPICenter {
                    method: .post,
                    parameters: parameter,
                    encoding: JSONEncoding.default).responseDecodable(of: LoginResponseModel.self, completionHandler: { (response) in
+                    print("=====================")
+                    print(response.response?.statusCode)
+                    print("=====================")
             switch response.result {
             case .success(let data):
                 print(data)
-                print(response.response?.statusCode)
-                
+            
                 if let headers = response.response?.allHeaderFields as? [String: String] {
                     guard let header = headers["Authorization"] else { return }
                     print(header)

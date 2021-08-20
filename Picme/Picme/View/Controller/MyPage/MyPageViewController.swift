@@ -17,7 +17,8 @@ class MyPageViewController: BaseViewContoller {
     @IBOutlet weak var userIdentifierLabel: UILabel!
     @IBOutlet weak var userImage: UIImageView!
     @IBOutlet weak var userStackView: UIStackView!
-    var mypageViewModel: MyPageViewModel?
+    
+    var mypageViewModel: MyPageViewModel? = MyPageViewModel()
     
     let loginUserInfo = LoginUser.shared
     
@@ -46,8 +47,25 @@ class MyPageViewController: BaseViewContoller {
     
     @IBAction func logOutAction(_ sender: UIButton) {
         print("LogOut")
-        mypageViewModel?.logOutAction(from: loginUserInfo.vendor)
-        // 로그인 뷰로 이동 ( 초기화면으로 이동?)
+        
+        guard let userVendor = loginUserInfo.vendor else { return }
+        
+        let alert = UIAlertController(title: nil, message: "로그아웃하시겠습니까", preferredStyle: .alert)
+        
+        let doneAction = UIAlertAction(title: "예", style: .default) { [weak self] _ in
+            
+            self?.mypageViewModel?.logOutAction(from: userVendor)
+            // 로그인 뷰로 이동 ( 초기화면으로 이동?)
+            
+        }
+        
+        let cancelAction = UIAlertAction(title: "아니요", style: .cancel, handler: nil)
+        
+        alert.addAction(cancelAction)
+        alert.addAction(doneAction)
+        
+        self.present(alert, animated: true, completion: nil)
+
     }
     
     func myPageSetting(name: String, image: String) {

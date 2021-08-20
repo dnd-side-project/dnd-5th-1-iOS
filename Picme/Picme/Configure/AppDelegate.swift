@@ -42,14 +42,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
             return true
         }
         
-        if indexOfTab == 1 {
-            if let uploadImageVC = tabBarController.storyboard?.instantiateViewController(withIdentifier: "UploadImage") {
-                uploadImageVC.modalPresentationStyle = .fullScreen
-                tabBarController.present(uploadImageVC, animated: true)
-                return false
+        switch indexOfTab {
+        case 1:
+            
+            if APIConstants.jwtToken != "" {
+                if let uploadImageVC = tabBarController.storyboard?.instantiateViewController(withIdentifier: "UploadImage") {
+                    uploadImageVC.modalPresentationStyle = .fullScreen
+                    tabBarController.present(uploadImageVC, animated: true)
+                    return false
+                }
+            } else {
+                AlertView.instance.showAlert(title: "로그인", denyButtonTitle: "나가기", doneButtonTitle: "로그인", image: #imageLiteral(resourceName: "hmm"), alertType: .login)
+                AlertView.instance.delegate = self
             }
+            
+        default:
+            return true
         }
         
         return true
+    }
+}
+
+extension AppDelegate: AlertViewwDelegate {
+    func loginButtonTapped() {
+        let storyboard = UIStoryboard(name: "Login", bundle: nil)
+        let loginVC = storyboard.instantiateViewController(withIdentifier: "LoginViewController")
+        loginVC.modalPresentationStyle = .fullScreen
+        
+        if let sceneDelegate = UIApplication.shared.connectedScenes.first!.delegate as? SceneDelegate {
+            sceneDelegate.window?.rootViewController = loginVC
+        }
     }
 }
