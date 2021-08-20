@@ -69,7 +69,7 @@ class MainViewController: BaseViewContoller, TouchDelegate {
         }
         
         // 서버 통신
-        // viewModel.fetchMainList()
+        viewModel.fetchMainList()
     }
     
     // MARK: - Table View
@@ -101,7 +101,6 @@ class MainViewController: BaseViewContoller, TouchDelegate {
             로그인 해야 투표를 할 수 있어요.
             로그인을 해주시겠어요?
             """
-        
         AlertView.instance.showAlert(
             title: alertTitle, denyButtonTitle: "더 둘러보기", doneButtonTitle: "로그인하기", image: #imageLiteral(resourceName: "eyeLarge"), alertType: .login)
         AlertView.instance.delegate = self
@@ -144,8 +143,7 @@ class MainListDatasource: GenericDataSource<MainModel>, UITableViewDataSource, C
     // MARK: - Table View Data Source
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // return data.value.count
-        return 1
+        return data.value.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -153,7 +151,7 @@ class MainListDatasource: GenericDataSource<MainModel>, UITableViewDataSource, C
         
         cell.setCollectionViewDataSourceDelegate(forRow: indexPath.row)
         cell.cellDelegate = self
-        // cell.updateCell(model: data.value[indexPath.row])
+        cell.updateCell(model: data.value[indexPath.row])
         
         return cell
     }
