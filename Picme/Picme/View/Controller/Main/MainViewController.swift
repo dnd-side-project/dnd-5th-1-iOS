@@ -119,8 +119,8 @@ class MainViewController: BaseViewContoller, TouchDelegate {
         } else { // 로그인한 사용자
             guard let voteDetailVC = self.storyboard?.instantiateViewController(withIdentifier: "VoteDetailViewController") as? VoteDetailViewController else { return }
             voteDetailVC.postId = postId
-//            voteDetailVC.postNickname = postNickname
-//            voteDetailVC.postProfileUrl = postProfileUrl
+            voteDetailVC.postNickname = postNickname
+            voteDetailVC.postProfileUrl = postProfileUrl
             self.navigationController?.pushViewController(voteDetailVC, animated: true)
         }
     }
