@@ -23,24 +23,12 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="qAK-pE-jJK">
-                                <rect key="frame" x="20" y="194" width="186" height="160.5"/>
+                                <rect key="frame" x="20" y="194" width="182" height="160"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="너도" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S7k-uS-bey">
-                                        <rect key="frame" x="0.0" y="0.0" width="66.5" height="53.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="너도  인생사진  건질 수 있어" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="46H-nm-KRk">
+                                        <rect key="frame" x="0.0" y="0.0" width="182" height="160"/>
                                         <fontDescription key="fontDescription" name="NotoSansCJKkr-Bold" family="Noto Sans CJK KR" pointSize="36"/>
-                                        <color key="textColor" red="0.99607843137254903" green="0.99607843137254903" blue="0.99607843137254903" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="인생사진" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4hC-Bg-FFV">
-                                        <rect key="frame" x="0.0" y="53.5" width="132.5" height="53.5"/>
-                                        <fontDescription key="fontDescription" name="NotoSansCJKkr-Bold" family="Noto Sans CJK KR" pointSize="36"/>
-                                        <color key="textColor" red="0.95125275850000002" green="0.10953106730000001" blue="0.62747663259999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="건질 수 있어" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PhP-Da-Trp">
-                                        <rect key="frame" x="0.0" y="107" width="186" height="53.5"/>
-                                        <fontDescription key="fontDescription" name="NotoSansCJKkr-Bold" family="Noto Sans CJK KR" pointSize="36"/>
-                                        <color key="textColor" red="0.99607843137254903" green="0.99607843137254903" blue="0.99607843137254903" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -97,6 +85,7 @@
                     <connections>
                         <outlet property="appleLoginButton" destination="VWu-rR-Ga7" id="UjN-1Q-wZ5"/>
                         <outlet property="kakaoLoginButton" destination="AMA-Qg-pdL" id="zqw-Hf-Gfa"/>
+                        <outlet property="mainLabel" destination="46H-nm-KRk" id="3UK-Iy-Ge3"/>
                         <outlet property="unLoginButton" destination="RL0-ae-cfF" id="x2P-VH-AVL"/>
                     </connections>
                 </viewController>
