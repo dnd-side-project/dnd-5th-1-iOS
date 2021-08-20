@@ -82,11 +82,6 @@ class ContentViewModel {
         return dateForMatter.string(from: addingDate)
     }
     
-    // 투표 만들기
-    func createVote() {
-        
-    }
-    
     func createList(title: String, endDate: String, completion: @escaping () -> Void) {
         
         let dateformatter = DateFormatter()
@@ -96,16 +91,22 @@ class ContentViewModel {
             let createList = CreateCase.listConfigure(title: title, endDate: stringConvertDate)
             
             CreateVoteService.fetchCreateList(createList) { [weak self] response in
-                print(response)
-                self?.isCreateListComplete.value = true
-            }
-            
-            CreateVoteService.fetchCreateImage(ContentViewModel.imagesData, ContentViewModel.imageMetaData) { [weak self] in
-                self?.isCreateImageComplete.value = true
-            }
-            
-            if isCreateListComplete.value == true && isCreateImageComplete.value == true {
-                completion()
+                switch response {
+                case .success(let data):
+                    
+                    print("=====================")
+                    print("POST ID:", data.postId)
+                    print("=====================")
+                    
+                    CreateVoteService.fetchCreateImage(postID: data.postId,
+                                                       ContentViewModel.imagesData,
+                                                       ContentViewModel.imageMetaData) { [weak self] in
+                        self?.isCreateImageComplete.value = true
+                    }
+                    
+                case .failure(let err):
+                    print(err.localized)
+                }
             }
         }
     }

@@ -102,7 +102,7 @@ struct APIConstants {
         var urlString: String {
             switch self {
             case .createImage(let postID):
-                return "\(APIConstants.baseURL)\(APIConstants.urlVersion)/post-images/:\(postID)"
+                return "\(APIConstants.baseURL)\(APIConstants.urlVersion)/post-images/\(postID)"
             case .deleteImage(let postID):
                 return "\(APIConstants.baseURL)\(APIConstants.urlVersion)/post-images/:\(postID)"
             }
