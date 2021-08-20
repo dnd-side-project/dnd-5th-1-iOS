@@ -533,7 +533,7 @@ extension VoteDetailViewController: VoteAlertViewDeleagte {
     // MARK: - Vote Alert View Delegate
     
     func deleteButtonTapped() {
-        viewModel.fetchDeletePost(postId: postId)
+        viewModel.fetchDeletePost(postId: postId!)
     }
     
     // MARK: - Pick Button Actions
