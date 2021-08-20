@@ -46,7 +46,6 @@ class OnePickViewController: BaseViewContoller {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print(createUserImges)
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.registerCell(OnePickCell.self)
@@ -97,17 +96,16 @@ extension OnePickViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = collectionView.frame.width / 2 - 5
-        let height = collectionView.frame.height / 3 - 5
         
-        return CGSize(width: width, height: height)
+        return CGSize(width: width, height: width)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 5
+        return 10
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 5
+        return 10
     }
 
 }
