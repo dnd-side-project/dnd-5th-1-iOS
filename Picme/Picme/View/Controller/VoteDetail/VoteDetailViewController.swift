@@ -325,7 +325,7 @@ extension VoteDetailViewController: AlertViewActionDelegate {
         detailPageControl.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
         
         detailNicknameLabel.text = postNickname
-        detailProfileImageView.kf.setImage(with: URL(string: postProfileUrl!), placeholder: #imageLiteral(resourceName: "profilePink"))
+        detailProfileImageView.kf.setImage(with: URL(string: postProfileUrl!), placeholder: #imageLiteral(resourceName: "progressCircle"))
         // detailTitleLabel.text = dataSource.data.value[0].title
         // detailParticipantsLabel.text = String(dataSource.data.value[0].participantsNum!)
         // Timer 설정
