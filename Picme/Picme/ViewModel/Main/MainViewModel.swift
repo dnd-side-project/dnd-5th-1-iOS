@@ -39,6 +39,9 @@ class MainViewModel {
                 case .success(let data):
                     if let mainData = data as? [MainModel] {
                         self?.dataSource?.data.value = mainData
+                        
+                        print("통신 성공")
+                        print(mainData)
                     }
                 case .requestErr(let message):
                     print("requestERR", message)

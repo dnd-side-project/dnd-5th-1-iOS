@@ -9,23 +9,19 @@ import Foundation
 
 struct MainModel: Codable {
     let postId: String
-//    let userNickname: String
-//    let userProfileimageUrl: String
-    let deadline: String
+    let deadline: String?
     let title: String
     let user: User
-    let images: [Images]
+    // let images: [Images]?
     let participantsNum: Int
     
     enum CodingKeys: String, CodingKey {
         case postId = "id"
-//        case userNickname = "username"
-//        case userProfileimageUrl = "userProfileImage"
         case user = "user"
         case participantsNum = "participantsNum"
         case deadline = "expiredAt"
         case title = "title"
-        case images = "images"
+        // case images = "images"
     }
 }
 
@@ -40,7 +36,7 @@ struct User: Codable {
 }
 
 struct Images: Codable {
-    let thumbnailUrl: String
+    let thumbnailUrl: String?
     
     enum CodingKeys: String, CodingKey {
         case thumbnailUrl = "thumbnailUrl"
