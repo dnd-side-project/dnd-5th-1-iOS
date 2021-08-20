@@ -48,14 +48,13 @@ class MyPageViewController: BaseViewContoller {
     @IBAction func logOutAction(_ sender: UIButton) {
         print("LogOut")
         
+        guard let userVendor = loginUserInfo.vendor else { return }
+        
         let alert = UIAlertController(title: nil, message: "로그아웃하시겠습니까", preferredStyle: .alert)
         
         let doneAction = UIAlertAction(title: "예", style: .default) { [weak self] _ in
-            if KeyChainModel.shared.deleteUserinfo() {
-                print("Keychain Remove")
-            }
             
-            self?.mypageViewModel?.logOutAction(from: "Kakao")
+            self?.mypageViewModel?.logOutAction(from: userVendor)
             // 로그인 뷰로 이동 ( 초기화면으로 이동?)
             
         }

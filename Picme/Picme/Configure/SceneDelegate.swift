@@ -52,7 +52,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                         let loginUserInfo = LoginUser.shared
                         loginUserInfo.userNickname = data.nickname
                         loginUserInfo.userProfileImageUrl = data.profilePictureImage
-    //                        loginUserInfo.vendor = data.vendor
+                        loginUserInfo.vendor = data.vendor
                     
                     case .failure(let err):
                         print(err.localized)

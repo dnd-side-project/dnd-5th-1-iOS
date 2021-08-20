@@ -146,7 +146,7 @@ struct LoginAPICenter {
                     let loginUser = LoginUser.shared
                     loginUser.userNickname = data.nickname
                     loginUser.userProfileImageUrl = data.profilePictureImage
-//                    loginUser.vendor = data.vendor
+                    loginUser.vendor = data.vendor
                 }
                 
                 completion(.success(data))

@@ -11,7 +11,7 @@ class OnboardingViewModel {
     
     var isButtonState: Dynamic<Bool> = Dynamic(false)
     var isVaildState: Dynamic<Bool> = Dynamic(false)
-    let userinfo = UserInfo.shared
+    let userinfo = OnboardingUserInfo.shared
     var registSingUp: LoginKind.SignUp?
     
     weak var onboardingDelegate: LoginState?
@@ -56,7 +56,7 @@ class OnboardingViewModel {
                     
                     self?.loginUserInfo.userNickname = data.nickname
                     self?.loginUserInfo.userProfileImageUrl = data.profilePictureImage
-//                    loginUserInfo.vendor = data.nickname
+                    self?.loginUserInfo.vendor = data.nickname
                     
                     if let saveUserInfo = self?.saveUserInfo {
                         _ = KeyChainModel.shared.createUserInfo(with: saveUserInfo)

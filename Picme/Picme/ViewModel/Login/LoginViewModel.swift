@@ -14,11 +14,10 @@ class LoginViewModel: NSObject {
     
     weak var loginDelegate: LoginState?
     
-    
     // 로그인 성공시 유저정보 저장
     let loginUserInfo = LoginUser.shared
     // 로그인 실패시 온보딩으로 전달하기위한 유저정보
-    let onboardingUserInfo = UserInfo.shared
+    let onboardingUserInfo = OnboardingUserInfo.shared
     
 }
 
@@ -79,7 +78,7 @@ extension LoginViewModel {
                         
                         self.loginUserInfo.userNickname = data.nickname
                         self.loginUserInfo.userProfileImageUrl = data.profilePictureImage
-//                        loginUserInfo.vendor = data.vendor
+                        self.loginUserInfo.vendor = data.vendor
                         
                         self.loginDelegate?.loginSuccess()
                     case .failure(let err):
