@@ -148,8 +148,18 @@ extension LoginViewController: LoginState {
         let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let mainViewController = mainStoryboard.instantiateViewController(withIdentifier:
                                                                             "TabBarController")
-        mainViewController.modalPresentationStyle = .fullScreen
-        self.present(mainViewController, animated: true, completion: nil)
+        
+        if let sceneDelegate = UIApplication.shared.connectedScenes.first!.delegate as? SceneDelegate {
+
+            sceneDelegate.window?.rootViewController = mainViewController
+            
+            UIView.transition(with: sceneDelegate.window!,
+                                  duration: 0.3,
+                                  options: .transitionCrossDissolve,
+                                  animations: nil,
+                                  completion: nil)
+        }
+        
     }
     
     func loginFail(error: String) {
