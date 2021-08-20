@@ -9,17 +9,17 @@ import Foundation
 import Alamofire
 
 protocol VoteDetailServiceProtocol: AnyObject {
-    func getVoteDetail(postId: Int, completion: @escaping ((NetworkResult<Any>) -> Void))
+    func getVoteDetail(postId: String, completion: @escaping ((NetworkResult<Any>) -> Void))
     func createVote(postId: String, imageId: String, category: String, completion: @escaping ((NetworkResult<Any>) -> Void))
-    func deletePost(postId: String, imageId: String, completion: @escaping ((NetworkResult<Any>) -> Void))
+    func deletePost(postId: String, completion: @escaping ((NetworkResult<Any>) -> Void))
 }
 
 class VoteDetailService: VoteDetailServiceProtocol {
     
     // MARK: - 투표 상세 조회
     
-    func getVoteDetail(postId: Int, completion: @escaping ((NetworkResult<Any>) -> Void)) {
-        let URL = APIConstants.Post.postRetrieve(postID: String(postId)).urlString
+    func getVoteDetail(postId: String, completion: @escaping ((NetworkResult<Any>) -> Void)) {
+        let URL = APIConstants.Post.postRetrieve(postID: postId).urlString
         
         let dataRequest = AF.request(URL,
                                      method: .get,
@@ -66,7 +66,7 @@ class VoteDetailService: VoteDetailServiceProtocol {
     
     // MARK: - 게시글 삭제
     
-    func deletePost(postId: String, imageId: String, completion: @escaping ((NetworkResult<Any>) -> Void)) {
+    func deletePost(postId: String, completion: @escaping ((NetworkResult<Any>) -> Void)) {
         let URL = APIConstants.Post.deletePost(postID: postId).urlString
         
         let dataRequest = AF.request(URL,

@@ -313,7 +313,7 @@ extension ScalingCarouselFlowDelegate: UICollectionViewDelegateFlowLayout {
 }
 
 // MARK: - Helpers
-extension VoteDetailViewController {
+extension VoteDetailViewController: VoteAlertViewDeleagte {
     
     // MARK: - Set Up View
     
@@ -514,6 +514,7 @@ extension VoteDetailViewController {
             
             AlertView.instance.showAlert(
                 title: alertTitle, denyButtonTitle: "아니요", doneButtonTitle: "삭제하기", image: #imageLiteral(resourceName: "trash"), alertType: .delete)
+            AlertView.instance.voteDelegate = self
         case 1:
             print("report")
             
@@ -527,6 +528,12 @@ extension VoteDetailViewController {
         default:
             print("error")
         }
+    }
+    
+    // MARK: - Vote Alert View Delegate
+    
+    func deleteButtonTapped() {
+        viewModel.fetchDeletePost(postId: postId)
     }
     
     // MARK: - Pick Button Actions
@@ -567,32 +574,32 @@ extension VoteDetailViewController {
             }
             
             /*
-            let allButtonTags = [2, 3, 4, 5, 6]
-            let currentButtonTag = sender.tag
-            
-            allButtonTags.filter { $0 != currentButtonTag }.forEach { tag in
-                if let button = self.view.viewWithTag(tag) as? UIButton {
-                    // Deselect/Disable these buttons
-                  
-                    if tag == 6 {
-                        skipButton.setTitleColor(#colorLiteral(red: 0.2156862745, green: 0.2352941176, blue: 0.2588235294, alpha: 1), for: .normal)
-                    }
-                    
-                    button.isSelected = false
-                }
-            }
-            
-            if currentButtonTag == 6 {
-                skipButton.setTitleColor(#colorLiteral(red: 0.9215686275, green: 0.2862745098, blue: 0.6039215686, alpha: 1), for: .normal)
-            }
-            
-            sender.backgroundColor = #colorLiteral(red: 0.9385799486, green: 0.1098039216, blue: 0.1215686275, alpha: 1)
-            sender.borderWidth = 2
-            sender.borderColor = #colorLiteral(red: 0.9215686275, green: 0.2862745098, blue: 0.6039215686, alpha: 1)
-            sender.cornerRadiusLayer = 10
-            
-            sender.isSelected = !sender.isSelected
-            */
+             let allButtonTags = [2, 3, 4, 5, 6]
+             let currentButtonTag = sender.tag
+             
+             allButtonTags.filter { $0 != currentButtonTag }.forEach { tag in
+             if let button = self.view.viewWithTag(tag) as? UIButton {
+             // Deselect/Disable these buttons
+             
+             if tag == 6 {
+             skipButton.setTitleColor(#colorLiteral(red: 0.2156862745, green: 0.2352941176, blue: 0.2588235294, alpha: 1), for: .normal)
+             }
+             
+             button.isSelected = false
+             }
+             }
+             
+             if currentButtonTag == 6 {
+             skipButton.setTitleColor(#colorLiteral(red: 0.9215686275, green: 0.2862745098, blue: 0.6039215686, alpha: 1), for: .normal)
+             }
+             
+             sender.backgroundColor = #colorLiteral(red: 0.9385799486, green: 0.1098039216, blue: 0.1215686275, alpha: 1)
+             sender.borderWidth = 2
+             sender.borderColor = #colorLiteral(red: 0.9215686275, green: 0.2862745098, blue: 0.6039215686, alpha: 1)
+             sender.cornerRadiusLayer = 10
+             
+             sender.isSelected = !sender.isSelected
+             */
             
             // 투표 생성 서버 통신 작성 필요
             
