@@ -36,7 +36,9 @@ class MyPageViewModel {
             
         case "Apple":
             // 키체인 제거
-            print("Apple")
+            if KeyChainModel.shared.deleteUserinfo() {
+                print("Keychain Remove")
+            }
         default:
             return
         }

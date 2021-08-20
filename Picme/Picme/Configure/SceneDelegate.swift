@@ -23,49 +23,67 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
-        guard let scene = (scene as? UIWindowScene) else { return }
-        window = UIWindow(windowScene: scene)
+//        guard let scene = (scene as? UIWindowScene) else { return }
+//        window = UIWindow(windowScene: scene)
+//
+//        let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+//        let mainViewController = mainStoryboard.instantiateViewController(withIdentifier:
+//                                                                            "TabBarController")
+//        mainViewController.modalPresentationStyle = .fullScreen
+//        self.window?.rootViewController = mainViewController
+//        self.window?.makeKeyAndVisible()
         
-        let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let mainViewController = mainStoryboard.instantiateViewController(withIdentifier:
-                                                                            "TabBarController")
-        mainViewController.modalPresentationStyle = .fullScreen
-        self.window?.rootViewController = mainViewController
-        self.window?.makeKeyAndVisible()
-        
-//        let appleIDProvider = ASAuthorizationAppleIDProvider()
-//        guard let readKeyChain = KeyChainModel.shared.readUserInfo(),
-//              let userIdentifier = readKeyChain.userIdentifier else { return }
-//
-//        appleIDProvider.getCredentialState(forUserID: userIdentifier) { (credentialState, error) in
-//            switch credentialState {
-//            case .authorized:
-//
-//                print("Apple Login연동 OK, U go homeTab")
-//                DispatchQueue.main.async {
-//                    let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
-//                    let mainViewController = mainStoryboard.instantiateViewController(withIdentifier:
-//                                                                                        "TabBarController")
-//                    mainViewController.modalPresentationStyle = .fullScreen
-//                    self.window?.rootViewController = mainViewController
-//                    self.window?.makeKeyAndVisible()
-//                }
-//
-//            case .revoked, .notFound:
-//                print("Apple Login연동 No")
-//                DispatchQueue.main.async {
-//                    let loginStoryboard = UIStoryboard(name: "Login", bundle: nil)
-//                    let loginViewController = loginStoryboard.instantiateViewController(withIdentifier:
-//                                                                                        "LoginViewController")
-//                    loginViewController.modalPresentationStyle = .fullScreen
-//                    self.window?.rootViewController = loginViewController
-//                    self.window?.makeKeyAndVisible()
-//                }
-//
-//            default:
-//                break
-//            }
-//        }
+        let appleIDProvider = ASAuthorizationAppleIDProvider()
+        guard let readKeyChain = KeyChainModel.shared.readUserInfo(),
+              let userIdentifier = readKeyChain.userIdentifier else { return }
+
+        appleIDProvider.getCredentialState(forUserID: userIdentifier) { (credentialState, error) in
+            switch credentialState {
+            case .authorized:
+
+                let appleUserInfo = LoginKind.SignIn.apple(userID: userIdentifier,
+                                                           email: readKeyChain.userEmail ?? "")
+                
+                LoginAPICenter.fetchSignIn(appleUserInfo.loginValue) { [weak self] (response) in
+                    
+                    switch response {
+                    case .success(let data):
+                        print(data)
+                        let loginUserInfo = LoginUser.shared
+                        loginUserInfo.userNickname = data.nickname
+                        loginUserInfo.userProfileImageUrl = data.profilePictureImage
+    //                        loginUserInfo.vendor = data.vendor
+                    
+                    case .failure(let err):
+                        print(err.localized)
+                    }
+                }
+                print("Apple Login연동 OK, U go homeTab")
+                DispatchQueue.main.async {
+                    let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                    let mainViewController = mainStoryboard.instantiateViewController(withIdentifier:
+                                                                                        "TabBarController")
+                    mainViewController.modalPresentationStyle = .fullScreen
+                    self.window?.rootViewController = mainViewController
+                    self.window?.makeKeyAndVisible()
+                    
+                }
+
+            case .revoked, .notFound:
+                print("Apple Login연동 No")
+                DispatchQueue.main.async {
+                    let loginStoryboard = UIStoryboard(name: "Login", bundle: nil)
+                    let loginViewController = loginStoryboard.instantiateViewController(withIdentifier:
+                                                                                        "LoginViewController")
+                    loginViewController.modalPresentationStyle = .fullScreen
+                    self.window?.rootViewController = loginViewController
+                    self.window?.makeKeyAndVisible()
+                }
+
+            default:
+                break
+            }
+        }
         
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
