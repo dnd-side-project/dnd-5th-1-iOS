@@ -234,7 +234,7 @@ extension CarouselDatasource: UICollectionViewDataSource {
                 setupResultViewPercent()
                 isFirstSetUpResultPercent = false
             }
-
+            
         } else { // 투표 선택 화면
             if isPicked {
                 // 선택한 이미지 핑크 뷰
@@ -264,6 +264,13 @@ typealias CarouselDelegate = VoteDetailViewController
 
 extension VoteDetailViewController: UICollectionViewDelegate {
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        isPicked = true
+        selectedImageId = indexPath.row
+        pickButton.setImage(#imageLiteral(resourceName: "pickButtonNormal"), for: .normal)
+        carouselCollectionView.reloadData()
+    }
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         carouselCollectionView.didScroll()
         
@@ -276,16 +283,14 @@ extension VoteDetailViewController: UICollectionViewDelegate {
         
         if !isVoted {
             // 투표 시작 뷰
-            if isPicked {
-                if currentPage != selectedImageId { // pick 선택 전
-                    pickView.isHidden = false
-                    feedbackView.isHidden = true
-                } else { // pick 선택 후
-                    pickView.isHidden = true
-                    feedbackView.isHidden = false
+            if isPicked { // 이미지 선택 됨
+                if currentPage != selectedImageId { // 선택된 이미지일 경우
+                    pickButton.setImage(#imageLiteral(resourceName: "pickButtonDisabled"), for: .normal)
+                } else { // 선택안된 이미지일 경우
+                    pickButton.setImage(#imageLiteral(resourceName: "pickButtonNormal"), for: .normal)
                 }
             }
-        } else {
+        } else { // pick 선택 후
             setupResultViewPercent()
         }
     }
@@ -308,12 +313,12 @@ extension ScalingCarouselFlowDelegate: UICollectionViewDelegateFlowLayout {
 }
 
 // MARK: - Helpers
-extension VoteDetailViewController {
+extension VoteDetailViewController: VoteAlertViewDeleagte {
     
     // MARK: - Set Up View
     
     private func setupView() {
-    
+        
         // Page Control
         detailPageControl.numberOfPages = voteDetailModel?.images?.count ?? 0
         detailPageControl.currentPage = 0
@@ -509,6 +514,7 @@ extension VoteDetailViewController {
             
             AlertView.instance.showAlert(
                 title: alertTitle, denyButtonTitle: "아니요", doneButtonTitle: "삭제하기", image: #imageLiteral(resourceName: "trash"), alertType: .delete)
+            AlertView.instance.voteDelegate = self
         case 1:
             print("report")
             
@@ -524,24 +530,28 @@ extension VoteDetailViewController {
         }
     }
     
+    // MARK: - Vote Alert View Delegate
+    
+    func deleteButtonTapped() {
+        // 게시물 삭제 서버 통신 
+        viewModel.fetchDeletePost(postId: postId!)
+    }
+    
     // MARK: - Pick Button Actions
     
     @objc func pickButtonClicked(_ sender: UIButton) {
         print("pickButton")
         
-        selectedImageId = currentPage
-        isPicked = true
         setupResultView(isVoted: false)
         
         //        let indexPath = IndexPath(item: currentPage, section: 0)
         //        carouselCollectionView.reloadItems(at: [indexPath])
-        
-        carouselCollectionView.reloadData()
     }
     
     // MARK: - Feedback Button Actions
     
     @objc func feedbackButtonClicked(_ sender: UIButton) {
+        
         if !isVoted {
             var feedback = ""
             switch sender.tag {
@@ -564,7 +574,36 @@ extension VoteDetailViewController {
                 print("error")
             }
             
-            // 투표 생성 서버 통신 작성 필요
+            /*
+             let allButtonTags = [2, 3, 4, 5, 6]
+             let currentButtonTag = sender.tag
+             
+             allButtonTags.filter { $0 != currentButtonTag }.forEach { tag in
+             if let button = self.view.viewWithTag(tag) as? UIButton {
+             // Deselect/Disable these buttons
+             
+             if tag == 6 {
+             skipButton.setTitleColor(#colorLiteral(red: 0.2156862745, green: 0.2352941176, blue: 0.2588235294, alpha: 1), for: .normal)
+             }
+             
+             button.isSelected = false
+             }
+             }
+             
+             if currentButtonTag == 6 {
+             skipButton.setTitleColor(#colorLiteral(red: 0.9215686275, green: 0.2862745098, blue: 0.6039215686, alpha: 1), for: .normal)
+             }
+             
+             sender.backgroundColor = #colorLiteral(red: 0.9385799486, green: 0.1098039216, blue: 0.1215686275, alpha: 1)
+             sender.borderWidth = 2
+             sender.borderColor = #colorLiteral(red: 0.9215686275, green: 0.2862745098, blue: 0.6039215686, alpha: 1)
+             sender.cornerRadiusLayer = 10
+             
+             sender.isSelected = !sender.isSelected
+             */
+            
+            // 투표 생성 서버 통신
+            viewModel.fetchCreatePost(postId: postId!, imageId: String(currentPage), category: feedback)
             
             isVoted = true
             setupResultView(isVoted: true)

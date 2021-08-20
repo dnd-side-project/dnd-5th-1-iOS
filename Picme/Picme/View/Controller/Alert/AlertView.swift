@@ -7,15 +7,20 @@
 
 import UIKit
 
-protocol AlertViewwDelegate: AnyObject {
+protocol LoginAlertViewDelegate: AnyObject {
     func loginButtonTapped()
+}
+
+protocol VoteAlertViewDeleagte: AnyObject {
+    func deleteButtonTapped()
 }
 
 class AlertView: UIView {
     
     static let instance = AlertView()
     
-    var delegate: AlertViewwDelegate?
+    var loginDelegate: LoginAlertViewDelegate?
+    var voteDelegate: VoteAlertViewDeleagte?
     
     @IBOutlet var rootView: UIView!
     @IBOutlet weak var alertView: UIView!
@@ -76,10 +81,11 @@ class AlertView: UIView {
         
         switch sender.tag {
         case 1:
-            delegate?.loginButtonTapped()
+            loginDelegate?.loginButtonTapped()
             rootView.removeFromSuperview()
         case 2:
-            print("delete")
+            voteDelegate?.deleteButtonTapped()
+            rootView.removeFromSuperview()
         case 3:
             print("report")
         default:

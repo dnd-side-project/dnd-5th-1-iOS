@@ -23,15 +23,16 @@ class MainTableViewCell: UITableViewCell {
     @IBOutlet weak var mainParticipantsLabel: UILabel!
     @IBOutlet weak var mainDeadlineLabel: UILabel!
     @IBOutlet weak var mainTitleLabel: UILabel!
+    @IBOutlet weak var mainClockImageView: UIImageView!
+    
     @IBOutlet weak var mainCollectionView: UICollectionView!
     
     // MARK: - Variables
     
     weak var cellDelegate: CollectionViewCellDelegate?
-    var imageData: [Images]!
+    var imageData: [Images]?
     var postId: String!
     
-    // 서버 통신 전 예시 이미지
     var imageArray = [#imageLiteral(resourceName: "defalutImage"), #imageLiteral(resourceName: "defalutImage"), #imageLiteral(resourceName: "defalutImage")]
     
     // MARK: - Timer
@@ -47,8 +48,9 @@ class MainTableViewCell: UITableViewCell {
             mainNicknameLabel.text = object.user.nickname
             mainParticipantsLabel.text = String(object.participantsNum)
             mainTitleLabel.text = object.title
-            imageData = object.images
-            setTimer(endTime: object.deadline)
+            // imageData = object.images
+            // setTimer(endTime: object.deadline)
+            setTimer(endTime: "2021-08-20T23:05:59.703Z")
             postId = object.postId
         }
     }
@@ -57,15 +59,25 @@ class MainTableViewCell: UITableViewCell {
         DispatchQueue.main.async { [weak self] in
             self?.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] timer in
                 
+                // 마감 시간 Date 형식으로 변환
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
                 let convertDate = dateFormatter.date(from: endTime)
                 
-                let elapsedTimeSeconds = Int(Date().timeIntervalSince(convertDate!))
-                let expireLimit = Int(Date().timeIntervalSince(Date()))
+                // 현재 시간 적용하기 - 시간 + 9시간
+                let calendar = Calendar.current
+                let today = Date()
+                let localDate = Date(timeInterval: TimeInterval(calendar.timeZone.secondsFromGMT()), since: today)
+                let localConvertDate =  Date(timeInterval: TimeInterval(calendar.timeZone.secondsFromGMT()), since: convertDate!)
+                
+                let elapsedTimeSeconds = Int(Date().timeIntervalSince(localConvertDate)) // 마감 시간
+                let expireLimit = Int(Date().timeIntervalSince(localDate)) // 현재 시간
                 
                 guard elapsedTimeSeconds <= expireLimit else { // 시간 초과한 경우
                     timer.invalidate()
+                    
+                    self?.mainDeadlineLabel.text = "마감된 투표에요"
+                    self?.mainClockImageView.isHidden = true
                     return
                 }
 
@@ -101,8 +113,7 @@ class MainTableViewCell: UITableViewCell {
 
 extension MainTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // return imageData.count
-        
+        // return imageData?.count ?? 0
         return imageArray.count
     }
     
@@ -110,32 +121,31 @@ extension MainTableViewCell: UICollectionViewDelegate, UICollectionViewDataSourc
         let cell: MainCollectionViewCell = mainCollectionView.dequeueCollectionCell(for: indexPath)
         
         /*
-        if indexPath.item == imageData.count - 1 {
+        if indexPath.item == imageData!.count - 1 {
             cell.mainPhotoImageView.image = #imageLiteral(resourceName: "defalutImage").withRenderingMode(.alwaysTemplate)
             cell.mainPhotoImageView.tintColor = .solidColor(.solid12)
             cell.stackView.isHidden = false
         } else {
-            cell.mainPhotoImageView.kf.setImage(with: URL(string: imageData[indexPath.row].thumbnailUrl), placeholder: #imageLiteral(resourceName: "defalutImage"))
+            cell.mainPhotoImageView.kf.setImage(with: URL(string: (imageData?[indexPath.row].thumbnailUrl)!), placeholder: #imageLiteral(resourceName: "defalutImage"))
             cell.stackView.isHidden = true
         }
         */
         
         if indexPath.item == imageArray.count - 1 {
-            cell.mainPhotoImageView.image = #imageLiteral(resourceName: "defalutImage").withRenderingMode(.alwaysTemplate)
-            cell.mainPhotoImageView.tintColor = .solidColor(.solid12)
-            cell.stackView.isHidden = false
-        } else {
-            cell.mainPhotoImageView.image = imageArray[indexPath.row]
-            cell.stackView.isHidden = true
-        }
-    
+                  cell.mainPhotoImageView.image = #imageLiteral(resourceName: "defalutImage").withRenderingMode(.alwaysTemplate)
+                  cell.mainPhotoImageView.tintColor = .solidColor(.solid12)
+                  cell.stackView.isHidden = false
+              } else {
+                  cell.mainPhotoImageView.image = imageArray[indexPath.row]
+                  cell.stackView.isHidden = true
+              }
+        
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let cellDelegate = cellDelegate {
-            // cellDelegate.selectedCVCell(indexPath.item, postId)
-            cellDelegate.selectedCVCell(indexPath.item, "1")
+            cellDelegate.selectedCVCell(indexPath.item, postId)
         }
     }
     

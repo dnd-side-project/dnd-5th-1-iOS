@@ -70,25 +70,25 @@ struct APIConstants {
             case .postListRetrieve:
                 return "\(APIConstants.baseURL)\(APIConstants.urlVersion)/posts?page=pageNum&limit=10"
             case .postRetrieve(let postID):
-                return "\(APIConstants.baseURL)\(APIConstants.urlVersion)/posts/:\(postID)"
+                return "\(APIConstants.baseURL)\(APIConstants.urlVersion)/posts/\(postID)"
             case .deletePost(let postID):
-                return "\(APIConstants.baseURL)\(APIConstants.urlVersion)/posts/:\(postID)"
+                return "\(APIConstants.baseURL)\(APIConstants.urlVersion)/posts/\(postID)"
             }
         }
     }
     
     enum Vote {
         /// 투표 생성 URL
-        case createVote(postID: String, postImgeID: String)
+        case createVote(postID: String, postImageID: String)
         /// 투표 삭제 URL
-        case deleteVote(postID: String, postImgeID: String)
+        case deleteVote(postID: String, postImageID: String)
         
         var urlString: String {
             switch self {
             case let .createVote(postID, postImageID):
-                return "\(APIConstants.baseURL)\(APIConstants.urlVersion)/votes/:\(postID)/:\(postImageID)"
+                return "\(APIConstants.baseURL)\(APIConstants.urlVersion)/votes/\(postID)/\(postImageID)"
             case let .deleteVote(postID, postImageID):
-                return "\(APIConstants.baseURL)\(APIConstants.urlVersion)/votes/:\(postID)/:\(postImageID)"
+                return "\(APIConstants.baseURL)\(APIConstants.urlVersion)/votes/\(postID)/\(postImageID)"
             }
         }
     }

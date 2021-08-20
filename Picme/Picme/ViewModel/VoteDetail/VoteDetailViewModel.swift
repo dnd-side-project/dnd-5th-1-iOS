@@ -25,7 +25,7 @@ class VoteDetailViewModel {
     
     // MARK: - 게시글 조회
     
-    func fetchVoteDetail(postId: Int) {
+    func fetchVoteDetail(postId: String) {
         
         guard let service = service else {
             onErrorHandling?(APIError.networkFailed)
@@ -50,7 +50,60 @@ class VoteDetailViewModel {
                 }
             }
         }
+    }
+    
+    // MARK: - 투표 생성
+    
+    func fetchCreatePost(postId: String, imageId: String, category: String) {
+     
+        guard let service = service else {
+            onErrorHandling?(APIError.networkFailed)
+            return
+        }
         
+        service.createVote(postId: postId, imageId: imageId, category: category, completion: { response in
+            DispatchQueue.main.async {
+                switch response {
+                case .success(let data):
+                    print(data)
+                case .requestErr(let message):
+                    print("requestERR", message)
+                case .pathErr:
+                    print("pathERR")
+                case .serverErr:
+                    print("serverERR")
+                case .networkFail:
+                    print("networkERR")
+                }
+            }
+        })
+    }
+    
+    // MARK: - 게시글 삭제
+    
+    func fetchDeletePost(postId: String) {
+     
+        guard let service = service else {
+            onErrorHandling?(APIError.networkFailed)
+            return
+        }
+        
+        service.deletePost(postId: postId) { response in
+            DispatchQueue.main.async {
+                switch response {
+                case .success(let data):
+                    print(data)
+                case .requestErr(let message):
+                    print("requestERR", message)
+                case .pathErr:
+                    print("pathERR")
+                case .serverErr:
+                    print("serverERR")
+                case .networkFail:
+                    print("networkERR")
+                }
+            }
+        }
     }
     
 }
