@@ -154,10 +154,8 @@ extension OnePickViewController {
     }
     
     @objc func backAction(_ sender: UIBarButtonItem) {
-        customAlert(.inputDataCancel) {
-            self.imageDelegate?.removeALLImage()
-            self.navigationController?.popViewController(animated: true)
-        }
+        AlertView.instance.showAlert(using: .listRemove)
+        AlertView.instance.actionDelegate = self
     }
     
     override func setConstraints() {
@@ -182,5 +180,13 @@ extension OnePickViewController {
             $0.trailing.equalTo(progressBar.snp.trailing)
             $0.height.equalTo(52)
         }
+    }
+}
+
+extension OnePickViewController: AlertViewActionDelegate {
+    
+    func listRemoveTapped() {
+        self.imageDelegate?.removeALLImage()
+        self.navigationController?.popViewController(animated: true)
     }
 }
