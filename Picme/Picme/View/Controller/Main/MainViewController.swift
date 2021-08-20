@@ -99,13 +99,8 @@ class MainViewController: BaseViewContoller, TouchDelegate {
     func pushVoteDetailView(index: Int, postId: String) {
         
         if APIConstants.jwtToken == "" { // 미로그인 사용자
-            let alertTitle = """
-            로그인 해야 투표를 할 수 있어요.
-            로그인을 해주시겠어요?
-            """
-            AlertView.instance.showAlert(
-                title: alertTitle, denyButtonTitle: "더 둘러보기", doneButtonTitle: "로그인하기", image: #imageLiteral(resourceName: "eyeLarge"), alertType: .login)
-            AlertView.instance.loginDelegate = self
+            AlertView.instance.showAlert(using: .logIn)
+            AlertView.instance.actionDelegate = self
         } else { // 로그인한 사용자
             guard let voteDetailVC = self.storyboard?.instantiateViewController(withIdentifier: "VoteDetailViewController") as? VoteDetailViewController else { return }
             voteDetailVC.postId = postId
@@ -116,18 +111,11 @@ class MainViewController: BaseViewContoller, TouchDelegate {
      
     }
     */
+    
     func pushVoteDetailView(index: Int, postId: String, postNickname: String, postProfileUrl: String) {
         if APIConstants.jwtToken == "" { // 미로그인 사용자
-            let alertTitle = """
-            로그인 해야 투표를 할 수 있어요.
-            로그인을 해주시겠어요?
-            """
-//            AlertView.instance.showAlert(
-//                title: alertTitle, denyButtonTitle: "더 둘러보기", doneButtonTitle: "로그인하기", image: #imageLiteral(resourceName: "eyeLarge"), alertType: .logIn)
-//            AlertView.instance.loginDelegate = self
             AlertView.instance.showAlert(using: .logIn)
             AlertView.instance.actionDelegate = self
-            
         } else { // 로그인한 사용자
             guard let voteDetailVC = self.storyboard?.instantiateViewController(withIdentifier: "VoteDetailViewController") as? VoteDetailViewController else { return }
             voteDetailVC.postId = postId
@@ -139,7 +127,8 @@ class MainViewController: BaseViewContoller, TouchDelegate {
     
 }
 
-// MARK: - Login Alert View Delegate
+// MARK: - Alert View Action Delegate
+
 extension MainViewController: AlertViewActionDelegate {
     func loginTapped() {
         self.view.window?.rootViewController?.dismiss(animated: false, completion: {

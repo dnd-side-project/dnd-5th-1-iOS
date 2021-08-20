@@ -46,25 +46,27 @@ class MyPageViewController: BaseViewContoller {
     // MARK: - Log Out
     
     @IBAction func logOutAction(_ sender: UIButton) {
-        print("LogOut")
         
-        guard let userVendor = loginUserInfo.vendor else { return }
+        // guard let userVendor = loginUserInfo.vendor else { return }
         
-        let alert = UIAlertController(title: nil, message: "로그아웃하시겠습니까", preferredStyle: .alert)
+        AlertView.instance.showAlert(using: .logOut)
+        AlertView.instance.actionDelegate = self
         
-        let doneAction = UIAlertAction(title: "예", style: .default) { [weak self] _ in
-            
-            self?.mypageViewModel?.logOutAction(from: userVendor)
-            // 로그인 뷰로 이동 ( 초기화면으로 이동?)
-            
-        }
-        
-        let cancelAction = UIAlertAction(title: "아니요", style: .cancel, handler: nil)
-        
-        alert.addAction(cancelAction)
-        alert.addAction(doneAction)
-        
-        self.present(alert, animated: true, completion: nil)
+//        let alert = UIAlertController(title: nil, message: "로그아웃하시겠습니까", preferredStyle: .alert)
+//
+//        let doneAction = UIAlertAction(title: "예", style: .default) { [weak self] _ in
+//
+//            self?.mypageViewModel?.logOutAction(from: userVendor)
+//            // 로그인 뷰로 이동 ( 초기화면으로 이동?)
+//
+//        }
+//
+//        let cancelAction = UIAlertAction(title: "아니요", style: .cancel, handler: nil)
+//
+//        alert.addAction(cancelAction)
+//        alert.addAction(doneAction)
+//
+//        self.present(alert, animated: true, completion: nil)
         
     }
     
@@ -81,12 +83,19 @@ class MyPageViewController: BaseViewContoller {
     }
     
     @objc func showAlertView(_ sender: UIButton) {
-        let alertTitle = """
-        아직 서비스 준비 중이에요.
-        조금만 기다려 주시면 곧 찾아갈게요!
-        """
-        AlertView.instance.showAlert(
-            title: alertTitle, denyButtonTitle: "", doneButtonTitle: "", image: #imageLiteral(resourceName: "setting"), alertType: .service)
+        AlertView.instance.showAlert(using: .service)
+        AlertView.instance.actionDelegate = self
+    }
+
+}
+
+// MARK: - Alert View Action Delegate
+
+extension MyPageViewController: AlertViewActionDelegate {
+    
+    func serviceTapped() {
+        guard let userVendor = loginUserInfo.vendor else { return }
+        self.mypageViewModel?.logOutAction(from: userVendor)
     }
 
 }

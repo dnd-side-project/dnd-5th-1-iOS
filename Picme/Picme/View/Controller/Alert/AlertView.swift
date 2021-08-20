@@ -13,6 +13,7 @@ import UIKit
     @objc optional func inputDataCencelTapped()
     @objc optional func listRemoveTapped()
     @objc optional func reportTapped()
+    @objc optional func serviceTapped()
 }
 
 class AlertView: UIView {
@@ -28,6 +29,7 @@ class AlertView: UIView {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var doneButton: UIButton!
     @IBOutlet weak var denyButton: UIButton!
+    @IBOutlet weak var buttonStackView: UIStackView!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -67,19 +69,23 @@ class AlertView: UIView {
         case listRemove
         /// 신고하기, Tag = 4
         case report
+        /// 서비스 준비중, Tag = 5
+        case service
         
         fileprivate var title: String {
             switch self {
             case .logIn:
                 return "로그인을 해야 투표를 볼 수 있어요.\n로그인을 해주시겠어요?"
             case .logOut:
-                return "로그아웃 하시겠어요?"
+                return "정말 로그아웃 하시겠어요?"
             case .inputDataCencel:
                 return "지금 종료하면 입력중인 데이터가 사라져요.\n그래도 나가시겠어요?"
             case .listRemove:
                 return "게시글을 삭제하면 다시 업로드 해야해요.\n정말 삭제하시겠어요?"
             case .report:
                 return "게시글에 문제가 있나요?\n신고를 하면 더 이상 게시글이 안보여요"
+            case .service:
+                return "아직 서비스 준비 중이에요.\n조금만 기다려 주시면 곧 찾아갈게요!"
             }
         }
         
@@ -89,6 +95,8 @@ class AlertView: UIView {
                 return "아니요"
             case .logIn:
                 return "더 둘러볼래요"
+            case .service:
+                return ""
             }
         }
         
@@ -104,6 +112,8 @@ class AlertView: UIView {
                 return "삭제하기"
             case .report:
                 return "신고하기"
+            case .service:
+                return ""
             }
         }
         
@@ -115,6 +125,8 @@ class AlertView: UIView {
                 return UIImage(named: "trash")
             case .report:
                 return UIImage(named: "report")
+            case .service:
+                return UIImage(named: "setting")
             }
         }
     }
@@ -127,6 +139,12 @@ class AlertView: UIView {
         doneButton.setTitle(type.doneButtonText, for: .normal)
         
         doneButton.tag = type.rawValue
+        
+        if type == .service {
+            buttonStackView.isHidden = true
+        } else {
+            buttonStackView.isHidden = false
+        }
         
         UIApplication.shared.windows.first?.addSubview(rootView)
     }
@@ -144,6 +162,8 @@ class AlertView: UIView {
             actionDelegate?.listRemoveTapped?()
         case 4:
             actionDelegate?.reportTapped?()
+        case 5:
+            actionDelegate?.serviceTapped?()
         default:
             print("AlertView has Error....nothing case")
         }
