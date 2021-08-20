@@ -57,5 +57,6 @@ class MyPageViewModel {
         loginUserInfo.vendor = nil
         loginUserInfo.userNickname = nil
         loginUserInfo.userProfileImageUrl = nil
+        APIConstants.jwtToken = ""
     }
 }
