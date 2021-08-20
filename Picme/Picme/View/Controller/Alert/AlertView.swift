@@ -159,17 +159,17 @@ class AlertView: UIView {
     
     @objc func doneButtonClicked(_ sender: UIButton) {
         switch sender.tag {
-        case 0:
+        case 0, 1, 2:
             actionDelegate?.loginTapped?()
-        case 1:
-            actionDelegate?.logOutTapped?()
-        case 2:
-            actionDelegate?.inputDataCencelTapped?()
         case 3:
-            actionDelegate?.listRemoveTapped?()
+            actionDelegate?.logOutTapped?()
         case 4:
-            actionDelegate?.reportTapped?()
+            actionDelegate?.inputDataCencelTapped?()
         case 5:
+            actionDelegate?.listRemoveTapped?()
+        case 6:
+            actionDelegate?.reportTapped?()
+        case 7:
             actionDelegate?.serviceTapped?()
         default:
             print("AlertView has Error....nothing case")
