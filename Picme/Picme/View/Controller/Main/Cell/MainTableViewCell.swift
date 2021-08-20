@@ -50,7 +50,7 @@ class MainTableViewCell: UITableViewCell {
             mainTitleLabel.text = object.title
             // imageData = object.images
             // setTimer(endTime: object.deadline)
-            setTimer(endTime: "2021-08-20T18:05:59.703Z")
+            setTimer(endTime: "2021-08-20T23:05:59.703Z")
             postId = object.postId
         }
     }
