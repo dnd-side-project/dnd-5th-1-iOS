@@ -533,6 +533,7 @@ extension VoteDetailViewController: VoteAlertViewDeleagte {
     // MARK: - Vote Alert View Delegate
     
     func deleteButtonTapped() {
+        // 게시물 삭제 서버 통신 
         viewModel.fetchDeletePost(postId: postId!)
     }
     
@@ -601,7 +602,8 @@ extension VoteDetailViewController: VoteAlertViewDeleagte {
              sender.isSelected = !sender.isSelected
              */
             
-            // 투표 생성 서버 통신 작성 필요
+            // 투표 생성 서버 통신
+            viewModel.fetchCreatePost(postId: postId!, imageId: String(currentPage), category: feedback)
             
             isVoted = true
             setupResultView(isVoted: true)
