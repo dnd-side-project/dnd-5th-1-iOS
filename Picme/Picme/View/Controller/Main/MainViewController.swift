@@ -80,7 +80,7 @@ class MainViewController: BaseViewContoller, TouchDelegate {
         DispatchQueue.main.async {
             if self.dataSource.data.value.isEmpty {
                 self.emptyView.isHidden = true
-                // self.showEmptyView()
+                self.showEmptyView()
             } else {
                 self.mainTableView.isHidden = false
                 self.emptyView.isHidden = true
