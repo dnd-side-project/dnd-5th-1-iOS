@@ -14,6 +14,12 @@ class LoginViewModel: NSObject {
     
     weak var loginDelegate: LoginState?
     
+    
+    // 로그인 성공시 유저정보 저장
+    let loginUserInfo = LoginUser.shared
+    // 로그인 실패시 온보딩으로 전달하기위한 유저정보
+    let onboardingUserInfo = UserInfo.shared
+    
 }
 
 // MARK: - Kakao Login
@@ -70,20 +76,25 @@ extension LoginViewModel {
                     case .success(let data):
                         // home으로 이동
                         print(data)
+                        
+                        self.loginUserInfo.userNickname = data.nickname
+                        self.loginUserInfo.userProfileImageUrl = data.profilePictureImage
+//                        loginUserInfo.vendor = data.vendor
+                        
                         self.loginDelegate?.loginSuccess()
                     case .failure(let err):
                         // onboarding으로 이동
                         print(err.localized)
                         // user정보 싱글턴에 저장
-                        let userinfo = UserInfo.shared
-                        userinfo.vendor = LoginKind.LoginRawValue.kakao.vendor
-                        userinfo.vendorID = String(kakaoUserId)
-                        userinfo.userEmail = kakaoUserEmail
+                        
+                        self.onboardingUserInfo.vendor = LoginKind.LoginRawValue.kakao.vendor
+                        self.onboardingUserInfo.vendorID = String(kakaoUserId)
+                        self.onboardingUserInfo.userEmail = kakaoUserEmail
                         
                         print("=======================")
-                        print(userinfo.vendor)
-                        print(userinfo.vendorID)
-                        print(userinfo.userEmail)
+                        print(self.onboardingUserInfo.vendor)
+                        print(self.onboardingUserInfo.vendorID)
+                        print(self.onboardingUserInfo.userEmail)
                         print("=======================")
                         
                         self.loginDelegate?.presentOnboarding()
@@ -108,47 +119,44 @@ extension LoginViewModel: ASAuthorizationControllerDelegate, ASAuthorizationCont
         
         switch authorization.credential {
         case let appleIDCredetial as ASAuthorizationAppleIDCredential:
+            
+            print("========================")
             print(appleIDCredetial.email)
             print(appleIDCredetial.fullName)
             print(appleIDCredetial.user)
+            print("========================")
             
-            let tokenString = String(data: appleIDCredetial.identityToken!, encoding: .utf8)
-            print(tokenString)
+//            let tokenString = String(data: appleIDCredetial.identityToken!, encoding: .utf8)
+//            print(tokenString)
             // keychain 저장용 프로퍼티
             let saveUserInfo = KeychainUserInfo(userIdentifier: appleIDCredetial.user,
                                                 userEmail: appleIDCredetial.email)
             
-            // 초기 로그인시에만 이메일받아오기 때문에 로직 수정 필요
-            if let userEmail = appleIDCredetial.email {
+            let appleUserInfo = LoginKind.SignIn.apple(userID: appleIDCredetial.user,
+                                                       email: appleIDCredetial.email ?? "")
+            
+            LoginAPICenter.fetchSignIn(appleUserInfo.loginValue) { [weak self] (response) in
+                guard let self = self else { return}
                 
-                print(appleIDCredetial.user)
-                print(userEmail)
-                
-                let appleUserInfo = LoginKind.SignIn.apple(userID: appleIDCredetial.user, email: userEmail)
-                
-                LoginAPICenter.fetchSignIn(appleUserInfo.loginValue) { [weak self] (response) in
-                    guard let self = self else { return}
+                switch response {
+                case .success(let data):
+                    print(data)
                     
-                    switch response {
-                    case .success(let data):
-                        print(data)
-
-                        _ = KeyChainModel.shared.createUserInfo(with: saveUserInfo)
-                        self.loginDelegate?.loginSuccess()
-                    case .failure(let err):
-                        print(err.localized)
-                        // user정보 싱글턴에 저장
-                        let userinfo = UserInfo.shared
-                        userinfo.vendor = LoginKind.LoginRawValue.apple.vendor
-                        userinfo.vendorID = String(appleIDCredetial.user)
-                        userinfo.userEmail = appleIDCredetial.email
-                        
-                        print(userinfo.vendor)
-                        print(userinfo.vendorID)
-                        print(userinfo.userEmail)
-                        _ = KeyChainModel.shared.createUserInfo(with: saveUserInfo)
-                        self.loginDelegate?.presentOnboarding()
-                    }
+                    self.loginUserInfo.userNickname = data.nickname
+                    self.loginUserInfo.userProfileImageUrl = data.profilePictureImage
+//                        loginUserInfo.vendor = data.vendor
+                    
+                    _ = KeyChainModel.shared.createUserInfo(with: saveUserInfo)
+                    self.loginDelegate?.loginSuccess()
+                case .failure(let err):
+                    print(err.localized)
+                    // user정보 싱글턴에 저장
+                    
+                    self.onboardingUserInfo.vendor = LoginKind.LoginRawValue.apple.vendor
+                    self.onboardingUserInfo.vendorID = String(appleIDCredetial.user)
+                    self.onboardingUserInfo.userEmail = appleIDCredetial.email
+                    
+                    self.loginDelegate?.presentOnboarding()
                 }
             }
         default:

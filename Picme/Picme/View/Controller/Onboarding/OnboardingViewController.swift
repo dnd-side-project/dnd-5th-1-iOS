@@ -45,7 +45,6 @@ class OnboardingViewController: BaseViewContoller {
     
     @objc func textfieldDidChanged(_ textfield: UITextField) {
         guard let text = textfield.text else { return }
-        print(text)
         
         nickNameTextCount = text.count
         
