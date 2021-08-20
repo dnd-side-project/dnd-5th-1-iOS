@@ -59,7 +59,9 @@
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="52" id="YNJ-2A-BHD"/>
                                                 </constraints>
-                                                <state key="normal" title="카카오" image="kakao_login"/>
+                                                <state key="normal" title="카카오로 시작하기">
+                                                    <color key="titleColor" systemColor="linkColor"/>
+                                                </state>
                                                 <connections>
                                                     <action selector="kakaoLoginAction:" destination="Inh-nG-xUb" eventType="touchUpInside" id="i0r-RI-gJn"/>
                                                 </connections>
@@ -67,7 +69,7 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VWu-rR-Ga7">
                                                 <rect key="frame" x="0.0" y="62" width="374" height="52"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                                <state key="normal" title="Apple로 로그인"/>
+                                                <state key="normal" title="Apple로 시작하기"/>
                                                 <connections>
                                                     <action selector="appleLoginAction:" destination="Inh-nG-xUb" eventType="touchUpInside" id="jtE-C9-9eL"/>
                                                 </connections>
@@ -107,7 +109,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="kakao_login" width="600" height="90"/>
+        <systemColor name="linkColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
