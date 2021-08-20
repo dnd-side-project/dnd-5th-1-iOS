@@ -14,7 +14,6 @@ class LoginViewController: BaseViewContoller {
 
     // MARK: - Properties
     
-    @IBOutlet weak var mainTitleLabel: UILabel!
     @IBOutlet weak var kakaoLoginButton: UIButton!
     @IBOutlet weak var appleLoginButton: UIButton!
     @IBOutlet weak var unLoginButton: UIButton!
@@ -88,11 +87,7 @@ extension LoginViewController {
         
         // Color
         view.backgroundColor = .solidColor(.solid0)
-        mainTitleLabel.textColor = .textColor(.text100)
         unLoginButton.setTitleColor(.textColor(.text91), for: .normal)
-        
-        // String
-        mainTitleLabel.attributedText = attributeString(text: mainTitleLabel.text, changeString: "인생사진")
         
         appleLoginButton.layer.cornerRadius = 12
     }
