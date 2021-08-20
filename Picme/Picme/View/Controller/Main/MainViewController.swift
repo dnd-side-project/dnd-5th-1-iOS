@@ -55,8 +55,9 @@ class MainViewController: BaseViewContoller, TouchDelegate {
         }
         
         // tab bar item - image 설정
-        self.tabBarController?.tabBar.items![1].image = #imageLiteral(resourceName: "plusPink")
+        self.tabBarController?.tabBar.items![1].image = #imageLiteral(resourceName: "plusPink").withRenderingMode(.alwaysOriginal)
         self.tabBarController?.tabBar.items![2].image = #imageLiteral(resourceName: "mypageWhite")
+        
     }
     
     // MARK: - Bind View Model
