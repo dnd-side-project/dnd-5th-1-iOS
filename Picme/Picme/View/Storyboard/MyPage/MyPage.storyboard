@@ -5,7 +5,6 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -20,70 +19,6 @@
         </array>
     </customFonts>
     <scenes>
-        <!--마이페이지-->
-        <scene sceneID="s0d-6b-0kx">
-            <objects>
-                <viewController id="Y6W-OH-hqX" customClass="MyPageViewController" customModule="Picme" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qDv-K4-IEZ">
-                                <rect key="frame" x="20" y="778" width="374" height="52"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="52" id="urC-Ck-clU"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="NotoSansCJKkr-Bold" family="Noto Sans CJK KR" pointSize="16"/>
-                                <state key="normal" title="로그아웃"/>
-                            </button>
-                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="XT4-YP-LJ2">
-                                <rect key="frame" x="20" y="64" width="374" height="44"/>
-                                <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profilePink" translatesAutoresizingMaskIntoConstraints="NO" id="mKm-lU-WoF">
-                                        <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="mKm-lU-WoF" secondAttribute="height" multiplier="1:1" id="Px5-Hs-jc4"/>
-                                            <constraint firstAttribute="height" constant="44" id="ibO-4B-gKQ"/>
-                                        </constraints>
-                                    </imageView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="124" translatesAutoresizingMaskIntoConstraints="NO" id="k79-Uc-ekC">
-                                        <rect key="frame" x="54" y="11" width="320" height="22"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="97g-wD-k1L">
-                                                <rect key="frame" x="0.0" y="0.0" width="176" height="22"/>
-                                                <fontDescription key="fontDescription" name="NotoSansCJKkr-Bold" family="Noto Sans CJK KR" pointSize="14"/>
-                                                <color key="textColor" red="0.90196078431372551" green="0.90588235294117647" blue="0.9137254901960784" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d1q-mG-sA1">
-                                                <rect key="frame" x="300" y="0.0" width="20" height="22"/>
-                                                <state key="normal" image="configure"/>
-                                            </button>
-                                        </subviews>
-                                    </stackView>
-                                </subviews>
-                            </stackView>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="qDv-K4-IEZ" secondAttribute="trailing" constant="20" id="N56-Fk-GRU"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="XT4-YP-LJ2" secondAttribute="trailing" constant="20" id="Owt-1w-ZKr"/>
-                            <constraint firstItem="XT4-YP-LJ2" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="kgR-aw-Xcx"/>
-                            <constraint firstItem="qDv-K4-IEZ" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="l7A-kf-4Ib"/>
-                            <constraint firstItem="XT4-YP-LJ2" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="20" id="rEx-4K-TMN"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="qDv-K4-IEZ" secondAttribute="bottom" constant="32" id="yjg-5q-8D8"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" title="마이페이지" id="523-q1-Mlb"/>
-                    <connections>
-                        <outlet property="userStackView" destination="XT4-YP-LJ2" id="tTQ-eA-n35"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1586" y="42"/>
-        </scene>
         <!--마이페이지-->
         <scene sceneID="ef8-nF-WRr">
             <objects>
@@ -330,11 +265,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="configure" width="20" height="20"/>
         <image name="profilePink" width="44" height="44"/>
         <image name="settingsButton" width="17" height="17"/>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
     </resources>
 </document>
