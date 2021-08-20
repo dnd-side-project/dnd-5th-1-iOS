@@ -8,15 +8,19 @@
 import Foundation
 
 struct VoteDetailModel: Codable {
-    let onePickImageId: Int
-    let isVoted: Bool
-    let votedImageId: Int
-    let title: String
-    let participantsNum: Int
-    let deadline: Date?
+    var postNickname: String
+    var postProfileUrl: String
+    var onePickImageId: Int
+    var isVoted: Bool
+    var votedImageId: Int
+    var title: String
+    var participantsNum: Int
+    var deadline: String
     var images: [VoteDetailImage]
     
     enum CodingKeys: String, CodingKey {
+        case postNickname = "nickname"
+        case postProfileUrl = "userProfileUrl"
         case onePickImageId = "firstPickIndex"
         case isVoted = "isVoted"
         case votedImageId = "votedImageIndex"
@@ -30,21 +34,14 @@ struct VoteDetailModel: Codable {
 // MARK: - 투표 상세 이미지
 
 struct VoteDetailImage: Codable {
-    let imageId: String
-    let imageUrl: String
-    let pickedNum: Int
-    let emotion: Int
-    let composition: Int
-    let light: Int
-    let color: Int
-    let skip: Int
-    
-    var percent: Double
-    var rank: Int
-    var sensitivityPercent: Double
-    var compositionPercent: Double
-    var lightPercent: Double
-    var colorPercent: Double
+    var imageId: String
+    var imageUrl: String
+    var pickedNum: Int
+    var emotion: Int
+    var composition: Int
+    var light: Int
+    var color: Int
+    var skip: Int
     
     enum CodingKeys: String, CodingKey {
         case imageId = "id"
@@ -55,13 +52,23 @@ struct VoteDetailImage: Codable {
         case composition
         case light
         case skip
-        
-        case percent
-        case rank
-        case sensitivityPercent
-        case compositionPercent
-        case lightPercent
-        case colorPercent
-        
+    }
+}
+
+struct VoteResultModel {
+        var percent: Double
+        var rank: Int
+        var sensitivityPercent: Double
+        var compositionPercent: Double
+        var lightPercent: Double
+        var colorPercent: Double
+    
+    init(percent: Double, rank: Int, sensitivityPercent: Double, compositionPercent: Double, lightPercent: Double, colorPercent: Double) {
+        self.percent = percent
+        self.rank = rank
+        self.sensitivityPercent = sensitivityPercent
+        self.compositionPercent = compositionPercent
+        self.lightPercent = lightPercent
+        self.colorPercent = colorPercent
     }
 }
