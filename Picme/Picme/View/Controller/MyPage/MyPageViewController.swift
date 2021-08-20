@@ -45,7 +45,7 @@ class MyPageViewController: BaseViewContoller {
         } else {
             
             userIdentifierLabel.text = "로그인을 해주세요."
-            userImage.image = #imageLiteral(resourceName: "profilePink")
+            userImage.image = #imageLiteral(resourceName: "progressCircle")
         }
 
         setupButtons()
