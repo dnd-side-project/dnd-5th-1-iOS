@@ -11,7 +11,7 @@ import Foundation
 
 struct CreateUserImages: Codable {
     var isFirstPick: Int
-    var metaData: [UserImageSize]
+    var sizes: [UserImageSize]
 }
 
 struct UserImageSize: Codable {

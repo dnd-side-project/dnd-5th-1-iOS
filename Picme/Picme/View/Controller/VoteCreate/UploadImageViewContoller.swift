@@ -17,7 +17,7 @@ class UploadImageViewContoller: BaseViewContoller {
     
     // MARK: - Properties
     var userImagesData: [Data] = []
-    var userimagesMeta = CreateUserImages(isFirstPick: 0, metaData: [])
+    var userimagesMeta = CreateUserImages(isFirstPick: 0, sizes: [])
     
     @IBOutlet weak var uploadButton: UIButton!
     @IBOutlet weak var uploadLabel: UILabel!
@@ -54,7 +54,7 @@ class UploadImageViewContoller: BaseViewContoller {
                     print(photos.image)
                     print(photos.image.size.width)
                     print(photos.image.size.height)
-                    self.userimagesMeta.metaData.append(UserImageSize(width: Int(photos.image.size.width),
+                    self.userimagesMeta.sizes.append(UserImageSize(width: Int(photos.image.size.width),
                                                       height: Int(photos.image.size.width)))
                     count += 1
                 default:

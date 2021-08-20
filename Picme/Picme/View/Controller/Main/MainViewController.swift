@@ -8,7 +8,6 @@
 import UIKit
 
 // MARK: - Collection View Cell 클릭 시 실행할 프로토콜
-
 protocol TouchDelegate: AnyObject {
     func pushVoteDetailView(index: Int, postId: String)
 }
@@ -118,7 +117,6 @@ class MainViewController: BaseViewContoller, TouchDelegate {
 }
 
 // MARK: - Alert View Delegate
-
 extension MainViewController: AlertViewwDelegate {
     func loginButtonTapped() {
         self.view.window?.rootViewController?.dismiss(animated: false, completion: {
@@ -132,7 +130,6 @@ extension MainViewController: AlertViewwDelegate {
 }
 
 // MARK: - Table View Data Source / Collection View Cell Delegate
-
 class MainListDatasource: GenericDataSource<MainModel>, UITableViewDataSource, CollectionViewCellDelegate {
     
     // MARK: - CollectionV View Cell Delegate

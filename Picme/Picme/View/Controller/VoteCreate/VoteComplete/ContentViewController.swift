@@ -61,8 +61,27 @@ class ContentViewController: BaseViewContoller {
 
     @IBAction func registVote(_ sender: UIButton) {
         print("Regist")
+        
+//        self.dismiss(animated: true) {
+//            
+//            //
+//            if let sceneDelegate = UIApplication.shared.connectedScenes.first!.delegate as? SceneDelegate, let initVC = sceneDelegate.window?.rootViewController {
+//                    
+//                Toast.show(using: .voteUpload, controller: initVC)
+//            }
+//        }
+        
         if let voteText = voteTextView.text, let voteEndDate = voteEndDateTextfield.text {
-            contentViewModel?.createList(title: voteText, endDate: voteEndDate)
+            contentViewModel?.createList(title: voteText, endDate: voteEndDate, completion: {
+                self.dismiss(animated: true) {
+
+                    //
+                    if let sceneDelegate = UIApplication.shared.connectedScenes.first!.delegate as? SceneDelegate, let initVC = sceneDelegate.window?.rootViewController {
+
+                        Toast.show(using: .voteComplete, controller: initVC)
+                    }
+                }
+            })
         }
         
     }
@@ -74,9 +93,9 @@ class ContentViewController: BaseViewContoller {
         toolBar.tintColor = .white
         toolBar.sizeToFit()
         
-        let doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItem.Style.done, target: self, action: #selector(toolBarDoneButton(_:)))
+        let doneButton = UIBarButtonItem(title: "완료", style: UIBarButtonItem.Style.done, target: self, action: #selector(toolBarDoneButton(_:)))
         let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
-        let cancelButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItem.Style.plain, target: self, action: #selector(toolBarCancelButton(_:)))
+        let cancelButton = UIBarButtonItem(title: "취소", style: UIBarButtonItem.Style.plain, target: self, action: #selector(toolBarCancelButton(_:)))
 
         toolBar.setItems([cancelButton, spaceButton, doneButton], animated: false)
         toolBar.isUserInteractionEnabled = true
@@ -87,11 +106,19 @@ class ContentViewController: BaseViewContoller {
     
     @objc func toolBarDoneButton(_ sender: UIButton) {
         print("DONE")
+        if voteEndDateTextfield.text == contentViewModel?.addDate(0) {
+            contentViewModel?.hasVoteEndDate.value = false
+        }
+        
+        contentViewModel?.completeCheck()
         voteEndDateTextfield.resignFirstResponder()
     }
     
     @objc func toolBarCancelButton(_ sender: UIButton) {
-        voteEndDateTextfield.text = nil
+        voteEndDateTextfield.text = contentViewModel?.addDate(0)
+        contentViewModel?.hasVoteEndDate.value = false
+        
+        contentViewModel?.completeCheck()
         voteEndDateTextfield.resignFirstResponder()
     }
     
@@ -108,7 +135,26 @@ class ContentViewController: BaseViewContoller {
         }
     }
 }
+extension UIViewController {
+    func showToast(message : String, font: UIFont) {
 
+        let toastLabel = UILabel(frame: CGRect(x: self.view.frame.size.width/2 - 75, y: self.view.frame.size.height-200, width: 150, height: 35))
+        toastLabel.backgroundColor = UIColor.black.withAlphaComponent(0.6)
+        toastLabel.textColor = UIColor.white
+        toastLabel.font = font
+        toastLabel.textAlignment = .center;
+        toastLabel.text = message
+        toastLabel.alpha = 1.0
+        toastLabel.layer.cornerRadius = 10;
+        toastLabel.clipsToBounds  =  true
+        self.view.addSubview(toastLabel)
+        UIView.animate(withDuration: 4.0, delay: 0.1, options: .curveEaseOut, animations: {
+             toastLabel.alpha = 0.0
+        }, completion: {(isCompleted) in
+            toastLabel.removeFromSuperview()
+        })
+    }
+}
 // MARK: - TextViewDelegate
 
 extension ContentViewController: UITextViewDelegate {
@@ -152,9 +198,10 @@ extension ContentViewController: UIPickerViewDelegate, UIPickerViewDataSource {
         
         voteEndDateTextfield.text = contentVM.stringConvertDate(ExpirationDate.allCases[row])
         
-        if voteEndDateTextfield.text != "" {
+        if voteEndDateTextfield.text != "" && voteEndDateTextfield.text != contentViewModel?.addDate(0) {
             contentViewModel?.hasVoteEndDate.value = true
         }
+        
         contentViewModel?.completeCheck()
     }
 }
@@ -204,7 +251,7 @@ extension ContentViewController {
         navigationItem.title = "제목/마감시간 설정"
         navigationItem.hidesBackButton = true
         
-        let customBackButton = UIBarButtonItem(image: UIImage(named: "navigationBackBtn"),
+        let customBackButton = UIBarButtonItem(image: UIImage(named: "leftArrow28"),
                                                style: .done,
                                                target: self,
                                                action: #selector(backAction(_:)))

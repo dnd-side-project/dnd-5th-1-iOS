@@ -12,6 +12,7 @@ class LoginUser {
     
     private init() {}
     
+    var vendor: String?
     var userNickname: String?
     var userProfileImageUrl: String?
 }

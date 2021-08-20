@@ -18,12 +18,11 @@ class MyPageViewModel {
     
     weak var logOutDelegate: LogOutProtocol?
     
-    func logOutAction() {
+    func logOutAction(from kind: String?) {
         
-        // 유저Body 저장하는 싱글턴 vendor로 대체예정
-        let tt = "123"
+        guard let kind = kind else { return }
         
-        switch tt {
+        switch kind {
         case "Kakao":
             
             UserApi.shared.logout { [weak self] error in
@@ -36,6 +35,7 @@ class MyPageViewModel {
             }
             
         case "Apple":
+            // 키체인 제거
             print("Apple")
         default:
             return

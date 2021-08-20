@@ -146,7 +146,7 @@ extension OnePickViewController {
         navigationItem.title = "원픽 선택"
         navigationItem.hidesBackButton = true
         
-        let customBackButton = UIBarButtonItem(image: UIImage(named: "navigationBackBtn"),
+        let customBackButton = UIBarButtonItem(image: UIImage(named: "leftArrow28"),
                                                style: .done,
                                                target: self,
                                                action: #selector(backAction(_:)))
