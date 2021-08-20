@@ -322,6 +322,7 @@ extension VoteDetailViewController: AlertViewActionDelegate {
         // Page Control
         detailPageControl.numberOfPages = voteDetailModel?.images?.count ?? 0
         detailPageControl.currentPage = 0
+        detailPageControl.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
         
         detailNicknameLabel.text = postNickname
         detailProfileImageView.kf.setImage(with: URL(string: postProfileUrl!), placeholder: #imageLiteral(resourceName: "profilePink"))
