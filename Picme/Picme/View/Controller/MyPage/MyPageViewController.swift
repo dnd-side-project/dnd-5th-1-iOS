@@ -37,9 +37,17 @@ class MyPageViewController: BaseViewContoller {
         
         mypageViewModel?.logOutDelegate = self
         
-//        userIdentifierLabel.text = loginUserInfo.userNickname
-//        userImage.kf.setImage(with: URL(string: loginUserInfo.userProfileImageUrl!), placeholder: #imageLiteral(resourceName: "progressCircle"))
-//        
+        if let userNickName = loginUserInfo.userNickname,
+           let profileImageUrl = loginUserInfo.userProfileImageUrl {
+            
+            userIdentifierLabel.text = userNickName
+            userImage.kf.setImage(with: URL(string: profileImageUrl), placeholder: #imageLiteral(resourceName: "progressCircle"))
+        } else {
+            
+            userIdentifierLabel.text = "로그인을 해주세요."
+            userImage.image = #imageLiteral(resourceName: "profilePink")
+        }
+
         setupButtons()
     }
     
