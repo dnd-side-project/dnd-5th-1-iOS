@@ -313,7 +313,7 @@ extension ScalingCarouselFlowDelegate: UICollectionViewDelegateFlowLayout {
 }
 
 // MARK: - Helpers
-extension VoteDetailViewController: VoteAlertViewDeleagte {
+extension VoteDetailViewController: AlertViewActionDelegate {
     
     // MARK: - Set Up View
     
@@ -507,14 +507,9 @@ extension VoteDetailViewController: VoteAlertViewDeleagte {
         case 0:
             print("trash")
             
-            let alertTitle = """
-                게시글을 삭제하면 다시 업로드해야해요.
-                정말 삭제하시겠어요?
-                """
-            
-            AlertView.instance.showAlert(
-                title: alertTitle, denyButtonTitle: "아니요", doneButtonTitle: "삭제하기", image: #imageLiteral(resourceName: "trash"), alertType: .delete)
-            AlertView.instance.voteDelegate = self
+            AlertView.instance.showAlert(using: .listRemove)
+            AlertView.instance.actionDelegate = self
+        
         case 1:
             print("report")
             
@@ -522,9 +517,11 @@ extension VoteDetailViewController: VoteAlertViewDeleagte {
                 게시글에 문제가 있나요?
                 신고를 하면 더 이상 게시글이 안보여요.
                 """
+            AlertView.instance.showAlert(using: .report)
+            AlertView.instance.actionDelegate = self
             
-            AlertView.instance.showAlert(
-                title: alertTitle, denyButtonTitle: "아니요", doneButtonTitle: "신고하기", image: #imageLiteral(resourceName: "report"), alertType: .report)
+//            AlertView.instance.showAlert(
+//                title: alertTitle, denyButtonTitle: "아니요", doneButtonTitle: "신고하기", image: #imageLiteral(resourceName: "report"), alertType: .report)
         default:
             print("error")
         }
