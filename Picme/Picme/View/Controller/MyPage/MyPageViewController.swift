@@ -9,14 +9,22 @@ import UIKit
 import AuthenticationServices
 
 class MyPageViewController: BaseViewContoller {
-
-    // MARK: - Properties
+    
+    // MARK: - IBOutlet
     
     @IBOutlet weak var logOutButton: UIButton!
+    @IBOutlet weak var allVoteListButton: UIButton!
+    @IBOutlet weak var myBedgeButton: UIButton!
+    @IBOutlet weak var settingButton: UIButton!
     
     @IBOutlet weak var userIdentifierLabel: UILabel!
     @IBOutlet weak var userImage: UIImageView!
-    @IBOutlet weak var userStackView: UIStackView!
+    
+    @IBOutlet weak var myVoteCountLabel: UILabel!
+    @IBOutlet weak var participationCountLabel: UILabel!
+    @IBOutlet weak var overallWinRateLabel: UILabel!
+    
+    @IBOutlet weak var progressView: UIProgressView!
     
     var mypageViewModel: MyPageViewModel? = MyPageViewModel()
     
@@ -26,24 +34,16 @@ class MyPageViewController: BaseViewContoller {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         mypageViewModel?.logOutDelegate = self
+        
+        userIdentifierLabel.text = loginUserInfo.userNickname
+        userImage.kf.setImage(with: URL(string: loginUserInfo.userProfileImageUrl!), placeholder: #imageLiteral(resourceName: "progressCircle"))
+        
+        setupButtons()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        if let nickName = loginUserInfo.userNickname,
-           let userImageUrl = loginUserInfo.userProfileImageUrl {
-            myPageSetting(name: nickName, image: userImageUrl)
-        } else {
-            myPageSetting(name: "로그인 전", image: "mypageWhite")
-        }
-    }
-    
-    @IBAction func userSettingAction(_ sender: UIButton) {
-        
-    }
+    // MARK: - Log Out
     
     @IBAction func logOutAction(_ sender: UIButton) {
         print("LogOut")
@@ -65,17 +65,33 @@ class MyPageViewController: BaseViewContoller {
         alert.addAction(doneAction)
         
         self.present(alert, animated: true, completion: nil)
-
+        
     }
     
-    func myPageSetting(name: String, image: String) {
-        userIdentifierLabel.text = name
-        // 수정전
-        userImage.image = UIImage(named: image)
+    // MARK: - Button Actions
+    
+    func setupButtons() {
+        allVoteListButton.tag = 1
+        myBedgeButton.tag = 2
+        settingButton.tag = 3
+        
+        allVoteListButton.addTarget(self, action: #selector(showAlertView), for: UIControl.Event.touchUpInside)
+        myBedgeButton.addTarget(self, action: #selector(showAlertView), for: UIControl.Event.touchUpInside)
+        settingButton.addTarget(self, action: #selector(showAlertView), for: UIControl.Event.touchUpInside)
     }
+    
+    @objc func showAlertView(_ sender: UIButton) {
+        let alertTitle = """
+        아직 서비스 준비 중이에요.
+        조금만 기다려 주시면 곧 찾아갈게요!
+        """
+        AlertView.instance.showAlert(
+            title: alertTitle, denyButtonTitle: "", doneButtonTitle: "", image: #imageLiteral(resourceName: "setting"), alertType: .service)
+    }
+
 }
 
-// 로그아웃
+// MARK: - Log Out Protocol
 
 extension MyPageViewController: LogOutProtocol {
     
@@ -84,42 +100,5 @@ extension MyPageViewController: LogOutProtocol {
         let loginVC = presentLogin.instantiateViewController(withIdentifier: "LoginViewController")
         loginVC.modalPresentationStyle = .fullScreen
         self.present(loginVC, animated: true, completion: nil)
-    }
-}
-
-// MARK: - UI
-
-extension MyPageViewController {
-    
-    override func setProperties() {
-        
-        userStackView.layer.cornerRadius = 10
-        userStackView.backgroundColor = .solidColor(.solid12)
-        
-        logOutButton.setTitleColor(.textColor(.text100), for: .normal)
-        logOutButton.layer.cornerRadius = 10
-        logOutButton.layer.borderWidth = 1
-        logOutButton.layer.borderColor = UIColor.textColor(.text100).cgColor
-        logOutButton.backgroundColor = .solidColor(.solid0)
-    }
-    
-    override func setConfiguration() {
-        
-        view.backgroundColor = .solidColor(.solid0)
-        
-        // isLayoutMarginsRelativeArrangement 프로퍼티 true를 해야 arranged view들이 지정된 margin의 값을 따름
-        userStackView.isLayoutMarginsRelativeArrangement = true
-        userStackView.layoutMargins = UIEdgeInsets(top: 24, left: 16, bottom: 24, right: 16)
-        
-        // navigation
-        if let navBar = navigationController?.navigationBar {
-            navBar.isTranslucent = false
-            navBar.barTintColor = .solidColor(.solid0)
-
-            navBar.topItem?.title = "마이페이지"
-            
-            navBar.titleTextAttributes = [.foregroundColor: UIColor.textColor(.text100),
-                                          NSAttributedString.Key.font: UIFont.kr(.bold, size: 16)]
-        }
     }
 }
