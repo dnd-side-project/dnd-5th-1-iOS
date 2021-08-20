@@ -23,8 +23,13 @@ class MainViewController: BaseViewContoller, TouchDelegate {
     // MARK: - IBActions
     
     @IBAction func voteButtonClicked(_ sender: Any) {
-        if let uploadImageVC = tabBarController?.storyboard?.instantiateViewController(withIdentifier: "UploadImage") {
-            tabBarController?.present(uploadImageVC, animated: true)
+        if APIConstants.jwtToken == "" {
+            AlertView.instance.showAlert(using: .logInVote)
+            AlertView.instance.actionDelegate = self
+        } else {
+            if let uploadImageVC = tabBarController?.storyboard?.instantiateViewController(withIdentifier: "UploadImage") {
+                tabBarController?.present(uploadImageVC, animated: true)
+            }
         }
     }
     
@@ -55,8 +60,9 @@ class MainViewController: BaseViewContoller, TouchDelegate {
         }
         
         // tab bar item - image 설정
-        self.tabBarController?.tabBar.items![1].image = #imageLiteral(resourceName: "plusPink")
+        self.tabBarController?.tabBar.items![1].image = #imageLiteral(resourceName: "plusPink").withRenderingMode(.alwaysOriginal)
         self.tabBarController?.tabBar.items![2].image = #imageLiteral(resourceName: "mypageWhite")
+        
     }
     
     // MARK: - Bind View Model
@@ -78,19 +84,18 @@ class MainViewController: BaseViewContoller, TouchDelegate {
     func showTableView() {
         DispatchQueue.main.async {
             if self.dataSource.data.value.isEmpty {
-                self.emptyView.isHidden = true
-                // self.showEmptyView()
+                self.showEmptyView()
             } else {
-                self.mainTableView.isHidden = false
                 self.emptyView.isHidden = true
+                self.mainTableView.isHidden = false
                 self.mainTableView.reloadData()
             }
         }
     }
     
     func showEmptyView() {
-        self.mainTableView.isHidden = true
         self.emptyView.isHidden = false
+        self.mainTableView.isHidden = true
     }
     
     // MARK: - Collection View Cell 클릭시
@@ -99,13 +104,8 @@ class MainViewController: BaseViewContoller, TouchDelegate {
     func pushVoteDetailView(index: Int, postId: String) {
         
         if APIConstants.jwtToken == "" { // 미로그인 사용자
-            let alertTitle = """
-            로그인 해야 투표를 할 수 있어요.
-            로그인을 해주시겠어요?
-            """
-            AlertView.instance.showAlert(
-                title: alertTitle, denyButtonTitle: "더 둘러보기", doneButtonTitle: "로그인하기", image: #imageLiteral(resourceName: "eyeLarge"), alertType: .login)
-            AlertView.instance.loginDelegate = self
+            AlertView.instance.showAlert(using: .logIn)
+            AlertView.instance.actionDelegate = self
         } else { // 로그인한 사용자
             guard let voteDetailVC = self.storyboard?.instantiateViewController(withIdentifier: "VoteDetailViewController") as? VoteDetailViewController else { return }
             voteDetailVC.postId = postId
@@ -116,30 +116,24 @@ class MainViewController: BaseViewContoller, TouchDelegate {
      
     }
     */
+    
     func pushVoteDetailView(index: Int, postId: String, postNickname: String, postProfileUrl: String) {
         if APIConstants.jwtToken == "" { // 미로그인 사용자
-            let alertTitle = """
-            로그인 해야 투표를 할 수 있어요.
-            로그인을 해주시겠어요?
-            """
-//            AlertView.instance.showAlert(
-//                title: alertTitle, denyButtonTitle: "더 둘러보기", doneButtonTitle: "로그인하기", image: #imageLiteral(resourceName: "eyeLarge"), alertType: .logIn)
-//            AlertView.instance.loginDelegate = self
-            AlertView.instance.showAlert(using: .logIn)
+            AlertView.instance.showAlert(using: .logInDetail)
             AlertView.instance.actionDelegate = self
-            
         } else { // 로그인한 사용자
             guard let voteDetailVC = self.storyboard?.instantiateViewController(withIdentifier: "VoteDetailViewController") as? VoteDetailViewController else { return }
             voteDetailVC.postId = postId
-//            voteDetailVC.postNickname = postNickname
-//            voteDetailVC.postProfileUrl = postProfileUrl
+            voteDetailVC.postNickname = postNickname
+            voteDetailVC.postProfileUrl = postProfileUrl
             self.navigationController?.pushViewController(voteDetailVC, animated: true)
         }
     }
     
 }
 
-// MARK: - Login Alert View Delegate
+// MARK: - Alert View Action Delegate
+
 extension MainViewController: AlertViewActionDelegate {
     func loginTapped() {
         self.view.window?.rootViewController?.dismiss(animated: false, completion: {

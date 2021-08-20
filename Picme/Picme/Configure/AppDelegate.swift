@@ -44,7 +44,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         
         switch indexOfTab {
         case 1:
-            
             if APIConstants.jwtToken != "" {
                 if let uploadImageVC = tabBarController.storyboard?.instantiateViewController(withIdentifier: "UploadImage") {
                     uploadImageVC.modalPresentationStyle = .fullScreen
@@ -52,10 +51,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
                     return false
                 }
             } else {
-                AlertView.instance.showAlert(using: .logIn)
+                AlertView.instance.showAlert(using: .logInVote)
                 AlertView.instance.actionDelegate = self
             }
-            
+        case 2:
+            if APIConstants.jwtToken == "" {
+                AlertView.instance.showAlert(using: .logInMypage)
+                AlertView.instance.actionDelegate = self
+            }
         default:
             return true
         }
@@ -73,6 +76,16 @@ extension AppDelegate: AlertViewActionDelegate {
         
         if let sceneDelegate = UIApplication.shared.connectedScenes.first!.delegate as? SceneDelegate {
             sceneDelegate.window?.rootViewController = loginVC
+        }
+    }
+    
+    func moveToHomeTab() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let mainVC = storyboard.instantiateViewController(withIdentifier: "TabBarController")
+        mainVC.modalPresentationStyle = .fullScreen
+
+        if let sceneDelegate = UIApplication.shared.connectedScenes.first!.delegate as? SceneDelegate {
+            sceneDelegate.window?.rootViewController = mainVC
         }
     }
 }
