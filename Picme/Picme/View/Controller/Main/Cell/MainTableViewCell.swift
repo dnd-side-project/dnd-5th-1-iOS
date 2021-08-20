@@ -25,7 +25,6 @@ class MainTableViewCell: UITableViewCell {
     @IBOutlet weak var mainTitleLabel: UILabel!
     @IBOutlet weak var mainClockImageView: UIImageView!
     
-    
     @IBOutlet weak var mainCollectionView: UICollectionView!
     
     // MARK: - Variables
@@ -33,6 +32,8 @@ class MainTableViewCell: UITableViewCell {
     weak var cellDelegate: CollectionViewCellDelegate?
     var imageData: [Images]?
     var postId: String!
+    
+    var imageArray = [#imageLiteral(resourceName: "defalutImage"), #imageLiteral(resourceName: "defalutImage"), #imageLiteral(resourceName: "defalutImage")]
     
     // MARK: - Timer
     var timer = Timer()
@@ -112,12 +113,14 @@ class MainTableViewCell: UITableViewCell {
 
 extension MainTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return imageData?.count ?? 0
+        // return imageData?.count ?? 0
+        return imageArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: MainCollectionViewCell = mainCollectionView.dequeueCollectionCell(for: indexPath)
         
+        /*
         if indexPath.item == imageData!.count - 1 {
             cell.mainPhotoImageView.image = #imageLiteral(resourceName: "defalutImage").withRenderingMode(.alwaysTemplate)
             cell.mainPhotoImageView.tintColor = .solidColor(.solid12)
@@ -126,6 +129,16 @@ extension MainTableViewCell: UICollectionViewDelegate, UICollectionViewDataSourc
             cell.mainPhotoImageView.kf.setImage(with: URL(string: (imageData?[indexPath.row].thumbnailUrl)!), placeholder: #imageLiteral(resourceName: "defalutImage"))
             cell.stackView.isHidden = true
         }
+        */
+        
+        if indexPath.item == imageArray.count - 1 {
+                  cell.mainPhotoImageView.image = #imageLiteral(resourceName: "defalutImage").withRenderingMode(.alwaysTemplate)
+                  cell.mainPhotoImageView.tintColor = .solidColor(.solid12)
+                  cell.stackView.isHidden = false
+              } else {
+                  cell.mainPhotoImageView.image = imageArray[indexPath.row]
+                  cell.stackView.isHidden = true
+              }
         
         return cell
     }
