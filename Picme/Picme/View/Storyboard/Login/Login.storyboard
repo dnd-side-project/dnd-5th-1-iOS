@@ -12,9 +12,6 @@
         <array key="NotoSansCJKkr-Bold.otf">
             <string>NotoSansCJKkr-Bold</string>
         </array>
-        <array key="NotoSansCJKkr-Medium.otf">
-            <string>NotoSansCJKkr-Medium</string>
-        </array>
     </customFonts>
     <scenes>
         <!--Login View Controller-->
@@ -49,7 +46,7 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="4in-FE-Lcr">
-                                <rect key="frame" x="20" y="688" width="374" height="154"/>
+                                <rect key="frame" x="20" y="685" width="374" height="157"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="g1M-eb-P1v">
                                         <rect key="frame" x="0.0" y="0.0" width="374" height="114"/>
@@ -77,8 +74,8 @@
                                         </subviews>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RL0-ae-cfF">
-                                        <rect key="frame" x="0.0" y="124" width="374" height="30"/>
-                                        <fontDescription key="fontDescription" name="NotoSansCJKkr-Medium" family="Noto Sans CJK KR" pointSize="12"/>
+                                        <rect key="frame" x="0.0" y="124" width="374" height="33"/>
+                                        <fontDescription key="fontDescription" name="NotoSansCJKkr-Bold" family="Noto Sans CJK KR" pointSize="14"/>
                                         <state key="normal" title="서비스 둘러보기"/>
                                         <connections>
                                             <action selector="unLoginAction:" destination="Inh-nG-xUb" eventType="touchUpInside" id="rCG-Mb-jcQ"/>
@@ -88,7 +85,7 @@
                             </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="5UX-PF-ZPP"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="qAK-pE-jJK" firstAttribute="leading" secondItem="5UX-PF-ZPP" secondAttribute="leading" constant="20" id="Ffv-mM-vY3"/>
                             <constraint firstItem="qAK-pE-jJK" firstAttribute="top" secondItem="5UX-PF-ZPP" secondAttribute="top" constant="150" id="ZNj-xl-FAZ"/>
@@ -111,9 +108,6 @@
     <resources>
         <systemColor name="linkColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
     </resources>
 </document>
