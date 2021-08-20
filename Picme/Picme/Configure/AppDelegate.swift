@@ -53,7 +53,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
                 }
             } else {
                 AlertView.instance.showAlert(title: "로그인", denyButtonTitle: "나가기", doneButtonTitle: "로그인", image: #imageLiteral(resourceName: "hmm"), alertType: .login)
-                AlertView.instance.delegate = self
+                AlertView.instance.loginDelegate = self
             }
             
         default:
@@ -64,7 +64,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
     }
 }
 
-extension AppDelegate: AlertViewwDelegate {
+extension AppDelegate: LoginAlertViewDelegate {
     func loginButtonTapped() {
         let storyboard = UIStoryboard(name: "Login", bundle: nil)
         let loginVC = storyboard.instantiateViewController(withIdentifier: "LoginViewController")
