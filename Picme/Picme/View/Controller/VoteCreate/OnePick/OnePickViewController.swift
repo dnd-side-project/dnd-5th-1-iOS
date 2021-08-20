@@ -72,10 +72,12 @@ extension OnePickViewController: UICollectionViewDataSource {
                 cell.pickLayer.backgroundColor = .opacityColor(.pink80)
                 nextButton.backgroundColor = .mainColor(.pink)
                 nextButton.setTitleColor(.white, for: .normal)
+                
+                cell.pickCenterImage.isHidden = false
             } else {
                 cell.pickImage.image = UIImage(named: "notonepick")
                 cell.pickLayer.backgroundColor = .opacityColor(.solid0)
-                
+                cell.pickCenterImage.isHidden = true
             }
         }
 

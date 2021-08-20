@@ -29,6 +29,14 @@ class OnePickCell: UICollectionViewCell {
         return $0
     }(UIView())
     
+    let pickCenterImage: UIImageView = {
+        $0.contentMode = .scaleAspectFit
+        $0.backgroundColor = .clear
+        $0.isHidden = true
+        $0.image = UIImage(named: "diamonds")
+        return $0
+    }(UIImageView())
+    
     // MARK: - LifeCycle
     
     override init(frame: CGRect) {
@@ -57,6 +65,7 @@ class OnePickCell: UICollectionViewCell {
         self.addSubview(cellImages)
         cellImages.addSubview(pickLayer)
         cellImages.addSubview(pickImage)
+        pickLayer.addSubview(pickCenterImage)
         
         cellImages.snp.makeConstraints {
             $0.edges.equalTo(contentView)
@@ -70,6 +79,12 @@ class OnePickCell: UICollectionViewCell {
             $0.top.equalTo(cellImages).offset(10)
             $0.trailing.equalTo(cellImages).offset(-10)
             $0.width.equalTo(pickImage.snp.height).multipliedBy(1/1)
+        }
+        
+        pickCenterImage.snp.makeConstraints {
+            $0.centerX.equalTo(pickLayer.snp.centerX)
+            $0.centerY.equalTo(pickLayer.snp.centerY)
+            $0.width.equalTo(pickCenterImage.snp.height).multipliedBy(1/1)
         }
     }
 }
