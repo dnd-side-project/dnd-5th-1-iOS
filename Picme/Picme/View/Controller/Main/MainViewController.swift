@@ -23,8 +23,13 @@ class MainViewController: BaseViewContoller, TouchDelegate {
     // MARK: - IBActions
     
     @IBAction func voteButtonClicked(_ sender: Any) {
-        if let uploadImageVC = tabBarController?.storyboard?.instantiateViewController(withIdentifier: "UploadImage") {
-            tabBarController?.present(uploadImageVC, animated: true)
+        if APIConstants.jwtToken == "" {
+            AlertView.instance.showAlert(using: .logInVote)
+            AlertView.instance.actionDelegate = self
+        } else {
+            if let uploadImageVC = tabBarController?.storyboard?.instantiateViewController(withIdentifier: "UploadImage") {
+                tabBarController?.present(uploadImageVC, animated: true)
+            }
         }
     }
     
@@ -79,19 +84,18 @@ class MainViewController: BaseViewContoller, TouchDelegate {
     func showTableView() {
         DispatchQueue.main.async {
             if self.dataSource.data.value.isEmpty {
-                self.emptyView.isHidden = true
                 self.showEmptyView()
             } else {
-                self.mainTableView.isHidden = false
                 self.emptyView.isHidden = true
+                self.mainTableView.isHidden = false
                 self.mainTableView.reloadData()
             }
         }
     }
     
     func showEmptyView() {
-        self.mainTableView.isHidden = true
         self.emptyView.isHidden = false
+        self.mainTableView.isHidden = true
     }
     
     // MARK: - Collection View Cell 클릭시
