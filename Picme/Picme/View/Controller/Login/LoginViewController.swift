@@ -13,7 +13,7 @@ import AuthenticationServices
 class LoginViewController: BaseViewContoller {
 
     // MARK: - Properties
-    
+    @IBOutlet weak var mainLabel: UILabel!
     @IBOutlet weak var kakaoLoginButton: UIButton!
     @IBOutlet weak var appleLoginButton: UIButton!
     @IBOutlet weak var unLoginButton: UIButton!
@@ -73,15 +73,28 @@ extension LoginViewController {
     
     // Label 일부 색 변경
     func attributeString(text: String?, changeString: String) -> NSMutableAttributedString {
+        
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineHeightMultiple = 0.8
+        
         guard let text = text else { fatalError("NSMutable Error") }
         let attributeString = NSMutableAttributedString(string: text)
         attributeString.addAttribute(.foregroundColor,
                                      value: UIColor.mainColor(.logoPink),
                                      range: (text as NSString).range(of: changeString))
+        
+        attributeString.addAttribute(NSAttributedString.Key.paragraphStyle,
+                                     value: paragraphStyle,
+                                     range: NSMakeRange(0, attributeString.length))
+        
         return attributeString
     }
     
     override func setProperties() {
+        
+        mainLabel.textColor = .textColor(.text100)
+        
+        mainLabel.attributedText = attributeString(text: mainLabel.text, changeString: "인생사진")
         
         appleLoginButton.layer.cornerRadius = 10
         appleLoginButton.backgroundColor = .white
@@ -104,7 +117,6 @@ extension LoginViewController {
         view.backgroundColor = .solidColor(.solid0)
         unLoginButton.setTitleColor(.textColor(.text91), for: .normal)
         
-        appleLoginButton.layer.cornerRadius = 12
     }
     
     override func setConstraints() {
