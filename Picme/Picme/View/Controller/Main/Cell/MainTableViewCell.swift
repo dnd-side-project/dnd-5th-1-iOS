@@ -11,7 +11,8 @@ import Kingfisher
 // MARK: - CollectionviewCellDelegate
 
 protocol CollectionViewCellDelegate: AnyObject {
-    func selectedCVCell(_ index: Int, _ postId: String)
+    // func selectedCVCell(_ index: Int, _ postId: String)
+    func selectedCVCell(_ index: Int, _ postId: String, _ postNickname: String, _ postProfileUrl: String)
 }
 
 class MainTableViewCell: UITableViewCell {
@@ -32,6 +33,8 @@ class MainTableViewCell: UITableViewCell {
     weak var cellDelegate: CollectionViewCellDelegate?
     var imageData: [Images]?
     var postId: String!
+    var postNickname: String!
+    var postProfileUrl: String!
     
     var imageArray = [#imageLiteral(resourceName: "defalutImage"), #imageLiteral(resourceName: "defalutImage"), #imageLiteral(resourceName: "defalutImage")]
     
@@ -51,7 +54,10 @@ class MainTableViewCell: UITableViewCell {
             // imageData = object.images
             // setTimer(endTime: object.deadline)
             setTimer(endTime: "2021-08-20T23:05:59.703Z")
+            
             postId = object.postId
+            postNickname = object.user.nickname
+            postProfileUrl = object.user.profileImageUrl
         }
     }
     
@@ -145,7 +151,8 @@ extension MainTableViewCell: UICollectionViewDelegate, UICollectionViewDataSourc
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let cellDelegate = cellDelegate {
-            cellDelegate.selectedCVCell(indexPath.item, postId)
+            // cellDelegate.selectedCVCell(indexPath.item, postId)
+            cellDelegate.selectedCVCell(indexPath.item, postId, postNickname, postProfileUrl)
         }
     }
     

@@ -9,7 +9,8 @@ import UIKit
 
 // MARK: - Collection View Cell 클릭 시 실행할 프로토콜
 protocol TouchDelegate: AnyObject {
-    func pushVoteDetailView(index: Int, postId: String)
+    // func pushVoteDetailView(index: Int, postId: String)
+    func pushVoteDetailView(index: Int, postId: String, postNickname: String, postProfileUrl: String)
 }
 
 class MainViewController: BaseViewContoller, TouchDelegate {
@@ -94,9 +95,10 @@ class MainViewController: BaseViewContoller, TouchDelegate {
     
     // MARK: - Collection View Cell 클릭시
     
+    /*
     func pushVoteDetailView(index: Int, postId: String) {
         
-        if APIConstants.jwtToken != "" { // 미로그인 사용자
+        if APIConstants.jwtToken == "" { // 미로그인 사용자
             let alertTitle = """
             로그인 해야 투표를 할 수 있어요.
             로그인을 해주시겠어요?
@@ -106,9 +108,28 @@ class MainViewController: BaseViewContoller, TouchDelegate {
             AlertView.instance.loginDelegate = self
         } else { // 로그인한 사용자
             guard let voteDetailVC = self.storyboard?.instantiateViewController(withIdentifier: "VoteDetailViewController") as? VoteDetailViewController else { return }
-            voteDetailVC.postId = "1"
+            voteDetailVC.postId = postId
             voteDetailVC.userNickname = "minha"
             voteDetailVC.userProfileimageUrl = ""
+            self.navigationController?.pushViewController(voteDetailVC, animated: true)
+        }
+     
+    }
+    */
+    func pushVoteDetailView(index: Int, postId: String, postNickname: String, postProfileUrl: String) {
+        if APIConstants.jwtToken == "" { // 미로그인 사용자
+            let alertTitle = """
+            로그인 해야 투표를 할 수 있어요.
+            로그인을 해주시겠어요?
+            """
+            AlertView.instance.showAlert(
+                title: alertTitle, denyButtonTitle: "더 둘러보기", doneButtonTitle: "로그인하기", image: #imageLiteral(resourceName: "eyeLarge"), alertType: .login)
+            AlertView.instance.loginDelegate = self
+        } else { // 로그인한 사용자
+            guard let voteDetailVC = self.storyboard?.instantiateViewController(withIdentifier: "VoteDetailViewController") as? VoteDetailViewController else { return }
+            voteDetailVC.postId = postId
+            voteDetailVC.postNickname = postNickname
+            voteDetailVC.postProfileUrl = postProfileUrl
             self.navigationController?.pushViewController(voteDetailVC, animated: true)
         }
     }
@@ -136,8 +157,13 @@ class MainListDatasource: GenericDataSource<MainModel>, UITableViewDataSource, C
     weak var delegate: TouchDelegate?
     
     // Collection View Cell 클릭시 실행할 함수
-    func selectedCVCell(_ index: Int, _ postId: String) {
-        delegate?.pushVoteDetailView(index: index, postId: postId)
+    
+//    func selectedCVCell(_ index: Int, _ postId: String) {
+//        delegate?.pushVoteDetailView(index: index, postId: postId)
+//    }
+    
+    func selectedCVCell(_ index: Int, _ postId: String, _ postNickname: String, _ postProfileUrl: String) {
+        delegate?.pushVoteDetailView(index: index, postId: postId, postNickname: postNickname, postProfileUrl: postProfileUrl)
     }
     
     // MARK: - Table View Data Source
