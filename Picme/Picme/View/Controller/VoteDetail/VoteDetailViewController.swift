@@ -68,9 +68,9 @@ class VoteDetailViewController: BaseViewContoller {
     
     // 테스트 코드
     var postId: String?
-    var userNickname: String?
-    var userProfileimageUrl: String?
-    var loginUserNickName: String = "minha222"
+    var postNickname: String?
+    var postProfileUrl: String?
+    let loginUserNickname = LoginUser.shared.userNickname
     var isVoted: Bool = false
     
     var voteDetailImages: [VoteDetailImage]?
@@ -217,7 +217,7 @@ extension CarouselDatasource: UICollectionViewDataSource {
                 // 1위 이미지일 경우
                 if firstRankSet.contains(indexPath.row) {
                     // 작성자 원픽이 1위 or 투표자 투표 이미지가 1위
-                    if (loginUserNickName == userNickname && voteDetailModel?.onePickImageId == indexPath.row) || (loginUserNickName != userNickname && voteDetailModel?.votedImageId == indexPath.row) {
+                    if (loginUserNickname == postNickname && voteDetailModel?.onePickImageId == indexPath.row) || (loginUserNickname != postNickname && voteDetailModel?.votedImageId == indexPath.row) {
                         cell.resultColorView.backgroundColor = #colorLiteral(red: 0.9215686275, green: 0.2862745098, blue: 0.6039215686, alpha: 0.8)
                         isFirstRank = true
                     } else { // 1위가 다르면
@@ -323,13 +323,13 @@ extension VoteDetailViewController: VoteAlertViewDeleagte {
         detailPageControl.numberOfPages = voteDetailModel?.images?.count ?? 0
         detailPageControl.currentPage = 0
         
-        detailNicknameLabel.text = userNickname
-        detailProfileImageView.kf.setImage(with: URL(string: userProfileimageUrl!), placeholder: #imageLiteral(resourceName: "profilePink"))
+        detailNicknameLabel.text = postNickname
+        detailProfileImageView.kf.setImage(with: URL(string: postProfileUrl!), placeholder: #imageLiteral(resourceName: "profilePink"))
         // detailTitleLabel.text = dataSource.data.value[0].title
         // detailParticipantsLabel.text = String(dataSource.data.value[0].participantsNum!)
         // Timer 설정
         
-        if loginUserNickName == userNickname { // 1. 투표 작성자인 경우 - Feedback View + 원픽 이미지
+        if loginUserNickname == postNickname { // 1. 투표 작성자인 경우 - Feedback View + 원픽 이미지
             print("투표 작성자인 경우")
             rightBarButton.setBackgroundImage(#imageLiteral(resourceName: "trashcan"), for: .normal, barMetrics: .default)
             rightBarButton.tag = 0
@@ -459,7 +459,7 @@ extension VoteDetailViewController: VoteAlertViewDeleagte {
     // MARK: - Button Tag
     
     private func setupButtonTag() {
-        if userNickname == loginUserNickName { // 투표 작성자 - 삭제하기
+        if postNickname == loginUserNickname { // 투표 작성자 - 삭제하기
             rightBarButton.image = #imageLiteral(resourceName: "trashcan")
             rightBarButton.tag = 0
         } else { // 투표자 - 신고하기
@@ -614,7 +614,7 @@ extension VoteDetailViewController: VoteAlertViewDeleagte {
             if sender.tag == 7 {
                 print("onePickButton")
                 
-                if userNickname == loginUserNickName { // 투표 작성자 - 원픽 이미지로 이동
+                if postNickname == loginUserNickname { // 투표 작성자 - 원픽 이미지로 이동
                     carouselCollectionView.scrollToItem(at: IndexPath(row: voteDetailModel?.onePickImageId ?? 0, section: 0), at: .top, animated: true)
                 } else { // 투표자 - 투표한 이미지로 이동
                     carouselCollectionView.scrollToItem(at: IndexPath(row: voteDetailModel?.votedImageId ?? 0, section: 0), at: .top, animated: true)
