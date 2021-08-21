@@ -4,6 +4,7 @@
 <dict>
 	<key>UIAppFonts</key>
 	<array>
+		<string>NotoSansCJKkr-Black.otf</string>
 		<string>NotoSansCJKkr-Bold.otf</string>
 		<string>NotoSansCJKkr-Medium.otf</string>
 		<string>NotoSansCJKkr-Regular.otf</string>

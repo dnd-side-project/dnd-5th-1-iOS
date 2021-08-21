@@ -87,6 +87,10 @@ extension LoginViewController {
                                      value: paragraphStyle,
                                      range: NSMakeRange(0, attributeString.length))
         
+        attributeString.addAttribute(.font,
+                                     value: UIFont.kr(.black, size: 36),
+                                     range: (text as NSString).range(of: changeString))
+        
         return attributeString
     }
     
