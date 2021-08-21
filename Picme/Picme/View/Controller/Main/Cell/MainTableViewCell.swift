@@ -47,7 +47,7 @@ class MainTableViewCell: UITableViewCell {
     
     func updateCell(model: Any) {
         if let object = model as? MainModel {
-            mainProfileImageView.kf.setImage(with: URL(string: object.user.profileImageUrl), placeholder: #imageLiteral(resourceName: "profilePink"))
+            mainProfileImageView.kf.setImage(with: URL(string: object.user.profileImageUrl), placeholder: #imageLiteral(resourceName: "progressCircle"))
             mainNicknameLabel.text = object.user.nickname
             mainParticipantsLabel.text = "\(object.participantsNum)명 참여중"
             mainTitleLabel.text = object.title
