@@ -8,6 +8,8 @@
 import UIKit
 
 enum NotoSans: String {
+    /// Weight 900
+    case black = "NotoSansCJKkr-Black"
     /// Weight 700
     case bold = "NotoSansCJKkr-Bold"
     /// Weight 500
@@ -28,7 +30,11 @@ enum Montserrat: String {
 extension UIFont {
     
     static func kr(_ font: NotoSans, size: CGFloat) -> UIFont {
+        
         switch font {
+        case .black:
+            guard let font = UIFont(name: font.rawValue, size: size) else { return UIFont() }
+            return font
         case .bold:
             guard let font = UIFont(name: font.rawValue, size: size) else { return UIFont() }
             return font
