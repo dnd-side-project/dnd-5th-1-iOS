@@ -75,7 +75,7 @@ extension LoginViewController {
     func attributeString(text: String?, changeString: String) -> NSMutableAttributedString {
         
         let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineHeightMultiple = 0.85
+        paragraphStyle.lineHeightMultiple = 0.87
         
         guard let text = text else { fatalError("NSMutable Error") }
         let attributeString = NSMutableAttributedString(string: text)
