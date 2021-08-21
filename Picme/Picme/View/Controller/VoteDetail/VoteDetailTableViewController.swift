@@ -28,20 +28,20 @@ class VoteDetailTableViewController: BaseViewContoller {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        viewModel = VoteDetailViewModel(service: VoteDetailService(), dataSource: dataSource)
+        // viewModel = VoteDetailViewModel(service: VoteDetailService(), dataSource: dataSource)
         
-        bindViewModel()
+        // bindViewModel()
     }
     
     private func bindViewModel() {
-        detailTableView.dataSource = dataSource
-        
-        dataSource.data.addAndNotify(observer: self) { [weak self] _ in
-            self?.detailTableView.reloadData()
-            // self?.showTableView()
-        }
-        
-        // viewModel.fetchVoteDetail(postId: 1)
+//        detailTableView.dataSource = dataSource
+//
+//        dataSource.data.addAndNotify(observer: self) { [weak self] _ in
+//            self?.detailTableView.reloadData()
+//            // self?.showTableView()
+//        }
+//
+//        // viewModel.fetchVoteDetail(postId: 1)
     }
     
     func showTableView() {

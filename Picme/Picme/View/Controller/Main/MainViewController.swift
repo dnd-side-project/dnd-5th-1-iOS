@@ -48,6 +48,12 @@ class MainViewController: BaseViewContoller, TouchDelegate {
         bindViewModel()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        mainTableView.reloadData()
+    }
+    
     // MARK: - Tab Bar
     
     func setupTabBar() {
@@ -84,6 +90,7 @@ class MainViewController: BaseViewContoller, TouchDelegate {
     func showTableView() {
         DispatchQueue.main.async {
             if self.dataSource.data.value.isEmpty {
+                print("empty")
                 self.showEmptyView()
             } else {
                 self.emptyView.isHidden = true

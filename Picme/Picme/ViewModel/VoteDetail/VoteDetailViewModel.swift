@@ -9,18 +9,18 @@ import Alamofire
 import Foundation
 
 class VoteDetailViewModel {
+
+    var voteDetailModel: Dynamic<VoteDetailModel> = Dynamic(VoteDetailModel(postNickname: "", postProfileUrl: "", onePickImageId: 0, isVoted: false, votedImageId: 0, title: "", participantsNum: 0, deadline: "", images: [VoteDetailImage(imageId: "", imageUrl: "", pickedNum: 0, emotion: 0, composition: 0, light: 0, color: 0, skip: 0)]))
     
     // MARK: - Properties
     
     var service: VoteDetailServiceProtocol?
-    var dataSource: GenericDataSource<VoteDetailModel>?
     var onErrorHandling: ((APIError?) -> Void)?
     
     // MARK: - Initializer
     
-    init(service: VoteDetailServiceProtocol, dataSource: GenericDataSource<VoteDetailModel>?) {
+    init(service: VoteDetailServiceProtocol) {
         self.service = service
-        self.dataSource = dataSource
     }
     
     // MARK: - 게시글 조회
@@ -37,7 +37,7 @@ class VoteDetailViewModel {
                 switch response {
                 case .success(let data):
                     if let voteDetailData = data as? VoteDetailModel {
-                        self?.dataSource?.data.value = [voteDetailData]
+                       self?.voteDetailModel.value = voteDetailData
                     }
                 case .requestErr(let message):
                     print("requestERR", message)

@@ -10,16 +10,7 @@ import Foundation
 struct MainListModel: Codable {
     let mainList: [MainModel]
     
-//    init(mainList : [MainModel]){
-//        self.mainList = mainList
-//    }
-    
     enum CodingKeys: String, CodingKey {
         case mainList = "posts"
     }
-    
-//    init(from decoder: Decoder) throws {
-//        let values = try decoder.container(keyedBy: CodingKeys.self)
-//        mainList = try values.decodeIfPresent([MainModel].self, forKey: .mainList)
-//    }
 }
