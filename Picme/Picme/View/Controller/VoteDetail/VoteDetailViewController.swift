@@ -61,7 +61,9 @@ class VoteDetailViewController: BaseViewContoller {
     var isFirstRank: Bool = false
     var isFirstSetUpResultPercent: Bool = false
     
-    var viewModel: VoteDetailViewModel!
+    var deadlineTime: String = ""
+    
+    var viewModel = VoteDetailViewModel(service: VoteDetailService())
     
     var postId: String!
     var postNickname: String!
@@ -81,15 +83,13 @@ class VoteDetailViewController: BaseViewContoller {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        viewModel = VoteDetailViewModel(service: VoteDetailService())
-        
         bindViewModel()
     }
     
     // MARK: - Bind View Model
     
     private func bindViewModel() {
-        viewModel.fetchVoteDetail(postId: postId)
+        //viewModel.fetchVoteDetail(postId: postId)
         
         if let postId = postId {
             viewModel.fetchVoteDetail(postId: postId)
@@ -104,19 +104,18 @@ class VoteDetailViewController: BaseViewContoller {
             self.detailTitleLabel.text = response.title
             self.detailPageLabel.text = "\(self.currentPage)/\(response.images.count)"
         
-            //self.setTimer(endTime: response.deadline)
+            self.deadlineTime = response.deadline
+            self.setTimer(endTime: self.deadlineTime)
             
             self.detailPageControl.numberOfPages = response.images.count
+            
+            self.voteResultModel = Array(repeating: VoteResultModel(percent: 0.0, rank: 0, sensitivityPercent: 0.0, compositionPercent: 0.0, lightPercent: 0.0, colorPercent: 0.0), count: self.viewModel.voteDetailModel.value.images.count)
      
             self.setupButtonTag()
             self.setupButtonAction()
-            
             self.carouselCollectionView.reloadData()
         }
         
-        voteResultModel = Array(repeating: VoteResultModel(percent: 0.0, rank: 0, sensitivityPercent: 0.0, compositionPercent: 0.0, lightPercent: 0.0, colorPercent: 0.0), count: viewModel.voteDetailModel.value.images.count)
-        
-        print("voteResultModel \(voteResultModel.count)")
     }
     
 }
