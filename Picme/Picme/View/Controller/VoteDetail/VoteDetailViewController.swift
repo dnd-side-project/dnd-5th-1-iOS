@@ -333,7 +333,7 @@ extension VoteDetailViewController: AlertViewActionDelegate {
         // Page Control
         detailPageControl.currentPage = 0
         detailPageControl.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
-        
+       
         if loginUserNickname == postNickname { // 1. 투표 작성자인 경우 - Feedback View + 원픽 이미지
             print("투표 작성자인 경우")
             rightBarButton.setBackgroundImage(#imageLiteral(resourceName: "trashcan"), for: .normal, barMetrics: .default)
