@@ -20,15 +20,19 @@ class VoteDetailService: VoteDetailServiceProtocol {
     
     func getVoteDetail(postId: String, completion: @escaping ((NetworkResult<Any>) -> Void)) {
         let URL = APIConstants.Post.postRetrieve(postID: postId).urlString
+        let header: HTTPHeaders = [
+            "Authorization": APIConstants.jwtToken
+        ]
         
         let dataRequest = AF.request(URL,
                                      method: .get,
                                      parameters: nil,
                                      encoding: JSONEncoding.default,
-                                     headers: nil)
+                                     headers: header)
         
         dataRequest.responseData { dataResponse in
             switch dataResponse.result {
+        
             case .success:
                 guard let statusCode = dataResponse.response?.statusCode else {return}
                 guard let value = dataResponse.value else {return}
@@ -97,11 +101,7 @@ class VoteDetailService: VoteDetailServiceProtocol {
     }
     
     func isValidData(data: Data) -> NetworkResult<Any> {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "HH:mm:ss"
-        
         let decoder = JSONDecoder()
-        decoder.dateDecodingStrategy = .formatted(dateFormatter)
         
         guard let decodedData = try? decoder.decode(VoteDetailModel.self, from: data)
         else { return .pathErr }

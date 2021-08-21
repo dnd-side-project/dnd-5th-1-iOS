@@ -54,61 +54,69 @@ class VoteDetailViewController: BaseViewContoller {
     
     // MARK: - Properties
     
-    var currentImageId: Int?
     var selectedImageId: Int?
-    var onePickImageId: Int?
     var currentPage: Int = 0
     var isPicked: Bool = false
     var firstRankSet: Set<Int> = []
     var isFirstRank: Bool = false
     var isFirstSetUpResultPercent: Bool = false
     
-    var dataSource = VoteDetailDatasource()
     var viewModel: VoteDetailViewModel!
     
-    // 테스트 코드
-    var postId: String?
-    var postNickname: String?
-    var postProfileUrl: String?
-    let loginUserNickname = LoginUser.shared.userNickname
-    var isVoted: Bool = false
+    var postId: String!
+    var postNickname: String!
+    var postProfileUrl: String!
     
-    var voteDetailImages: [VoteDetailImage]?
-    var voteDetailModel: VoteDetailModel?
+    let loginUserNickname = LoginUser.shared.userNickname
+    
+    var voteResultModel: [VoteResultModel] = []
+    
+    // MARK: - Timer
+    var timer = Timer()
+    
+    deinit {
+        timer.invalidate()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // 테스트 코드
-        let image1 = VoteDetailImage(imageId: "0", imageUrl: "", pickedNum: 0, emotion: 0, composition: 0, light: 0, color: 0, skip: 0)
-        let image2: VoteDetailImage = VoteDetailImage(imageId: "1", imageUrl: "", pickedNum: 8, emotion: 1, composition: 1, light: 4, color: 1, skip: 1)
-        let image3: VoteDetailImage = VoteDetailImage(imageId: "2", imageUrl: "", pickedNum: 3, emotion: 1, composition: 0, light: 1, color: 0, skip: 1)
-        let image4: VoteDetailImage = VoteDetailImage(imageId: "3", imageUrl: "", pickedNum: 4, emotion: 2, composition: 0, light: 0, color: 2, skip: 0)
-        let image5: VoteDetailImage = VoteDetailImage(imageId: "4", imageUrl: "", pickedNum: 3, emotion: 1, composition: 0, light: 0, color: 1, skip: 1)
-        
-        voteDetailImages = [image1, image2, image3, image4, image5]
-        
-        voteDetailModel = VoteDetailModel(onePickImageId: 2, isVoted: false, votedImageId: 0, title: "minha", participantsNum: 18, deadline: Date(), images: voteDetailImages!)
-        
-        viewModel = VoteDetailViewModel(service: VoteDetailService(), dataSource: dataSource)
+        viewModel = VoteDetailViewModel(service: VoteDetailService())
         
         bindViewModel()
-        
-        setupButtonTag()
-        setupButtonAction()
-        setupView()
     }
     
     // MARK: - Bind View Model
     
     private func bindViewModel() {
+        viewModel.fetchVoteDetail(postId: postId)
         
-        dataSource.data.addAndNotify(observer: self) { [weak self] _ in
-            self?.carouselCollectionView.reloadData()
+        if let postId = postId {
+            viewModel.fetchVoteDetail(postId: postId)
         }
         
-        // viewModel.fetchVoteDetail(postId: postId)
+        viewModel.voteDetailModel.bindAndFire { (response) in
+          
+            self.detailNicknameLabel.text = response.postNickname
+            self.detailProfileImageView.kf.setImage(with: URL(string: response.postProfileUrl), placeholder: #imageLiteral(resourceName: "progressCircle"))
+            self.detailParticipantsLabel.text = "\(response.participantsNum)명 참여중"
+            self.detailDeadlineLabel.text = response.deadline
+            self.detailTitleLabel.text = response.title
+            self.detailPageLabel.text = "\(self.currentPage)/\(response.images.count)"
         
+            //self.setTimer(endTime: response.deadline)
+            
+            self.detailPageControl.numberOfPages = response.images.count
+     
+            self.setupButtonTag()
+            self.setupButtonAction()
+            
+            self.carouselCollectionView.reloadData()
+        }
+        
+        voteResultModel = Array(repeating: VoteResultModel(percent: 0.0, rank: 0, sensitivityPercent: 0.0, compositionPercent: 0.0, lightPercent: 0.0, colorPercent: 0.0), count: viewModel.voteDetailModel.value.images.count)
+        
+        print("voteResultModel \(voteResultModel.count)")
     }
     
 }
@@ -119,7 +127,8 @@ typealias CarouselDatasource = VoteDetailViewController
 extension CarouselDatasource: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return voteDetailModel?.images?.count ?? 0
+        return viewModel.voteDetailModel.value.images.count
+
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -130,94 +139,97 @@ extension CarouselDatasource: UICollectionViewDataSource {
             scalingCell.mainView.backgroundColor = .black
             scalingCell.cornerRadius = 10
         }
+
+        let object = self.viewModel.voteDetailModel.value
         
         // 투표 결과 화면
-        if isVoted {
+        if object.isVoted {
             cell.resultView.isHidden = false
             cell.diamondsImageView.isHidden = true
             cell.viewWidthConstraint.constant = 0
-            
+
             // 투표 퍼센트 및 순위 구하기
-            let participantsNum = gino(voteDetailModel?.participantsNum)
-            let count = gino(voteDetailModel?.images?.count)
-            
+            let participantsNum = object.participantsNum
+            let count = object.images.count
+
             var pickedNums = [Int](repeating: 0, count: count)
             var percents = [Double](repeating: 0, count: count)
-            
+
             // 피드백 퍼센트 구하기
             for index in 0..<count {
-                let sensitivityCount = gino(voteDetailModel?.images?[index].emotion)
-                let compositionCount = gino(voteDetailModel?.images?[index].composition)
-                let lightCount = gino(voteDetailModel?.images?[index].light)
-                let colorCount = gino(voteDetailModel?.images?[index].color)
-                let skipCount = gino(voteDetailModel?.images?[index].skip)
-                
+           
+                let sensitivityCount = object.images[index].emotion
+                let compositionCount = object.images[index].composition
+                let lightCount = object.images[index].light
+                let colorCount = object.images[index].color
+                let skipCount = object.images[index].skip
+
                 let total = sensitivityCount + compositionCount + lightCount + colorCount + skipCount
-                
+
                 if total == 0 { // total이 0일 경우 0 / 0 = nan이니 예외처리
-                    voteDetailModel?.images?[index].sensitivityPercent = 0.0
-                    voteDetailModel?.images?[index].compositionPercent = 0.0
-                    voteDetailModel?.images?[index].lightPercent = 0.0
-                    voteDetailModel?.images?[index].colorPercent = 0.0
+                    voteResultModel[index].sensitivityPercent = 0.0
+                    voteResultModel[index].compositionPercent = 0.0
+                    voteResultModel[index].lightPercent = 0.0
+                    voteResultModel[index].colorPercent = 0.0
                 } else {
-                    voteDetailModel?.images?[index].sensitivityPercent = round((Double(sensitivityCount) / Double(total) * 100) * 10) / 10
-                    voteDetailModel?.images?[index].compositionPercent = round((Double(compositionCount) / Double(total) * 100) * 10) / 10
-                    voteDetailModel?.images?[index].lightPercent = round((Double(lightCount) / Double(total) * 100) * 10) / 10
-                    voteDetailModel?.images?[index].colorPercent = round((Double(colorCount) / Double(total) * 100) * 10) / 10
+                    voteResultModel[index].sensitivityPercent = round((Double(sensitivityCount) / Double(total) * 100) * 10) / 10
+                    voteResultModel[index].compositionPercent = round((Double(compositionCount) / Double(total) * 100) * 10) / 10
+                    voteResultModel[index].lightPercent = round((Double(lightCount) / Double(total) * 100) * 10) / 10
+                    voteResultModel[index].colorPercent = round((Double(colorCount) / Double(total) * 100) * 10) / 10
                 }
-                
+
                 // 이미지 퍼센트 구하기
-                pickedNums[index] = gino(voteDetailModel?.images?[index].pickedNum)
+                pickedNums[index] = object.images[index].pickedNum
                 percents[index] = round((Double(pickedNums[index]) / Double(participantsNum) * 100) * 10) / 10
-                voteDetailModel?.images?[index].percent = percents[index]
+                voteResultModel[index].percent = percents[index]
             }
-            
+
             // 이미지 percent 순위별 내림차순 정렬
             var dictionary = [Int: Double]()
-            
+
             for index in 0..<percents.count {
                 dictionary[index] = percents[index]
             }
-            
+
             let sortedDitionary = dictionary.sorted { $0.1 > $1.1 }
-            
+
             // 공동 순위 정리
             var rank = 1
             // 정렬했으니 0번째가 1등
-            var rankPickedNum = voteDetailModel?.images?[sortedDitionary[0].key].pickedNum
-            voteDetailModel?.images?[sortedDitionary[0].key].rank = rank
+            var rankPickedNum = object.images[sortedDitionary[0].key].pickedNum
+            voteResultModel[sortedDitionary[0].key].rank = rank
             firstRankSet.insert(sortedDitionary[0].key)
-            
+
             for index in 1..<sortedDitionary.count {
-                
+
                 // 이전 퍼센트와 동일할 경우 공동 순위
-                if voteDetailModel?.images?[sortedDitionary[index].key].pickedNum == rankPickedNum {
-                    voteDetailModel?.images?[sortedDitionary[index].key].rank = rank
+                if object.images[sortedDitionary[index].key].pickedNum == rankPickedNum {
+                    voteResultModel[sortedDitionary[index].key].rank = rank
                     if rank == 1 { // 공동 1위라면 1위 Set에 추가
                         firstRankSet.insert(sortedDitionary[index].key)
                     }
                 } else { // 다르면 다음 순위
                     rank += 1
-                    voteDetailModel?.images?[sortedDitionary[index].key].rank = rank
-                    rankPickedNum = voteDetailModel?.images?[sortedDitionary[index].key].pickedNum
+                    voteResultModel[sortedDitionary[index].key].rank = rank
+                    rankPickedNum = object.images[sortedDitionary[index].key].pickedNum
                 }
             }
-            
-            cell.pickedNumLabel.text = "\(gino(voteDetailModel?.images?[indexPath.row].pickedNum))명"
-            cell.percentLabel.text = "\(gdno(voteDetailModel?.images?[indexPath.row].percent))%"
-            cell.rankingLabel.text = "\(gino(voteDetailModel?.images?[indexPath.row].rank))위"
-            
+
+            cell.pickedNumLabel.text = "\(object.images[indexPath.row].pickedNum)명"
+            cell.percentLabel.text = "\(voteResultModel[indexPath.row].percent))%"
+            cell.rankingLabel.text = "\(voteResultModel[indexPath.row].rank))위"
+
             if cell.percentLabel.text == "0.0%" {
                 cell.viewWidthConstraint.constant = 301
                 cell.resultColorView.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.5)
             } else {
-                let size = 239 * 0.01 * (voteDetailModel?.images?[indexPath.row].percent)! + 62
+                let size = 239 * 0.01 * (voteResultModel[indexPath.row].percent) + 62
                 cell.viewWidthConstraint.constant = CGFloat(size)
-                
+
                 // 1위 이미지일 경우
                 if firstRankSet.contains(indexPath.row) {
                     // 작성자 원픽이 1위 or 투표자 투표 이미지가 1위
-                    if (loginUserNickname == postNickname && voteDetailModel?.onePickImageId == indexPath.row) || (loginUserNickname != postNickname && voteDetailModel?.votedImageId == indexPath.row) {
+                    if (loginUserNickname == postNickname && object.onePickImageId == indexPath.row) || (loginUserNickname != postNickname && object.votedImageId == indexPath.row) {
                         cell.resultColorView.backgroundColor = #colorLiteral(red: 0.9215686275, green: 0.2862745098, blue: 0.6039215686, alpha: 0.8)
                         isFirstRank = true
                     } else { // 1위가 다르면
@@ -228,13 +240,13 @@ extension CarouselDatasource: UICollectionViewDataSource {
                     cell.resultColorView.backgroundColor = #colorLiteral(red: 0.2, green: 0.8, blue: 0.5490196078, alpha: 0.8)
                 }
             }
-            
+
             // Pick View에서 투표시 바로 피드백 퍼센트가 반영되지 않기 때문에 투표 완료후 한 번 setupResultViewPercent 호출
             if isFirstSetUpResultPercent {
                 setupResultViewPercent()
                 isFirstSetUpResultPercent = false
             }
-            
+
         } else { // 투표 선택 화면
             if isPicked {
                 // 선택한 이미지 핑크 뷰
@@ -247,14 +259,14 @@ extension CarouselDatasource: UICollectionViewDataSource {
                 }
             }
         }
-        
-        cell.detailPhotoImageView.kf.setImage(with: URL(string: (voteDetailModel?.images![indexPath.row].imageUrl)!), placeholder: #imageLiteral(resourceName: "defalutImage"))
-        
+
+        cell.detailPhotoImageView.kf.setImage(with: URL(string: (object.images[indexPath.row].imageUrl)), placeholder: #imageLiteral(resourceName: "defalutImage"))
+
         DispatchQueue.main.async {
             cell.setNeedsLayout()
             cell.layoutIfNeeded()
         }
-        
+
         return cell
     }
 }
@@ -276,12 +288,12 @@ extension VoteDetailViewController: UICollectionViewDelegate {
         
         guard let currentCenterIndex = carouselCollectionView.currentCenterCellIndex?.row else { return }
         currentPage = currentCenterIndex
-        detailPageLabel.text = String(describing: currentPage + 1)
-        // detailPageLabel.text = "\(String(describing: currentCenterIndex)) / \(String(describing: dataSource.data.value[0].images?.count))"
+        
+        detailPageLabel.text = "\(String(describing: currentPage + 1)) / \(String(describing: viewModel.voteDetailModel.value.images.count))"
         
         detailPageControl.currentPage = currentPage
         
-        if !isVoted {
+        if !viewModel.voteDetailModel.value.isVoted {
             // 투표 시작 뷰
             if isPicked { // 이미지 선택 됨
                 if currentPage != selectedImageId { // 선택된 이미지일 경우
@@ -320,16 +332,9 @@ extension VoteDetailViewController: AlertViewActionDelegate {
     private func setupView() {
         
         // Page Control
-        detailPageControl.numberOfPages = voteDetailModel?.images?.count ?? 0
         detailPageControl.currentPage = 0
         detailPageControl.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
-        
-        detailNicknameLabel.text = postNickname
-        detailProfileImageView.kf.setImage(with: URL(string: postProfileUrl!), placeholder: #imageLiteral(resourceName: "progressCircle"))
-        // detailTitleLabel.text = dataSource.data.value[0].title
-        // detailParticipantsLabel.text = String(dataSource.data.value[0].participantsNum!)
-        // Timer 설정
-        
+       
         if loginUserNickname == postNickname { // 1. 투표 작성자인 경우 - Feedback View + 원픽 이미지
             print("투표 작성자인 경우")
             rightBarButton.setBackgroundImage(#imageLiteral(resourceName: "trashcan"), for: .normal, barMetrics: .default)
@@ -339,7 +344,7 @@ extension VoteDetailViewController: AlertViewActionDelegate {
             rightBarButton.setBackgroundImage(#imageLiteral(resourceName: "megaphone"), for: .normal, barMetrics: .default)
             rightBarButton.tag = 1
             
-            if !isVoted { // 투표하지 않은 사용자 - Pick View
+            if !viewModel.voteDetailModel.value.isVoted { // 투표하지 않은 사용자 - Pick View
                 print("사용자 투표 X")
                 pickView.isHidden = false
                 feedbackView.isHidden = true
@@ -349,6 +354,47 @@ extension VoteDetailViewController: AlertViewActionDelegate {
             }
         }
         
+    }
+    
+    // MARK: - Set Timer
+    
+    func setTimer(endTime: String) {
+        DispatchQueue.main.async { [weak self] in
+            self?.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] timer in
+                
+                print("endTime : \(endTime)")
+                // 마감 시간 Date 형식으로 변환
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+                // "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+                let convertDate = dateFormatter.date(from: endTime)
+                
+                // 현재 시간 적용하기 - 시간 + 9시간
+                let calendar = Calendar.current
+                let today = Date()
+                let localDate = Date(timeInterval: TimeInterval(calendar.timeZone.secondsFromGMT()), since: today)
+                let localConvertDate =  Date(timeInterval: TimeInterval(calendar.timeZone.secondsFromGMT()), since: convertDate!)
+                
+                let elapsedTimeSeconds = Int(Date().timeIntervalSince(localConvertDate)) // 마감 시간
+                let expireLimit = Int(Date().timeIntervalSince(localDate)) // 현재 시간
+                
+                guard elapsedTimeSeconds <= expireLimit else { // 시간 초과한 경우
+                    timer.invalidate()
+                    
+                    self?.detailDeadlineLabel.text = "마감된 투표에요"
+                    // self?.mainClockImageView.isHidden = true
+                    return
+                }
+
+                let remainSeconds = expireLimit - elapsedTimeSeconds
+                
+                let hours   = Int(remainSeconds) / 3600
+                let minutes = Int(remainSeconds) / 60 % 60
+                let seconds = Int(remainSeconds) % 60
+                
+                self?.detailDeadlineLabel.text = String(format: "%02i:%02i:%02i", hours, minutes, seconds)
+            }
+        }
     }
     
     // MARK: - Set Up Result View(Feedback View)
@@ -382,10 +428,10 @@ extension VoteDetailViewController: AlertViewActionDelegate {
     
     private func setupResultViewPercent() {
         // 투표 결과 뷰
-        sensitivityPercentLabel.text = "\(gdno(voteDetailModel?.images?[currentPage].sensitivityPercent))%"
-        compositionPercentLabel.text = "\(gdno(voteDetailModel?.images?[currentPage].compositionPercent))%"
-        lightPercentLabel.text = "\(gdno(voteDetailModel?.images?[currentPage].lightPercent))%"
-        colorPercentLabel.text = "\(gdno(voteDetailModel?.images?[currentPage].colorPercent))%"
+        sensitivityPercentLabel.text = "\(voteResultModel[currentPage].sensitivityPercent)%"
+        compositionPercentLabel.text = "\(voteResultModel[currentPage].compositionPercent)%"
+        lightPercentLabel.text = "\(voteResultModel[currentPage].lightPercent)%"
+        colorPercentLabel.text = "\(voteResultModel[currentPage].colorPercent)%"
         
         // 감성
         if sensitivityPercentLabel.text == "0.0%" { // 0%
@@ -401,7 +447,7 @@ extension VoteDetailViewController: AlertViewActionDelegate {
             }
             
             // 뷰 사이즈 조정
-            let size = 44 * 0.01 * (voteDetailModel?.images?[currentPage].sensitivityPercent)! + 4
+            let size = 44 * 0.01 * (voteResultModel[currentPage].sensitivityPercent) + 4
             sensitivityHeightConstraint.constant = CGFloat(size)
         }
         
@@ -418,7 +464,7 @@ extension VoteDetailViewController: AlertViewActionDelegate {
                 compositionResultView.backgroundColor = #colorLiteral(red: 0.2, green: 0.8, blue: 0.5490196078, alpha: 0.8)
             }
             
-            let size = 44 * 0.01 * (voteDetailModel?.images?[currentPage].compositionPercent)! + 4
+            let size = 44 * 0.01 * (voteResultModel[currentPage].compositionPercent) + 4
             compositionHeightConstraint.constant = CGFloat(size)
         }
         
@@ -435,7 +481,7 @@ extension VoteDetailViewController: AlertViewActionDelegate {
                 lightResultView.backgroundColor = #colorLiteral(red: 0.2, green: 0.8, blue: 0.5490196078, alpha: 0.8)
             }
             
-            let size = 44 * 0.01 * (voteDetailModel?.images?[currentPage].lightPercent)! + 4
+            let size = 44 * 0.01 * (voteResultModel[currentPage].lightPercent) + 4
             lightHeightConstraint.constant = CGFloat(size)
         }
         
@@ -452,12 +498,12 @@ extension VoteDetailViewController: AlertViewActionDelegate {
                 colorResultView.backgroundColor = #colorLiteral(red: 0.2, green: 0.8, blue: 0.5490196078, alpha: 0.8)
             }
             
-            let size = 44 * 0.01 * (voteDetailModel?.images?[currentPage].colorPercent)! + 4
+            let size = 44 * 0.01 * (voteResultModel[currentPage].colorPercent) + 4
             colorHeightConstraint.constant = CGFloat(size)
         }
     }
     
-    // MARK: - Button Tag
+    // MARK: - Button Tags
     
     private func setupButtonTag() {
         if postNickname == loginUserNickname { // 투표 작성자 - 삭제하기
@@ -495,127 +541,76 @@ extension VoteDetailViewController: AlertViewActionDelegate {
         skipButton.addTarget(self, action: #selector(feedbackButtonClicked), for: UIControl.Event.touchUpInside)
     }
     
-    // MARK: - Back Button Actions
+    // MARK: - Back Button Action
     
     @objc func backButtonClicked(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
     }
     
-    // MARK: - Right Button Actions - Alert View
+    // MARK: - Right Button Action - Alert View
     
     @objc func rightButtonClicked(_ sender: UIButton) {
         switch sender.tag {
         case 0:
-            print("trash")
-            
             AlertView.instance.showAlert(using: .listRemove)
             AlertView.instance.actionDelegate = self
-        
         case 1:
-            print("report")
-            
-            let alertTitle = """
-                게시글에 문제가 있나요?
-                신고를 하면 더 이상 게시글이 안보여요.
-                """
             AlertView.instance.showAlert(using: .report)
             AlertView.instance.actionDelegate = self
-            
-//            AlertView.instance.showAlert(
-//                title: alertTitle, denyButtonTitle: "아니요", doneButtonTitle: "신고하기", image: #imageLiteral(resourceName: "report"), alertType: .report)
         default:
             print("error")
         }
     }
     
-    // MARK: - Vote Alert View Delegate
+    // MARK: - Alert View Action
     
-    func deleteButtonTapped() {
-        // 게시물 삭제 서버 통신 
-        viewModel.fetchDeletePost(postId: postId!)
+    func listRemoveTapped() {
+        // viewModel.fetchDeletePost(postId: postId)
     }
     
-    // MARK: - Pick Button Actions
+    func reportTapped() {
+        
+    }
+    
+    // MARK: - Pick Button Action
     
     @objc func pickButtonClicked(_ sender: UIButton) {
-        print("pickButton")
-        
         setupResultView(isVoted: false)
-        
-        //        let indexPath = IndexPath(item: currentPage, section: 0)
-        //        carouselCollectionView.reloadItems(at: [indexPath])
     }
     
     // MARK: - Feedback Button Actions
     
     @objc func feedbackButtonClicked(_ sender: UIButton) {
         
-        if !isVoted {
+        if !viewModel.voteDetailModel.value.isVoted {
             var feedback = ""
             switch sender.tag {
             case 2:
-                print("sensitivityButton")
                 feedback = "sensitivity"
             case 3:
-                print("compositionButton")
                 feedback = "composition"
             case 4:
-                print("lightButton")
                 feedback = "light"
             case 5:
-                print("colorButton")
                 feedback = "color"
             case 6:
-                print("skipButton")
                 feedback = "skip"
             default:
                 print("error")
             }
             
-            /*
-             let allButtonTags = [2, 3, 4, 5, 6]
-             let currentButtonTag = sender.tag
-             
-             allButtonTags.filter { $0 != currentButtonTag }.forEach { tag in
-             if let button = self.view.viewWithTag(tag) as? UIButton {
-             // Deselect/Disable these buttons
-             
-             if tag == 6 {
-             skipButton.setTitleColor(#colorLiteral(red: 0.2156862745, green: 0.2352941176, blue: 0.2588235294, alpha: 1), for: .normal)
-             }
-             
-             button.isSelected = false
-             }
-             }
-             
-             if currentButtonTag == 6 {
-             skipButton.setTitleColor(#colorLiteral(red: 0.9215686275, green: 0.2862745098, blue: 0.6039215686, alpha: 1), for: .normal)
-             }
-             
-             sender.backgroundColor = #colorLiteral(red: 0.9385799486, green: 0.1098039216, blue: 0.1215686275, alpha: 1)
-             sender.borderWidth = 2
-             sender.borderColor = #colorLiteral(red: 0.9215686275, green: 0.2862745098, blue: 0.6039215686, alpha: 1)
-             sender.cornerRadiusLayer = 10
-             
-             sender.isSelected = !sender.isSelected
-             */
-            
             // 투표 생성 서버 통신
-            viewModel.fetchCreatePost(postId: postId!, imageId: String(currentPage), category: feedback)
+            //viewModel.fetchCreatePost(postId: postId, imageId: String(currentPage), category: feedback)
             
-            isVoted = true
             setupResultView(isVoted: true)
-            voteDetailModel?.votedImageId = currentPage
             isFirstSetUpResultPercent = true
             carouselCollectionView.reloadData()
         } else {
             if sender.tag == 7 {
-                print("onePickButton")
-                
                 if postNickname == loginUserNickname { // 투표 작성자 - 원픽 이미지로 이동
-                    carouselCollectionView.scrollToItem(at: IndexPath(row: voteDetailModel?.onePickImageId ?? 0, section: 0), at: .top, animated: true)
+                    carouselCollectionView.scrollToItem(at: IndexPath(row: viewModel.voteDetailModel.value.onePickImageId, section: 0), at: .top, animated: true)
                 } else { // 투표자 - 투표한 이미지로 이동
-                    carouselCollectionView.scrollToItem(at: IndexPath(row: voteDetailModel?.votedImageId ?? 0, section: 0), at: .top, animated: true)
+                    carouselCollectionView.scrollToItem(at: IndexPath(row: viewModel.voteDetailModel.value.votedImageId, section: 0), at: .top, animated: true)
                 }
             }
         }
