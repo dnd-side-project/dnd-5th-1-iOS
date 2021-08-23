@@ -1159,6 +1159,7 @@
                         <outlet property="compositionHeightConstraint" destination="uOx-LE-VgW" id="1Ej-W7-8HC"/>
                         <outlet property="compositionPercentLabel" destination="s5c-aI-h4P" id="gOn-5q-vwQ"/>
                         <outlet property="compositionResultView" destination="MxF-mP-9NI" id="rGB-Wn-btt"/>
+                        <outlet property="detailClockImageView" destination="7yz-dX-7Ep" id="bj7-gT-6aA"/>
                         <outlet property="detailDeadlineLabel" destination="zv1-Px-PD4" id="BXp-M2-fhu"/>
                         <outlet property="detailNicknameLabel" destination="xcI-fx-oFf" id="SGV-e6-KQN"/>
                         <outlet property="detailPageControl" destination="1hK-7q-nex" id="bbS-CU-nSs"/>

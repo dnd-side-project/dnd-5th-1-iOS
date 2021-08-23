@@ -11,8 +11,7 @@ import Kingfisher
 // MARK: - CollectionviewCellDelegate
 
 protocol CollectionViewCellDelegate: AnyObject {
-    // func selectedCVCell(_ index: Int, _ postId: String)
-    func selectedCVCell(_ index: Int, _ postId: String, _ postNickname: String, _ postProfileUrl: String)
+    func selectedCVCell(_ index: Int, _ postId: String)
 }
 
 class MainTableViewCell: UITableViewCell {
@@ -25,7 +24,6 @@ class MainTableViewCell: UITableViewCell {
     @IBOutlet weak var mainDeadlineLabel: UILabel!
     @IBOutlet weak var mainTitleLabel: UILabel!
     @IBOutlet weak var mainClockImageView: UIImageView!
-    
     @IBOutlet weak var mainCollectionView: UICollectionView!
     
     // MARK: - Variables
@@ -33,12 +31,6 @@ class MainTableViewCell: UITableViewCell {
     weak var cellDelegate: CollectionViewCellDelegate?
     var imageData: [Images]?
     var postId: String!
-    var postNickname: String!
-    var postProfileUrl: String!
-    
-    var imageArray = [#imageLiteral(resourceName: "defalutImage"), #imageLiteral(resourceName: "defalutImage"), #imageLiteral(resourceName: "defalutImage")]
-    
-    // MARK: - Timer
     var timer = Timer()
     
     deinit {
@@ -51,17 +43,13 @@ class MainTableViewCell: UITableViewCell {
             mainNicknameLabel.text = object.user.nickname
             mainParticipantsLabel.text = "\(object.participantsNum)명 참여중"
             mainTitleLabel.text = object.title
-       
-            
-            //imageData = object.images
-            // setTimer(endTime: object.deadline)
-            setTimer(endTime: "2021-08-20T23:05:59.703Z")
-            
+            imageData = object.images
+            setTimer(endTime: "2021-08-22T15:05:59.703Z")
             postId = object.postId
-            postNickname = object.user.nickname
-            postProfileUrl = object.user.profileImageUrl
         }
     }
+    
+    // MARK: - Timer
     
     func setTimer(endTime: String) {
         DispatchQueue.main.async { [weak self] in
@@ -88,7 +76,7 @@ class MainTableViewCell: UITableViewCell {
                     self?.mainClockImageView.isHidden = true
                     return
                 }
-
+                
                 let remainSeconds = expireLimit - elapsedTimeSeconds
                 
                 let hours   = Int(remainSeconds) / 3600
@@ -109,10 +97,7 @@ class MainTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        // 프로필 이미지 원형으로 만들기
-        mainProfileImageView.layer.cornerRadius = mainProfileImageView.frame.width / 2 // 프레임 원으로
-        mainProfileImageView.contentMode = UIView.ContentMode.scaleAspectFill // 이미지 비율 바로잡기
-        mainProfileImageView.clipsToBounds = true // 이미지를 뷰 프레임에 맞게 clip
+        mainProfileImageView.circular() // 프로필 이미지 원형
     }
     
 }
@@ -121,42 +106,31 @@ class MainTableViewCell: UITableViewCell {
 
 extension MainTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        let count = imageData?.count ?? 0
-//        return count+1
-        imageArray.count
+        let count = imageData?.count ?? 0
+        
+        return count+1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: MainCollectionViewCell = mainCollectionView.dequeueCollectionCell(for: indexPath)
         
-//        if let imageData = imageData {
-//            if indexPath.item == imageData.count {
-//                cell.mainPhotoImageView.image = #imageLiteral(resourceName: "defalutImage").withRenderingMode(.alwaysTemplate)
-//                cell.mainPhotoImageView.tintColor = .solidColor(.solid12)
-//                cell.stackView.isHidden = false
-//            } else {
-//                cell.mainPhotoImageView.kf.setImage(with: URL(string: (imageData[indexPath.row].thumbnailUrl)!), placeholder: #imageLiteral(resourceName: "defalutImage"))
-//                cell.stackView.isHidden = true
-//            }
-//        }
-        
-        
-        if indexPath.item == imageArray.count - 1 {
-                  cell.mainPhotoImageView.image = #imageLiteral(resourceName: "defalutImage").withRenderingMode(.alwaysTemplate)
-                  cell.mainPhotoImageView.tintColor = .solidColor(.solid12)
-                  cell.stackView.isHidden = false
-              } else {
-                  cell.mainPhotoImageView.image = imageArray[indexPath.row]
-                  cell.stackView.isHidden = true
-              }
+        if let imageData = imageData {
+            if indexPath.item == imageData.count {
+                cell.mainPhotoImageView.image = #imageLiteral(resourceName: "defalutImage").withRenderingMode(.alwaysTemplate)
+                cell.mainPhotoImageView.tintColor = .solidColor(.solid12)
+                cell.stackView.isHidden = false
+            } else {
+                cell.mainPhotoImageView.kf.setImage(with: URL(string: (imageData[indexPath.row].thumbnailUrl)!), placeholder: #imageLiteral(resourceName: "defalutImage"))
+                cell.stackView.isHidden = true
+            }
+        }
         
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let cellDelegate = cellDelegate {
-            // cellDelegate.selectedCVCell(indexPath.item, postId)
-            cellDelegate.selectedCVCell(indexPath.item, postId, postNickname, postProfileUrl)
+            cellDelegate.selectedCVCell(indexPath.item, postId)
         }
     }
     

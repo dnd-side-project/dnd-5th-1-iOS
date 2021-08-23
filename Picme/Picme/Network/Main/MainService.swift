@@ -14,6 +14,8 @@ protocol MainServiceProtocol: AnyObject {
 
 class MainService: MainServiceProtocol {
     
+    // MARK: - 게시글 리스트 조회
+    
     func getMainList(page: Int, completion: @escaping ((NetworkResult<Any>) -> Void)) {
         let URL = APIConstants.Post.postListRetrieve.urlString.replacingOccurrences(of: "pageNum", with: String(page))
         

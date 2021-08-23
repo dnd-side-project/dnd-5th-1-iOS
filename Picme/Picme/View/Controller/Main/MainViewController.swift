@@ -9,8 +9,7 @@ import UIKit
 
 // MARK: - Collection View Cell 클릭 시 실행할 프로토콜
 protocol TouchDelegate: AnyObject {
-    // func pushVoteDetailView(index: Int, postId: String)
-    func pushVoteDetailView(index: Int, postId: String, postNickname: String, postProfileUrl: String)
+    func pushVoteDetailView(index: Int, postId: String)
 }
 
 class MainViewController: BaseViewContoller, TouchDelegate {
@@ -81,7 +80,7 @@ class MainViewController: BaseViewContoller, TouchDelegate {
             self?.showTableView()
         }
         
-        // 서버 통신
+        // 메인 리스트 조회
         viewModel.fetchMainList()
     }
     
@@ -107,32 +106,13 @@ class MainViewController: BaseViewContoller, TouchDelegate {
     
     // MARK: - Collection View Cell 클릭시
     
-    /*
     func pushVoteDetailView(index: Int, postId: String) {
-        
-        if APIConstants.jwtToken == "" { // 미로그인 사용자
-            AlertView.instance.showAlert(using: .logIn)
-            AlertView.instance.actionDelegate = self
-        } else { // 로그인한 사용자
-            guard let voteDetailVC = self.storyboard?.instantiateViewController(withIdentifier: "VoteDetailViewController") as? VoteDetailViewController else { return }
-            voteDetailVC.postId = postId
-            voteDetailVC.userNickname = "minha"
-            voteDetailVC.userProfileimageUrl = ""
-            self.navigationController?.pushViewController(voteDetailVC, animated: true)
-        }
-     
-    }
-    */
-    
-    func pushVoteDetailView(index: Int, postId: String, postNickname: String, postProfileUrl: String) {
         if APIConstants.jwtToken == "" { // 미로그인 사용자
             AlertView.instance.showAlert(using: .logInDetail)
             AlertView.instance.actionDelegate = self
         } else { // 로그인한 사용자
             guard let voteDetailVC = self.storyboard?.instantiateViewController(withIdentifier: "VoteDetailViewController") as? VoteDetailViewController else { return }
             voteDetailVC.postId = postId
-            voteDetailVC.postNickname = postNickname
-            voteDetailVC.postProfileUrl = postProfileUrl
             self.navigationController?.pushViewController(voteDetailVC, animated: true)
         }
     }
@@ -154,6 +134,7 @@ extension MainViewController: AlertViewActionDelegate {
 }
 
 // MARK: - Table View Data Source / Collection View Cell Delegate
+
 class MainListDatasource: GenericDataSource<MainModel>, UITableViewDataSource, CollectionViewCellDelegate {
     
     // MARK: - CollectionV View Cell Delegate
@@ -161,13 +142,8 @@ class MainListDatasource: GenericDataSource<MainModel>, UITableViewDataSource, C
     weak var delegate: TouchDelegate?
     
     // Collection View Cell 클릭시 실행할 함수
-    
-//    func selectedCVCell(_ index: Int, _ postId: String) {
-//        delegate?.pushVoteDetailView(index: index, postId: postId)
-//    }
-    
-    func selectedCVCell(_ index: Int, _ postId: String, _ postNickname: String, _ postProfileUrl: String) {
-        delegate?.pushVoteDetailView(index: index, postId: postId, postNickname: postNickname, postProfileUrl: postProfileUrl)
+    func selectedCVCell(_ index: Int, _ postId: String) {
+        delegate?.pushVoteDetailView(index: index, postId: postId)
     }
     
     // MARK: - Table View Data Source
