@@ -38,4 +38,10 @@ extension UIView {
         }
     }
     
+    func circular() {
+        self.layer.cornerRadius = (self.frame.width / 2)
+        self.clipsToBounds = true
+        self.layer.masksToBounds = true
+        self.contentMode = UIView.ContentMode.scaleAspectFit
+    }
 }
