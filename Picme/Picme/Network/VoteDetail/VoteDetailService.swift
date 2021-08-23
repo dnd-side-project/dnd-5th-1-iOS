@@ -10,8 +10,8 @@ import Alamofire
 
 protocol VoteDetailServiceProtocol: AnyObject {
     func getVoteDetail(postId: String, completion: @escaping ((NetworkResult<Any>) -> Void))
-    func createVote(postId: String, imageId: String, category: String, completion: @escaping ((NetworkResult<Any>) -> Void))
-    func deletePost(postId: String, completion: @escaping ((NetworkResult<Any>) -> Void))
+    func createVote(postId: String, imageId: String, category: String, completion: @escaping () -> Void)
+    func deletePost(postId: String, completion: @escaping () -> Void)
 }
 
 class VoteDetailService: VoteDetailServiceProtocol {
@@ -32,7 +32,7 @@ class VoteDetailService: VoteDetailServiceProtocol {
         
         dataRequest.responseData { dataResponse in
             switch dataResponse.result {
-        
+            
             case .success:
                 guard let statusCode = dataResponse.response?.statusCode else {return}
                 guard let value = dataResponse.value else {return}
@@ -45,48 +45,45 @@ class VoteDetailService: VoteDetailServiceProtocol {
     
     // MARK: - 투표 생성
     
-    func createVote(postId: String, imageId: String, category: String, completion: @escaping ((NetworkResult<Any>) -> Void)) {
+    func createVote(postId: String, imageId: String, category: String, completion: @escaping () -> Void) {
         let URL = APIConstants.Vote.createVote(postID: postId, postImageID: imageId).urlString
-        let body: [String : String] = [
-            "category" : category]
+        let body: [ String : String ] = [ "category" : category ]
+        let header: HTTPHeaders = [ "Authorization": APIConstants.jwtToken ]
         
         let dataRequest = AF.request(URL,
                                      method: .post,
                                      parameters: body,
                                      encoding: JSONEncoding.default,
-                                     headers: nil)
+                                     headers: header)
         
         dataRequest.responseData { dataResponse in
             switch dataResponse.result {
             case .success:
-                guard let statusCode = dataResponse.response?.statusCode else {return}
-                guard let value = dataResponse.value else {return}
-                let networkResult = self.judgeStatus(by: statusCode, value)
-                completion(networkResult)
-            case .failure: completion(.pathErr)
+                completion()
+            case .failure(let error):
+                print(error.localizedDescription)
             }
         }
     }
     
     // MARK: - 게시글 삭제
     
-    func deletePost(postId: String, completion: @escaping ((NetworkResult<Any>) -> Void)) {
+    func deletePost(postId: String, completion: @escaping () -> Void) {
         let URL = APIConstants.Post.deletePost(postID: postId).urlString
+        let header: HTTPHeaders = [ "Authorization": APIConstants.jwtToken ]
         
         let dataRequest = AF.request(URL,
                                      method: .post,
                                      parameters: nil,
                                      encoding: JSONEncoding.default,
-                                     headers: nil)
+                                     headers: header)
         
         dataRequest.responseData { dataResponse in
             switch dataResponse.result {
             case .success:
-                guard let statusCode = dataResponse.response?.statusCode else {return}
-                guard let value = dataResponse.value else {return}
-                let networkResult = self.judgeStatus(by: statusCode, value)
-                completion(networkResult)
-            case .failure: completion(.pathErr)
+                completion()
+            case .failure(let error):
+                print(error.localizedDescription)
             }
         }
     }
