@@ -102,6 +102,7 @@ class ContentViewModel {
                                                        ContentViewModel.imagesData,
                                                        ContentViewModel.imageMetaData) { [weak self] in
                         self?.isCreateImageComplete.value = true
+                        completion()
                     }
                     
                 case .failure(let err):

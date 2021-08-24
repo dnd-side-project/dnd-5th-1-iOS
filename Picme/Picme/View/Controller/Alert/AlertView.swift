@@ -14,7 +14,6 @@ import UIKit
     @objc optional func listRemoveTapped()
     @objc optional func reportTapped()
     @objc optional func serviceTapped()
-    
     @objc optional func moveToHomeTab()
 }
 

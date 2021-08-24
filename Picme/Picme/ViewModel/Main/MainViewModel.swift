@@ -27,7 +27,6 @@ class MainViewModel {
     // MARK: - 게시글 리스트 조회
     
     func fetchMainList() {
-        
         guard let service = service else {
             onErrorHandling?(APIError.networkFailed)
             return

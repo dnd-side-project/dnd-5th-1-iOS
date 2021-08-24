@@ -34,7 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
     
-    //MARK: - 투표만들기 Tab Bar Prenset
+    //MARK: - Tab Bar Should Select
     
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
         
@@ -43,19 +43,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         }
         
         switch indexOfTab {
+        // 투표 만들기 탭
         case 1:
-            if APIConstants.jwtToken != "" {
+            if APIConstants.jwtToken != "" { // 로그인 후 탭하면 present로 나타남
                 if let uploadImageVC = tabBarController.storyboard?.instantiateViewController(withIdentifier: "UploadImage") {
                     uploadImageVC.modalPresentationStyle = .fullScreen
                     tabBarController.present(uploadImageVC, animated: true)
                     return false
                 }
-            } else {
+            } else { // 미로그인 시 AlertView
                 AlertView.instance.showAlert(using: .logInVote)
                 AlertView.instance.actionDelegate = self
             }
+        // 마이 페이지 탭
         case 2:
-            if APIConstants.jwtToken == "" {
+            if APIConstants.jwtToken == "" { // 미로그인 시 AlertView
                 AlertView.instance.showAlert(using: .logInMypage)
                 AlertView.instance.actionDelegate = self
             }
@@ -66,6 +68,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         return true
     }
 }
+
+// MARK: - Alert View Action Delegate
 
 extension AppDelegate: AlertViewActionDelegate {
     
