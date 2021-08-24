@@ -119,7 +119,9 @@ extension UploadImageViewContoller {
         config.onlySquareImagesFromCamera = true
         config.startOnScreen = .library
         config.screens = [.library]
-        config.wordings.libraryTitle = "Gallerys"
+        config.wordings.libraryTitle = "사진"
+        config.wordings.cancel = "취소"
+        config.wordings.next = "확인"
         config.hidesStatusBar = false
         config.hidesBottomBar = false
         config.maxCameraZoomFactor = 5.0
