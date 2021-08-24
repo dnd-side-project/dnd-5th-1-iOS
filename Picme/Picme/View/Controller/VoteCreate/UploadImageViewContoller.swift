@@ -46,6 +46,12 @@ class UploadImageViewContoller: BaseViewContoller {
         
         // 멀티 사진
         picker.didFinishPicking { [unowned picker] items, cancelled in
+            if items.count < 2 {
+                AlertView.instance.showAlert(using: .uploadImagesFailed)
+                self.dismiss(animated: true, completion: nil)
+                return
+            }
+            
             for item in items {
                 switch item {
                 case .photo(let photos):
@@ -108,12 +114,22 @@ extension UploadImageViewContoller {
         stepView.backgroundColor = .solidColor(.solid12)
         stepView.layer.cornerRadius = 10
         
+        configYPImagePicker()
+    }
+    
+    func configYPImagePicker() {
+        
         config.shouldSaveNewPicturesToAlbum = false
         config.targetImageSize = .cappedTo(size: 1024)
         config.onlySquareImagesFromCamera = true
         config.startOnScreen = .library
         config.screens = [.library]
-        config.wordings.libraryTitle = "Gallerys"
+        config.wordings.libraryTitle = "사진"
+        config.wordings.cancel = "취소"
+        config.wordings.next = "다음"
+        config.wordings.done = "확인"
+        config.wordings.filter = "필터"
+        config.wordings.albumsTitle = "앨범"
         config.hidesStatusBar = false
         config.hidesBottomBar = false
         config.maxCameraZoomFactor = 5.0
@@ -125,6 +141,7 @@ extension UploadImageViewContoller {
         config.library.mediaType = .photo
         config.library.itemOverlayType = .grid
         config.library.defaultMultipleSelection = true
+        
     }
     
     override func setConfiguration() {
