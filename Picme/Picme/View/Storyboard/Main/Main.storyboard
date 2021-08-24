@@ -778,7 +778,7 @@
                                                                     </constraints>
                                                                 </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1위" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KMk-th-Wac">
-                                                                    <rect key="frame" x="10" y="5" width="15.5" height="15"/>
+                                                                    <rect key="frame" x="10" y="3" width="15.5" height="15"/>
                                                                     <fontDescription key="fontDescription" name="NotoSansCJKkr-Bold" family="Noto Sans CJK KR" pointSize="10"/>
                                                                     <color key="textColor" red="0.99607843137254903" green="0.99607843137254903" blue="0.99607843137254903" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                     <nil key="highlightedColor"/>
@@ -801,7 +801,7 @@
                                                                 <constraint firstItem="QC8-vE-g7A" firstAttribute="width" secondItem="vw8-NU-Xdo" secondAttribute="width" multiplier="0.841667" id="03J-Po-QdH"/>
                                                                 <constraint firstItem="QC8-vE-g7A" firstAttribute="leading" secondItem="WXP-Jm-TE6" secondAttribute="leading" id="4dx-jd-rST"/>
                                                                 <constraint firstItem="WXP-Jm-TE6" firstAttribute="leading" secondItem="vw8-NU-Xdo" secondAttribute="leading" id="Gd1-AI-xd4"/>
-                                                                <constraint firstItem="KMk-th-Wac" firstAttribute="top" secondItem="WXP-Jm-TE6" secondAttribute="top" constant="5" id="Nhq-1x-5qi"/>
+                                                                <constraint firstItem="KMk-th-Wac" firstAttribute="top" secondItem="WXP-Jm-TE6" secondAttribute="top" constant="3" id="Nhq-1x-5qi"/>
                                                                 <constraint firstItem="KMk-th-Wac" firstAttribute="centerX" secondItem="WXP-Jm-TE6" secondAttribute="centerX" id="Scn-S7-ip7"/>
                                                                 <constraint firstItem="QC8-vE-g7A" firstAttribute="top" secondItem="WXP-Jm-TE6" secondAttribute="bottom" constant="10" id="Wiq-3C-MTi"/>
                                                                 <constraint firstItem="WXP-Jm-TE6" firstAttribute="top" secondItem="vw8-NU-Xdo" secondAttribute="top" id="XmJ-a9-x5U"/>
@@ -869,7 +869,7 @@
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T1H-Rf-Hg1">
                                                         <rect key="frame" x="0.0" y="0.0" width="48" height="48"/>
                                                         <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BPK-dL-bcq">
+                                                            <button opaque="NO" tag="11" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BPK-dL-bcq">
                                                                 <rect key="frame" x="0.0" y="0.0" width="48" height="48"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="48" id="6vK-dM-0do"/>
@@ -924,7 +924,7 @@
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Aqf-ye-aO6">
                                                         <rect key="frame" x="0.0" y="0.0" width="48" height="48"/>
                                                         <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YTj-AY-mbZ">
+                                                            <button opaque="NO" tag="12" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YTj-AY-mbZ">
                                                                 <rect key="frame" x="0.0" y="0.0" width="48" height="48"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="48" id="PZw-hd-SmO"/>
@@ -979,7 +979,7 @@
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UHP-Lk-vwE">
                                                         <rect key="frame" x="0.0" y="0.0" width="48" height="48"/>
                                                         <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RdS-rt-ngV">
+                                                            <button opaque="NO" tag="13" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RdS-rt-ngV">
                                                                 <rect key="frame" x="0.0" y="0.0" width="48" height="48"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="48" id="6oj-Xf-dyd"/>
@@ -1034,7 +1034,7 @@
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3el-p0-2TB">
                                                         <rect key="frame" x="0.0" y="0.0" width="48" height="48"/>
                                                         <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HzQ-kV-XRq">
+                                                            <button opaque="NO" tag="14" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HzQ-kV-XRq">
                                                                 <rect key="frame" x="0.0" y="0.0" width="48" height="48"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" secondItem="HzQ-kV-XRq" secondAttribute="height" multiplier="1:1" id="2Up-uA-2Ua"/>
@@ -1086,14 +1086,14 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="pFh-4f-iMU" userLabel="Skip Stack View">
                                                 <rect key="frame" x="232" y="0.0" width="48" height="67"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pnA-WO-wYb">
+                                                    <button opaque="NO" tag="15" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pnA-WO-wYb">
                                                         <rect key="frame" x="0.0" y="0.0" width="48" height="48"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="pnA-WO-wYb" secondAttribute="height" multiplier="1:1" id="F2J-cW-9Tx"/>
                                                             <constraint firstAttribute="width" constant="48" id="dfb-eM-4sq"/>
                                                             <constraint firstAttribute="height" constant="48" id="sjZ-yD-AE0"/>
                                                         </constraints>
-                                                        <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="12"/>
+                                                        <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat" pointSize="12"/>
                                                         <state key="normal" title="Skip">
                                                             <color key="titleColor" red="0.92156862750000001" green="0.28627450980000002" blue="0.60392156860000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                         </state>
@@ -1151,14 +1151,14 @@
                     <connections>
                         <outlet property="backButton" destination="Irt-dw-Le6" id="x2A-iP-Vwx"/>
                         <outlet property="carouselCollectionView" destination="T04-YG-drm" id="rvd-Tf-52I"/>
-                        <outlet property="colorButton" destination="HzQ-kV-XRq" id="A2J-pM-6ou"/>
-                        <outlet property="colorHeightConstraint" destination="Qfm-Gi-8mp" id="KgE-f9-ohV"/>
-                        <outlet property="colorPercentLabel" destination="Bzy-s0-eqs" id="4vx-gb-Eox"/>
-                        <outlet property="colorResultView" destination="zqp-uq-vv7" id="Zrx-eY-JW7"/>
-                        <outlet property="compositionButton" destination="YTj-AY-mbZ" id="wIp-j2-Po4"/>
-                        <outlet property="compositionHeightConstraint" destination="uOx-LE-VgW" id="1Ej-W7-8HC"/>
-                        <outlet property="compositionPercentLabel" destination="s5c-aI-h4P" id="gOn-5q-vwQ"/>
-                        <outlet property="compositionResultView" destination="MxF-mP-9NI" id="rGB-Wn-btt"/>
+                        <outlet property="colorButton" destination="HzQ-kV-XRq" id="mIf-Ba-UEU"/>
+                        <outlet property="colorHeightConstraint" destination="Qfm-Gi-8mp" id="1zo-YS-7zm"/>
+                        <outlet property="colorPercentLabel" destination="Bzy-s0-eqs" id="eVh-FC-w1p"/>
+                        <outlet property="colorResultView" destination="zqp-uq-vv7" id="Dka-8D-4kO"/>
+                        <outlet property="compositionButton" destination="YTj-AY-mbZ" id="5AF-nJ-bX7"/>
+                        <outlet property="compositionHeightConstraint" destination="uOx-LE-VgW" id="oc3-n9-DK6"/>
+                        <outlet property="compositionPercentLabel" destination="s5c-aI-h4P" id="1j8-uM-JYC"/>
+                        <outlet property="compositionResultView" destination="MxF-mP-9NI" id="tRa-SE-gFa"/>
                         <outlet property="detailClockImageView" destination="7yz-dX-7Ep" id="bj7-gT-6aA"/>
                         <outlet property="detailDeadlineLabel" destination="zv1-Px-PD4" id="BXp-M2-fhu"/>
                         <outlet property="detailNicknameLabel" destination="xcI-fx-oFf" id="SGV-e6-KQN"/>
@@ -1168,39 +1168,24 @@
                         <outlet property="detailProfileImageView" destination="Lge-DT-c9U" id="ycE-ex-tGo"/>
                         <outlet property="detailTitleLabel" destination="mmd-Ur-e39" id="kMI-pL-9pa"/>
                         <outlet property="feedbackView" destination="nM7-Ii-Esh" id="lnF-8K-q2g"/>
-                        <outlet property="lightButton" destination="RdS-rt-ngV" id="Wkq-JO-kvq"/>
-                        <outlet property="lightHeightConstraint" destination="Nqz-vb-S3q" id="UDf-dn-Pdm"/>
-                        <outlet property="lightPercentLabel" destination="la6-nI-AWL" id="zIV-Ba-3Ue"/>
-                        <outlet property="lightResultView" destination="43a-ka-Ebb" id="CLe-hg-FIG"/>
+                        <outlet property="lightButton" destination="RdS-rt-ngV" id="ahG-GA-G7Y"/>
+                        <outlet property="lightHeightConstraint" destination="Nqz-vb-S3q" id="gIg-dW-ClW"/>
+                        <outlet property="lightPercentLabel" destination="la6-nI-AWL" id="Jho-c3-7vJ"/>
+                        <outlet property="lightResultView" destination="43a-ka-Ebb" id="n80-yR-NFN"/>
                         <outlet property="onePickLabel" destination="Pyd-JN-cK4" id="Av1-BQ-cn5"/>
                         <outlet property="pickButton" destination="otq-hq-BSA" id="1bt-qc-G8b"/>
                         <outlet property="pickView" destination="Lbn-9o-aCP" id="fg8-Q6-MDt"/>
                         <outlet property="rightBarButton" destination="ALU-4F-MJG" id="Y3t-ph-76r"/>
-                        <outlet property="sensitivityButton" destination="BPK-dL-bcq" id="6dW-DF-Z3I"/>
-                        <outlet property="sensitivityHeightConstraint" destination="apy-ia-OlN" id="qcU-Ix-yGw"/>
-                        <outlet property="sensitivityPercentLabel" destination="iNb-U8-aHm" id="GKL-s3-eP8"/>
-                        <outlet property="sensitivityResultView" destination="zDr-TJ-Oq6" id="3gs-fg-wNz"/>
+                        <outlet property="sensitivityButton" destination="BPK-dL-bcq" id="hie-gc-ndQ"/>
+                        <outlet property="sensitivityHeightConstraint" destination="apy-ia-OlN" id="S6f-PS-BFl"/>
+                        <outlet property="sensitivityPercentLabel" destination="iNb-U8-aHm" id="EnR-6v-MiW"/>
+                        <outlet property="sensitivityResultView" destination="zDr-TJ-Oq6" id="RHU-4g-1c0"/>
                         <outlet property="skipButton" destination="pnA-WO-wYb" id="v15-4u-sMt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3If-2U-gSy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2762.3188405797105" y="77.678571428571431"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="E6P-V1-FMs">
-            <objects>
-                <viewController id="iN2-0p-40S" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="7ew-nb-nOb">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="hgZ-H4-9zZ"/>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="WW4-oU-ODc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3447.826086956522" y="77.678571428571431"/>
         </scene>
         <!--홈-->
         <scene sceneID="34U-si-WzT">
