@@ -114,6 +114,11 @@ extension UploadImageViewContoller {
         stepView.backgroundColor = .solidColor(.solid12)
         stepView.layer.cornerRadius = 10
         
+        configYPImagePicker()
+    }
+    
+    func configYPImagePicker() {
+        
         config.shouldSaveNewPicturesToAlbum = false
         config.targetImageSize = .cappedTo(size: 1024)
         config.onlySquareImagesFromCamera = true
@@ -121,7 +126,10 @@ extension UploadImageViewContoller {
         config.screens = [.library]
         config.wordings.libraryTitle = "사진"
         config.wordings.cancel = "취소"
-        config.wordings.next = "확인"
+        config.wordings.next = "다음"
+        config.wordings.done = "확인"
+        config.wordings.filter = "필터"
+        config.wordings.albumsTitle = "앨범"
         config.hidesStatusBar = false
         config.hidesBottomBar = false
         config.maxCameraZoomFactor = 5.0
@@ -133,6 +141,7 @@ extension UploadImageViewContoller {
         config.library.mediaType = .photo
         config.library.itemOverlayType = .grid
         config.library.defaultMultipleSelection = true
+        
     }
     
     override func setConfiguration() {
