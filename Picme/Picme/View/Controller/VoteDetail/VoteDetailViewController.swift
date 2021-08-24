@@ -55,7 +55,7 @@ class VoteDetailViewController: BaseViewContoller {
     @IBOutlet weak var lightHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var colorHeightConstraint: NSLayoutConstraint!
     
-    // Array
+    // Feedback View Array
     var buttonArray = [UIButton]()
     var percentLabelArray = [UILabel]()
     var resultViewArray = [UIView]()
@@ -64,10 +64,8 @@ class VoteDetailViewController: BaseViewContoller {
     // MARK: - Properties
     
     var selectedImageId: String? // 실제 선택된 이미지의 ID 값
-    var isPicked: Bool = false
-    var firstRankSet: Set<Int> = []
-    var isFirstRank: Bool = false
-    var isFirstSetUpResultPercent: Bool = false
+    var firstRankSet: Set<Int> = [] // 1위 이미지 인덱스 값 저장
+    var isFirstRank: Bool = false // 1위 이미지가 원픽 이미지 or 투표한 이미지일 경우 true
     
     var currentPage: Int = 0 // 현재 중앙에 보이는 컬렉션뷰 이미지의 IndexPath.row 값
     var isSelect: Bool = false // didSelectItemAt으로 이미지 선택이 되었는지 판별할 Bool 값 - true라면 선택함
@@ -251,6 +249,7 @@ extension VoteDetailViewController: UICollectionViewDelegate {
         detailPageLabel.text = "\(String(describing: currentPage + 1)) / \(String(describing: viewModel.voteDetailModel.value.images.count))"
         detailPageControl.currentPage = currentPage
         
+        // 투표하지 않은 경우 (Pick View)
         if !viewModel.voteDetailModel.value.isVoted { // 투표를 하지 않아 이미지를 선택해야할 경우 (Pick View)
             if isSelect { // 선택한 이미지가 있을 경우
                 if currentPage == selectImageIndex { // 현재 이미지 인덱스 = 선택된 이미지 인덱스
@@ -262,7 +261,34 @@ extension VoteDetailViewController: UICollectionViewDelegate {
                 }
             }
         } else { // 투표한 경우 (Feedback View)
-           // Feedback View 결과값 처리
+            // 결과값 처리
+            let percentArray = [voteResultModel[currentPage].sensitivityPercent,
+                                voteResultModel[currentPage].compositionPercent,
+                                voteResultModel[currentPage].lightPercent,
+                                voteResultModel[currentPage].colorPercent]
+            
+            for index in 0..<resultViewArray.count {
+                // Feedback View - Percent Label 설정
+                percentLabelArray[index].text = "\(percentArray[index])%"
+                
+                // Feedback View - Result View Color 설정
+                if percentLabelArray[index].text == "0.0%" {
+                    resultViewArray[index].backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.5)
+                    heightConstraintArray[index].constant = 48
+                } else {
+                    if firstRankSet.contains(currentPage) && isFirstRank { // 1위 = 원픽 or 투표이미지
+                        resultViewArray[index].backgroundColor = #colorLiteral(red: 0.9215686275, green: 0.2862745098, blue: 0.6039215686, alpha: 0.8)
+                    } else if firstRankSet.contains(currentPage) && !isFirstRank { // 1위 != 원픽 or 투표이미지
+                        resultViewArray[index].backgroundColor = #colorLiteral(red: 0.9411764706, green: 0.4745098039, blue: 0.2352941176, alpha: 0.8)
+                    } else { // 그 외
+                        resultViewArray[index].backgroundColor = #colorLiteral(red: 0.2, green: 0.8, blue: 0.5490196078, alpha: 0.8)
+                    }
+                }
+                
+                // Feedback View - Height Constraint 설정
+                let size = 44 * 0.01 * (percentArray[index]) + 4
+                heightConstraintArray[index].constant = CGFloat(size)
+            }
         }
     }
     
@@ -324,7 +350,7 @@ extension VoteDetailViewController: AlertViewActionDelegate {
             pickView.isHidden = false
             feedbackView.isHidden = true
         }
-     
+        
         if isVoted { // 투표를 한 상태 -> 스킵 버튼이 원픽 버튼이어야 함
             // Skip Button -> One Pick Button
             skipButton.setImage(#imageLiteral(resourceName: "onePickButton"), for: .normal)
@@ -428,12 +454,13 @@ extension VoteDetailViewController: AlertViewActionDelegate {
     // MARK: - Feedback Button Action
     
     @objc func feedbackButtonClicked(_ sender: UIButton) {
-        let feedbackDictionary: [Int: String] = [11: "emotion", 12: "composition", 13: "light", 14: "color", 15: "skip"]
-        
-        let category = feedbackDictionary[sender.tag]!
-        
         // 투표 안 했을 때만 투표 생성 서버 통신
         if !viewModel.voteDetailModel.value.isVoted {
+            
+            let feedbackDictionary: [Int: String] = [11: "emotion", 12: "composition", 13: "light", 14: "color", 15: "skip"]
+            
+            let category = feedbackDictionary[sender.tag]!
+            
             viewModel.service?.createVote(postId: postId, imageId: selectedImageId!, category: category, completion: {
                 print("ok")
                 
@@ -472,7 +499,9 @@ extension VoteDetailViewController: AlertViewActionDelegate {
     // MARK: - Alert View Action
     
     func listRemoveTapped() {
-        // viewModel.fetchDeletePost(postId: postId)
+        viewModel.service?.deletePost(postId: postId, completion: {
+            print("vote delete")
+        })
     }
     
     func reportTapped() {
