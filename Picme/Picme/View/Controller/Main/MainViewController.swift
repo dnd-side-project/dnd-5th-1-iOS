@@ -13,7 +13,7 @@ protocol TouchDelegate: AnyObject {
 }
 
 class MainViewController: BaseViewContoller, TouchDelegate {
-    
+
     // MARK: - IBOutlets
     
     @IBOutlet weak var mainTableView: UITableView!
@@ -50,7 +50,10 @@ class MainViewController: BaseViewContoller, TouchDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        mainTableView.reloadData()
+        // 메인 리스트 조회
+        viewModel.fetchMainList()
+        
+        self.mainTableView.reloadData()
     }
     
     // MARK: - Tab Bar

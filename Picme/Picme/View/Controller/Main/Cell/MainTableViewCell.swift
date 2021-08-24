@@ -29,7 +29,8 @@ class MainTableViewCell: UITableViewCell {
     // MARK: - Variables
     
     weak var cellDelegate: CollectionViewCellDelegate?
-    var imageData: [Images]?
+    // var imageData: [Images]?
+    var imageData = [#imageLiteral(resourceName: "defalutImage"), #imageLiteral(resourceName: "defalutImage"), #imageLiteral(resourceName: "defalutImage")]
     var postId: String!
     var timer = Timer()
     
@@ -43,7 +44,7 @@ class MainTableViewCell: UITableViewCell {
             mainNicknameLabel.text = object.user.nickname
             mainParticipantsLabel.text = "\(object.participantsNum)명 참여중"
             mainTitleLabel.text = object.title
-            imageData = object.images
+            // imageData = object.images
             setTimer(endTime: "2021-08-22T15:05:59.703Z")
             postId = object.postId
         }
@@ -106,24 +107,28 @@ class MainTableViewCell: UITableViewCell {
 
 extension MainTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        let count = imageData?.count ?? 0
+//        let count = imageData?.count ?? 0
+//
+//        return count+1
         
-        return count+1
+        return imageData.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: MainCollectionViewCell = mainCollectionView.dequeueCollectionCell(for: indexPath)
         
-        if let imageData = imageData {
-            if indexPath.item == imageData.count {
-                cell.mainPhotoImageView.image = #imageLiteral(resourceName: "defalutImage").withRenderingMode(.alwaysTemplate)
-                cell.mainPhotoImageView.tintColor = .solidColor(.solid12)
-                cell.stackView.isHidden = false
-            } else {
-                cell.mainPhotoImageView.kf.setImage(with: URL(string: (imageData[indexPath.row].thumbnailUrl)!), placeholder: #imageLiteral(resourceName: "defalutImage"))
-                cell.stackView.isHidden = true
-            }
-        }
+//        if let imageData = imageData {
+//            if indexPath.item == imageData.count {
+//                cell.mainPhotoImageView.image = #imageLiteral(resourceName: "defalutImage").withRenderingMode(.alwaysTemplate)
+//                cell.mainPhotoImageView.tintColor = .solidColor(.solid12)
+//                cell.stackView.isHidden = false
+//            } else {
+//                cell.mainPhotoImageView.kf.setImage(with: URL(string: (imageData[indexPath.row].thumbnailUrl!)), placeholder: #imageLiteral(resourceName: "defalutImage"))
+//                cell.stackView.isHidden = true
+//            }
+//        }
+        
+        cell.mainPhotoImageView.image = imageData[indexPath.row]
         
         return cell
     }
