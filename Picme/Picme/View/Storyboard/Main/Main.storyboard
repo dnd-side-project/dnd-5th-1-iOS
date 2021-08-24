@@ -646,11 +646,11 @@
                                             <constraint firstAttribute="width" constant="75" id="lXb-W3-6BR"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat" pointSize="16"/>
-                                        <color key="tintColor" red="0.92156862750000001" green="0.28627450980000002" blue="0.60392156860000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" image="pickButtonDisabled">
                                             <color key="titleColor" red="0.47058823529999999" green="0.4823529412" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
-                                        <state key="highlighted" image="pickButtonNormal">
+                                        <state key="highlighted">
                                             <color key="titleColor" red="0.99607843137254903" green="0.99607843137254903" blue="0.99607843137254903" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
@@ -1271,7 +1271,6 @@
         <image name="navigationMoreBtn" width="5" height="19"/>
         <image name="nextButton" width="24" height="24"/>
         <image name="pickButtonDisabled" width="77" height="44"/>
-        <image name="pickButtonNormal" width="77" height="44"/>
         <image name="rankingBox" width="35" height="26"/>
         <image name="sensitivity" width="24" height="24"/>
         <image name="time" width="16" height="16"/>

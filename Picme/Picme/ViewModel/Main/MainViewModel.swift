@@ -37,6 +37,7 @@ class MainViewModel {
                 switch response {
                 case .success(let data):
                     if let mainData = data as? [MainModel] {
+                        print("succ")
                         self?.dataSource?.data.value = mainData
                     }
                 case .requestErr(let message):
