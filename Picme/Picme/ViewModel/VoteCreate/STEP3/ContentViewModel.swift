@@ -9,6 +9,7 @@ import Foundation
 
 enum ExpirationDate: String, CaseIterable {
     
+    case timeSelect = "시간 선택"
     case half   = "30 분"
     case one    = "1 시간"
     case two    = "2 시간"
@@ -19,6 +20,7 @@ enum ExpirationDate: String, CaseIterable {
     
     var timeValue: Int {
         switch self {
+        case .timeSelect: return 0
         case .half:     return 30
         case .one:      return 1
         case .two:      return 2
@@ -40,7 +42,6 @@ class ContentViewModel {
     var hasVoteEndDate: Dynamic<Bool> = Dynamic(false)
     var isCompleteState: Dynamic<Bool> = Dynamic(false)
     
-    
     // 투표 통신완료시 홈화면으로 이동
     var isCreateListComplete: Dynamic<Bool> = Dynamic(false)
     var isCreateImageComplete: Dynamic<Bool> = Dynamic(false)
@@ -58,7 +59,7 @@ class ContentViewModel {
     func stringConvertDate(_ hour: ExpirationDate) -> String? {
     
         switch hour {
-        case .half, .one, .two, .three, .six, .twelve, .day:
+        case .timeSelect, .half, .one, .two, .three, .six, .twelve, .day:
             return addDate(hour.timeValue)
         }
     }
