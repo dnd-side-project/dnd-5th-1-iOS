@@ -65,18 +65,21 @@ class ContentViewController: BaseViewContoller {
         if let voteText = voteTextView.text, let voteEndDate = voteEndDateTextfield.text {
             contentViewModel?.createList(title: voteText, endDate: voteEndDate, completion: {
                 self.dismiss(animated: true) {
-
-                    //
-                    if let sceneDelegate = UIApplication.shared.connectedScenes.first!.delegate as? SceneDelegate, let initVC = sceneDelegate.window?.rootViewController {
-
-                        Toast.show(using: .voteComplete, controller: initVC)
+                    
+                    guard let sceneDelegate = UIApplication.shared.connectedScenes.first!.delegate as? SceneDelegate, let rootVC = sceneDelegate.window?.rootViewController else { return }
+                    
+                    if let tabbarVC = rootVC as? UITabBarController,
+                       let mainNav = tabbarVC.selectedViewController as? UINavigationController,
+                       let mainVC = mainNav.topViewController as? MainViewController {
+                        
+                        mainVC.mainTableView.reloadData()
+                        Toast.show(using: .voteUpload, controller: mainVC)
                     }
                 }
             })
         }
-        
     }
-    
+
     func datePickerToolBar() {
         let toolBar = UIToolbar()
         toolBar.barStyle = UIBarStyle.default
