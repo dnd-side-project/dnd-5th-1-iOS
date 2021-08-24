@@ -58,7 +58,7 @@ class ContentViewController: BaseViewContoller {
         pickerView.delegate = self
         
     }
-
+    
     @IBAction func registVote(_ sender: UIButton) {
         print("Regist")
         
@@ -175,6 +175,8 @@ extension ContentViewController: UIPickerViewDelegate, UIPickerViewDataSource {
         
         if voteEndDateTextfield.text != "" && voteEndDateTextfield.text != contentViewModel?.addDate(0) {
             contentViewModel?.hasVoteEndDate.value = true
+        } else if ExpirationDate.timeSelect.rawValue == "시간 선택" {
+            contentViewModel?.hasVoteEndDate.value = false
         }
         
         contentViewModel?.completeCheck()
