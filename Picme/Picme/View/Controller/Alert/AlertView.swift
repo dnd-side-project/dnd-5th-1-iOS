@@ -74,6 +74,8 @@ class AlertView: UIView {
         case report
         /// 서비스 준비중, Tag = 7
         case service
+        /// 업로드 사진 두 장 이하일 경우, Tag = 8
+        case uploadImagesFailed
         
         fileprivate var title: String {
             switch self {
@@ -93,6 +95,8 @@ class AlertView: UIView {
                 return "게시글에 문제가 있나요?\n신고를 하면 더 이상 게시글이 안보여요"
             case .service:
                 return "아직 서비스 준비 중이에요.\n조금만 기다려 주시면 곧 찾아갈게요!"
+            case .uploadImagesFailed:
+                return "최소 2장 이상의 사진이 필요해요.\n다시 업로드 해주시겠어요^^?"
             }
         }
         
@@ -102,7 +106,7 @@ class AlertView: UIView {
                 return "아니요"
             case .logInDetail, .logInVote, .logInMypage:
                 return "더 둘러볼래요"
-            case .service:
+            case .service, .uploadImagesFailed:
                 return ""
             }
         }
@@ -119,6 +123,8 @@ class AlertView: UIView {
                 return "삭제하기"
             case .report:
                 return "신고하기"
+            case .uploadImagesFailed:
+                return "확인"
             case .service:
                 return ""
             }
@@ -132,7 +138,7 @@ class AlertView: UIView {
                 return UIImage(named: "trash")
             case .report:
                 return UIImage(named: "report")
-            case .service:
+            case .service, .uploadImagesFailed:
                 return UIImage(named: "setting")
             }
         }
@@ -147,9 +153,12 @@ class AlertView: UIView {
         doneButton.tag = type.rawValue
         denyButton.tag = type.rawValue
         
-        if type == .service {
+        switch type {
+        case .service:
             buttonStackView.isHidden = true
-        } else {
+        case .uploadImagesFailed:
+            denyButton.isHidden = true
+        default:
             buttonStackView.isHidden = false
         }
         
@@ -171,7 +180,7 @@ class AlertView: UIView {
         case 7:
             actionDelegate?.serviceTapped?()
         default:
-            print("AlertView has Error....nothing case")
+            print("AlertView has Not Work")
         }
         
         rootView.removeFromSuperview()

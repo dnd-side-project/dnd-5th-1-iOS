@@ -46,6 +46,12 @@ class UploadImageViewContoller: BaseViewContoller {
         
         // 멀티 사진
         picker.didFinishPicking { [unowned picker] items, cancelled in
+            if items.count < 2 {
+                AlertView.instance.showAlert(using: .uploadImagesFailed)
+                self.dismiss(animated: true, completion: nil)
+                return
+            }
+            
             for item in items {
                 switch item {
                 case .photo(let photos):
