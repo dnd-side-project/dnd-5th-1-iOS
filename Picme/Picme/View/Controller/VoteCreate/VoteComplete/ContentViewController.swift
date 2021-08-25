@@ -128,6 +128,10 @@ class ContentViewController: BaseViewContoller {
             self.registVoteButton.isEnabled = false
         }
     }
+    
+    deinit {
+        print("contentViewController deInit")
+    }
 }
 
 // MARK: - TextViewDelegate
