@@ -9,7 +9,7 @@ import Foundation
 
 struct CreateListModel: Codable {
     let title: String
-    let expireAt: Date
+    let expireAt: String
 }
 
 struct CreateListReponseModel: Codable {
