@@ -22,7 +22,7 @@ struct CreateVoteService {
         
         switch configure {
         case let .listConfigure(title, endDate):
-            parameter = CreateListModel(title: title, expireAt: endDate)
+            parameter = CreateListModel(title: title, expiredAt: endDate)
             
         default:
             return
