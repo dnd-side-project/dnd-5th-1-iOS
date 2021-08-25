@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class StepView: UIView {
+final class StepView: UIView {
     
     // MARK: - Properties
     

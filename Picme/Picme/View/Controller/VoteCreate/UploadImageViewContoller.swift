@@ -13,7 +13,7 @@ protocol ImageDelete: AnyObject {
     func removeALLImage()
 }
 
-class UploadImageViewContoller: BaseViewContoller {
+final class UploadImageViewContoller: BaseViewContoller {
     
     // MARK: - Properties
     var userImagesData: [Data] = []

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class OnboardingViewController: BaseViewContoller {
+final class OnboardingViewController: BaseViewContoller {
 
     // MARK: - Properties
     

@@ -10,7 +10,7 @@ import KakaoSDKAuth
 import KakaoSDKUser
 import AuthenticationServices
 
-class LoginViewController: BaseViewContoller {
+final class LoginViewController: BaseViewContoller {
 
     // MARK: - Properties
     @IBOutlet weak var mainLabel: UILabel!

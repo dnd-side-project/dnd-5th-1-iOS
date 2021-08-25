@@ -8,7 +8,7 @@
 import UIKit
 import AuthenticationServices
 
-class MyPageViewController: BaseViewContoller {
+final class MyPageViewController: BaseViewContoller {
     
     // MARK: - IBOutlet
     

@@ -10,7 +10,7 @@ import KakaoSDKUser
 import KakaoSDKAuth
 import AuthenticationServices
 
-class LoginViewModel: NSObject {
+final class LoginViewModel: NSObject {
     
     weak var loginDelegate: LoginState?
     

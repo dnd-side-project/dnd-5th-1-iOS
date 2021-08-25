@@ -8,7 +8,7 @@
 import Alamofire
 import Foundation
 
-class VoteDetailViewModel {
+final class VoteDetailViewModel {
     
     // MARK: - Properties
     

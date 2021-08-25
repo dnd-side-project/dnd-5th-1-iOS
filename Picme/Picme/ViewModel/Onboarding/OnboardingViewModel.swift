@@ -7,7 +7,7 @@
 
 import Foundation
 
-class OnboardingViewModel {
+final class OnboardingViewModel {
     
     var isButtonState: Dynamic<Bool> = Dynamic(false)
     var isVaildState: Dynamic<Bool> = Dynamic(false)

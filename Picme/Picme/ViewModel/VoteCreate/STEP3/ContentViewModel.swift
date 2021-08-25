@@ -32,7 +32,7 @@ enum ExpirationDate: String, CaseIterable {
     }
 }
 
-class ContentViewModel {
+final class ContentViewModel {
     
     static var imagesData: CreateCase = .userImage(date: [])
     static var imageMetaData: CreateCase = .userImageMetadata(data: CreateUserImages(isFirstPick: 0,
