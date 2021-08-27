@@ -105,8 +105,7 @@ class VoteDetailViewController: BaseViewContoller {
     private func bindViewModel() {
         
         viewModel.voteDetailModel.bindAndFire { (response) in
-            print("bind!!!!")
-            
+
             if response.postNickname != "" {
                 self.detailNicknameLabel.text = response.postNickname
                 self.detailProfileImageView.kf.setImage(with: URL(string: response.postProfileUrl), placeholder: #imageLiteral(resourceName: "progressCircle"))
@@ -115,9 +114,9 @@ class VoteDetailViewController: BaseViewContoller {
                 self.detailPageLabel.text = "\(self.currentPage)/\(response.images.count)"
                 
                 // Set Deadline Timer
-//                if let deadline = response.deadline {
-//                    self.setTimer(endTime: deadline)
-//                }
+                if let deadline = response.deadline {
+                    self.setTimer(endTime: deadline)
+                }
                 
                 self.detailPageControl.numberOfPages = response.images.count
                 
@@ -397,7 +396,6 @@ extension VoteDetailViewController: AlertViewActionDelegate {
                 // 마감 시간 Date 형식으로 변환
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-                // "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
                 let convertDate = dateFormatter.date(from: endTime)
                 
                 // 현재 시간 적용하기 - 시간 + 9시간
@@ -406,9 +404,6 @@ extension VoteDetailViewController: AlertViewActionDelegate {
                 let localDate = Date(timeInterval: TimeInterval(calendar.timeZone.secondsFromGMT()), since: today)
                 let localConvertDate =  Date(timeInterval: TimeInterval(calendar.timeZone.secondsFromGMT()), since: convertDate!)
                 
-                print("localdate : \(localDate)")
-                print("localConvert : \(localConvertDate)")
-                
                 let elapsedTimeSeconds = Int(Date().timeIntervalSince(localConvertDate)) // 마감 시간
                 let expireLimit = Int(Date().timeIntervalSince(localDate)) // 현재 시간
                 
@@ -416,7 +411,7 @@ extension VoteDetailViewController: AlertViewActionDelegate {
                     timer.invalidate()
                     
                     self?.detailDeadlineLabel.text = "마감된 투표에요"
-                    // self?.mainClockImageView.isHidden = true
+                    self?.detailClockImageView.isHidden = true
                     return
                 }
                 

@@ -81,6 +81,8 @@ class VoteDetailService: VoteDetailServiceProtocol {
         dataRequest.responseData { dataResponse in
             switch dataResponse.result {
             case .success:
+                print("삭제")
+                print(dataResponse.data)
                 completion()
             case .failure(let error):
                 print(error.localizedDescription)

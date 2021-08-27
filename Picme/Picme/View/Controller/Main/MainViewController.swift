@@ -37,23 +37,22 @@ class MainViewController: BaseViewContoller, TouchDelegate {
     var dataSource = MainListDatasource()
     private var viewModel: MainViewModel!
     
+    var isFirst: Bool = true
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        print("viewdidload")
         
         setupTabBar()
         
         viewModel = MainViewModel(service: MainService(), dataSource: dataSource)
-        
-        bindViewModel()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        // 메인 리스트 조회
-        viewModel.fetchMainList()
-        
-        self.mainTableView.reloadData()
+        bindViewModel()
     }
     
     // MARK: - Tab Bar
@@ -91,13 +90,16 @@ class MainViewController: BaseViewContoller, TouchDelegate {
     
     func showTableView() {
         DispatchQueue.main.async {
-            if self.dataSource.data.value.isEmpty {
-                print("empty")
-                self.showEmptyView()
+            if self.isFirst {
+                self.isFirst = false
             } else {
-                self.emptyView.isHidden = true
-                self.mainTableView.isHidden = false
-                self.mainTableView.reloadData()
+                if self.dataSource.data.value.isEmpty {
+                    self.showEmptyView()
+                } else {
+                    self.emptyView.isHidden = true
+                    self.mainTableView.isHidden = false
+                    self.mainTableView.reloadData()
+                }
             }
         }
     }
