@@ -90,6 +90,7 @@ class MainViewController: BaseViewContoller, TouchDelegate {
     
     func showTableView() {
         DispatchQueue.main.async {
+            // 제일 처음 뷰가 로드되면 데이터가 무조건 없는 isEmpty로 빠졌다가 로드되기 때문에 isFirt 변수 추가
             if self.isFirst {
                 self.isFirst = false
             } else {
