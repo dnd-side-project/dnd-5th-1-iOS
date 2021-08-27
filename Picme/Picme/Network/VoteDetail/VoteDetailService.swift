@@ -20,9 +20,7 @@ class VoteDetailService: VoteDetailServiceProtocol {
     
     func getVoteDetail(postId: String, completion: @escaping ((NetworkResult<Any>) -> Void)) {
         let URL = APIConstants.Post.postRetrieve(postID: postId).urlString
-        let header: HTTPHeaders = [
-            "Authorization": APIConstants.jwtToken
-        ]
+        let header: HTTPHeaders = [ "Authorization": APIConstants.jwtToken ]
         
         let dataRequest = AF.request(URL,
                                      method: .get,
@@ -47,7 +45,7 @@ class VoteDetailService: VoteDetailServiceProtocol {
     
     func createVote(postId: String, imageId: String, category: String, completion: @escaping () -> Void) {
         let URL = APIConstants.Vote.createVote(postID: postId, postImageID: imageId).urlString
-        let body: [ String : String ] = [ "category" : category ]
+        let body: [ String: String ] = [ "category": category ]
         let header: HTTPHeaders = [ "Authorization": APIConstants.jwtToken ]
         
         let dataRequest = AF.request(URL,
@@ -86,7 +84,7 @@ class VoteDetailService: VoteDetailServiceProtocol {
                 
                 let decoder = JSONDecoder()
                 
-                guard let decodedData = try? decoder.decode(String.self, from: dataResponse.data!)
+                guard (try? decoder.decode(Bool.self, from: dataResponse.data!)) != nil
                 else { print("에러어엉")
                     return
                 }
