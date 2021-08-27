@@ -32,7 +32,7 @@ enum ExpirationDate: String, CaseIterable {
     }
 }
 
-class ContentViewModel {
+final class ContentViewModel {
     
     static var imagesData: CreateCase = .userImage(date: [])
     static var imageMetaData: CreateCase = .userImageMetadata(data: CreateUserImages(isFirstPick: 0,
@@ -87,9 +87,15 @@ class ContentViewModel {
         
         let dateformatter = DateFormatter()
         dateformatter.dateFormat = "yy/MM/dd HH:mm"
+        
+        let convertDateformatter = DateFormatter()
+        convertDateformatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        
         if let stringConvertDate = dateformatter.date(from: endDate) {
             
-            let createList = CreateCase.listConfigure(title: title, endDate: stringConvertDate)
+            let postDate = convertDateformatter.string(from: stringConvertDate)
+            print(postDate)
+            let createList = CreateCase.listConfigure(title: title, endDate: postDate)
             
             CreateVoteService.fetchCreateList(createList) { [weak self] response in
                 switch response {
@@ -117,5 +123,5 @@ class ContentViewModel {
 enum CreateCase {
     case userImage(date: [Data])
     case userImageMetadata(data: CreateUserImages)
-    case listConfigure(title: String, endDate: Date)
+    case listConfigure(title: String, endDate: String)
 }

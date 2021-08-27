@@ -14,7 +14,7 @@ protocol LogOutProtocol: AnyObject {
     func logoutFromMain()
 }
 
-class MyPageViewModel {
+final class MyPageViewModel {
     
     weak var logOutDelegate: LogOutProtocol?
     

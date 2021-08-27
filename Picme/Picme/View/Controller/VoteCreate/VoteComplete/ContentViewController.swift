@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class ContentViewController: BaseViewContoller {
+final class ContentViewController: BaseViewContoller {
 
     // MARK: - Properties
     
@@ -127,6 +127,10 @@ class ContentViewController: BaseViewContoller {
             self.registVoteButton.setTitleColor(.textColor(.text50), for: .normal)
             self.registVoteButton.isEnabled = false
         }
+    }
+    
+    deinit {
+        print("contentViewController deInit")
     }
 }
 
