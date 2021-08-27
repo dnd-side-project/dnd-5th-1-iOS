@@ -392,7 +392,6 @@ extension VoteDetailViewController: AlertViewActionDelegate {
         DispatchQueue.main.async { [weak self] in
             self?.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] timer in
                 
-                print("endTime : \(endTime)")
                 // 마감 시간 Date 형식으로 변환
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"

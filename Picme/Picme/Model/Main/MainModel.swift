@@ -12,7 +12,7 @@ struct MainModel: Codable {
     let deadline: String
     let title: String
     let user: User
-    let images: [Images]?
+    // let images: [Images]?
     let participantsNum: Int
     
     enum CodingKeys: String, CodingKey {
@@ -21,7 +21,7 @@ struct MainModel: Codable {
         case participantsNum = "participantsNum"
         case deadline = "expiredAt"
         case title = "title"
-        case images = "images"
+        // case images = "images"
     }
 }
 

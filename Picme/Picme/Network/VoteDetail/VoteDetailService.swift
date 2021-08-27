@@ -69,6 +69,7 @@ class VoteDetailService: VoteDetailServiceProtocol {
     // MARK: - 게시글 삭제
     
     func deletePost(postId: String, completion: @escaping () -> Void) {
+        print("postID ; \(postId)")
         let URL = APIConstants.Post.deletePost(postID: postId).urlString
         let header: HTTPHeaders = [ "Authorization": APIConstants.jwtToken ]
         
@@ -82,7 +83,14 @@ class VoteDetailService: VoteDetailServiceProtocol {
             switch dataResponse.result {
             case .success:
                 print("삭제")
-                print(dataResponse.data)
+                
+                let decoder = JSONDecoder()
+                
+                guard let decodedData = try? decoder.decode(String.self, from: dataResponse.data!)
+                else { print("에러어엉")
+                    return
+                }
+                
                 completion()
             case .failure(let error):
                 print(error.localizedDescription)
