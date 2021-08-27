@@ -26,7 +26,12 @@ final class MyPageViewController: BaseViewContoller {
     
     @IBOutlet weak var progressView: UIProgressView!
     
-    var mypageViewModel: MyPageViewModel? = MyPageViewModel()
+    // MARK: - Properties
+    
+    lazy var viewModel: MyPageViewModel = {
+        let viewModel = MyPageViewModel(service: MyPageService())
+        return viewModel
+    }()
     
     let loginUserInfo = LoginUser.shared
     
@@ -35,20 +40,20 @@ final class MyPageViewController: BaseViewContoller {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        mypageViewModel?.logOutDelegate = self
+        viewModel.logOutDelegate = self
         
         if let userNickName = loginUserInfo.userNickname,
            let profileImageUrl = loginUserInfo.userProfileImageUrl {
-            
             userIdentifierLabel.text = userNickName
             userImage.kf.setImage(with: URL(string: profileImageUrl), placeholder: #imageLiteral(resourceName: "progressCircle"))
         } else {
-            
             userIdentifierLabel.text = "로그인을 해주세요."
             userImage.image = #imageLiteral(resourceName: "progressCircle")
         }
 
         setupButtons()
+        
+        fetchUser()
     }
     
     // MARK: - Log Out
@@ -75,6 +80,15 @@ final class MyPageViewController: BaseViewContoller {
         AlertView.instance.actionDelegate = self
     }
     
+    // MARK: - Fetch User
+    
+    func fetchUser() {
+        viewModel.service?.getUser(completion: { response in
+            self.myVoteCountLabel.text = "\(response.createdCount)"
+            self.participationCountLabel.text = "\(response.attendedCount)"
+        })
+    }
+    
 }
 
 // MARK: - Alert View Action Delegate
@@ -87,7 +101,7 @@ extension MyPageViewController: AlertViewActionDelegate {
     
     func logOutTapped() {
         guard let userVendor = loginUserInfo.vendor else { return }
-        self.mypageViewModel?.logOutAction(from: userVendor)
+        self.viewModel.logOutAction(from: userVendor)
     }
     
 }

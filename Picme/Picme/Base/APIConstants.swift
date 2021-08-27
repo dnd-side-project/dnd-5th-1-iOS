@@ -110,7 +110,15 @@ struct APIConstants {
     }
     
     enum MyPage {
+        /// 유저 프로필
+        case userRetrieve
         
+        var urlString: String {
+            switch self {
+            case .userRetrieve:
+                return "\(APIConstants.baseURL)\(APIConstants.urlVersion)/users"
+           }
+        }
     }
     
 }
