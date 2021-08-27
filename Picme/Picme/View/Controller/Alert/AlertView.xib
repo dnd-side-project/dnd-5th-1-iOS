@@ -34,7 +34,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GoQ-M0-258" userLabel="Alert View">
-                            <rect key="frame" x="39.5" y="318.5" width="335" height="259.5"/>
+                            <rect key="frame" x="39.5" y="315.5" width="335" height="265.5"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZlJ-QE-KHk">
                                     <rect key="frame" x="297" y="26" width="16" height="16"/>
@@ -119,7 +119,7 @@
                             </subviews>
                             <color key="backgroundColor" red="0.16470588235294117" green="0.1803921568627451" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
-                                <constraint firstAttribute="bottom" secondItem="vJt-xL-KUh" secondAttribute="bottom" constant="24" id="BZj-Ki-uYW"/>
+                                <constraint firstAttribute="bottom" secondItem="vJt-xL-KUh" secondAttribute="bottom" constant="30" id="BZj-Ki-uYW"/>
                                 <constraint firstItem="vJt-xL-KUh" firstAttribute="centerX" secondItem="GoQ-M0-258" secondAttribute="centerX" id="Nwq-fy-rLq"/>
                                 <constraint firstItem="vJt-xL-KUh" firstAttribute="top" secondItem="ZlJ-QE-KHk" secondAttribute="bottom" constant="6" id="SRP-4k-5aD"/>
                                 <constraint firstItem="ZlJ-QE-KHk" firstAttribute="leading" secondItem="GoQ-M0-258" secondAttribute="leading" constant="297" id="T2S-JP-b4t"/>
