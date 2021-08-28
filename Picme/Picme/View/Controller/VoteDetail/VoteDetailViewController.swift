@@ -520,7 +520,6 @@ extension VoteDetailViewController: AlertViewActionDelegate {
     
     func listRemoveTapped() {
         viewModel.service?.deletePost(postId: postId, completion: {
-            print("vote delete")
             self.navigationController?.popViewController(animated: true)
         })
     }

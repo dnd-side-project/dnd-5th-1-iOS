@@ -72,7 +72,7 @@ class VoteDetailService: VoteDetailServiceProtocol {
         let header: HTTPHeaders = [ "Authorization": APIConstants.jwtToken ]
         
         let dataRequest = AF.request(URL,
-                                     method: .post,
+                                     method: .delete,
                                      parameters: nil,
                                      encoding: JSONEncoding.default,
                                      headers: header)
@@ -80,15 +80,6 @@ class VoteDetailService: VoteDetailServiceProtocol {
         dataRequest.responseData { dataResponse in
             switch dataResponse.result {
             case .success:
-                print("삭제")
-                
-                let decoder = JSONDecoder()
-                
-                guard (try? decoder.decode(Bool.self, from: dataResponse.data!)) != nil
-                else { print("에러어엉")
-                    return
-                }
-                
                 completion()
             case .failure(let error):
                 print(error.localizedDescription)
