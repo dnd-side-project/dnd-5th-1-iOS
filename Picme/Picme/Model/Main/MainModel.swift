@@ -9,7 +9,7 @@ import Foundation
 
 struct MainModel: Codable {
     let postId: String
-    let deadline: String?
+    let deadline: String
     let title: String
     let user: User
     // let images: [Images]?
@@ -36,7 +36,7 @@ struct User: Codable {
 }
 
 struct Images: Codable {
-    let thumbnailUrl: String?
+    let thumbnailUrl: String
     
     enum CodingKeys: String, CodingKey {
         case thumbnailUrl

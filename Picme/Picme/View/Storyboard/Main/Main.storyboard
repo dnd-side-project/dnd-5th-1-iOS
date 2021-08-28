@@ -183,8 +183,9 @@
                                                     </constraints>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                            <integer key="value" value="14"/>
+                                                            <integer key="value" value="12"/>
                                                         </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                             </subviews>
@@ -192,7 +193,7 @@
                                                 <constraint firstItem="liA-ma-dUg" firstAttribute="centerY" secondItem="Mvv-OA-9oz" secondAttribute="centerY" id="172-B2-7gB"/>
                                                 <constraint firstItem="Mvv-OA-9oz" firstAttribute="top" secondItem="yYn-pn-djr" secondAttribute="top" constant="12" id="19U-lO-rR7"/>
                                                 <constraint firstItem="ltH-kV-oc5" firstAttribute="leading" secondItem="yYn-pn-djr" secondAttribute="leading" id="508-kI-uqI"/>
-                                                <constraint firstItem="zZa-z8-hjs" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="liA-ma-dUg" secondAttribute="trailing" constant="60" id="Cmf-Ra-TUS"/>
+                                                <constraint firstItem="zZa-z8-hjs" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="liA-ma-dUg" secondAttribute="trailing" constant="20" id="Cmf-Ra-TUS"/>
                                                 <constraint firstItem="y1l-K0-83N" firstAttribute="leading" secondItem="yYn-pn-djr" secondAttribute="leading" constant="20" id="Elg-Vz-9JO"/>
                                                 <constraint firstItem="y1l-K0-83N" firstAttribute="top" secondItem="Mvv-OA-9oz" secondAttribute="bottom" constant="12" id="GRh-X7-3qf"/>
                                                 <constraint firstItem="Mvv-OA-9oz" firstAttribute="leading" secondItem="yYn-pn-djr" secondAttribute="leading" constant="20" id="RhV-la-LRl"/>
@@ -218,8 +219,8 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uMI-DR-1KM">
-                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                            <view hidden="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uMI-DR-1KM">
+                                <rect key="frame" x="0.0" y="511" width="414" height="303"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="hmm" translatesAutoresizingMaskIntoConstraints="NO" id="7fd-ST-BGc">
                                         <rect key="frame" x="183" y="208" width="48" height="48"/>
@@ -598,10 +599,10 @@
                                 </subviews>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vTV-am-Nmy" userLabel="Timer View">
-                                <rect key="frame" x="304" y="112" width="90" height="24"/>
+                                <rect key="frame" x="304.5" y="112" width="89.5" height="24"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="5.2999999999999998" translatesAutoresizingMaskIntoConstraints="NO" id="Pqd-QZ-YWN" userLabel="Timer Stack View">
-                                        <rect key="frame" x="9" y="3.5" width="72" height="16"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Pqd-QZ-YWN" userLabel="Timer Stack View">
+                                        <rect key="frame" x="9" y="3.5" width="71.5" height="16"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="time" translatesAutoresizingMaskIntoConstraints="NO" id="7yz-dX-7Ep">
                                                 <rect key="frame" x="0.0" y="0.0" width="16" height="16"/>
@@ -612,7 +613,7 @@
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zv1-Px-PD4">
-                                                <rect key="frame" x="21.5" y="0.0" width="50.5" height="16"/>
+                                                <rect key="frame" x="21" y="0.0" width="50.5" height="16"/>
                                                 <fontDescription key="fontDescription" name="NotoSansCJKkr-Bold" family="Noto Sans CJK KR" pointSize="12"/>
                                                 <color key="textColor" red="0.92156862750000001" green="0.28627450980000002" blue="0.60392156860000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -632,8 +633,9 @@
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="14"/>
+                                        <integer key="value" value="12"/>
                                     </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lbn-9o-aCP" userLabel="Pick View">

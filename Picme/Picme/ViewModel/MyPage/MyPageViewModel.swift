@@ -16,9 +16,22 @@ protocol LogOutProtocol: AnyObject {
 
 final class MyPageViewModel {
     
+    // MARK: - Properties
+    
+    var myPageModel: Dynamic<MyPageModel> = Dynamic(MyPageModel(createdCount: 0, attendedCount: 0))
+    
+    var service: MyPageServiceProtocol?
+    var onErrorHandling: ((APIError?) -> Void)?
+    
     weak var logOutDelegate: LogOutProtocol?
     
     let loginUserInfo = LoginUser.shared
+    
+    // MARK: - Initializer
+    
+    init(service: MyPageServiceProtocol) {
+        self.service = service
+    }
     
     func logOutAction(from kind: String?) {
         
@@ -26,12 +39,10 @@ final class MyPageViewModel {
         
         switch kind {
         case "Kakao":
-            
             UserApi.shared.logout { [weak self] error in
                 if let err = error {
                     print(err.localizedDescription)
                 } else {
-                    
                     print("Kakao Log Out Success")
                     
                     self?.userInfoRemove()
@@ -39,7 +50,6 @@ final class MyPageViewModel {
                     
                 }
             }
-            
         case "Apple":
             // 키체인 제거
             if KeyChainModel.shared.deleteUserinfo() {

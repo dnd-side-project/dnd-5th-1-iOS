@@ -45,7 +45,7 @@ class MainTableViewCell: UITableViewCell {
             mainParticipantsLabel.text = "\(object.participantsNum)명 참여중"
             mainTitleLabel.text = object.title
             // imageData = object.images
-            setTimer(endTime: "2021-08-22T15:05:59.703Z")
+            setTimer(endTime: object.deadline)
             postId = object.postId
         }
     }
@@ -58,7 +58,7 @@ class MainTableViewCell: UITableViewCell {
                 
                 // 마감 시간 Date 형식으로 변환
                 let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+                dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
                 let convertDate = dateFormatter.date(from: endTime)
                 
                 // 현재 시간 적용하기 - 시간 + 9시간
@@ -84,6 +84,7 @@ class MainTableViewCell: UITableViewCell {
                 let minutes = Int(remainSeconds) / 60 % 60
                 let seconds = Int(remainSeconds) % 60
                 
+                self?.mainClockImageView.isHidden = false
                 self?.mainDeadlineLabel.text = String(format: "%02i:%02i:%02i", hours, minutes, seconds)
             }
         }
@@ -99,6 +100,8 @@ class MainTableViewCell: UITableViewCell {
         super.awakeFromNib()
         
         mainProfileImageView.circular() // 프로필 이미지 원형
+        
+        mainCollectionView.showsHorizontalScrollIndicator = false
     }
     
 }
@@ -109,9 +112,8 @@ extension MainTableViewCell: UICollectionViewDelegate, UICollectionViewDataSourc
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 //        let count = imageData?.count ?? 0
 //
-//        return count+1
-        
-        return imageData.count
+//        return count + 1
+        return 3
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -123,11 +125,11 @@ extension MainTableViewCell: UICollectionViewDelegate, UICollectionViewDataSourc
 //                cell.mainPhotoImageView.tintColor = .solidColor(.solid12)
 //                cell.stackView.isHidden = false
 //            } else {
-//                cell.mainPhotoImageView.kf.setImage(with: URL(string: (imageData[indexPath.row].thumbnailUrl!)), placeholder: #imageLiteral(resourceName: "defalutImage"))
+//                cell.mainPhotoImageView.kf.setImage(with: URL(string: (imageData[indexPath.row].thumbnailUrl)), placeholder: #imageLiteral(resourceName: "defalutImage"))
 //                cell.stackView.isHidden = true
 //            }
 //        }
-        
+   
         cell.mainPhotoImageView.image = imageData[indexPath.row]
         
         return cell
