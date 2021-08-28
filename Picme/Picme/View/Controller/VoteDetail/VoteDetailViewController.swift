@@ -261,7 +261,7 @@ extension VoteDetailViewController: UICollectionViewDelegate {
         detailPageControl.currentPage = currentPage
         
         // 투표하지 않은 경우 (Pick View)
-        if !viewModel.voteDetailModel.value.isVoted { // 투표를 하지 않아 이미지를 선택해야할 경우 (Pick View)
+        if !isSameNickname && !viewModel.voteDetailModel.value.isVoted { // 투표를 하지 않아 이미지를 선택해야할 경우 (Pick View)
             if isSelect { // 선택한 이미지가 있을 경우
                 if currentPage == selectImageIndex { // 현재 이미지 인덱스 = 선택된 이미지 인덱스
                     if !isPick {
