@@ -14,7 +14,8 @@ final class MyPageViewController: BaseViewContoller {
     
     @IBOutlet weak var logOutButton: UIButton!
     @IBOutlet weak var allVoteListButton: UIButton!
-    @IBOutlet weak var myBedgeButton: UIButton!
+    @IBOutlet weak var guideButton: UIButton!
+    @IBOutlet weak var versionLabel: UILabel!
     @IBOutlet weak var settingButton: UIButton!
     
     @IBOutlet weak var userIdentifierLabel: UILabel!
@@ -67,11 +68,10 @@ final class MyPageViewController: BaseViewContoller {
     
     func setupButtons() {
         allVoteListButton.tag = 1
-        myBedgeButton.tag = 2
         settingButton.tag = 3
         
         allVoteListButton.addTarget(self, action: #selector(showAlertView), for: UIControl.Event.touchUpInside)
-        myBedgeButton.addTarget(self, action: #selector(showAlertView), for: UIControl.Event.touchUpInside)
+
         settingButton.addTarget(self, action: #selector(showAlertView), for: UIControl.Event.touchUpInside)
     }
     
