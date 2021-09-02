@@ -33,6 +33,8 @@ class MainViewModel {
         }
         
         service.getMainList(page: currentPage, completion: { [weak self] (response) in
+            print("* get Main List")
+            
             DispatchQueue.main.async {
                 switch response {
                 case .success(let data):
