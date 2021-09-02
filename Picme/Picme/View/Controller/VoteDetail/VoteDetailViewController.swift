@@ -188,11 +188,13 @@ extension CarouselDatasource: UICollectionViewDataSource {
             cell.rankingLabel.text = "\(voteResultModel[indexPath.row].rank)위"
             
             if cell.percentLabel.text == "0.0%" {
-                cell.viewWidthConstraint.constant = 301
+                cell.viewWidthConstraint.constant = 299
                 cell.resultColorView.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.5)
             } else {
-                let size = 239 * 0.01 * (voteResultModel[indexPath.row].percent) + 62
+                let size = 239 * 0.01 * (voteResultModel[indexPath.row].percent) + 60
                 cell.viewWidthConstraint.constant = CGFloat(size)
+                print("image size : \(cell.detailPhotoImageView.frame.width)")
+                print("resut size : \(size)")
                 
                 // 1위 이미지일 경우
                 if firstRankSet.contains(indexPath.row) {
@@ -212,7 +214,7 @@ extension CarouselDatasource: UICollectionViewDataSource {
             if isSelect {
                 // 투표는 안했지만 선택한 이미지가 있는 경우 -> 핑크뷰 + 다이아몬드 이미지 활성화
                 if indexPath.item == selectImageIndex {
-                    cell.viewWidthConstraint.constant = 301 // 300 말고 301로 해야 모서리가 꽉 채워짐
+                    cell.viewWidthConstraint.constant = 299
                     cell.diamondsImageView.isHidden = false
                 } else { // 나머지 이미지는 그대로
                     cell.viewWidthConstraint.constant = 0

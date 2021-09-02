@@ -750,7 +750,7 @@
                                                             </userDefinedRuntimeAttributes>
                                                         </imageView>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0pu-gY-xby">
-                                                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="280"/>
+                                                            <rect key="frame" x="-9.5" y="0.0" width="0.0" height="280"/>
                                                             <color key="backgroundColor" red="0.92156862745098034" green="0.41176470588235292" blue="0.6588235294117647" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" id="FU1-Zg-R3B"/>
@@ -820,10 +820,10 @@
                                                         <constraint firstItem="0pu-gY-xby" firstAttribute="top" secondItem="fkq-8O-qEk" secondAttribute="top" id="QHW-Vb-odp"/>
                                                         <constraint firstItem="IdT-mW-AiB" firstAttribute="centerY" secondItem="fkq-8O-qEk" secondAttribute="centerY" id="TFv-EC-8Z2"/>
                                                         <constraint firstItem="egU-Zk-Ngg" firstAttribute="centerY" secondItem="fkq-8O-qEk" secondAttribute="centerY" id="THu-po-RHi"/>
-                                                        <constraint firstItem="0pu-gY-xby" firstAttribute="leading" secondItem="fkq-8O-qEk" secondAttribute="leading" id="WzX-G5-aUt"/>
-                                                        <constraint firstItem="vw8-NU-Xdo" firstAttribute="top" secondItem="fkq-8O-qEk" secondAttribute="top" constant="16" id="XJd-bL-NQZ"/>
+                                                        <constraint firstItem="0pu-gY-xby" firstAttribute="leading" secondItem="IdT-mW-AiB" secondAttribute="leading" id="WzX-G5-aUt"/>
+                                                        <constraint firstItem="vw8-NU-Xdo" firstAttribute="top" secondItem="IdT-mW-AiB" secondAttribute="top" constant="25.5" id="XJd-bL-NQZ"/>
                                                         <constraint firstItem="IdT-mW-AiB" firstAttribute="centerX" secondItem="fkq-8O-qEk" secondAttribute="centerX" id="sV6-uu-PYI"/>
-                                                        <constraint firstItem="vw8-NU-Xdo" firstAttribute="leading" secondItem="fkq-8O-qEk" secondAttribute="leading" constant="12" id="zQx-kc-dZN"/>
+                                                        <constraint firstItem="vw8-NU-Xdo" firstAttribute="leading" secondItem="IdT-mW-AiB" secondAttribute="leading" constant="21.5" id="zQx-kc-dZN"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
