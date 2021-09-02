@@ -527,7 +527,7 @@ extension VoteDetailViewController: AlertViewActionDelegate {
     }
     
     func reportTapped() {
-        
+        Toast.show(using: .report, controller: self)
     }
     
     // MARK: - Get Vote Result
