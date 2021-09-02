@@ -118,7 +118,8 @@ class VoteDetailViewController: BaseViewContoller {
             
             if response.postNickname != "" {
                 self.detailNicknameLabel.text = response.postNickname
-                self.detailProfileImageView.kf.setImage(with: URL(string: response.postProfileUrl), placeholder: #imageLiteral(resourceName: "progressCircle"))
+                // self.detailProfileImageView.kf.setImage(with: URL(string: response.postProfileUrl), placeholder: #imageLiteral(resourceName: "progressCircle"))
+                self.detailProfileImageView.image = UIImage.profileImage(response.postProfileUrl)
                 self.detailParticipantsLabel.text = "\(response.participantsNum)명 참여중"
                 self.detailTitleLabel.text = response.title
                 self.detailPageLabel.text = "\(self.currentPage)/\(response.images.count)"

@@ -7,22 +7,18 @@
 
 import UIKit
 
-enum ProfileImage {
-    case imagePink
-    case imageOrange
-    case imageGreen
-}
-
 extension UIImage {
     
-    static func profileImage(_ image: ProfileImage) -> UIImage {
-        switch image {
-        case .imagePink:
+    static func profileImage(_ index: String) -> UIImage {
+        switch index {
+        case "1":
             return #imageLiteral(resourceName: "profilePink")
-        case .imageOrange:
+        case "2":
             return #imageLiteral(resourceName: "profileOrange")
-        case .imageGreen:
+        case "3":
             return #imageLiteral(resourceName: "profileGreen")
+        default:
+            return #imageLiteral(resourceName: "profilePink")
         }
     }
     

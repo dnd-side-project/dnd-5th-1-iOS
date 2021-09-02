@@ -46,7 +46,8 @@ final class MyPageViewController: BaseViewContoller {
         if let userNickName = loginUserInfo.userNickname,
            let profileImageUrl = loginUserInfo.userProfileImageUrl {
             userIdentifierLabel.text = userNickName
-            userImage.kf.setImage(with: URL(string: profileImageUrl), placeholder: #imageLiteral(resourceName: "progressCircle"))
+            // userImage.kf.setImage(with: URL(string: profileImageUrl), placeholder: #imageLiteral(resourceName: "progressCircle"))
+            userImage.image = UIImage.profileImage(profileImageUrl)
         } else {
             userIdentifierLabel.text = "로그인을 해주세요."
             userImage.image = #imageLiteral(resourceName: "progressCircle")
