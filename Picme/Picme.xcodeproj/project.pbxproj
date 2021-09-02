@@ -94,6 +94,7 @@
 		D1F7E2C726E10B92002E95F4 /* TermsAndPoliciesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F7E2C626E10B92002E95F4 /* TermsAndPoliciesViewController.swift */; };
 		D1F7E2C926E10BA9002E95F4 /* PrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F7E2C826E10BA9002E95F4 /* PrivacyPolicyViewController.swift */; };
 		D1F7E2CB26E11091002E95F4 /* Extension+UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F7E2CA26E11091002E95F4 /* Extension+UIButton.swift */; };
+		D1F7E2CF26E12192002E95F4 /* Extension+UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F7E2CE26E12192002E95F4 /* Extension+UIImage.swift */; };
 		FFAF1D14C850C640DBD39898 /* Pods_Picme_PicmeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99CB56FAF51F7B3577E0BB1C /* Pods_Picme_PicmeUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -213,6 +214,7 @@
 		D1F7E2C626E10B92002E95F4 /* TermsAndPoliciesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndPoliciesViewController.swift; sourceTree = "<group>"; };
 		D1F7E2C826E10BA9002E95F4 /* PrivacyPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewController.swift; sourceTree = "<group>"; };
 		D1F7E2CA26E11091002E95F4 /* Extension+UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIButton.swift"; sourceTree = "<group>"; };
+		D1F7E2CE26E12192002E95F4 /* Extension+UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIImage.swift"; sourceTree = "<group>"; };
 		FF2C64C50A6163DFE30A0F3B /* Pods-Picme.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Picme.debug.xcconfig"; path = "Target Support Files/Pods-Picme/Pods-Picme.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -527,6 +529,7 @@
 				D1F173F826C86A0A0069C42E /* Extension+UIView.swift */,
 				D12B119926CD057B00777498 /* Extension+UIViewController.swift */,
 				D1F7E2CA26E11091002E95F4 /* Extension+UIButton.swift */,
+				D1F7E2CE26E12192002E95F4 /* Extension+UIImage.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1157,6 +1160,7 @@
 				A9E6DD6D26C89064006155F3 /* ContentViewModel.swift in Sources */,
 				A9E6DD7C26C9F855006155F3 /* CreateVoteService.swift in Sources */,
 				D1F173F926C86A0A0069C42E /* Extension+UIView.swift in Sources */,
+				D1F7E2CF26E12192002E95F4 /* Extension+UIImage.swift in Sources */,
 				D1657FBB26D9749700A12F9E /* MyPageService.swift in Sources */,
 				A9E6DD7626C8E8F4006155F3 /* MyPageViewController.swift in Sources */,
 				A9C12B82269AB94B00729A74 /* Extension+UIFont.swift in Sources */,
