@@ -533,7 +533,7 @@ extension VoteDetailViewController: AlertViewActionDelegate {
         viewModel.service?.deletePost(postId: postId, completion: {
             // self.navigationController?.popViewController(animated: true)
            
-            let time = DispatchTime.now() + .seconds(1)
+            let time = DispatchTime.now() + 0.5
             DispatchQueue.main.asyncAfter(deadline: time) {
                 self.deleteView.isHidden = false
                 Toast.show(using: .remove, controller: self)
