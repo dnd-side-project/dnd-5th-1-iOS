@@ -91,6 +91,9 @@
 		D1F173F526C867560069C42E /* AlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1F173F426C867560069C42E /* AlertView.xib */; };
 		D1F173F726C8675C0069C42E /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F173F626C8675C0069C42E /* AlertView.swift */; };
 		D1F173F926C86A0A0069C42E /* Extension+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F173F826C86A0A0069C42E /* Extension+UIView.swift */; };
+		D1F7E2C726E10B92002E95F4 /* TermsAndPoliciesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F7E2C626E10B92002E95F4 /* TermsAndPoliciesViewController.swift */; };
+		D1F7E2C926E10BA9002E95F4 /* PrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F7E2C826E10BA9002E95F4 /* PrivacyPolicyViewController.swift */; };
+		D1F7E2CB26E11091002E95F4 /* Extension+UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F7E2CA26E11091002E95F4 /* Extension+UIButton.swift */; };
 		FFAF1D14C850C640DBD39898 /* Pods_Picme_PicmeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99CB56FAF51F7B3577E0BB1C /* Pods_Picme_PicmeUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -207,6 +210,9 @@
 		D1F173F426C867560069C42E /* AlertView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlertView.xib; sourceTree = "<group>"; };
 		D1F173F626C8675C0069C42E /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 		D1F173F826C86A0A0069C42E /* Extension+UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIView.swift"; sourceTree = "<group>"; };
+		D1F7E2C626E10B92002E95F4 /* TermsAndPoliciesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndPoliciesViewController.swift; sourceTree = "<group>"; };
+		D1F7E2C826E10BA9002E95F4 /* PrivacyPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewController.swift; sourceTree = "<group>"; };
+		D1F7E2CA26E11091002E95F4 /* Extension+UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIButton.swift"; sourceTree = "<group>"; };
 		FF2C64C50A6163DFE30A0F3B /* Pods-Picme.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Picme.debug.xcconfig"; path = "Target Support Files/Pods-Picme/Pods-Picme.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -520,6 +526,7 @@
 				A9322EEA26BFD81A0061EF35 /* Extension+UIAlert.swift */,
 				D1F173F826C86A0A0069C42E /* Extension+UIView.swift */,
 				D12B119926CD057B00777498 /* Extension+UIViewController.swift */,
+				D1F7E2CA26E11091002E95F4 /* Extension+UIButton.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -611,6 +618,8 @@
 			isa = PBXGroup;
 			children = (
 				A9E6DD7526C8E8F4006155F3 /* MyPageViewController.swift */,
+				D1F7E2C626E10B92002E95F4 /* TermsAndPoliciesViewController.swift */,
+				D1F7E2C826E10BA9002E95F4 /* PrivacyPolicyViewController.swift */,
 			);
 			path = MyPage;
 			sourceTree = "<group>";
@@ -1119,12 +1128,15 @@
 				D180456826B3E2850053430E /* MainTableViewCell.swift in Sources */,
 				A91F57D426B7B261006F20AD /* OnboardingViewController.swift in Sources */,
 				A95CD34E269DA66C002CCCA8 /* Protocol+LoginState.swift in Sources */,
+				D1F7E2C926E10BA9002E95F4 /* PrivacyPolicyViewController.swift in Sources */,
 				D1B51C9B26BEAD2C00928FF3 /* GenericDataSource.swift in Sources */,
 				A9C12B87269C137600729A74 /* Dynamic.swift in Sources */,
 				D1B51C9626BE9EA500928FF3 /* VoteDetailCollectionViewCell.swift in Sources */,
+				D1F7E2C726E10B92002E95F4 /* TermsAndPoliciesViewController.swift in Sources */,
 				A95CD35E269EFBC8002CCCA8 /* LoginAPICenter.swift in Sources */,
 				A9322EF726C0C38F0061EF35 /* OnePickViewController.swift in Sources */,
 				A9E6DD8D26CCE206006155F3 /* ToastView.swift in Sources */,
+				D1F7E2CB26E11091002E95F4 /* Extension+UIButton.swift in Sources */,
 				D1B51E2526C302E800928FF3 /* VoteDetailListModel.swift in Sources */,
 				A9322EFC26C0D2670061EF35 /* ContentViewController.swift in Sources */,
 				D180456A26B3E2940053430E /* MainCollectionViewCell.swift in Sources */,
