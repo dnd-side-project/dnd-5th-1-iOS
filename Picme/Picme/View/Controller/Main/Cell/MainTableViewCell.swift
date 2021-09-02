@@ -32,6 +32,8 @@ class MainTableViewCell: UITableViewCell {
     var imageData: [Images]?
     // var imageData = [#imageLiteral(resourceName: "defalutImage"), #imageLiteral(resourceName: "defalutImage"), #imageLiteral(resourceName: "defalutImage")]
     var postId: String!
+    
+    // Timer
     var timer = Timer()
     
     deinit {
@@ -102,6 +104,12 @@ class MainTableViewCell: UITableViewCell {
         mainProfileImageView.circular() // 프로필 이미지 원형
         
         mainCollectionView.showsHorizontalScrollIndicator = false
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+
+        timer.invalidate()
     }
     
 }
