@@ -54,8 +54,8 @@ class MainViewController: BaseViewContoller, TouchDelegate {
         
         print("* main view will appear")
         
-        // 서버에 이미지 업로드되는 시간 때문에 delay줌 (안주면 서버 네트워크 에러남 / 0.5가 최적)
-        let time = DispatchTime.now() + 0.5
+        // 서버에 이미지 업로드되는 시간 때문에 delay줌 (안주면 서버 네트워크 에러남 / 사진 2개 최소일 땐 0.5가 최적)
+        let time = DispatchTime.now() + 1.5
         DispatchQueue.main.asyncAfter(deadline: time) {
             self.bindViewModel()
         }
