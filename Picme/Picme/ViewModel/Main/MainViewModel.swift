@@ -16,7 +16,7 @@ class MainViewModel {
     var onErrorHandling: ((APIError?) -> Void)?
     
     var currentPage = 1
-    
+  
     // MARK: - Initializer
     
     init(service: MainServiceProtocol, dataSource: GenericDataSource<MainModel>?) {
@@ -37,7 +37,10 @@ class MainViewModel {
                 switch response {
                 case .success(let data):
                     if let mainData = data as? [MainModel] {
+                        // self?.currentPage += 1
                         self?.dataSource?.data.value = mainData
+                        // self?.dataSource?.data.value.append(contentsOf: mainData)
+                   
                     }
                 case .requestErr(let message):
                     print("requestERR", message)

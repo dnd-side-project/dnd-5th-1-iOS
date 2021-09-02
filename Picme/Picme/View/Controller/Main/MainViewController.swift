@@ -13,7 +13,7 @@ protocol TouchDelegate: AnyObject {
 }
 
 class MainViewController: BaseViewContoller, TouchDelegate {
-
+    
     // MARK: - IBOutlets
     
     @IBOutlet weak var mainTableView: UITableView!
@@ -42,7 +42,7 @@ class MainViewController: BaseViewContoller, TouchDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("viewdidload")
+        print("* main view did load")
         
         setupTabBar()
         
@@ -51,6 +51,8 @@ class MainViewController: BaseViewContoller, TouchDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        print("* main view will appear")
         
         bindViewModel()
     }
@@ -75,10 +77,14 @@ class MainViewController: BaseViewContoller, TouchDelegate {
     // MARK: - Bind View Model
     
     private func bindViewModel() {
+        
+        print("* main bind view model")
+    
         mainTableView.dataSource = dataSource
         dataSource.delegate = self
         
         dataSource.data.addAndNotify(observer: self) { [weak self] _ in
+            print("* main show Table View")
             self?.showTableView()
         }
         
@@ -100,6 +106,7 @@ class MainViewController: BaseViewContoller, TouchDelegate {
                     self.emptyView.isHidden = true
                     self.mainTableView.isHidden = false
                     self.mainTableView.reloadData()
+                    print("* main reload data")
                 }
             }
         }

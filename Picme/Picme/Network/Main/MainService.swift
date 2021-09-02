@@ -53,6 +53,9 @@ class MainService: MainServiceProtocol {
         guard let decodedData = try? decoder.decode(MainListModel.self, from: data)
         else { return .pathErr }
         
+        print("* main server success")
+        print(decodedData.mainList)
+        
         return .success(decodedData.mainList)
     }
     

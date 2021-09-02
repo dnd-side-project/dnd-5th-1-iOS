@@ -1121,10 +1121,34 @@
                                     <constraint firstAttribute="height" constant="100" id="lj2-Kn-ZpA"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VvQ-sh-e3K">
+                                <rect key="frame" x="0.0" y="88" width="414" height="808"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="u1i-50-UtO">
+                                        <rect key="frame" x="101.5" y="352" width="211.5" height="103.5"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="trash" translatesAutoresizingMaskIntoConstraints="NO" id="EpZ-By-SfV">
+                                                <rect key="frame" x="0.0" y="0.0" width="211.5" height="48"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="EpZ-By-SfV" secondAttribute="height" multiplier="211:48" id="0Ii-Qe-IwR"/>
+                                                </constraints>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="게시글이 삭제되어 볼 수 없어요. 홈으로 돌아가주세요." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="29Q-7Z-PQY">
+                                                <rect key="frame" x="0.0" y="56" width="211.5" height="47.5"/>
+                                                <fontDescription key="fontDescription" name="NotoSansCJKkr-Bold" family="Noto Sans CJK KR" pointSize="16"/>
+                                                <color key="textColor" red="0.30196078431372547" green="0.30980392156862746" blue="0.32156862745098036" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vlC-pT-r26"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="VvQ-sh-e3K" firstAttribute="height" secondItem="vlC-pT-r26" secondAttribute="height" multiplier="0.987775" id="1Ne-kV-ZuF"/>
                             <constraint firstItem="vlC-pT-r26" firstAttribute="trailing" secondItem="vTV-am-Nmy" secondAttribute="trailing" constant="20" id="7VO-de-PwA"/>
                             <constraint firstItem="cEW-AT-Rkn" firstAttribute="leading" secondItem="vlC-pT-r26" secondAttribute="leading" constant="20" id="8Pu-4M-kp3"/>
                             <constraint firstItem="Khk-tx-YN4" firstAttribute="leading" secondItem="Lge-DT-c9U" secondAttribute="trailing" constant="8" id="J1j-xy-zI8"/>
@@ -1134,8 +1158,11 @@
                             <constraint firstItem="cEW-AT-Rkn" firstAttribute="top" secondItem="Lge-DT-c9U" secondAttribute="bottom" constant="32" id="Okn-X7-2QR"/>
                             <constraint firstItem="nM7-Ii-Esh" firstAttribute="trailing" secondItem="vlC-pT-r26" secondAttribute="trailing" id="PFY-lG-Ugg"/>
                             <constraint firstItem="cEW-AT-Rkn" firstAttribute="centerX" secondItem="vlC-pT-r26" secondAttribute="centerX" id="PUE-M0-BFI"/>
+                            <constraint firstItem="VvQ-sh-e3K" firstAttribute="leading" secondItem="vlC-pT-r26" secondAttribute="leading" id="Q1c-Zs-Psn"/>
                             <constraint firstItem="vTV-am-Nmy" firstAttribute="top" secondItem="Lge-DT-c9U" secondAttribute="top" id="RMn-bd-El6"/>
+                            <constraint firstItem="VvQ-sh-e3K" firstAttribute="trailing" secondItem="vlC-pT-r26" secondAttribute="trailing" id="Sp4-6P-I56"/>
                             <constraint firstItem="Lge-DT-c9U" firstAttribute="leading" secondItem="vlC-pT-r26" secondAttribute="leading" constant="20" id="UH4-hW-ylF"/>
+                            <constraint firstItem="VvQ-sh-e3K" firstAttribute="width" secondItem="vlC-pT-r26" secondAttribute="width" id="UII-nW-49x"/>
                             <constraint firstItem="T04-YG-drm" firstAttribute="trailing" secondItem="vlC-pT-r26" secondAttribute="trailing" id="Vff-me-SsA"/>
                             <constraint firstItem="T04-YG-drm" firstAttribute="width" secondItem="idd-lq-4rt" secondAttribute="width" id="a6a-hC-afN"/>
                             <constraint firstItem="Lge-DT-c9U" firstAttribute="top" secondItem="4oQ-Hg-wQt" secondAttribute="bottom" constant="24" id="ecY-Lu-eaQ"/>
@@ -1143,7 +1170,9 @@
                             <constraint firstItem="vTV-am-Nmy" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Khk-tx-YN4" secondAttribute="trailing" constant="60" id="fUH-jh-GRf"/>
                             <constraint firstItem="Lbn-9o-aCP" firstAttribute="top" secondItem="T04-YG-drm" secondAttribute="bottom" id="gQN-uH-ZoX"/>
                             <constraint firstItem="T04-YG-drm" firstAttribute="leading" secondItem="vlC-pT-r26" secondAttribute="leading" id="gv3-gd-jI6"/>
+                            <constraint firstItem="VvQ-sh-e3K" firstAttribute="top" secondItem="4oQ-Hg-wQt" secondAttribute="bottom" id="iBL-ic-HBM"/>
                             <constraint firstItem="nM7-Ii-Esh" firstAttribute="leading" secondItem="vlC-pT-r26" secondAttribute="leading" id="n5w-OV-ioU"/>
+                            <constraint firstAttribute="bottom" secondItem="VvQ-sh-e3K" secondAttribute="bottom" id="nDr-P4-5ya"/>
                             <constraint firstItem="Khk-tx-YN4" firstAttribute="centerY" secondItem="Lge-DT-c9U" secondAttribute="centerY" id="oeF-LL-oJl"/>
                             <constraint firstItem="4oQ-Hg-wQt" firstAttribute="trailing" secondItem="vlC-pT-r26" secondAttribute="trailing" id="sQf-gh-PqZ"/>
                             <constraint firstItem="Lbn-9o-aCP" firstAttribute="trailing" secondItem="vlC-pT-r26" secondAttribute="trailing" id="sRs-I8-cY1"/>
@@ -1163,6 +1192,7 @@
                         <outlet property="compositionHeightConstraint" destination="uOx-LE-VgW" id="oc3-n9-DK6"/>
                         <outlet property="compositionPercentLabel" destination="s5c-aI-h4P" id="1j8-uM-JYC"/>
                         <outlet property="compositionResultView" destination="MxF-mP-9NI" id="tRa-SE-gFa"/>
+                        <outlet property="deleteView" destination="VvQ-sh-e3K" id="dsP-TB-fd1"/>
                         <outlet property="detailClockImageView" destination="7yz-dX-7Ep" id="bj7-gT-6aA"/>
                         <outlet property="detailDeadlineLabel" destination="zv1-Px-PD4" id="BXp-M2-fhu"/>
                         <outlet property="detailNicknameLabel" destination="xcI-fx-oFf" id="SGV-e6-KQN"/>
@@ -1280,6 +1310,7 @@
         <image name="rankingBox" width="35" height="26"/>
         <image name="sensitivity" width="24" height="24"/>
         <image name="time" width="16" height="16"/>
+        <image name="trash" width="48" height="48"/>
         <image name="trashcan" width="17" height="21"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

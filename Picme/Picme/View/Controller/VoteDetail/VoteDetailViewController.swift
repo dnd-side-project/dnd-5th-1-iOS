@@ -61,6 +61,9 @@ class VoteDetailViewController: BaseViewContoller {
     var resultViewArray = [UIView]()
     var heightConstraintArray = [NSLayoutConstraint]()
     
+    // Delete View
+    @IBOutlet weak var deleteView: UIView!
+    
     // MARK: - Properties
     
     var selectedImageId: String? // 실제 선택된 이미지의 ID 값
@@ -96,7 +99,6 @@ class VoteDetailViewController: BaseViewContoller {
         super.viewDidLoad()
         
         setConfiguration()
-        
         bindViewModel()
     }
     
@@ -459,6 +461,8 @@ extension VoteDetailViewController: AlertViewActionDelegate {
     // MARK: - Back Button Action
     
     @objc func backButtonClicked(_ sender: UIButton) {
+        print("* vote delete back button click")
+        
         self.navigationController?.popViewController(animated: true)
     }
     
@@ -485,6 +489,11 @@ extension VoteDetailViewController: AlertViewActionDelegate {
             
             viewModel.service?.createVote(postId: postId, imageId: selectedImageId!, category: category, completion: {
                 print("vote")
+                
+                let time = DispatchTime.now() + .seconds(1)
+                DispatchQueue.main.asyncAfter(deadline: time) {
+                    
+                }
                 
                 self.bindViewModel()
             })
@@ -522,7 +531,13 @@ extension VoteDetailViewController: AlertViewActionDelegate {
     
     func listRemoveTapped() {
         viewModel.service?.deletePost(postId: postId, completion: {
-            self.navigationController?.popViewController(animated: true)
+            // self.navigationController?.popViewController(animated: true)
+           
+            let time = DispatchTime.now() + .seconds(1)
+            DispatchQueue.main.asyncAfter(deadline: time) {
+                self.deleteView.isHidden = false
+                Toast.show(using: .remove, controller: self)
+            }
         })
     }
     
