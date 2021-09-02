@@ -55,11 +55,21 @@ class VoteDetailViewController: BaseViewContoller {
     @IBOutlet weak var lightHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var colorHeightConstraint: NSLayoutConstraint!
     
+    // Feedback Button Label
+    @IBOutlet weak var sensitivityLabel: UILabel!
+    @IBOutlet weak var compositionLabel: UILabel!
+    @IBOutlet weak var lightLabel: UILabel!
+    @IBOutlet weak var colorLabel: UILabel!
+    
     // Feedback View Array
     var buttonArray = [UIButton]()
     var percentLabelArray = [UILabel]()
     var resultViewArray = [UIView]()
     var heightConstraintArray = [NSLayoutConstraint]()
+    var buttonLabelArray = [UILabel]()
+    
+    // Delete View
+    @IBOutlet weak var deleteView: UIView!
     
     // MARK: - Properties
     
@@ -96,7 +106,7 @@ class VoteDetailViewController: BaseViewContoller {
         super.viewDidLoad()
         
         setConfiguration()
-        
+        setupButton()
         bindViewModel()
     }
     
@@ -105,10 +115,11 @@ class VoteDetailViewController: BaseViewContoller {
     private func bindViewModel() {
         
         viewModel.voteDetailModel.bindAndFire { (response) in
-
+            
             if response.postNickname != "" {
                 self.detailNicknameLabel.text = response.postNickname
-                self.detailProfileImageView.kf.setImage(with: URL(string: response.postProfileUrl), placeholder: #imageLiteral(resourceName: "progressCircle"))
+                // self.detailProfileImageView.kf.setImage(with: URL(string: response.postProfileUrl), placeholder: #imageLiteral(resourceName: "progressCircle"))
+                self.detailProfileImageView.image = UIImage.profileImage(response.postProfileUrl)
                 self.detailParticipantsLabel.text = "\(response.participantsNum)명 참여중"
                 self.detailTitleLabel.text = response.title
                 self.detailPageLabel.text = "\(self.currentPage)/\(response.images.count)"
@@ -134,7 +145,6 @@ class VoteDetailViewController: BaseViewContoller {
                     self.getVoteResult()
                 }
                 
-                self.setupButton()
                 self.setupView() // 결과값 계산 후 Feedback View 퍼센트 초기화 해야함
                 
                 self.carouselCollectionView.reloadData()
@@ -150,6 +160,7 @@ class VoteDetailViewController: BaseViewContoller {
         percentLabelArray = [sensitivityPercentLabel, compositionPercentLabel, lightPercentLabel, colorPercentLabel]
         resultViewArray = [sensitivityResultView, compositionResultView, lightResultView, colorResultView]
         heightConstraintArray = [sensitivityHeightConstraint, compositionHeightConstraint, lightHeightConstraint, colorHeightConstraint]
+        buttonLabelArray = [sensitivityLabel, compositionLabel, lightLabel, colorLabel]
     }
     
 }
@@ -188,11 +199,13 @@ extension CarouselDatasource: UICollectionViewDataSource {
             cell.rankingLabel.text = "\(voteResultModel[indexPath.row].rank)위"
             
             if cell.percentLabel.text == "0.0%" {
-                cell.viewWidthConstraint.constant = 301
+                cell.viewWidthConstraint.constant = 299
                 cell.resultColorView.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.5)
             } else {
-                let size = 239 * 0.01 * (voteResultModel[indexPath.row].percent) + 62
+                let size = 239 * 0.01 * (voteResultModel[indexPath.row].percent) + 60
                 cell.viewWidthConstraint.constant = CGFloat(size)
+                print("image size : \(cell.detailPhotoImageView.frame.width)")
+                print("resut size : \(size)")
                 
                 // 1위 이미지일 경우
                 if firstRankSet.contains(indexPath.row) {
@@ -212,7 +225,7 @@ extension CarouselDatasource: UICollectionViewDataSource {
             if isSelect {
                 // 투표는 안했지만 선택한 이미지가 있는 경우 -> 핑크뷰 + 다이아몬드 이미지 활성화
                 if indexPath.item == selectImageIndex {
-                    cell.viewWidthConstraint.constant = 301 // 300 말고 301로 해야 모서리가 꽉 채워짐
+                    cell.viewWidthConstraint.constant = 299
                     cell.diamondsImageView.isHidden = false
                 } else { // 나머지 이미지는 그대로
                     cell.viewWidthConstraint.constant = 0
@@ -457,6 +470,8 @@ extension VoteDetailViewController: AlertViewActionDelegate {
     // MARK: - Back Button Action
     
     @objc func backButtonClicked(_ sender: UIButton) {
+        print("* vote delete back button click")
+        
         self.navigationController?.popViewController(animated: true)
     }
     
@@ -479,12 +494,50 @@ extension VoteDetailViewController: AlertViewActionDelegate {
             
             let feedbackDictionary: [Int: String] = [11: "emotion", 12: "composition", 13: "light", 14: "color", 15: "skip"]
             
+            let buttonDictionary: [Int: Int] = [11: 0, 12: 1, 13: 2, 14: 3]
+            
             let category = feedbackDictionary[sender.tag]!
             
+            // 투표 생성
             viewModel.service?.createVote(postId: postId, imageId: selectedImageId!, category: category, completion: {
                 print("vote")
                 
-                self.bindViewModel()
+                let currentButtonTag = sender.tag
+                
+                feedbackDictionary.keys.filter { $0 != currentButtonTag }.forEach { tag in
+                    if let button = self.view.viewWithTag(tag) as? UIButton {
+                        
+                        // Skip 버튼 비활성화
+                        if tag == 15 {
+                            self.skipButton.setTitleColor(#colorLiteral(red: 0.2156862745, green: 0.2352941176, blue: 0.2588235294, alpha: 1), for: .normal)
+                        } else { // 그 이외의 버튼 비활성화
+                            self.resultViewArray[buttonDictionary[tag] ?? 0].isHidden = false
+                            self.heightConstraintArray[buttonDictionary[tag] ?? 0].constant = 48
+                            self.resultViewArray[buttonDictionary[tag] ?? 0].backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.5)
+                            self.buttonLabelArray[buttonDictionary[tag] ?? 0].textColor = #colorLiteral(red: 0.3607843137, green: 0.3607843137, blue: 0.3647058824, alpha: 1)
+                        }
+                        
+                        button.isSelected = false
+                    }
+                }
+                
+                // Skip 버튼을 누른 경우 - Skip 버튼 활성화
+                if currentButtonTag == 15 {
+                    self.skipButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 12)
+                }
+                
+                // 그 이외의 버튼 활성화
+                sender.borderWidth = 2
+                sender.borderColor = #colorLiteral(red: 0.9215686275, green: 0.2862745098, blue: 0.6039215686, alpha: 1)
+                sender.cornerRadiusLayer = 10
+                sender.isSelected = !sender.isSelected
+                
+                let time = DispatchTime.now() + 1
+                DispatchQueue.main.asyncAfter(deadline: time) {
+                    sender.borderWidth = 0
+                    self.pickView.isHidden = true // 결과 뷰 나오기 전에 처리를 위해 여기서 hidden
+                    self.bindViewModel()
+                }
             })
         }
         
@@ -520,12 +573,18 @@ extension VoteDetailViewController: AlertViewActionDelegate {
     
     func listRemoveTapped() {
         viewModel.service?.deletePost(postId: postId, completion: {
-            self.navigationController?.popViewController(animated: true)
+            // self.navigationController?.popViewController(animated: true)
+            
+            let time = DispatchTime.now() + 0.5
+            DispatchQueue.main.asyncAfter(deadline: time) {
+                self.deleteView.isHidden = false
+                Toast.show(using: .remove, controller: self)
+            }
         })
     }
     
     func reportTapped() {
-        
+        Toast.show(using: .report, controller: self)
     }
     
     // MARK: - Get Vote Result

@@ -29,9 +29,11 @@ class MainTableViewCell: UITableViewCell {
     // MARK: - Variables
     
     weak var cellDelegate: CollectionViewCellDelegate?
-    // var imageData: [Images]?
-    var imageData = [#imageLiteral(resourceName: "defalutImage"), #imageLiteral(resourceName: "defalutImage"), #imageLiteral(resourceName: "defalutImage")]
+    var imageData: [Images]?
+    // var imageData = [#imageLiteral(resourceName: "defalutImage"), #imageLiteral(resourceName: "defalutImage"), #imageLiteral(resourceName: "defalutImage")]
     var postId: String!
+    
+    // Timer
     var timer = Timer()
     
     deinit {
@@ -40,11 +42,13 @@ class MainTableViewCell: UITableViewCell {
     
     func updateCell(model: Any) {
         if let object = model as? MainModel {
-            mainProfileImageView.kf.setImage(with: URL(string: object.user.profileImageUrl), placeholder: #imageLiteral(resourceName: "progressCircle"))
+            // mainProfileImageView.kf.setImage(with: URL(string: object.user.profileImageUrl), placeholder: #imageLiteral(resourceName: "progressCircle"))
+            
+            mainProfileImageView.image = UIImage.profileImage(object.user.profileImageUrl)
             mainNicknameLabel.text = object.user.nickname
             mainParticipantsLabel.text = "\(object.participantsNum)명 참여중"
             mainTitleLabel.text = object.title
-            // imageData = object.images
+            imageData = object.images
             setTimer(endTime: object.deadline)
             postId = object.postId
         }
@@ -104,33 +108,39 @@ class MainTableViewCell: UITableViewCell {
         mainCollectionView.showsHorizontalScrollIndicator = false
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+
+        timer.invalidate()
+    }
+    
 }
 
 // MARK: - CollectionView
 
 extension MainTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        let count = imageData?.count ?? 0
-//
-//        return count + 1
-        return 3
+        let count = imageData?.count ?? 0
+        return count + 1
+        
+        // return 3
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: MainCollectionViewCell = mainCollectionView.dequeueCollectionCell(for: indexPath)
         
-//        if let imageData = imageData {
-//            if indexPath.item == imageData.count {
-//                cell.mainPhotoImageView.image = #imageLiteral(resourceName: "defalutImage").withRenderingMode(.alwaysTemplate)
-//                cell.mainPhotoImageView.tintColor = .solidColor(.solid12)
-//                cell.stackView.isHidden = false
-//            } else {
-//                cell.mainPhotoImageView.kf.setImage(with: URL(string: (imageData[indexPath.row].thumbnailUrl)), placeholder: #imageLiteral(resourceName: "defalutImage"))
-//                cell.stackView.isHidden = true
-//            }
-//        }
+        if let imageData = imageData {
+            if indexPath.item == imageData.count {
+                cell.mainPhotoImageView.image = #imageLiteral(resourceName: "defalutImage").withRenderingMode(.alwaysTemplate)
+                cell.mainPhotoImageView.tintColor = .solidColor(.solid12)
+                cell.stackView.isHidden = false
+            } else {
+                cell.mainPhotoImageView.kf.setImage(with: URL(string: (imageData[indexPath.row].thumbnailUrl)), placeholder: #imageLiteral(resourceName: "defalutImage"))
+                cell.stackView.isHidden = true
+            }
+        }
    
-        cell.mainPhotoImageView.image = imageData[indexPath.row]
+        // cell.mainPhotoImageView.image = imageData[indexPath.row]
         
         return cell
     }
