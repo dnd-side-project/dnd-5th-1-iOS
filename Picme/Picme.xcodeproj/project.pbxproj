@@ -51,6 +51,7 @@
 		A9DDA14226DF436000ACA63D /* GuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DDA14126DF436000ACA63D /* GuideViewController.swift */; };
 		A9DDA14426DF438E00ACA63D /* GuideCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DDA14326DF438E00ACA63D /* GuideCell.swift */; };
 		A9DDA15526E1A6FC00ACA63D /* PersonalInfoViewContoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DDA15426E1A6FC00ACA63D /* PersonalInfoViewContoller.swift */; };
+		A9DDA15826E1BD6500ACA63D /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DDA15726E1BD6500ACA63D /* ActivityView.swift */; };
 		A9DF3F7F26C6681C00DB81DB /* NotoSansCJKkr-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = A9DF3F7C26C6681A00DB81DB /* NotoSansCJKkr-Bold.otf */; };
 		A9DF3F8026C6681C00DB81DB /* NotoSansCJKkr-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = A9DF3F7D26C6681B00DB81DB /* NotoSansCJKkr-Medium.otf */; };
 		A9DF3F8126C6681C00DB81DB /* NotoSansCJKkr-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = A9DF3F7E26C6681C00DB81DB /* NotoSansCJKkr-Regular.otf */; };
@@ -171,6 +172,7 @@
 		A9DDA14126DF436000ACA63D /* GuideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideViewController.swift; sourceTree = "<group>"; };
 		A9DDA14326DF438E00ACA63D /* GuideCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideCell.swift; sourceTree = "<group>"; };
 		A9DDA15426E1A6FC00ACA63D /* PersonalInfoViewContoller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalInfoViewContoller.swift; sourceTree = "<group>"; };
+		A9DDA15726E1BD6500ACA63D /* ActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityView.swift; sourceTree = "<group>"; };
 		A9DF3F7C26C6681A00DB81DB /* NotoSansCJKkr-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansCJKkr-Bold.otf"; sourceTree = "<group>"; };
 		A9DF3F7D26C6681B00DB81DB /* NotoSansCJKkr-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansCJKkr-Medium.otf"; sourceTree = "<group>"; };
 		A9DF3F7E26C6681C00DB81DB /* NotoSansCJKkr-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansCJKkr-Regular.otf"; sourceTree = "<group>"; };
@@ -668,6 +670,7 @@
 			children = (
 				A9E6DD8726CCD960006155F3 /* Toast */,
 				A9DDA11F26D6FD2C00ACA63D /* DateFormat.swift */,
+				A9DDA15726E1BD6500ACA63D /* ActivityView.swift */,
 			);
 			path = etc;
 			sourceTree = "<group>";
@@ -1135,6 +1138,7 @@
 				D173CD9F26C50E2F00468D52 /* VoteDetailViewController.swift in Sources */,
 				D1EC0C6326C30D2000387F1B /* VoteDetailViewModel.swift in Sources */,
 				D12B119A26CD057B00777498 /* Extension+UIViewController.swift in Sources */,
+				A9DDA15826E1BD6500ACA63D /* ActivityView.swift in Sources */,
 				A91A909026BE9D2800C43D43 /* KeyChainModel.swift in Sources */,
 				A9A1AD432699FAE600169D76 /* AppDelegate.swift in Sources */,
 				A9E6DD7E26CA1AD6006155F3 /* CreateUserImages.swift in Sources */,

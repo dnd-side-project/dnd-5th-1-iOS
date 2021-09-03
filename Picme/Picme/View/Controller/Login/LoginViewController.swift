@@ -42,7 +42,7 @@ final class LoginViewController: BaseViewContoller {
         loginViewModel?.loginDelegate = self
         
     }
-
+    
     @IBAction func kakaoLoginAction(_ sender: UIButton) {
         loginViewModel?.kakaoLogin()
     }
