@@ -62,18 +62,24 @@ final class ContentViewController: BaseViewContoller {
     @IBAction func registVote(_ sender: UIButton) {
         print("Regist")
         
+        ActivityView.instance.start(controller: self)
+        
         if let voteText = voteTextView.text, let voteEndDate = voteEndDateTextfield.text {
             contentViewModel?.createList(title: voteText, endDate: voteEndDate, completion: {
-                self.dismiss(animated: true) {
-                    
-                    guard let sceneDelegate = UIApplication.shared.connectedScenes.first!.delegate as? SceneDelegate, let rootVC = sceneDelegate.window?.rootViewController else { return }
-                    
-                    if let tabbarVC = rootVC as? UITabBarController,
-                       let mainNav = tabbarVC.selectedViewController as? UINavigationController,
-                       let mainVC = mainNav.topViewController as? MainViewController {
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                    ActivityView.instance.stop()
+                    self.dismiss(animated: true) {
                         
-                        mainVC.mainTableView.reloadData()
-                        Toast.show(using: .voteUpload, controller: mainVC)
+                        guard let sceneDelegate = UIApplication.shared.connectedScenes.first!.delegate as? SceneDelegate, let rootVC = sceneDelegate.window?.rootViewController else { return }
+                        
+                        if let tabbarVC = rootVC as? UITabBarController,
+                           let mainNav = tabbarVC.selectedViewController as? UINavigationController,
+                           let mainVC = mainNav.topViewController as? MainViewController {
+                            
+                            mainVC.mainTableView.reloadData()
+                            Toast.show(using: .voteUpload, controller: mainVC)
+                        }
                     }
                 }
             })
