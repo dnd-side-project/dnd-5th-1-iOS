@@ -51,6 +51,9 @@ final class LoginViewController: BaseViewContoller {
     }
     
     @IBAction func appleLoginAction(_ sender: ASAuthorizationAppleIDButton) {
+        
+        ActivityView.instance.start(controller: self)
+        
         let appleIDProvider = ASAuthorizationAppleIDProvider()
         let request = appleIDProvider.createRequest()
         request.requestedScopes = [.fullName, .email]

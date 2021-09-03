@@ -144,7 +144,7 @@ extension LoginViewModel: ASAuthorizationControllerDelegate, ASAuthorizationCont
                     
                     self.loginUserInfo.userNickname = data.nickname
                     self.loginUserInfo.userProfileImageUrl = data.profilePictureImage
-//                        loginUserInfo.vendor = data.vendor
+                    self.loginUserInfo.vendor = data.vendor
                     
                     _ = KeyChainModel.shared.createUserInfo(with: saveUserInfo)
                     self.loginDelegate?.loginSuccess()

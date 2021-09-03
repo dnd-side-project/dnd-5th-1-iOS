@@ -56,7 +56,7 @@ final class OnboardingViewModel {
                     
                     self?.loginUserInfo.userNickname = data.nickname
                     self?.loginUserInfo.userProfileImageUrl = data.profilePictureImage
-                    self?.loginUserInfo.vendor = data.nickname
+                    self?.loginUserInfo.vendor = data.vendor
                     
                     if let saveUserInfo = self?.saveUserInfo {
                         _ = KeyChainModel.shared.createUserInfo(with: saveUserInfo)
