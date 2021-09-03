@@ -47,6 +47,7 @@ extension GuideViewController: UITableViewDelegate, UITableViewDataSource {
             return
         case 1:
             guard let personalVC = storyboard?.instantiateViewController(withIdentifier: "PersonalInfo") as? UINavigationController else { return }
+            personalVC.modalPresentationStyle = .fullScreen
             self.present(personalVC, animated: true, completion: nil)
         default:
             return

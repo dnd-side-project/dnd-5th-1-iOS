@@ -26,7 +26,6 @@ final class MyPageViewController: BaseViewContoller {
     @IBOutlet weak var overallWinRateLabel: UILabel!
     
     @IBOutlet weak var progressView: UIProgressView!
-    @IBOutlet weak var termsButton: UIButton!
     
     // MARK: - Properties
     
@@ -73,9 +72,6 @@ final class MyPageViewController: BaseViewContoller {
     func setupButtons() {
         allVoteListButton.tag = 1
         settingButton.tag = 3
-        
-        // Terms Button
-        termsButton.setBackgroundColor(color: .mainColor(.logoPink), forState: .highlighted)
         
         allVoteListButton.addTarget(self, action: #selector(showAlertView), for: UIControl.Event.touchUpInside)
 
