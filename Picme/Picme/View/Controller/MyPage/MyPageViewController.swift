@@ -55,6 +55,8 @@ final class MyPageViewController: BaseViewContoller {
         setupButtons()
         
         fetchUser()
+        
+        versionLabel.text = viewModel.getVersion()
     }
     
     // MARK: - Log Out
@@ -116,4 +118,8 @@ extension MyPageViewController: LogOutProtocol {
         loginVC.modalPresentationStyle = .fullScreen
         self.present(loginVC, animated: true, completion: nil)
     }
+}
+
+extension MyPageViewController {
+    
 }

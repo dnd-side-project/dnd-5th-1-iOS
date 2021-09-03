@@ -9,17 +9,22 @@ import UIKit
 
 class GuideCell: UITableViewCell {
 
-    @IBOutlet weak var guideButton: UIButton!
+    @IBOutlet weak var guideLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+     
+        cellSetting()
+        self.selectionStyle = .none
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }  
-
+    
+    func setLabelText(_ text: String) {
+        guideLabel.text = text
+    }
+    
+    private func cellSetting() {
+        guideLabel.layer.borderWidth = 1
+        guideLabel.layer.borderColor = UIColor.white.cgColor
+        guideLabel.layer.cornerRadius = 10
+    }
 }
