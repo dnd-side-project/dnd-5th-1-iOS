@@ -27,38 +27,55 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SBI-Rb-gZ2">
-                                <rect key="frame" x="39.5" y="240" width="335" height="52"/>
-                                <color key="backgroundColor" red="0.92156862750000001" green="0.28627450980000002" blue="0.60392156860000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="52" id="ydA-y6-Cbj"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="NotoSansCJKkr-Bold" family="Noto Sans CJK KR" pointSize="16"/>
-                                <state key="normal" title="전체 투표 목록">
-                                    <color key="titleColor" red="0.99607843137254903" green="0.99607843137254903" blue="0.99607843137254903" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadiusLayer">
-                                        <real key="value" value="10"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uU1-fZ-CSf">
-                                <rect key="frame" x="39.5" y="308" width="335" height="52"/>
-                                <color key="backgroundColor" red="0.21568627450980393" green="0.23529411764705882" blue="0.25882352941176467" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="52" id="tlY-vO-1aR"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="NotoSansCJKkr-Bold" family="Noto Sans CJK KR" pointSize="16"/>
-                                <state key="normal" title="나의 뱃지">
-                                    <color key="titleColor" red="0.47058823529411764" green="0.4823529411764706" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadiusLayer">
-                                        <real key="value" value="10"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="dgF-H5-ShM">
+                                <rect key="frame" x="39.5" y="240" width="335" height="188"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SBI-Rb-gZ2">
+                                        <rect key="frame" x="0.0" y="0.0" width="335" height="52"/>
+                                        <color key="backgroundColor" red="0.92156862750000001" green="0.28627450980000002" blue="0.60392156860000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="52" id="ydA-y6-Cbj"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="NotoSansCJKkr-Bold" family="Noto Sans CJK KR" pointSize="16"/>
+                                        <state key="normal" title="전체 투표 목록">
+                                            <color key="titleColor" red="0.99607843137254903" green="0.99607843137254903" blue="0.99607843137254903" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadiusLayer">
+                                                <real key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u9h-jN-ZVF">
+                                        <rect key="frame" x="0.0" y="68" width="335" height="52"/>
+                                        <color key="backgroundColor" red="0.21568627450980393" green="0.23529411764705882" blue="0.25882352941176467" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" name="NotoSansCJKkr-Bold" family="Noto Sans CJK KR" pointSize="16"/>
+                                        <state key="normal" title="약관 및 정책">
+                                            <color key="titleColor" red="0.47058823529411764" green="0.4823529411764706" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadiusLayer">
+                                                <real key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <segue destination="1PJ-f0-XSa" kind="show" id="UAi-DM-SIy"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Version" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tEo-9o-vfo">
+                                        <rect key="frame" x="0.0" y="136" width="335" height="52"/>
+                                        <color key="backgroundColor" red="0.2156862745" green="0.23529411759999999" blue="0.25882352939999997" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" name="NotoSansCJKkr-Regular" family="Noto Sans CJK KR" pointSize="16"/>
+                                        <color key="textColor" red="0.47058823529999999" green="0.4823529412" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadiusLayer">
+                                                <real key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </label>
+                                </subviews>
+                            </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5bP-dw-Tkm">
                                 <rect key="frame" x="39.5" y="690" width="335" height="52"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -209,25 +226,22 @@
                         <viewLayoutGuide key="safeArea" id="5cC-Ch-DAb"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="5bP-dw-Tkm" firstAttribute="width" secondItem="uU1-fZ-CSf" secondAttribute="width" id="00J-ha-Ffx"/>
                             <constraint firstItem="5cC-Ch-DAb" firstAttribute="bottom" secondItem="5bP-dw-Tkm" secondAttribute="bottom" constant="32" id="0LS-Io-0UI"/>
                             <constraint firstItem="VVn-t6-5UB" firstAttribute="top" secondItem="5cC-Ch-DAb" secondAttribute="top" constant="24" id="0x1-lt-30a"/>
-                            <constraint firstItem="uU1-fZ-CSf" firstAttribute="centerX" secondItem="SBI-Rb-gZ2" secondAttribute="centerX" id="1tz-Yt-6Da"/>
-                            <constraint firstItem="uU1-fZ-CSf" firstAttribute="top" secondItem="SBI-Rb-gZ2" secondAttribute="bottom" constant="16" id="3qr-cK-EYZ"/>
                             <constraint firstItem="VVn-t6-5UB" firstAttribute="centerX" secondItem="5cC-Ch-DAb" secondAttribute="centerX" id="5Jo-jO-cF2"/>
-                            <constraint firstItem="SBI-Rb-gZ2" firstAttribute="width" secondItem="VVn-t6-5UB" secondAttribute="width" id="M17-Rd-LZI"/>
-                            <constraint firstItem="5bP-dw-Tkm" firstAttribute="top" relation="greaterThanOrEqual" secondItem="uU1-fZ-CSf" secondAttribute="bottom" constant="200" id="Xem-VJ-zYc"/>
-                            <constraint firstItem="uU1-fZ-CSf" firstAttribute="width" secondItem="SBI-Rb-gZ2" secondAttribute="width" id="hCw-48-JzR"/>
-                            <constraint firstItem="SBI-Rb-gZ2" firstAttribute="centerX" secondItem="VVn-t6-5UB" secondAttribute="centerX" id="mVA-NE-5se"/>
-                            <constraint firstItem="SBI-Rb-gZ2" firstAttribute="top" secondItem="VVn-t6-5UB" secondAttribute="bottom" constant="16" id="qJk-E3-QWh"/>
-                            <constraint firstItem="5bP-dw-Tkm" firstAttribute="centerX" secondItem="uU1-fZ-CSf" secondAttribute="centerX" id="twj-R8-roi"/>
+                            <constraint firstItem="5bP-dw-Tkm" firstAttribute="leading" secondItem="dgF-H5-ShM" secondAttribute="leading" id="6EA-Xp-ztV"/>
+                            <constraint firstItem="5bP-dw-Tkm" firstAttribute="width" secondItem="VVn-t6-5UB" secondAttribute="width" id="9jp-mx-40l"/>
+                            <constraint firstItem="5bP-dw-Tkm" firstAttribute="top" relation="lessThanOrEqual" secondItem="dgF-H5-ShM" secondAttribute="bottom" constant="306" id="TpA-bz-s4h"/>
+                            <constraint firstItem="dgF-H5-ShM" firstAttribute="width" secondItem="VVn-t6-5UB" secondAttribute="width" id="fzv-zB-bhJ"/>
+                            <constraint firstItem="dgF-H5-ShM" firstAttribute="top" secondItem="VVn-t6-5UB" secondAttribute="bottom" constant="16" id="ie6-fg-Pqp"/>
+                            <constraint firstItem="dgF-H5-ShM" firstAttribute="centerX" secondItem="Ayr-Bu-EUB" secondAttribute="centerX" id="zZq-PN-2bJ"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="마이페이지" id="HQK-ya-1IQ"/>
                     <connections>
                         <outlet property="allVoteListButton" destination="SBI-Rb-gZ2" id="uw5-xK-GUV"/>
+                        <outlet property="guideButton" destination="u9h-jN-ZVF" id="AF5-RT-tJW"/>
                         <outlet property="logOutButton" destination="5bP-dw-Tkm" id="o0u-i9-1xV"/>
-                        <outlet property="myBedgeButton" destination="uU1-fZ-CSf" id="fUe-16-1wt"/>
                         <outlet property="myVoteCountLabel" destination="kYa-ll-htJ" id="pRC-f7-FCt"/>
                         <outlet property="overallWinRateLabel" destination="dlV-qc-D0I" id="PgS-9F-raf"/>
                         <outlet property="participationCountLabel" destination="WNW-4K-geR" id="qon-92-jOy"/>
@@ -235,11 +249,180 @@
                         <outlet property="settingButton" destination="rf8-uR-HyQ" id="6aO-hH-YGe"/>
                         <outlet property="userIdentifierLabel" destination="DeA-JF-XBH" id="Cff-DN-fp2"/>
                         <outlet property="userImage" destination="irn-8S-9ZD" id="9gP-a8-EVs"/>
+                        <outlet property="versionLabel" destination="tEo-9o-vfo" id="DOo-SH-dZa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ymb-JQ-F3y" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="874" y="42"/>
+        </scene>
+        <!--Guide View Controller-->
+        <scene sceneID="mWv-wX-HPK">
+            <objects>
+                <viewController id="1PJ-f0-XSa" customClass="GuideViewController" customModule="Picme" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="6np-1p-8hx">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6UB-gh-1jf">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="774"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="GuideCell" rowHeight="126" id="Rkv-10-5M4" customClass="GuideCell" customModule="Picme" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="24.5" width="414" height="126"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Rkv-10-5M4" id="vI5-2h-kDD">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="126"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="가이드" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dRs-bA-pA6">
+                                                    <rect key="frame" x="20" y="20" width="374" height="86"/>
+                                                    <fontDescription key="fontDescription" name="NotoSansCJKkr-Bold" family="Noto Sans CJK KR" pointSize="16"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="dRs-bA-pA6" secondAttribute="bottom" constant="20" id="33d-8Y-2LM"/>
+                                                <constraint firstItem="dRs-bA-pA6" firstAttribute="top" secondItem="vI5-2h-kDD" secondAttribute="top" constant="20" id="757-n5-0v3"/>
+                                                <constraint firstAttribute="trailing" secondItem="dRs-bA-pA6" secondAttribute="trailing" constant="20" id="bjM-uH-BUh"/>
+                                                <constraint firstItem="dRs-bA-pA6" firstAttribute="leading" secondItem="vI5-2h-kDD" secondAttribute="leading" constant="20" id="rtJ-mS-5GT"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <connections>
+                                            <outlet property="guideLabel" destination="dRs-bA-pA6" id="dJR-6F-Dwd"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="ZUH-xk-cM1"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="ZUH-xk-cM1" firstAttribute="trailing" secondItem="6UB-gh-1jf" secondAttribute="trailing" id="FHx-fk-os0"/>
+                            <constraint firstItem="6UB-gh-1jf" firstAttribute="leading" secondItem="ZUH-xk-cM1" secondAttribute="leading" id="SP2-uu-MDN"/>
+                            <constraint firstItem="6UB-gh-1jf" firstAttribute="top" secondItem="ZUH-xk-cM1" secondAttribute="top" id="iUV-EN-OHT"/>
+                            <constraint firstItem="ZUH-xk-cM1" firstAttribute="bottom" secondItem="6UB-gh-1jf" secondAttribute="bottom" id="nDi-Z3-AUb"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="04x-p3-62N"/>
+                    <connections>
+                        <outlet property="tableView" destination="6UB-gh-1jf" id="D5L-Gl-Oy4"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GN0-Os-y3s" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1702.8985507246377" y="41.517857142857139"/>
+        </scene>
+        <!--개인정보처리방침-->
+        <scene sceneID="4wB-JA-Xb1">
+            <objects>
+                <viewController id="fEs-AU-GKm" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="aiJ-nT-Kfg">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="WJR-8M-RhB">
+                                <rect key="frame" x="20" y="0.0" width="374" height="774"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <string key="text">&lt;PICME&gt;('https://github.com/dnd-side-project/dnd-5th-1-iOS'이하 'PICME')은(는) 「개인정보 보호법」 제30조에 따라 정보주체의 개인정보를 보호하고 이와 관련한 고충을 신속하고 원활하게 처리할 수 있도록 하기 위하여 다음과 같이 개인정보 처리방침을 수립·공개합니다.
+
+○ 이 개인정보처리방침은 2021년 8월 28부터 적용됩니다.
+
+제1조(개인정보의 처리 목적)&lt; PICME &gt;('https://github.com/dnd-side-project/dnd-5th-1-iOS'이하 'PICME')은(는) 다음의 목적을 위하여 개인정보를 처리합니다. 처리하고 있는 개인정보는 다음의 목적 이외의 용도로는 이용되지 않으며 이용 목적이 변경되는 경우에는 「개인정보 보호법」 제18조에 따라 별도의 동의를 받는 등 필요한 조치를 이행할 예정입니다.
+
+1. 홈페이지 회원가입 및 관리
+
+회원 가입의사 확인, 회원제 서비스 제공에 따른 본인 식별·인증, 회원자격 유지·관리, 서비스 부정이용 방지, 만14세 미만 아동의 개인정보 처리 시 법정대리인의 동의여부 확인, 각종 고지·통지, 고충처리 목적으로 개인정보를 처리합니다.
+
+2. 재화 또는 서비스 제공
+
+서비스 제공, 콘텐츠 제공을 목적으로 개인정보를 처리합니다.
+
+**제2조(개인정보의 처리 및 보유 기간)**① &lt; PICME &gt;은(는) 법령에 따른 개인정보 보유·이용기간 또는 정보주체로부터 개인정보를 수집 시에 동의받은 개인정보 보유·이용기간 내에서 개인정보를 처리·보유합니다.② 각각의 개인정보 처리 및 보유 기간은 다음과 같습니다.
+
+- 1.&lt;홈페이지 회원가입 및 관리&gt;
+- &lt;홈페이지 회원가입 및 관리&gt;와 관련한 개인정보는 수집.이용에 관한 동의일로부터&lt;지체없이 파기&gt;까지 위 이용목적을 위하여 보유.이용됩니다.
+- 보유근거 : 서비스 제공
+
+**제3조(정보주체와 법정대리인의 권리·의무 및 그 행사방법)**
+
+① 정보주체는 PICME에 대해 언제든지 개인정보 열람·정정·삭제·처리정지 요구 등의 권리를 행사할 수 있습니다.
+
+② 제1항에 따른 권리 행사는PICME에 대해 「개인정보 보호법」 시행령 제41조제1항에 따라 서면, 전자우편, 모사전송(FAX) 등을 통하여 하실 수 있으며 PICME은(는) 이에 대해 지체 없이 조치하겠습니다.
+
+③ 제1항에 따른 권리 행사는 정보주체의 법정대리인이나 위임을 받은 자 등 대리인을 통하여 하실 수 있습니다.이 경우 “개인정보 처리 방법에 관한 고시(제2020-7호)” 별지 제11호 서식에 따른 위임장을 제출하셔야 합니다.
+
+④ 개인정보 열람 및 처리정지 요구는 「개인정보 보호법」 제35조 제4항, 제37조 제2항에 의하여 정보주체의 권리가 제한 될 수 있습니다.
+
+⑤ 개인정보의 정정 및 삭제 요구는 다른 법령에서 그 개인정보가 수집 대상으로 명시되어 있는 경우에는 그 삭제를 요구할 수 없습니다.
+
+⑥ PICME은(는) 정보주체 권리에 따른 열람의 요구, 정정·삭제의 요구, 처리정지의 요구 시 열람 등 요구를 한 자가 본인이거나 정당한 대리인인지를 확인합니다.
+
+**제4조(처리하는 개인정보의 항목 작성)**
+
+① &lt; PICME &gt;은(는) 다음의 개인정보 항목을 처리하고 있습니다.
+
+- 1&lt; 홈페이지 회원가입 및 관리 &gt;
+- 필수항목 : 이메일, 로그인ID, 이름
+
+**제5조(개인정보의 제3자 제공에 관한 사항)**
+
+① 당사는 개인정보를 제3자에게 제공하지 않습니다.
+
+**제6조(개인정보처리 위탁)**
+
+① 당사는 개인정보를 위탁하지 않습니다.
+
+**제7조(개인정보의 파기)**
+
+① &lt; PICME &gt; 은(는) 개인정보 보유기간의 경과, 처리목적 달성 등 개인정보가 불필요하게 되었을 때에는 지체없이 해당 개인정보를 파기합니다.② 정보주체로부터 동의받은 개인정보 보유기간이 경과하거나 처리목적이 달성되었음에도 불구하고 다른 법령에 따라 개인정보를 계속 보존하여야 하는 경우에는, 해당 개인정보를 별도의 데이터베이스(DB)로 옮기거나 보관장소를 달리하여 보존합니다.1. 법령 근거 : 서비스 제공2. 보존하는 개인정보 항목 : 이메일, 로그인ID, 이름③ 개인정보 파기의 절차 및 방법은 다음과 같습니다.1. 파기절차&lt; PICME &gt; 은(는) 파기 사유가 발생한 개인정보를 선정하고, &lt; PICME &gt; 의 개인정보 보호책임자의 승인을 받아 개인정보를 파기합니다.
+
+2. 파기방법
+
+전자적 파일 형태의 정보는 기록을 재생할 수 없는 기술적 방법을 사용합니다.
+
+**제8조(개인정보의 안전성 확보 조치)&lt; PICME &gt;은(는) 개인정보의 안전성 확보를 위해 다음과 같은 조치를 취하고 있습니다.**
+1. 정기적인 자체 감사 실시개인정보 취급 관련 안정성 확보를 위해 정기적(분기 1회)으로 자체 감사를 실시하고 있습니다.
+
+**제9조(개인정보 자동 수집 장치의 설치•운영 및 거부에 관한 사항)**
+PICME 은(는) 정보주체의 이용정보를 저장하고 수시로 불러오는 ‘쿠키(cookie)’를 사용하지 않습니다.
+
+**제10조 (개인정보 보호책임자)**
+① PICME 은(는) 개인정보 처리에 관한 업무를 총괄해서 책임지고, 개인정보 처리와 관련한 정보주체의 불만처리 및 피해구제 등을 위하여 아래와 같이 개인정보 보호책임자를 지정하고 있습니다.
+• ▶ 개인정보 보호책임자
+• 성명 :김태욱
+• 직책 :개발
+• 직급 :CTO
+• 연락처 :01066326235, nous178@naver.com
+② 정보주체께서는 PICME 의 서비스(또는 사업)을 이용하시면서 발생한 모든 개인정보 보호 관련 문의, 불만처리, 피해구제 등에 관한 사항을 개인정보 보호책임자 및 담당부서로 문의하실 수 있습니다. PICME 은(는) 정보주체의 문의에 대해 지체 없이 답변 및 처리해드릴 것입니다.
+
+**제11조(권익침해 구제방법)**정보주체는 개인정보침해로 인한 구제를 받기 위하여 개인정보분쟁조정위원회, 한국인터넷진흥원 개인정보침해신고센터 등에 분쟁해결이나 상담 등을 신청할 수 있습니다. 이 밖에 기타 개인정보침해의 신고, 상담에 대하여는 아래의 기관에 문의하시기 바랍니다.1. 개인정보분쟁조정위원회 : (국번없이) 1833-6972 (www.kopico.go.kr)2. 개인정보침해신고센터 : (국번없이) 118 (privacy.kisa.or.kr)3. 대검찰청 : (국번없이) 1301 (www.spo.go.kr)4. 경찰청 : (국번없이) 182 (cyberbureau.police.go.kr)「개인정보보호법」제35조(개인정보의 열람), 제36조(개인정보의 정정·삭제), 제37조(개인정보의 처리정지 등)의 규정에 의한 요구에 대 하여 공공기관의 장이 행한 처분 또는 부작위로 인하여 권리 또는 이익의 침해를 받은 자는 행정심판법이 정하는 바에 따라 행정심판을 청구할 수 있습니다.※ 행정심판에 대해 자세한 사항은 중앙행정심판위원회(www.simpan.go.kr) 홈페이지를 참고하시기 바랍니다.
+
+**제12조(개인정보 처리방침 변경)**
+① 이 개인정보처리방침은 2021년 8월 28부터 적용됩니다.</string>
+                                <color key="textColor" red="0.69803921568627447" green="0.70588235294117641" blue="0.71372549019607845" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Rwe-o7-LRQ"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="WJR-8M-RhB" firstAttribute="top" secondItem="Rwe-o7-LRQ" secondAttribute="top" id="bgB-eV-f1g"/>
+                            <constraint firstItem="Rwe-o7-LRQ" firstAttribute="trailing" secondItem="WJR-8M-RhB" secondAttribute="trailing" constant="20" id="eII-y5-kHt"/>
+                            <constraint firstItem="WJR-8M-RhB" firstAttribute="leading" secondItem="Rwe-o7-LRQ" secondAttribute="leading" constant="20" id="htt-Ej-NPz"/>
+                            <constraint firstItem="Rwe-o7-LRQ" firstAttribute="bottom" secondItem="WJR-8M-RhB" secondAttribute="bottom" id="jSk-nH-hiZ"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="개인정보처리방침" id="w9h-Wg-mHO">
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="x28" id="f3W-Pj-eSe"/>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QMn-2S-Pen" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1703" y="743"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="cRK-7o-e5d">
@@ -263,9 +446,32 @@
             </objects>
             <point key="canvasLocation" x="28.985507246376812" y="41.517857142857139"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="wjO-dF-7gC">
+            <objects>
+                <navigationController storyboardIdentifier="PersonalInfo" automaticallyAdjustsScrollViewInsets="NO" id="qmh-Kr-EzR" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="saa-rN-TF5">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="fEs-AU-GKm" kind="relationship" relationship="rootViewController" id="0tH-EU-7Uk"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nRw-bg-kce" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="874" y="743"/>
+        </scene>
     </scenes>
     <resources>
         <image name="1" width="44" height="44"/>
         <image name="settingsButton" width="17" height="17"/>
+        <image name="x28" width="16" height="16"/>
     </resources>
 </document>

@@ -33,6 +33,15 @@ final class MyPageViewModel {
         self.service = service
     }
     
+    func getVersion() -> String {
+        guard let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String else {
+            return "Version NULL"
+        }
+        return "Version \(version)"
+    }
+    
+    // MARK: - Login
+    
     func logOutAction(from kind: String?) {
         
         guard let kind = kind else { return }
