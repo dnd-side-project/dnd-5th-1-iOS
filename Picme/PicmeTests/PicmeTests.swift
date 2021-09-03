@@ -67,11 +67,11 @@ class PicmeTests: XCTestCase {
         // given
         let expectation = XCTestExpectation(description: "MainListModel Fetch")
 
-        let mainModel = MainModel(postId: "12345", deadline: "12", title: "제목",
-                                  user: User(nickname: "닉네임", profileImageUrl: "1"),
-                                  participantsNum: 99)
+//        let mainModel = MainModel(postId: "12345", deadline: "12", title: "제목",
+//                                  user: User(nickname: "닉네임", profileImageUrl: "1"), images: <#[Images]?#>,
+//                                  participantsNum: 99)
 
-        let mainList: [MainModel] = [mainModel]
+       // let mainList: [MainModel] = [mainModel]
 
 //        service.mainListModel = MainListModel(mainList: mainList)
 
