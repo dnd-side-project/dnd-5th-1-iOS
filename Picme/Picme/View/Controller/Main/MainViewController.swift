@@ -64,8 +64,8 @@ class MainViewController: BaseViewContoller, TouchDelegate, UITableViewDelegate 
         viewModel = MainViewModel(service: MainService(), delegate: self)
         // viewModel = MainViewModel(service: MainService(), dataSource: dataSource, delegate: self)
         // viewModel = MainViewModel(service: MainService(), dataSource: dataSource)
-        
-        viewModel.fetchMainList()
+       
+        // viewModel.fetchMainList()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -75,6 +75,12 @@ class MainViewController: BaseViewContoller, TouchDelegate, UITableViewDelegate 
         
         // self.bindViewModel()
 
+        viewModel.page = 0
+        viewModel.currentPage = 1
+        viewModel.mainList = []
+        viewModel.fetchMainList()
+        mainTableView.scrollToTop()
+        
     }
     
     // MARK: - Tab Bar

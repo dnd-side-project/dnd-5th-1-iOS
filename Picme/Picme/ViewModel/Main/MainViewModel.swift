@@ -21,11 +21,11 @@ class MainViewModel {
     var onErrorHandling: ((APIError?) -> Void)?
     
     ///
-    private var mainList: [MainModel] = []
+     var mainList: [MainModel] = []
     
     private weak var delegate: MainViewModelDelegate?
-    private var currentPage: Int = 1
-    private var page: Int = 0
+    var currentPage: Int = 1
+    var page: Int = 0
     private var total: Int = 0
     private var isFetchInProgress: Bool = false
     
@@ -36,11 +36,11 @@ class MainViewModel {
         self.delegate = delegate
     }
     
-//    init(service: MainServiceProtocol, dataSource: GenericDataSource<MainModel>?, delegate: MainViewModelDelegate) {
-//        self.service = service
-//        self.dataSource = dataSource
-//        self.delegate = delegate
-//    }
+    //    init(service: MainServiceProtocol, dataSource: GenericDataSource<MainModel>?, delegate: MainViewModelDelegate) {
+    //        self.service = service
+    //        self.dataSource = dataSource
+    //        self.delegate = delegate
+    //    }
     
     //    init(service: MainServiceProtocol, dataSource: GenericDataSource<MainModel>?) {
     //        self.service = service
@@ -51,23 +51,25 @@ class MainViewModel {
     var totalCount: Int {
         return total
     }
-//
-//    var currentCount: Int {
-//        return dataSource?.data.value.count ?? 0
-//        // return moderators.count
-//    }
-//
-//    func mainListIndex(at index: Int) -> MainModel {
-//        return (dataSource?.data.value[index])!
-//    }
+    //
+    //    var currentCount: Int {
+    //        return dataSource?.data.value.count ?? 0
+    //        // return moderators.count
+    //    }
+    //
+    //    func mainListIndex(at index: Int) -> MainModel {
+    //        return (dataSource?.data.value[index])!
+    //    }
     
     var currentCount: Int {
-      return mainList.count
+        return mainList.count
     }
     
     func moderator(at index: Int) -> MainModel {
-      return mainList[index]
+        return mainList[index]
     }
+    
+    
     
     // MARK: - 게시글 리스트 조회
     
