@@ -13,7 +13,7 @@ protocol TouchDelegate: AnyObject {
 }
 
 class MainViewController: BaseViewContoller, TouchDelegate {
-
+    
     // MARK: - IBOutlets
     
     @IBOutlet weak var mainTableView: UITableView!
@@ -42,7 +42,7 @@ class MainViewController: BaseViewContoller, TouchDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("viewdidload")
+        print("* main view did load")
         
         setupTabBar()
         
@@ -52,7 +52,13 @@ class MainViewController: BaseViewContoller, TouchDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        bindViewModel()
+        print("* main view will appear")
+        
+        // 서버에 이미지 업로드되는 시간 때문에 delay줌 (안주면 서버 네트워크 에러남 / 사진 2개 최소일 땐 0.5가 최적)
+        let time = DispatchTime.now() + 1.5
+        DispatchQueue.main.asyncAfter(deadline: time) {
+            self.bindViewModel()
+        }
     }
     
     // MARK: - Tab Bar
@@ -75,10 +81,14 @@ class MainViewController: BaseViewContoller, TouchDelegate {
     // MARK: - Bind View Model
     
     private func bindViewModel() {
+        
+        print("* main bind view model")
+    
         mainTableView.dataSource = dataSource
         dataSource.delegate = self
         
         dataSource.data.addAndNotify(observer: self) { [weak self] _ in
+            print("* main show Table View")
             self?.showTableView()
         }
         
@@ -100,6 +110,7 @@ class MainViewController: BaseViewContoller, TouchDelegate {
                     self.emptyView.isHidden = true
                     self.mainTableView.isHidden = false
                     self.mainTableView.reloadData()
+                    print("* main reload data")
                 }
             }
         }

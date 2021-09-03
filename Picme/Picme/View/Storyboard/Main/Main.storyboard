@@ -750,7 +750,7 @@
                                                             </userDefinedRuntimeAttributes>
                                                         </imageView>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0pu-gY-xby">
-                                                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="280"/>
+                                                            <rect key="frame" x="-9.5" y="0.0" width="0.0" height="280"/>
                                                             <color key="backgroundColor" red="0.92156862745098034" green="0.41176470588235292" blue="0.6588235294117647" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" id="FU1-Zg-R3B"/>
@@ -820,10 +820,10 @@
                                                         <constraint firstItem="0pu-gY-xby" firstAttribute="top" secondItem="fkq-8O-qEk" secondAttribute="top" id="QHW-Vb-odp"/>
                                                         <constraint firstItem="IdT-mW-AiB" firstAttribute="centerY" secondItem="fkq-8O-qEk" secondAttribute="centerY" id="TFv-EC-8Z2"/>
                                                         <constraint firstItem="egU-Zk-Ngg" firstAttribute="centerY" secondItem="fkq-8O-qEk" secondAttribute="centerY" id="THu-po-RHi"/>
-                                                        <constraint firstItem="0pu-gY-xby" firstAttribute="leading" secondItem="fkq-8O-qEk" secondAttribute="leading" id="WzX-G5-aUt"/>
-                                                        <constraint firstItem="vw8-NU-Xdo" firstAttribute="top" secondItem="fkq-8O-qEk" secondAttribute="top" constant="16" id="XJd-bL-NQZ"/>
+                                                        <constraint firstItem="0pu-gY-xby" firstAttribute="leading" secondItem="IdT-mW-AiB" secondAttribute="leading" id="WzX-G5-aUt"/>
+                                                        <constraint firstItem="vw8-NU-Xdo" firstAttribute="top" secondItem="IdT-mW-AiB" secondAttribute="top" constant="25.5" id="XJd-bL-NQZ"/>
                                                         <constraint firstItem="IdT-mW-AiB" firstAttribute="centerX" secondItem="fkq-8O-qEk" secondAttribute="centerX" id="sV6-uu-PYI"/>
-                                                        <constraint firstItem="vw8-NU-Xdo" firstAttribute="leading" secondItem="fkq-8O-qEk" secondAttribute="leading" constant="12" id="zQx-kc-dZN"/>
+                                                        <constraint firstItem="vw8-NU-Xdo" firstAttribute="leading" secondItem="IdT-mW-AiB" secondAttribute="leading" constant="21.5" id="zQx-kc-dZN"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
@@ -914,7 +914,7 @@
                                                     </view>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="감성" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nYm-UP-pJi">
                                                         <rect key="frame" x="0.0" y="52" width="48" height="15"/>
-                                                        <fontDescription key="fontDescription" name="NotoSansCJKkr-Medium" family="Noto Sans CJK KR" pointSize="10"/>
+                                                        <fontDescription key="fontDescription" name="NotoSansCJKkr-Medium" family="Noto Sans CJK KR" pointSize="9"/>
                                                         <color key="textColor" red="0.90196078431372551" green="0.90588235294117647" blue="0.9137254901960784" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
@@ -1121,6 +1121,33 @@
                                     <constraint firstAttribute="height" constant="100" id="lj2-Kn-ZpA"/>
                                 </constraints>
                             </view>
+                            <view hidden="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VvQ-sh-e3K">
+                                <rect key="frame" x="0.0" y="870" width="414" height="26"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="u1i-50-UtO">
+                                        <rect key="frame" x="101.5" y="352" width="211.5" height="104"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="trash" translatesAutoresizingMaskIntoConstraints="NO" id="EpZ-By-SfV">
+                                                <rect key="frame" x="0.0" y="0.0" width="211.5" height="48.5"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="EpZ-By-SfV" secondAttribute="height" multiplier="211:48" id="0Ii-Qe-IwR"/>
+                                                </constraints>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="게시글이 삭제되어 볼 수 없어요. 홈으로 돌아가주세요." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="29Q-7Z-PQY">
+                                                <rect key="frame" x="0.0" y="56.5" width="211.5" height="47.5"/>
+                                                <fontDescription key="fontDescription" name="NotoSansCJKkr-Bold" family="Noto Sans CJK KR" pointSize="16"/>
+                                                <color key="textColor" red="0.30196078431372547" green="0.30980392156862746" blue="0.32156862745098036" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="u1i-50-UtO" firstAttribute="centerX" secondItem="VvQ-sh-e3K" secondAttribute="centerX" id="0zH-Rd-4HR"/>
+                                    <constraint firstItem="u1i-50-UtO" firstAttribute="centerY" secondItem="VvQ-sh-e3K" secondAttribute="centerY" id="V85-NL-O9d"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vlC-pT-r26"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1134,6 +1161,7 @@
                             <constraint firstItem="cEW-AT-Rkn" firstAttribute="top" secondItem="Lge-DT-c9U" secondAttribute="bottom" constant="32" id="Okn-X7-2QR"/>
                             <constraint firstItem="nM7-Ii-Esh" firstAttribute="trailing" secondItem="vlC-pT-r26" secondAttribute="trailing" id="PFY-lG-Ugg"/>
                             <constraint firstItem="cEW-AT-Rkn" firstAttribute="centerX" secondItem="vlC-pT-r26" secondAttribute="centerX" id="PUE-M0-BFI"/>
+                            <constraint firstItem="VvQ-sh-e3K" firstAttribute="top" secondItem="4oQ-Hg-wQt" secondAttribute="bottom" id="QXY-Dl-Bao"/>
                             <constraint firstItem="vTV-am-Nmy" firstAttribute="top" secondItem="Lge-DT-c9U" secondAttribute="top" id="RMn-bd-El6"/>
                             <constraint firstItem="Lge-DT-c9U" firstAttribute="leading" secondItem="vlC-pT-r26" secondAttribute="leading" constant="20" id="UH4-hW-ylF"/>
                             <constraint firstItem="T04-YG-drm" firstAttribute="trailing" secondItem="vlC-pT-r26" secondAttribute="trailing" id="Vff-me-SsA"/>
@@ -1143,10 +1171,13 @@
                             <constraint firstItem="vTV-am-Nmy" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Khk-tx-YN4" secondAttribute="trailing" constant="60" id="fUH-jh-GRf"/>
                             <constraint firstItem="Lbn-9o-aCP" firstAttribute="top" secondItem="T04-YG-drm" secondAttribute="bottom" id="gQN-uH-ZoX"/>
                             <constraint firstItem="T04-YG-drm" firstAttribute="leading" secondItem="vlC-pT-r26" secondAttribute="leading" id="gv3-gd-jI6"/>
+                            <constraint firstAttribute="bottom" secondItem="VvQ-sh-e3K" secondAttribute="bottom" id="hU4-4T-yjn"/>
+                            <constraint firstItem="VvQ-sh-e3K" firstAttribute="leading" secondItem="vlC-pT-r26" secondAttribute="leading" id="jJm-Hh-HRO"/>
                             <constraint firstItem="nM7-Ii-Esh" firstAttribute="leading" secondItem="vlC-pT-r26" secondAttribute="leading" id="n5w-OV-ioU"/>
                             <constraint firstItem="Khk-tx-YN4" firstAttribute="centerY" secondItem="Lge-DT-c9U" secondAttribute="centerY" id="oeF-LL-oJl"/>
                             <constraint firstItem="4oQ-Hg-wQt" firstAttribute="trailing" secondItem="vlC-pT-r26" secondAttribute="trailing" id="sQf-gh-PqZ"/>
                             <constraint firstItem="Lbn-9o-aCP" firstAttribute="trailing" secondItem="vlC-pT-r26" secondAttribute="trailing" id="sRs-I8-cY1"/>
+                            <constraint firstItem="VvQ-sh-e3K" firstAttribute="trailing" secondItem="vlC-pT-r26" secondAttribute="trailing" id="vJX-fN-0CJ"/>
                             <constraint firstItem="4oQ-Hg-wQt" firstAttribute="top" secondItem="vlC-pT-r26" secondAttribute="top" id="vY2-Ps-7gB"/>
                             <constraint firstItem="nM7-Ii-Esh" firstAttribute="top" secondItem="T04-YG-drm" secondAttribute="bottom" id="vg9-8v-cFf"/>
                             <constraint firstItem="T04-YG-drm" firstAttribute="top" secondItem="cEW-AT-Rkn" secondAttribute="bottom" constant="24" id="z95-Fo-U1p"/>
@@ -1157,12 +1188,15 @@
                         <outlet property="carouselCollectionView" destination="T04-YG-drm" id="rvd-Tf-52I"/>
                         <outlet property="colorButton" destination="HzQ-kV-XRq" id="mIf-Ba-UEU"/>
                         <outlet property="colorHeightConstraint" destination="Qfm-Gi-8mp" id="1zo-YS-7zm"/>
+                        <outlet property="colorLabel" destination="s0b-vk-OUG" id="LQp-gE-EW3"/>
                         <outlet property="colorPercentLabel" destination="Bzy-s0-eqs" id="eVh-FC-w1p"/>
                         <outlet property="colorResultView" destination="zqp-uq-vv7" id="Dka-8D-4kO"/>
                         <outlet property="compositionButton" destination="YTj-AY-mbZ" id="5AF-nJ-bX7"/>
                         <outlet property="compositionHeightConstraint" destination="uOx-LE-VgW" id="oc3-n9-DK6"/>
+                        <outlet property="compositionLabel" destination="0RX-5y-0Nu" id="FeB-gw-4fK"/>
                         <outlet property="compositionPercentLabel" destination="s5c-aI-h4P" id="1j8-uM-JYC"/>
                         <outlet property="compositionResultView" destination="MxF-mP-9NI" id="tRa-SE-gFa"/>
+                        <outlet property="deleteView" destination="VvQ-sh-e3K" id="dsP-TB-fd1"/>
                         <outlet property="detailClockImageView" destination="7yz-dX-7Ep" id="bj7-gT-6aA"/>
                         <outlet property="detailDeadlineLabel" destination="zv1-Px-PD4" id="BXp-M2-fhu"/>
                         <outlet property="detailNicknameLabel" destination="xcI-fx-oFf" id="SGV-e6-KQN"/>
@@ -1174,6 +1208,7 @@
                         <outlet property="feedbackView" destination="nM7-Ii-Esh" id="lnF-8K-q2g"/>
                         <outlet property="lightButton" destination="RdS-rt-ngV" id="ahG-GA-G7Y"/>
                         <outlet property="lightHeightConstraint" destination="Nqz-vb-S3q" id="gIg-dW-ClW"/>
+                        <outlet property="lightLabel" destination="UVs-Db-eC8" id="AZX-jd-hbM"/>
                         <outlet property="lightPercentLabel" destination="la6-nI-AWL" id="Jho-c3-7vJ"/>
                         <outlet property="lightResultView" destination="43a-ka-Ebb" id="n80-yR-NFN"/>
                         <outlet property="onePickLabel" destination="Pyd-JN-cK4" id="Av1-BQ-cn5"/>
@@ -1182,6 +1217,7 @@
                         <outlet property="rightBarButton" destination="ALU-4F-MJG" id="Y3t-ph-76r"/>
                         <outlet property="sensitivityButton" destination="BPK-dL-bcq" id="hie-gc-ndQ"/>
                         <outlet property="sensitivityHeightConstraint" destination="apy-ia-OlN" id="S6f-PS-BFl"/>
+                        <outlet property="sensitivityLabel" destination="nYm-UP-pJi" id="eIM-8w-ma1"/>
                         <outlet property="sensitivityPercentLabel" destination="iNb-U8-aHm" id="EnR-6v-MiW"/>
                         <outlet property="sensitivityResultView" destination="zDr-TJ-Oq6" id="RHU-4g-1c0"/>
                         <outlet property="skipButton" destination="pnA-WO-wYb" id="v15-4u-sMt"/>
@@ -1280,6 +1316,7 @@
         <image name="rankingBox" width="35" height="26"/>
         <image name="sensitivity" width="24" height="24"/>
         <image name="time" width="16" height="16"/>
+        <image name="trash" width="48" height="48"/>
         <image name="trashcan" width="17" height="21"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

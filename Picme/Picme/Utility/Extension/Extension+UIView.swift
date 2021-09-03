@@ -38,6 +38,8 @@ extension UIView {
         }
     }
     
+    // MARK: - View 원형으로 만들기
+    
     func circular() {
         self.layer.cornerRadius = (self.frame.width / 2)
         self.clipsToBounds = true

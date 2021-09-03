@@ -26,6 +26,7 @@ final class MyPageViewController: BaseViewContoller {
     @IBOutlet weak var overallWinRateLabel: UILabel!
     
     @IBOutlet weak var progressView: UIProgressView!
+    @IBOutlet weak var termsButton: UIButton!
     
     // MARK: - Properties
     
@@ -46,7 +47,8 @@ final class MyPageViewController: BaseViewContoller {
         if let userNickName = loginUserInfo.userNickname,
            let profileImageUrl = loginUserInfo.userProfileImageUrl {
             userIdentifierLabel.text = userNickName
-            userImage.kf.setImage(with: URL(string: profileImageUrl), placeholder: #imageLiteral(resourceName: "progressCircle"))
+            // userImage.kf.setImage(with: URL(string: profileImageUrl), placeholder: #imageLiteral(resourceName: "progressCircle"))
+            userImage.image = UIImage.profileImage(profileImageUrl)
         } else {
             userIdentifierLabel.text = "로그인을 해주세요."
             userImage.image = #imageLiteral(resourceName: "progressCircle")
@@ -71,6 +73,9 @@ final class MyPageViewController: BaseViewContoller {
     func setupButtons() {
         allVoteListButton.tag = 1
         settingButton.tag = 3
+        
+        // Terms Button
+        termsButton.setBackgroundColor(color: .mainColor(.logoPink), forState: .highlighted)
         
         allVoteListButton.addTarget(self, action: #selector(showAlertView), for: UIControl.Event.touchUpInside)
 

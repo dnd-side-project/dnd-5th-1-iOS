@@ -50,8 +50,16 @@ class MainService: MainServiceProtocol {
         
         let decoder = JSONDecoder()
         
+        print("* main list data")
+        
         guard let decodedData = try? decoder.decode(MainListModel.self, from: data)
-        else { return .pathErr }
+        else {
+            print("* main server ERROR")
+            return .pathErr
+        }
+        
+        print("* main server success")
+        print(decodedData.mainList)
         
         return .success(decodedData.mainList)
     }

@@ -222,6 +222,19 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uU1-fZ-CSf">
+                                <rect key="frame" x="39.5" y="376" width="335" height="52"/>
+                                <color key="backgroundColor" red="0.21568627450980393" green="0.23529411764705882" blue="0.25882352941176467" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" name="NotoSansCJKkr-Bold" family="Noto Sans CJK KR" pointSize="16"/>
+                                <state key="normal" title="Version 1.1">
+                                    <color key="titleColor" red="0.47058823529411764" green="0.4823529411764706" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadiusLayer">
+                                        <real key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="5cC-Ch-DAb"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -247,6 +260,7 @@
                         <outlet property="participationCountLabel" destination="WNW-4K-geR" id="qon-92-jOy"/>
                         <outlet property="progressView" destination="Ulk-YU-Ygw" id="nBm-Hg-tA0"/>
                         <outlet property="settingButton" destination="rf8-uR-HyQ" id="6aO-hH-YGe"/>
+                        <outlet property="termsButton" destination="vd8-yV-P5Z" id="mxL-Bg-8Go"/>
                         <outlet property="userIdentifierLabel" destination="DeA-JF-XBH" id="Cff-DN-fp2"/>
                         <outlet property="userImage" destination="irn-8S-9ZD" id="9gP-a8-EVs"/>
                         <outlet property="versionLabel" destination="tEo-9o-vfo" id="DOo-SH-dZa"/>
@@ -471,6 +485,7 @@ PICME 은(는) 정보주체의 이용정보를 저장하고 수시로 불러오�
     </scenes>
     <resources>
         <image name="1" width="44" height="44"/>
+        <image name="leftArrow24" width="7.5" height="12"/>
         <image name="settingsButton" width="17" height="17"/>
         <image name="x28" width="16" height="16"/>
     </resources>
