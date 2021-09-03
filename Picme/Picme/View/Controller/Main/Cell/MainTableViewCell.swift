@@ -51,6 +51,24 @@ class MainTableViewCell: UITableViewCell {
             imageData = object.images
             setTimer(endTime: object.deadline)
             postId = object.postId
+        } else {
+            //            displayNameLabel.alpha = 0
+            //            reputationContainerView.alpha = 0
+            //            indicatorView.startAnimating()
+        }
+    }
+    
+    func configure(with object: MainModel?) {
+        if let object = object {
+            mainProfileImageView.image = UIImage.profileImage(object.user.profileImageUrl)
+            mainNicknameLabel.text = object.user.nickname
+            mainParticipantsLabel.text = "\(object.participantsNum)명 참여중"
+            mainTitleLabel.text = object.title
+            imageData = object.images
+            setTimer(endTime: object.deadline)
+            postId = object.postId
+        } else {
+           // print("로딩중")
         }
     }
     
@@ -110,7 +128,7 @@ class MainTableViewCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-
+        
         timer.invalidate()
     }
     
@@ -139,7 +157,7 @@ extension MainTableViewCell: UICollectionViewDelegate, UICollectionViewDataSourc
                 cell.stackView.isHidden = true
             }
         }
-   
+        
         // cell.mainPhotoImageView.image = imageData[indexPath.row]
         
         return cell

@@ -61,7 +61,7 @@ class MainService: MainServiceProtocol {
         print("* main server success")
         print(decodedData.mainList)
         
-        return .success(decodedData.mainList)
+        return .success(decodedData)
     }
     
 }
