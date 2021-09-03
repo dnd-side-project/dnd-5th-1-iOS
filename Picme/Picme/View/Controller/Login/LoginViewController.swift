@@ -42,12 +42,18 @@ final class LoginViewController: BaseViewContoller {
         loginViewModel?.loginDelegate = self
         
     }
-
+    
     @IBAction func kakaoLoginAction(_ sender: UIButton) {
+        
         loginViewModel?.kakaoLogin()
+        
+        ActivityView.instance.start(controller: self)
     }
     
     @IBAction func appleLoginAction(_ sender: ASAuthorizationAppleIDButton) {
+        
+        ActivityView.instance.start(controller: self)
+        
         let appleIDProvider = ASAuthorizationAppleIDProvider()
         let request = appleIDProvider.createRequest()
         request.requestedScopes = [.fullName, .email]
@@ -149,6 +155,9 @@ extension LoginViewController: LoginState {
     
     func loginSuccess() {
         print("\(Date()): Login Success")
+        
+        ActivityView.instance.stop()
+        
         let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let mainViewController = mainStoryboard.instantiateViewController(withIdentifier:
                                                                             "TabBarController")
@@ -167,6 +176,8 @@ extension LoginViewController: LoginState {
     }
     
     func loginFail(error: String) {
-        print(error)
+        
+        ActivityView.instance.stop()
+        
     }
 }

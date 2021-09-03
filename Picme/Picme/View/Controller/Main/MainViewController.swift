@@ -146,6 +146,12 @@ extension MainViewController: AlertViewActionDelegate {
             loginVC.modalPresentationStyle = .fullScreen
             let window = UIApplication.shared.windows.first { $0.isKeyWindow }
             window?.rootViewController = loginVC
+            
+            UIView.transition(with: window ?? UIWindow(),
+                                  duration: 0.3,
+                                  options: .transitionCrossDissolve,
+                                  animations: nil,
+                                  completion: nil)
         })
     }
 }

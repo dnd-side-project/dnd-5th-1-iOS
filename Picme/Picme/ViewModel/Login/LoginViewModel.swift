@@ -31,7 +31,7 @@ extension LoginViewModel {
                 guard let self = self else { return }
                 
                 if let error = error {
-                    print(error)
+                    self.loginDelegate?.loginFail(error: "kakao Login Error: \(error.localizedDescription)")
                 } else {
                     print("loginWithKakaoTalk() success.")
                     self.requestKakaoLogin()
@@ -57,6 +57,7 @@ extension LoginViewModel {
         UserApi.shared.me { user, error in
             if let error = error {
                 print("Kakao user get info Error, \(error.localizedDescription)")
+                self.loginDelegate?.loginFail(error: "kakao Login Error: \(error.localizedDescription)")
             } else {
                 guard let kakaoUser = user,
                       let kakaoUserId = kakaoUser.id,
@@ -143,7 +144,7 @@ extension LoginViewModel: ASAuthorizationControllerDelegate, ASAuthorizationCont
                     
                     self.loginUserInfo.userNickname = data.nickname
                     self.loginUserInfo.userProfileImageUrl = data.profilePictureImage
-//                        loginUserInfo.vendor = data.vendor
+                    self.loginUserInfo.vendor = data.vendor
                     
                     _ = KeyChainModel.shared.createUserInfo(with: saveUserInfo)
                     self.loginDelegate?.loginSuccess()

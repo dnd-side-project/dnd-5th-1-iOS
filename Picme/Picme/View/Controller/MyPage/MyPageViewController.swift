@@ -14,7 +14,8 @@ final class MyPageViewController: BaseViewContoller {
     
     @IBOutlet weak var logOutButton: UIButton!
     @IBOutlet weak var allVoteListButton: UIButton!
-    // @IBOutlet weak var myBedgeButton: UIButton!
+    @IBOutlet weak var guideButton: UIButton!
+    @IBOutlet weak var versionLabel: UILabel!
     @IBOutlet weak var settingButton: UIButton!
     
     @IBOutlet weak var userIdentifierLabel: UILabel!
@@ -25,7 +26,6 @@ final class MyPageViewController: BaseViewContoller {
     @IBOutlet weak var overallWinRateLabel: UILabel!
     
     @IBOutlet weak var progressView: UIProgressView!
-    @IBOutlet weak var termsButton: UIButton!
     
     // MARK: - Properties
     
@@ -56,6 +56,8 @@ final class MyPageViewController: BaseViewContoller {
         setupButtons()
         
         fetchUser()
+        
+        versionLabel.text = viewModel.getVersion()
     }
     
     // MARK: - Log Out
@@ -69,14 +71,10 @@ final class MyPageViewController: BaseViewContoller {
     
     func setupButtons() {
         allVoteListButton.tag = 1
-        // myBedgeButton.tag = 2
         settingButton.tag = 3
         
-        // Terms Button
-        termsButton.setBackgroundColor(color: .mainColor(.logoPink), forState: .highlighted)
-        
         allVoteListButton.addTarget(self, action: #selector(showAlertView), for: UIControl.Event.touchUpInside)
-        // myBedgeButton.addTarget(self, action: #selector(showAlertView), for: UIControl.Event.touchUpInside)
+
         settingButton.addTarget(self, action: #selector(showAlertView), for: UIControl.Event.touchUpInside)
     }
     
@@ -121,4 +119,8 @@ extension MyPageViewController: LogOutProtocol {
         loginVC.modalPresentationStyle = .fullScreen
         self.present(loginVC, animated: true, completion: nil)
     }
+}
+
+extension MyPageViewController {
+    
 }

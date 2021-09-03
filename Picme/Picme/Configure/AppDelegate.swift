@@ -80,6 +80,12 @@ extension AppDelegate: AlertViewActionDelegate {
         
         if let sceneDelegate = UIApplication.shared.connectedScenes.first!.delegate as? SceneDelegate {
             sceneDelegate.window?.rootViewController = loginVC
+            
+            UIView.transition(with: sceneDelegate.window ?? UIWindow(),
+                                  duration: 0.3,
+                                  options: .transitionCrossDissolve,
+                                  animations: nil,
+                                  completion: nil)
         }
     }
     
