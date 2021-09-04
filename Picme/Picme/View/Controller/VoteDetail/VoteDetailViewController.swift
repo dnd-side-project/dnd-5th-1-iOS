@@ -109,8 +109,11 @@ class VoteDetailViewController: BaseViewContoller {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print("* token : \(APIConstants.jwtToken)")
+        
         setConfiguration()
         
+        ActivityView.instance.start(controller: self, time: 10)
         
         bindViewModel()
     }
@@ -155,6 +158,8 @@ class VoteDetailViewController: BaseViewContoller {
                 self.setupView() // 결과값 계산 후 Feedback View 퍼센트 초기화 해야함
                 self.setupButton()
                 self.carouselCollectionView.reloadData()
+                
+                ActivityView.instance.stop()
             }
         }
         
@@ -336,6 +341,7 @@ extension VoteDetailViewController: AlertViewActionDelegate {
         // 1. 투표 작성자인 경우 -> Feedback View + 원픽 버튼(원픽 이미지)
         if isSameNickname {
             print("투표 작성자인 경우")
+            isPickStart = false
             setupResultView(isPicked: true, isVoted: true)
         } else { // 2. 투표 작성자가 아닐 경우
             if !viewModel.voteDetailModel.value.isVoted { // 2-1. 투표하지 않은 사용자 -> Pick View
@@ -344,6 +350,7 @@ extension VoteDetailViewController: AlertViewActionDelegate {
                 setupResultView(isPicked: false, isVoted: false)
             } else { // 2-2. 투표한 사용자 -> Feedback View + 원픽 버튼(투표 이미지)
                 print("사용자 투표 O")
+                isPickStart = false
                 setupResultView(isPicked: true, isVoted: true)
             }
         }
@@ -365,7 +372,9 @@ extension VoteDetailViewController: AlertViewActionDelegate {
             skipButton.setImage(#imageLiteral(resourceName: "onePickButton"), for: .normal)
             skipButton.setImage(#imageLiteral(resourceName: "onePickButtonDisabled"), for: .highlighted)
             skipButton.setTitle("", for: .normal)
+  
             skipButton.tag = 17
+            print("tag 변경 skip tag ? \(skipButton.tag)")
             onePickLabel.text = "내 원픽!"
             onePickLabel.textColor = .textColor(.text91)
             
@@ -522,6 +531,9 @@ extension VoteDetailViewController: AlertViewActionDelegate {
     
     @objc func feedbackButtonClicked(_ sender: UIButton) {
         // 투표 안 했을 때만 투표 생성 서버 통신
+        
+        print("is pick start??? \(isPickStart) + tag \(sender.tag)")
+        
         if isPickStart { // Pick View에서 투표해서 온 경우만 통신 가능
             isPickStart = false
             
@@ -574,8 +586,12 @@ extension VoteDetailViewController: AlertViewActionDelegate {
             })
         }
         
+        print("여기까지옴")
+        
         // One Pick Button Clicked
         if sender.tag == 17 {
+            print("tag = 17")
+            
             // 투표 작성자일 경우 -> 원픽 이미지로 이동
             if isSameNickname {
                 print("투표 작성자 원픽 ")
