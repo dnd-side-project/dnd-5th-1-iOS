@@ -15,6 +15,7 @@ import UIKit
     @objc optional func reportTapped()
     @objc optional func serviceTapped()
     @objc optional func moveToHomeTab()
+    @objc optional func leaveActionTapped()
 }
 
 class AlertView: UIView {
@@ -23,16 +24,16 @@ class AlertView: UIView {
     
     weak var actionDelegate: AlertViewActionDelegate?
     
-    @IBOutlet var rootView: UIView!
-    @IBOutlet weak var alertView: UIView!
-    @IBOutlet weak var XButton: UIButton!
-    @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var doneButton: UIButton!
-    @IBOutlet weak var denyButton: UIButton!
-    @IBOutlet weak var buttonStackView: UIStackView!
+    @IBOutlet private var rootView: UIView!
+    @IBOutlet private weak var alertView: UIView!
+    @IBOutlet private weak var XButton: UIButton!
+    @IBOutlet private weak var imageView: UIImageView!
+    @IBOutlet private weak var titleLabel: UILabel!
+    @IBOutlet private weak var doneButton: UIButton!
+    @IBOutlet private weak var denyButton: UIButton!
+    @IBOutlet private weak var buttonStackView: UIStackView!
     
-    override init(frame: CGRect) {
+    private override init(frame: CGRect) {
         super.init(frame: frame)
         
         Bundle.main.loadNibNamed("AlertView", owner: self, options: nil)
@@ -152,7 +153,7 @@ class AlertView: UIView {
         }
     }
     
-    func showAlert(using type: AlertType) {
+    public func showAlert(using type: AlertType) {
         titleLabel.text = type.title
         imageView.image = type.image
         denyButton.setTitle(type.cancelButtonText, for: .normal)
@@ -173,7 +174,7 @@ class AlertView: UIView {
         UIApplication.shared.windows.first?.addSubview(rootView)
     }
     
-    @objc func doneButtonClicked(_ sender: UIButton) {
+    @objc private func doneButtonClicked(_ sender: UIButton) {
         switch sender.tag {
         case 0, 1, 2:
             actionDelegate?.loginTapped?()
@@ -187,6 +188,8 @@ class AlertView: UIView {
             actionDelegate?.reportTapped?()
         case 7:
             actionDelegate?.serviceTapped?()
+        case 9:
+            actionDelegate?.leaveActionTapped?()
         default:
             print("AlertView has Not Work")
         }
@@ -194,7 +197,7 @@ class AlertView: UIView {
         rootView.removeFromSuperview()
     }
     
-    @objc func removeButtonClicked(_ sender: UIButton) {
+    @objc private func removeButtonClicked(_ sender: UIButton) {
         // 로그인 Alert창에서 둘러보기를 누르면 홈 탭으로 이동
         if sender.tag == 0 || sender.tag == 1 || sender.tag == 2 {
             actionDelegate?.moveToHomeTab?()

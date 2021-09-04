@@ -50,7 +50,7 @@
                                         <rect key="frame" x="0.0" y="68" width="335" height="52"/>
                                         <color key="backgroundColor" red="0.21568627450980393" green="0.23529411764705882" blue="0.25882352941176467" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="NotoSansCJKkr-Bold" family="Noto Sans CJK KR" pointSize="16"/>
-                                        <state key="normal" title="약관 및 정책">
+                                        <state key="normal" title="문의하기">
                                             <color key="titleColor" red="0.47058823529411764" green="0.4823529411764706" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
@@ -265,7 +265,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6UB-gh-1jf">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="774"/>
+                                <rect key="frame" x="0.0" y="16" width="414" height="742"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="GuideCell" rowHeight="126" id="Rkv-10-5M4" customClass="GuideCell" customModule="Picme" customModuleProvider="target">
@@ -276,15 +276,15 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="가이드" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dRs-bA-pA6">
-                                                    <rect key="frame" x="20" y="20" width="374" height="86"/>
+                                                    <rect key="frame" x="20" y="8" width="374" height="110"/>
                                                     <fontDescription key="fontDescription" name="NotoSansCJKkr-Bold" family="Noto Sans CJK KR" pointSize="16"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="dRs-bA-pA6" secondAttribute="bottom" constant="20" id="33d-8Y-2LM"/>
-                                                <constraint firstItem="dRs-bA-pA6" firstAttribute="top" secondItem="vI5-2h-kDD" secondAttribute="top" constant="20" id="757-n5-0v3"/>
+                                                <constraint firstAttribute="bottom" secondItem="dRs-bA-pA6" secondAttribute="bottom" constant="8" id="33d-8Y-2LM"/>
+                                                <constraint firstItem="dRs-bA-pA6" firstAttribute="top" secondItem="vI5-2h-kDD" secondAttribute="top" constant="8" id="757-n5-0v3"/>
                                                 <constraint firstAttribute="trailing" secondItem="dRs-bA-pA6" secondAttribute="trailing" constant="20" id="bjM-uH-BUh"/>
                                                 <constraint firstItem="dRs-bA-pA6" firstAttribute="leading" secondItem="vI5-2h-kDD" secondAttribute="leading" constant="20" id="rtJ-mS-5GT"/>
                                             </constraints>
@@ -302,8 +302,8 @@
                         <constraints>
                             <constraint firstItem="ZUH-xk-cM1" firstAttribute="trailing" secondItem="6UB-gh-1jf" secondAttribute="trailing" id="FHx-fk-os0"/>
                             <constraint firstItem="6UB-gh-1jf" firstAttribute="leading" secondItem="ZUH-xk-cM1" secondAttribute="leading" id="SP2-uu-MDN"/>
-                            <constraint firstItem="6UB-gh-1jf" firstAttribute="top" secondItem="ZUH-xk-cM1" secondAttribute="top" id="iUV-EN-OHT"/>
-                            <constraint firstItem="ZUH-xk-cM1" firstAttribute="bottom" secondItem="6UB-gh-1jf" secondAttribute="bottom" id="nDi-Z3-AUb"/>
+                            <constraint firstItem="6UB-gh-1jf" firstAttribute="top" secondItem="ZUH-xk-cM1" secondAttribute="top" constant="16" id="iUV-EN-OHT"/>
+                            <constraint firstItem="ZUH-xk-cM1" firstAttribute="bottom" secondItem="6UB-gh-1jf" secondAttribute="bottom" constant="16" id="nDi-Z3-AUb"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="04x-p3-62N"/>
@@ -417,6 +417,9 @@ PICME 은(는) 정보주체의 이용정보를 저장하고 수시로 불러오�
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="개인정보처리방침" id="w9h-Wg-mHO"/>
+                    <connections>
+                        <outlet property="textView" destination="WJR-8M-RhB" id="3Rn-w5-NdU"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QMn-2S-Pen" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
