@@ -80,7 +80,7 @@ class MainViewController: BaseViewContoller, TouchDelegate, UITableViewDelegate 
         viewModel.mainList = []
         viewModel.fetchMainList()
         
-        if viewModel.mainList.count == 0 {
+        if viewModel.mainList.isEmpty {
             self.showEmptyView()
         }
         // mainTableView.scrollToTop()
