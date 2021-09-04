@@ -74,6 +74,7 @@
 		D11C2DC126B82AA100C8EE51 /* VoteDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11C2DC026B82AA100C8EE51 /* VoteDetailTableViewController.swift */; };
 		D12B119A26CD057B00777498 /* Extension+UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D12B119926CD057B00777498 /* Extension+UIViewController.swift */; };
 		D12B119C26CD924200777498 /* LoginUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D12B119B26CD924200777498 /* LoginUser.swift */; };
+		D138B3F926E2F25000323A0B /* DateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D138B3F826E2F25000323A0B /* DateHelper.swift */; };
 		D1449D9426A845370083418D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D1449D9326A845370083418D /* Main.storyboard */; };
 		D1449D9926A848610083418D /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1449D9826A848610083418D /* MainViewController.swift */; };
 		D1657FB826D973C900A12F9E /* MyPageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1657FB726D973C900A12F9E /* MyPageModel.swift */; };
@@ -196,6 +197,7 @@
 		D11C2DC026B82AA100C8EE51 /* VoteDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteDetailTableViewController.swift; sourceTree = "<group>"; };
 		D12B119926CD057B00777498 /* Extension+UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIViewController.swift"; sourceTree = "<group>"; };
 		D12B119B26CD924200777498 /* LoginUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUser.swift; sourceTree = "<group>"; };
+		D138B3F826E2F25000323A0B /* DateHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHelper.swift; sourceTree = "<group>"; };
 		D1449D9326A845370083418D /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		D1449D9826A848610083418D /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		D1657FB726D973C900A12F9E /* MyPageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageModel.swift; sourceTree = "<group>"; };
@@ -671,6 +673,7 @@
 				A9E6DD8726CCD960006155F3 /* Toast */,
 				A9DDA11F26D6FD2C00ACA63D /* DateFormat.swift */,
 				A9DDA15726E1BD6500ACA63D /* ActivityView.swift */,
+				D138B3F826E2F25000323A0B /* DateHelper.swift */,
 			);
 			path = etc;
 			sourceTree = "<group>";
@@ -1150,6 +1153,7 @@
 				A9C12B87269C137600729A74 /* Dynamic.swift in Sources */,
 				D1B51C9626BE9EA500928FF3 /* VoteDetailCollectionViewCell.swift in Sources */,
 				A95CD35E269EFBC8002CCCA8 /* LoginAPICenter.swift in Sources */,
+				D138B3F926E2F25000323A0B /* DateHelper.swift in Sources */,
 				A9322EF726C0C38F0061EF35 /* OnePickViewController.swift in Sources */,
 				A9E6DD8D26CCE206006155F3 /* ToastView.swift in Sources */,
 				D1F7E2CB26E11091002E95F4 /* Extension+UIButton.swift in Sources */,
