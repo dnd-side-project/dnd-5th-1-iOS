@@ -98,6 +98,10 @@ class VoteDetailViewController: BaseViewContoller {
     // MARK: - Timer
     var timer = Timer()
     
+    var dateHelper = DateHelper()
+  
+    let currentDate = Date()
+    
     deinit {
         timer.invalidate()
     }
@@ -127,7 +131,7 @@ class VoteDetailViewController: BaseViewContoller {
                 
                 // Set Deadline Timer
                 if let deadline = response.deadline {
-                    self.setTimer(endTime: deadline)
+                    self.setTimer(deadline: deadline)
                 }
                 
                 self.detailPageControl.numberOfPages = response.images.count
@@ -406,6 +410,28 @@ extension VoteDetailViewController: AlertViewActionDelegate {
     
     // MARK: - Set Timer
     
+    func setTimer(deadline: String) {
+        let endDate = dateHelper.stringToDate(dateString: deadline)!
+        var remainSeconds = dateHelper.getTimer(startDate: currentDate, endDate: endDate)
+
+       DispatchQueue.main.async { [weak self] in
+        self?.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] timer in
+
+                if remainSeconds <= 0 {
+                    timer.invalidate()
+                    self?.detailDeadlineLabel.text = "마감된 투표에요"
+                    self?.detailClockImageView.isHidden = true
+                    return
+                }
+
+                remainSeconds -= 1
+                self?.detailClockImageView.isHidden = false
+            self?.detailDeadlineLabel.text = self?.dateHelper.timerString(remainSeconds: remainSeconds)
+            }
+       }
+    }
+    
+    /*
     func setTimer(endTime: String) {
         DispatchQueue.main.async { [weak self] in
             self?.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] timer in
@@ -442,6 +468,7 @@ extension VoteDetailViewController: AlertViewActionDelegate {
             }
         }
     }
+    */
     
     // MARK: - Button Tags
     

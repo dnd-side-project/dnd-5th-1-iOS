@@ -33,32 +33,36 @@ class MainTableViewCell: UITableViewCell {
     // var imageData = [#imageLiteral(resourceName: "defalutImage"), #imageLiteral(resourceName: "defalutImage"), #imageLiteral(resourceName: "defalutImage")]
     var postId: String!
     
+    var dateHelper = DateHelper()
+    
     // Timer
-    var timer = Timer()
     let currentDate = Date()
     
-    deinit {
-        timer.invalidate()
-    }
+        var timer = Timer()
+        deinit {
+            timer.invalidate()
+        }
+    
+    // var timer: Timer?
     
     /*
-    func updateCell(model: Any) {
-        if let object = model as? MainModel {
-            // mainProfileImageView.kf.setImage(with: URL(string: object.user.profileImageUrl), placeholder: #imageLiteral(resourceName: "progressCircle"))
-            
-            mainProfileImageView.image = UIImage.profileImage(object.user.profileImageUrl)
-            mainNicknameLabel.text = object.user.nickname
-            mainParticipantsLabel.text = "\(object.participantsNum)명 참여중"
-            mainTitleLabel.text = object.title
-            imageData = object.images
-            // setTimer(endTime: object.deadline)
-            setTimer(deadline: object.deadline)
-            postId = object.postId
-        } else {
-       
-        }
-    }
- */
+     func updateCell(model: Any) {
+     if let object = model as? MainModel {
+     // mainProfileImageView.kf.setImage(with: URL(string: object.user.profileImageUrl), placeholder: #imageLiteral(resourceName: "progressCircle"))
+     
+     mainProfileImageView.image = UIImage.profileImage(object.user.profileImageUrl)
+     mainNicknameLabel.text = object.user.nickname
+     mainParticipantsLabel.text = "\(object.participantsNum)명 참여중"
+     mainTitleLabel.text = object.title
+     imageData = object.images
+     // setTimer(endTime: object.deadline)
+     setTimer(deadline: object.deadline)
+     postId = object.postId
+     } else {
+     
+     }
+     }
+     */
     
     func configure(with object: MainModel?) {
         if let object = object {
@@ -69,76 +73,102 @@ class MainTableViewCell: UITableViewCell {
             imageData = object.images
             // setTimer(endTime: object.deadline)
             setTimer(deadline: object.deadline)
+            
+            // timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(fireTimer), userInfo: ["deadline": object.deadline], repeats: true)
+            
             postId = object.postId
         } else {
-           // print("로딩중")
-        }
-    }
-    
-    // MARK: - Timer
-    
-    func setTimer(deadline: String) {
-        let endDate = DateHelper.stringToDate(dateString: deadline)!
-        var remainSeconds = DateHelper.getTimer(startDate: currentDate, endDate: endDate)
-        
-        DispatchQueue.main.async { [weak self] in
-            self?.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] timer in
-           
-                if remainSeconds < 0 {
-                    timer.invalidate()
-                    self?.mainDeadlineLabel.text = "마감된 투표에요"
-                    self?.mainClockImageView.isHidden = true
-                    return
-                }
-                
-                remainSeconds -= 1
-                self?.mainClockImageView.isHidden = false
-                self?.mainDeadlineLabel.text = DateHelper.timerString(remainSeconds: remainSeconds)
-            }
+            // print("로딩중")
         }
     }
     
     /*
-    func setTimer(endTime: String) {
-        print("settiemr")
-        DispatchQueue.main.async { [weak self] in
-            self?.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] timer in
-                
-  
-                // 마감 시간 Date 형식으로 변환
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-                let convertDate = dateFormatter.date(from: endTime)
-                
-                // 현재 시간 적용하기 - 시간 + 9시간
-                let calendar = Calendar.current
-                let today = Date()
-                let localDate = Date(timeInterval: TimeInterval(calendar.timeZone.secondsFromGMT()), since: today)
-                let localConvertDate =  Date(timeInterval: TimeInterval(calendar.timeZone.secondsFromGMT()), since: convertDate!)
-                
-                let elapsedTimeSeconds = Int(Date().timeIntervalSince(localConvertDate)) // 마감 시간
-                let expireLimit = Int(Date().timeIntervalSince(localDate)) // 현재 시간
-                
-                guard elapsedTimeSeconds <= expireLimit else { // 시간 초과한 경우
-                    timer.invalidate()
-                    
-                    self?.mainDeadlineLabel.text = "마감된 투표에요"
-                    self?.mainClockImageView.isHidden = true
-                    return
-                }
-                
-                let remainSeconds = expireLimit - elapsedTimeSeconds
-                
-                let hours   = Int(remainSeconds) / 3600
-                let minutes = Int(remainSeconds) / 60 % 60
-                let seconds = Int(remainSeconds) % 60
-                
-                self?.mainClockImageView.isHidden = false
-                self?.mainDeadlineLabel.text = String(format: "%02i:%02i:%02i", hours, minutes, seconds)
-            }
+    @objc func fireTimer() {
+        guard let context = timer?.userInfo as? [String: String] else { return }
+        let deadline = context["deadline", default: ""]
+        
+        let endDate = dateHelper.stringToDate(dateString: deadline)!
+        var remainSeconds = dateHelper.getTimer(startDate: currentDate, endDate: endDate)
+        
+
+        
+        if remainSeconds <= 0 {
+            timer?.invalidate()
+            self.mainDeadlineLabel.text = "마감된 투표에요"
+            self.mainClockImageView.isHidden = true
+            timer = nil
         }
+        
+        remainSeconds -= 1
+        self.mainClockImageView.isHidden = false
+        self.mainDeadlineLabel.text = self.dateHelper.timerString(remainSeconds: remainSeconds)
     }
- */
+    */
+    
+    // MARK: - Timer
+    
+        func setTimer(deadline: String) {
+            let endDate = dateHelper.stringToDate(dateString: deadline)!
+            var remainSeconds = dateHelper.getTimer(startDate: currentDate, endDate: endDate)
+    
+           DispatchQueue.main.async { [weak self] in
+            self?.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] timer in
+    
+                    if remainSeconds <= 0 {
+                        timer.invalidate()
+                        self?.mainDeadlineLabel.text = "마감된 투표에요"
+                        self?.mainClockImageView.isHidden = true
+                        return
+                    }
+    
+                    remainSeconds -= 1
+                    self?.mainClockImageView.isHidden = false
+                self?.mainDeadlineLabel.text = self?.dateHelper.timerString(remainSeconds: remainSeconds)
+                }
+           }
+        }
+    
+    /*
+     func setTimer(endTime: String) {
+     print("settiemr")
+     DispatchQueue.main.async { [weak self] in
+     self?.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] timer in
+     
+     
+     // 마감 시간 Date 형식으로 변환
+     let dateFormatter = DateFormatter()
+     dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+     let convertDate = dateFormatter.date(from: endTime)
+     
+     // 현재 시간 적용하기 - 시간 + 9시간
+     let calendar = Calendar.current
+     let today = Date()
+     let localDate = Date(timeInterval: TimeInterval(calendar.timeZone.secondsFromGMT()), since: today)
+     let localConvertDate =  Date(timeInterval: TimeInterval(calendar.timeZone.secondsFromGMT()), since: convertDate!)
+     
+     let elapsedTimeSeconds = Int(Date().timeIntervalSince(localConvertDate)) // 마감 시간
+     let expireLimit = Int(Date().timeIntervalSince(localDate)) // 현재 시간
+     
+     guard elapsedTimeSeconds <= expireLimit else { // 시간 초과한 경우
+     timer.invalidate()
+     
+     self?.mainDeadlineLabel.text = "마감된 투표에요"
+     self?.mainClockImageView.isHidden = true
+     return
+     }
+     
+     let remainSeconds = expireLimit - elapsedTimeSeconds
+     
+     let hours   = Int(remainSeconds) / 3600
+     let minutes = Int(remainSeconds) / 60 % 60
+     let seconds = Int(remainSeconds) % 60
+     
+     self?.mainClockImageView.isHidden = false
+     self?.mainDeadlineLabel.text = String(format: "%02i:%02i:%02i", hours, minutes, seconds)
+     }
+     }
+     }
+     */
     
     func setCollectionViewDataSourceDelegate(forRow row: Int) {
         mainCollectionView.delegate = self
