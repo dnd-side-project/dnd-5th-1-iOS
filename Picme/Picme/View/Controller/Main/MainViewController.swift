@@ -79,6 +79,10 @@ class MainViewController: BaseViewContoller, TouchDelegate, UITableViewDelegate 
         viewModel.currentPage = 1
         viewModel.mainList = []
         viewModel.fetchMainList()
+        
+        if viewModel.mainList.count == 0 {
+            self.showEmptyView()
+        }
         // mainTableView.scrollToTop()
         
     }
@@ -145,6 +149,11 @@ class MainViewController: BaseViewContoller, TouchDelegate, UITableViewDelegate 
         self.mainTableView.isHidden = true
     }
     */
+    
+    func showEmptyView() {
+        self.emptyView.isHidden = false
+        self.mainTableView.isHidden = true
+    }
     
     // MARK: - Collection View Cell 클릭시
     
