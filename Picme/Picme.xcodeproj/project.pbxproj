@@ -13,6 +13,7 @@
 		A91A907526BD516400C43D43 /* UploadImage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A91A907426BD516400C43D43 /* UploadImage.storyboard */; };
 		A91A907726BD51FF00C43D43 /* UploadImageViewContoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91A907626BD51FF00C43D43 /* UploadImageViewContoller.swift */; };
 		A91A909026BE9D2800C43D43 /* KeyChainModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91A908F26BE9D2800C43D43 /* KeyChainModel.swift */; };
+		A91D3A4326E361CC00957561 /* TermsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91D3A4226E361CC00957561 /* TermsViewController.swift */; };
 		A91F57D426B7B261006F20AD /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91F57D326B7B261006F20AD /* OnboardingViewController.swift */; };
 		A91F57D726B7B641006F20AD /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91F57D626B7B641006F20AD /* OnboardingViewModel.swift */; };
 		A93222CB26D08CE6002ACBFC /* NotoSansCJKkr-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = A93222CA26D08CE6002ACBFC /* NotoSansCJKkr-Black.otf */; };
@@ -128,6 +129,7 @@
 		A91A907426BD516400C43D43 /* UploadImage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = UploadImage.storyboard; sourceTree = "<group>"; };
 		A91A907626BD51FF00C43D43 /* UploadImageViewContoller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadImageViewContoller.swift; sourceTree = "<group>"; };
 		A91A908F26BE9D2800C43D43 /* KeyChainModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainModel.swift; sourceTree = "<group>"; };
+		A91D3A4226E361CC00957561 /* TermsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsViewController.swift; sourceTree = "<group>"; };
 		A91F57D326B7B261006F20AD /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		A91F57D626B7B641006F20AD /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
 		A93222CA26D08CE6002ACBFC /* NotoSansCJKkr-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansCJKkr-Black.otf"; sourceTree = "<group>"; };
@@ -354,6 +356,7 @@
 		A975287E26B69F05003EE1A9 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
+				A91D3A4226E361CC00957561 /* TermsViewController.swift */,
 				A91F57D326B7B261006F20AD /* OnboardingViewController.swift */,
 			);
 			path = Onboarding;
@@ -1166,6 +1169,7 @@
 				A91A904626B92BDB00C43D43 /* OnboardingUserInfo.swift in Sources */,
 				D1B51CA426BEB72400928FF3 /* VoteDetailService.swift in Sources */,
 				D180456C26B3E8DD0053430E /* APIConstants.swift in Sources */,
+				A91D3A4326E361CC00957561 /* TermsViewController.swift in Sources */,
 				D1103F6226C46AE4002D1E78 /* Enum+NetworkResult.swift in Sources */,
 				A91A907726BD51FF00C43D43 /* UploadImageViewContoller.swift in Sources */,
 				A9E6DD7A26C9F63D006155F3 /* CreateListModel.swift in Sources */,
