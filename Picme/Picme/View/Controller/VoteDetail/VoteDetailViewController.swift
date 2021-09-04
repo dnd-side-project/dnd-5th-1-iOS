@@ -109,11 +109,12 @@ class VoteDetailViewController: BaseViewContoller {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        ActivityView.instance.start(controller: self)
+        
         print("* token : \(APIConstants.jwtToken)")
         
         setConfiguration()
         
-        ActivityView.instance.start(controller: self, time: 10)
         
         bindViewModel()
     }
@@ -237,15 +238,24 @@ extension CarouselDatasource: UICollectionViewDataSource {
             }
         } else { // 2-1. 투표 안한 사용자 -> 투표 선택 화면 Pick View
             if isSelect {
+               // print("* cell for is select")
                 // 투표는 안했지만 선택한 이미지가 있는 경우 -> 핑크뷰 + 다이아몬드 이미지 활성화
                 if indexPath.item == selectImageIndex {
+                   // print("* cell for is select ---- 활성 핑크")
                     cell.viewWidthConstraint.constant = 299
                     cell.diamondsImageView.isHidden = false
                 } else { // 나머지 이미지는 그대로
+                   // print("* cell for is select ---- 비활성 그대로 ")
                     cell.viewWidthConstraint.constant = 0
                     cell.diamondsImageView.isHidden = true
                 }
             }
+            
+            //             else { // didselectimetat에서 isselect취소시 해당 셀 활성이미지 없애주기 위함
+            //
+            //                    cell.viewWidthConstraint.constant = 0
+            //                    cell.diamondsImageView.isHidden = true
+            //
         }
         
         cell.detailPhotoImageView.kf.setImage(with: URL(string: (object.images[indexPath.row].imageUrl)), placeholder: #imageLiteral(resourceName: "defalutImage"))
@@ -268,11 +278,20 @@ extension VoteDetailViewController: UICollectionViewDelegate {
     // MARK: - Did Select Item At
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        isSelect = true
-        selectImageIndex = indexPath.row
-        selectedImageId = viewModel.voteDetailModel.value.images[indexPath.row].imageId
-        pickButton.setImage(#imageLiteral(resourceName: "pickButtonNormal"), for: .normal)
-        carouselCollectionView.reloadData() // 컬렉션 뷰 업데이트 해줘야지 반영됨
+//        if !isSelect {
+//            print("* did select item - select ok")
+            isSelect = true
+            selectImageIndex = indexPath.row
+            selectedImageId = viewModel.voteDetailModel.value.images[indexPath.row].imageId
+            pickButton.setImage(#imageLiteral(resourceName: "pickButtonNormal"), for: .normal)
+            carouselCollectionView.reloadData() // 컬렉션 뷰 업데이트 해줘야지 반영됨
+//        }
+//        else {
+//            print("* did select item - select nope!")
+//            isSelect = false
+//            pickButton.setImage(#imageLiteral(resourceName: "pickButtonDisabled"), for: .normal)
+//            carouselCollectionView.reloadData() // 컬렉션 뷰 업데이트 해줘야지 반영됨
+//        }
     }
     
     // MARK: - Scroll View Did Scroll
