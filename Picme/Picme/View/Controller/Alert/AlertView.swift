@@ -76,6 +76,8 @@ class AlertView: UIView {
         case service
         /// 업로드 사진 두 장 이하일 경우, Tag = 8
         case uploadImagesFailed
+        /// 회원탈퇴, Tag = 9
+        case leave
         
         fileprivate var title: String {
             switch self {
@@ -96,13 +98,15 @@ class AlertView: UIView {
             case .service:
                 return "아직 서비스 준비 중이에요.\n조금만 기다려 주시면 곧 찾아갈게요!"
             case .uploadImagesFailed:
-                return "최소 2장 이상의 사진이 필요해요.\n다시 업로드 해주시겠어요^^?"
+                return "2장 이상 업로드해야 투표를 만들 수 있어요\n사진을 더 업로드 해주시겠어요?"
+            case .leave:
+                return "정말 탈퇴하시겠어요?\n'탈퇴하기'를 누르시면 더 이상 만날 수 없어요."
             }
         }
         
         fileprivate var cancelButtonText: String {
             switch self {
-            case .logOut, .inputDataCencel, .listRemove, .report:
+            case .logOut, .inputDataCencel, .listRemove, .report, .leave:
                 return "아니요"
             case .logInDetail, .logInVote, .logInMypage:
                 return "더 둘러볼래요"
@@ -124,7 +128,9 @@ class AlertView: UIView {
             case .report:
                 return "신고하기"
             case .uploadImagesFailed:
-                return "확인"
+                return "네, 업로드할게요."
+            case .leave:
+                return "탈퇴하기"
             case .service:
                 return ""
             }
@@ -138,8 +144,10 @@ class AlertView: UIView {
                 return UIImage(named: "trash")
             case .report:
                 return UIImage(named: "report")
-            case .service, .uploadImagesFailed:
+            case .service:
                 return UIImage(named: "setting")
+            case .uploadImagesFailed, .leave:
+                return UIImage(named: "hmm")
             }
         }
     }
