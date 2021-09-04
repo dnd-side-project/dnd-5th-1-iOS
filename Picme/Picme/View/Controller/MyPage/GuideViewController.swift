@@ -11,7 +11,7 @@ class GuideViewController: BaseViewContoller {
 
     @IBOutlet weak var tableView: UITableView!
     
-    let guideList: [String] = ["가이드라인", "개인정보 처리방침"]
+    let guideList: [String] = ["인스타그램", "이용 약관", "개인정보 처리방침"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +26,7 @@ class GuideViewController: BaseViewContoller {
 extension GuideViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
+        return 68
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -46,12 +46,22 @@ extension GuideViewController: UITableViewDelegate, UITableViewDataSource {
         case 0:
             return
         case 1:
-            guard let personalVC = storyboard?.instantiateViewController(withIdentifier: "PersonalInfo") as? UINavigationController else { return }
-            personalVC.modalPresentationStyle = .fullScreen
-            self.present(personalVC, animated: true, completion: nil)
+            personalInfoPath(type: .term)
+        case 2:
+            personalInfoPath(type: .policy)
         default:
             return
         }
+    }
+    
+    private func personalInfoPath(type: PersonalInfoViewContoller.Terms) {
+        
+        guard let personalVC = storyboard?.instantiateViewController(withIdentifier: "PersonalInfo") as? UINavigationController else { return }
+        personalVC.modalPresentationStyle = .fullScreen
+        if let infoType = personalVC.topViewController as? PersonalInfoViewContoller {
+            infoType.types = type
+        }
+        self.present(personalVC, animated: true, completion: nil)
     }
 }
 
@@ -61,7 +71,7 @@ extension GuideViewController {
         
         // Navigation
         navigationController?.navigationBar.tintColor = .white
-        navigationItem.title = "약관 및 정책"
+        navigationItem.title = "문의하기"
         navigationItem.hidesBackButton = true
         
         let customBackButton = UIBarButtonItem(image: UIImage(named: "leftArrow28"),
