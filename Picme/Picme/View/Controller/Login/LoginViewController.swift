@@ -149,7 +149,8 @@ extension LoginViewController: LoginState {
     
     func presentOnboarding() {
         let onBoarding = UIStoryboard(name: "Onboarding", bundle: nil)
-        let presentController = onBoarding.instantiateViewController(withIdentifier: "OnboardingViewController")
+        let presentController = onBoarding.instantiateViewController(withIdentifier: "TermsViewController")
+        presentController.modalPresentationStyle = .fullScreen
         self.present(presentController, animated: true, completion: nil)
     }
     
