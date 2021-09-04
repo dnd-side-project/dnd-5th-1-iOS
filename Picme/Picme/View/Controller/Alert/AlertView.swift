@@ -15,6 +15,7 @@ import UIKit
     @objc optional func reportTapped()
     @objc optional func serviceTapped()
     @objc optional func moveToHomeTab()
+    @objc optional func leaveActionTapped()
 }
 
 class AlertView: UIView {
@@ -23,16 +24,16 @@ class AlertView: UIView {
     
     weak var actionDelegate: AlertViewActionDelegate?
     
-    @IBOutlet var rootView: UIView!
-    @IBOutlet weak var alertView: UIView!
-    @IBOutlet weak var XButton: UIButton!
-    @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var doneButton: UIButton!
-    @IBOutlet weak var denyButton: UIButton!
-    @IBOutlet weak var buttonStackView: UIStackView!
+    @IBOutlet private var rootView: UIView!
+    @IBOutlet private weak var alertView: UIView!
+    @IBOutlet private weak var XButton: UIButton!
+    @IBOutlet private weak var imageView: UIImageView!
+    @IBOutlet private weak var titleLabel: UILabel!
+    @IBOutlet private weak var doneButton: UIButton!
+    @IBOutlet private weak var denyButton: UIButton!
+    @IBOutlet private weak var buttonStackView: UIStackView!
     
-    override init(frame: CGRect) {
+    private override init(frame: CGRect) {
         super.init(frame: frame)
         
         Bundle.main.loadNibNamed("AlertView", owner: self, options: nil)
@@ -76,6 +77,8 @@ class AlertView: UIView {
         case service
         /// 업로드 사진 두 장 이하일 경우, Tag = 8
         case uploadImagesFailed
+        /// 회원탈퇴, Tag = 9
+        case leave
         
         fileprivate var title: String {
             switch self {
@@ -96,13 +99,15 @@ class AlertView: UIView {
             case .service:
                 return "아직 서비스 준비 중이에요.\n조금만 기다려 주시면 곧 찾아갈게요!"
             case .uploadImagesFailed:
-                return "최소 2장 이상의 사진이 필요해요.\n다시 업로드 해주시겠어요^^?"
+                return "2장 이상 업로드해야 투표를 만들 수 있어요\n사진을 더 업로드 해주시겠어요?"
+            case .leave:
+                return "정말 탈퇴하시겠어요?\n'탈퇴하기'를 누르시면 더 이상 만날 수 없어요."
             }
         }
         
         fileprivate var cancelButtonText: String {
             switch self {
-            case .logOut, .inputDataCencel, .listRemove, .report:
+            case .logOut, .inputDataCencel, .listRemove, .report, .leave:
                 return "아니요"
             case .logInDetail, .logInVote, .logInMypage:
                 return "더 둘러볼래요"
@@ -124,7 +129,9 @@ class AlertView: UIView {
             case .report:
                 return "신고하기"
             case .uploadImagesFailed:
-                return "확인"
+                return "네, 업로드할게요."
+            case .leave:
+                return "탈퇴하기"
             case .service:
                 return ""
             }
@@ -138,13 +145,15 @@ class AlertView: UIView {
                 return UIImage(named: "trash")
             case .report:
                 return UIImage(named: "report")
-            case .service, .uploadImagesFailed:
+            case .service:
                 return UIImage(named: "setting")
+            case .uploadImagesFailed, .leave:
+                return UIImage(named: "hmm")
             }
         }
     }
     
-    func showAlert(using type: AlertType) {
+    public func showAlert(using type: AlertType) {
         titleLabel.text = type.title
         imageView.image = type.image
         denyButton.setTitle(type.cancelButtonText, for: .normal)
@@ -165,7 +174,7 @@ class AlertView: UIView {
         UIApplication.shared.windows.first?.addSubview(rootView)
     }
     
-    @objc func doneButtonClicked(_ sender: UIButton) {
+    @objc private func doneButtonClicked(_ sender: UIButton) {
         switch sender.tag {
         case 0, 1, 2:
             actionDelegate?.loginTapped?()
@@ -179,6 +188,8 @@ class AlertView: UIView {
             actionDelegate?.reportTapped?()
         case 7:
             actionDelegate?.serviceTapped?()
+        case 9:
+            actionDelegate?.leaveActionTapped?()
         default:
             print("AlertView has Not Work")
         }
@@ -186,7 +197,7 @@ class AlertView: UIView {
         rootView.removeFromSuperview()
     }
     
-    @objc func removeButtonClicked(_ sender: UIButton) {
+    @objc private func removeButtonClicked(_ sender: UIButton) {
         // 로그인 Alert창에서 둘러보기를 누르면 홈 탭으로 이동
         if sender.tag == 0 || sender.tag == 1 || sender.tag == 2 {
             actionDelegate?.moveToHomeTab?()

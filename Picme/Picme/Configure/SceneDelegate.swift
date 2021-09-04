@@ -26,9 +26,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //        guard let scene = (scene as? UIWindowScene) else { return }
 //        window = UIWindow(windowScene: scene)
 //
-//        let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+//        let mainStoryboard = UIStoryboard(name: "Onboarding", bundle: nil)
 //        let mainViewController = mainStoryboard.instantiateViewController(withIdentifier:
-//                                                                            "TabBarController")
+//                                                                            "TermsViewController")
 //        mainViewController.modalPresentationStyle = .fullScreen
 //        self.window?.rootViewController = mainViewController
 //        self.window?.makeKeyAndVisible()
@@ -43,9 +43,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
                 let appleUserInfo = LoginKind.SignIn.apple(userID: userIdentifier,
                                                            email: readKeyChain.userEmail ?? "")
-                
+
                 LoginAPICenter.fetchSignIn(appleUserInfo.loginValue) { [weak self] (response) in
-                    
+
                     switch response {
                     case .success(let data):
                         print(data)
@@ -53,7 +53,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                         loginUserInfo.userNickname = data.nickname
                         loginUserInfo.userProfileImageUrl = data.profilePictureImage
                         loginUserInfo.vendor = data.vendor
-                    
+
                     case .failure(let err):
                         print(err.localized)
                     }
@@ -66,7 +66,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                     mainViewController.modalPresentationStyle = .fullScreen
                     self.window?.rootViewController = mainViewController
                     self.window?.makeKeyAndVisible()
-                    
+
                 }
 
             case .revoked, .notFound:
@@ -84,11 +84,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 break
             }
         }
-        
-        // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
-        // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
-        // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead)
-    
     }
     
     func sceneDidDisconnect(_ scene: UIScene) {
