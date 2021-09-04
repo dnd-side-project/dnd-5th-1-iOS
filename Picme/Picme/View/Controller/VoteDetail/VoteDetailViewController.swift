@@ -90,13 +90,17 @@ class VoteDetailViewController: BaseViewContoller {
     
     var postId: String!
     
-    let loginUserNickname = LoginUser.shared.userNickname
+    let loginUserNickname = LoginUser.shared.userNickname!
     var isSameNickname: Bool = false // 로그인 유저와 게시글 작성자가 일치하는지 판별
     
     var voteResultModel: [VoteResultModel] = []
     
     // MARK: - Timer
     var timer = Timer()
+    
+    var dateHelper = DateHelper()
+  
+    let currentDate = Date()
     
     deinit {
         timer.invalidate()
@@ -106,14 +110,15 @@ class VoteDetailViewController: BaseViewContoller {
         super.viewDidLoad()
         
         setConfiguration()
-        setupButton()
+        
+        
         bindViewModel()
     }
     
     // MARK: - Bind View Model
     
     private func bindViewModel() {
-        
+    
         viewModel.voteDetailModel.bindAndFire { (response) in
             
             if response.postNickname != "" {
@@ -126,13 +131,15 @@ class VoteDetailViewController: BaseViewContoller {
                 
                 // Set Deadline Timer
                 if let deadline = response.deadline {
-                    self.setTimer(endTime: deadline)
+                    self.setTimer(deadline: deadline)
                 }
                 
                 self.detailPageControl.numberOfPages = response.images.count
                 
                 // 로그인 유저 = 투표 게시자
+                print("로그인 유저 닉네임 : \(self.loginUserNickname) +  게시글 닉네임 \(response.postNickname)")
                 if self.loginUserNickname == response.postNickname {
+                    print("truerueruerueuruere")
                     self.isSameNickname = true
                 }
                 
@@ -146,13 +153,15 @@ class VoteDetailViewController: BaseViewContoller {
                 }
                 
                 self.setupView() // 결과값 계산 후 Feedback View 퍼센트 초기화 해야함
-                
+                self.setupButton()
                 self.carouselCollectionView.reloadData()
             }
         }
         
         // 게시글 상세 조회
+        
         viewModel.fetchVoteDetail(postId: postId)
+
     }
     
     override func setConfiguration() {
@@ -401,6 +410,28 @@ extension VoteDetailViewController: AlertViewActionDelegate {
     
     // MARK: - Set Timer
     
+    func setTimer(deadline: String) {
+        let endDate = dateHelper.stringToDate(dateString: deadline)!
+        var remainSeconds = dateHelper.getTimer(startDate: currentDate, endDate: endDate)
+
+       DispatchQueue.main.async { [weak self] in
+        self?.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] timer in
+
+                if remainSeconds <= 0 {
+                    timer.invalidate()
+                    self?.detailDeadlineLabel.text = "마감된 투표에요"
+                    self?.detailClockImageView.isHidden = true
+                    return
+                }
+
+                remainSeconds -= 1
+                self?.detailClockImageView.isHidden = false
+            self?.detailDeadlineLabel.text = self?.dateHelper.timerString(remainSeconds: remainSeconds)
+            }
+       }
+    }
+    
+    /*
     func setTimer(endTime: String) {
         DispatchQueue.main.async { [weak self] in
             self?.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] timer in
@@ -437,11 +468,13 @@ extension VoteDetailViewController: AlertViewActionDelegate {
             }
         }
     }
+    */
     
     // MARK: - Button Tags
     
     private func setupButton() {
         
+        print("************* is same nickname \(isSameNickname)")
         // Navigation Right Bar Button
         if isSameNickname { // 투표 작성자 -> 삭제하기
             rightBarButton.image = #imageLiteral(resourceName: "trashcan")
@@ -559,9 +592,11 @@ extension VoteDetailViewController: AlertViewActionDelegate {
     @objc func rightButtonClicked(_ sender: UIButton) {
         switch sender.tag {
         case 0:
+            print("삭제하기")
             AlertView.instance.showAlert(using: .listRemove)
             AlertView.instance.actionDelegate = self
         case 1:
+            print("신고하기")
             AlertView.instance.showAlert(using: .report)
             AlertView.instance.actionDelegate = self
         default:

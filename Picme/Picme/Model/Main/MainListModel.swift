@@ -9,8 +9,10 @@ import Foundation
 
 struct MainListModel: Codable {
     let mainList: [MainModel]
+    let total: Int
     
     enum CodingKeys: String, CodingKey {
         case mainList = "posts"
+        case total = "total"
     }
 }
