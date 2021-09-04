@@ -66,9 +66,11 @@ class TermsViewController: BaseViewContoller {
             if isAgreeCheck {
                 agreeButton.backgroundColor = .mainColor(.pink)
                 agreeButton.setTitleColor(.textColor(.text100), for: .normal)
+                agreeButton.isEnabled = true
             } else {
                 agreeButton.backgroundColor = .solidColor(.solid26)
                 agreeButton.setTitleColor(.textColor(.text50), for: .normal)
+                agreeButton.isEnabled = false
             }
         }
     }
@@ -107,6 +109,9 @@ class TermsViewController: BaseViewContoller {
     
     @IBAction func agreeAction(_ sender: UIButton) {
         
+        guard let onboardVC = storyboard?.instantiateViewController(withIdentifier: "OnboardingViewController") else { return }
+        onboardVC.modalPresentationStyle = .fullScreen
+        self.present(onboardVC, animated: true, completion: nil)
     }
     
     private func personalInfoPath(type: PersonalInfoViewContoller.Terms) {
