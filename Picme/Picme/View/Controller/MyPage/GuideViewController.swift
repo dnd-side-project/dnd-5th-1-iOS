@@ -41,6 +41,28 @@ extension GuideViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let leaveButton = UIButton(type: .custom)
+        leaveButton.frame = CGRect(x: 0, y: 0, width: tableView.frame.width, height: 22)
+        leaveButton.setTitle("회원 탈퇴하기", for: .normal)
+        leaveButton.titleLabel?.textAlignment = .center
+        leaveButton.setTitleColor(.textColor(.text50), for: .normal)
+        leaveButton.titleLabel?.font = .kr(.bold, size: 14)
+        leaveButton.backgroundColor = .solidColor(.solid0)
+        leaveButton.addTarget(self, action: #selector(leaveAction(_:)), for: .touchUpInside)
+        return leaveButton
+    }
+    
+    @objc func leaveAction(_ sender: UIButton) {
+        
+        AlertView.instance.showAlert(using: .leave)
+        AlertView.instance.actionDelegate = self
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 30
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.row {
         case 0:
@@ -62,6 +84,13 @@ extension GuideViewController: UITableViewDelegate, UITableViewDataSource {
             infoType.types = type
         }
         self.present(personalVC, animated: true, completion: nil)
+    }
+}
+
+extension GuideViewController: AlertViewActionDelegate {
+    
+    func leaveActionTapped() {
+        print("탈퇴")
     }
 }
 
