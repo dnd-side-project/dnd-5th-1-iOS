@@ -79,7 +79,7 @@ class MainViewController: BaseViewContoller, TouchDelegate, UITableViewDelegate 
         viewModel.currentPage = 1
         viewModel.mainList = []
         viewModel.fetchMainList()
-        mainTableView.scrollToTop()
+        // mainTableView.scrollToTop()
         
     }
     
@@ -173,6 +173,7 @@ class MainViewController: BaseViewContoller, TouchDelegate, UITableViewDelegate 
 //    }
 }
 
+/*
 // MARK: - Table View Data Source / Collection View Cell Delegate
 
 class MainListDatasource: GenericDataSource<MainModel>, UITableViewDataSource, CollectionViewCellDelegate {
@@ -216,6 +217,7 @@ class MainListDatasource: GenericDataSource<MainModel>, UITableViewDataSource, C
         return cell
     }
 }
+*/
 
 extension MainViewController: UITableViewDataSource, CollectionViewCellDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

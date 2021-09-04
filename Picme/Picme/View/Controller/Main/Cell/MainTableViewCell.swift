@@ -35,11 +35,13 @@ class MainTableViewCell: UITableViewCell {
     
     // Timer
     var timer = Timer()
+    let currentDate = Date()
     
     deinit {
         timer.invalidate()
     }
     
+    /*
     func updateCell(model: Any) {
         if let object = model as? MainModel {
             // mainProfileImageView.kf.setImage(with: URL(string: object.user.profileImageUrl), placeholder: #imageLiteral(resourceName: "progressCircle"))
@@ -49,14 +51,14 @@ class MainTableViewCell: UITableViewCell {
             mainParticipantsLabel.text = "\(object.participantsNum)명 참여중"
             mainTitleLabel.text = object.title
             imageData = object.images
-            setTimer(endTime: object.deadline)
+            // setTimer(endTime: object.deadline)
+            setTimer(deadline: object.deadline)
             postId = object.postId
         } else {
-            //            displayNameLabel.alpha = 0
-            //            reputationContainerView.alpha = 0
-            //            indicatorView.startAnimating()
+       
         }
     }
+ */
     
     func configure(with object: MainModel?) {
         if let object = object {
@@ -65,7 +67,8 @@ class MainTableViewCell: UITableViewCell {
             mainParticipantsLabel.text = "\(object.participantsNum)명 참여중"
             mainTitleLabel.text = object.title
             imageData = object.images
-            setTimer(endTime: object.deadline)
+            // setTimer(endTime: object.deadline)
+            setTimer(deadline: object.deadline)
             postId = object.postId
         } else {
            // print("로딩중")
@@ -74,10 +77,34 @@ class MainTableViewCell: UITableViewCell {
     
     // MARK: - Timer
     
+    func setTimer(deadline: String) {
+        let endDate = DateHelper.stringToDate(dateString: deadline)!
+        var remainSeconds = DateHelper.getTimer(startDate: currentDate, endDate: endDate)
+        
+        DispatchQueue.main.async { [weak self] in
+            self?.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] timer in
+           
+                if remainSeconds < 0 {
+                    timer.invalidate()
+                    self?.mainDeadlineLabel.text = "마감된 투표에요"
+                    self?.mainClockImageView.isHidden = true
+                    return
+                }
+                
+                remainSeconds -= 1
+                self?.mainClockImageView.isHidden = false
+                self?.mainDeadlineLabel.text = DateHelper.timerString(remainSeconds: remainSeconds)
+            }
+        }
+    }
+    
+    /*
     func setTimer(endTime: String) {
+        print("settiemr")
         DispatchQueue.main.async { [weak self] in
             self?.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] timer in
                 
+  
                 // 마감 시간 Date 형식으로 변환
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
@@ -111,6 +138,7 @@ class MainTableViewCell: UITableViewCell {
             }
         }
     }
+ */
     
     func setCollectionViewDataSourceDelegate(forRow row: Int) {
         mainCollectionView.delegate = self

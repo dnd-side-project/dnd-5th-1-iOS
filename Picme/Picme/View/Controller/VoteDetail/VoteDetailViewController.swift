@@ -106,13 +106,15 @@ class VoteDetailViewController: BaseViewContoller {
         super.viewDidLoad()
         
         setConfiguration()
+        
+        
         bindViewModel()
     }
     
     // MARK: - Bind View Model
     
     private func bindViewModel() {
-        
+    
         viewModel.voteDetailModel.bindAndFire { (response) in
             
             if response.postNickname != "" {
@@ -153,7 +155,9 @@ class VoteDetailViewController: BaseViewContoller {
         }
         
         // 게시글 상세 조회
+        
         viewModel.fetchVoteDetail(postId: postId)
+
     }
     
     override func setConfiguration() {
