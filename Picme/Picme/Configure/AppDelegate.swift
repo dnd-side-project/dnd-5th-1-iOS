@@ -43,6 +43,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         }
         
         switch indexOfTab {
+        // 홈 탭
+        case 0:
+            if let mainNC = tabBarController.viewControllers?.first as? UINavigationController,
+               let mainVC = mainNC.topViewController as? MainViewController {
+                mainVC.mainTableView.scrollToTop()
+            }
+            
         // 투표 만들기 탭
         case 1:
             if APIConstants.jwtToken != "" { // 로그인 후 탭하면 present로 나타남
@@ -82,10 +89,10 @@ extension AppDelegate: AlertViewActionDelegate {
             sceneDelegate.window?.rootViewController = loginVC
             
             UIView.transition(with: sceneDelegate.window ?? UIWindow(),
-                                  duration: 0.3,
-                                  options: .transitionCrossDissolve,
-                                  animations: nil,
-                                  completion: nil)
+                              duration: 0.3,
+                              options: .transitionCrossDissolve,
+                              animations: nil,
+                              completion: nil)
         }
     }
     
@@ -93,7 +100,7 @@ extension AppDelegate: AlertViewActionDelegate {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let mainVC = storyboard.instantiateViewController(withIdentifier: "TabBarController")
         mainVC.modalPresentationStyle = .fullScreen
-
+        
         if let sceneDelegate = UIApplication.shared.connectedScenes.first!.delegate as? SceneDelegate {
             sceneDelegate.window?.rootViewController = mainVC
         }
