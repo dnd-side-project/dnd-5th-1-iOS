@@ -102,7 +102,7 @@
         <!--Terms View Controller-->
         <scene sceneID="gmP-O2-NfL">
             <objects>
-                <viewController id="i5W-vr-nxA" customClass="TermsViewController" customModule="Picme" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TermsViewController" id="i5W-vr-nxA" customClass="TermsViewController" customModule="Picme" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="k29-xP-gQC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -135,6 +135,9 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BDS-0y-F2U">
                                                 <rect key="frame" x="0.0" y="0.0" width="28" height="28"/>
                                                 <state key="normal" image="nocheck"/>
+                                                <connections>
+                                                    <action selector="allCheckAction:" destination="i5W-vr-nxA" eventType="touchUpInside" id="kuM-wS-ffw"/>
+                                                </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="전체동의" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f2L-ae-2HR">
                                                 <rect key="frame" x="43" y="0.0" width="331" height="28"/>
@@ -150,6 +153,9 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cu5-30-GnG">
                                                 <rect key="frame" x="0.0" y="0.0" width="28" height="28"/>
                                                 <state key="normal" image="nocheck"/>
+                                                <connections>
+                                                    <action selector="termsCheckAction:" destination="i5W-vr-nxA" eventType="touchUpInside" id="4Na-sa-GQW"/>
+                                                </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="(필수) 이용 약관 동의" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U0P-Yp-YZ9">
                                                 <rect key="frame" x="43" y="0.0" width="296" height="28"/>
@@ -160,6 +166,9 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dQ6-dA-VdC">
                                                 <rect key="frame" x="354" y="0.0" width="20" height="28"/>
                                                 <state key="normal" image="&gt;"/>
+                                                <connections>
+                                                    <action selector="seeTermsAction:" destination="i5W-vr-nxA" eventType="touchUpInside" id="Abj-Ud-THp"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -169,6 +178,9 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ABp-tv-uCb">
                                                 <rect key="frame" x="0.0" y="0.0" width="28" height="28"/>
                                                 <state key="normal" image="nocheck"/>
+                                                <connections>
+                                                    <action selector="policyCheckAction:" destination="i5W-vr-nxA" eventType="touchUpInside" id="13t-lV-OFn"/>
+                                                </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="(필수) 개인정보 처리방침 동의" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0v7-V3-6nF">
                                                 <rect key="frame" x="43" y="0.0" width="296" height="28"/>
@@ -179,6 +191,9 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c2I-7x-U48">
                                                 <rect key="frame" x="354" y="0.0" width="20" height="28"/>
                                                 <state key="normal" image="&gt;"/>
+                                                <connections>
+                                                    <action selector="seePolicyAction:" destination="i5W-vr-nxA" eventType="touchUpInside" id="efs-Bh-HPv"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -213,8 +228,6 @@
                         <outlet property="agreeButton" destination="FXp-V8-XSb" id="rWj-1z-1wh"/>
                         <outlet property="allCheckButton" destination="BDS-0y-F2U" id="7wS-ZV-L4n"/>
                         <outlet property="policyCheckButton" destination="ABp-tv-uCb" id="kwe-RP-wxw"/>
-                        <outlet property="seePolicyButton" destination="c2I-7x-U48" id="RCq-6C-giK"/>
-                        <outlet property="seeTermsButton" destination="dQ6-dA-VdC" id="Mdl-42-pSj"/>
                         <outlet property="termsCheckButton" destination="Cu5-30-GnG" id="25c-Uf-XcZ"/>
                     </connections>
                 </viewController>
