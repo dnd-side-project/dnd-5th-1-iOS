@@ -80,9 +80,7 @@ class MainViewController: BaseViewContoller, TouchDelegate, UITableViewDelegate 
         viewModel.mainList = []
         viewModel.fetchMainList()
         
-        if viewModel.mainList.isEmpty {
-            self.showEmptyView()
-        }
+
         // mainTableView.scrollToTop()
         
     }
@@ -266,6 +264,14 @@ extension MainViewController: MainViewModelDelegate {
             print("* on fetch com - guard 안 ")
 //          indicatorView.stopAnimating()
 //          tableView.isHidden = false
+            
+            // 처음 1페이지일 때 아무것도 없으면 empty
+            print("* 메인 개수 : \(viewModel.mainList.count)")
+            
+            if viewModel.mainList.isEmpty {
+                self.showEmptyView()
+            }
+            
           mainTableView.reloadData()
           return
         }
