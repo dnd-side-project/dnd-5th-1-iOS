@@ -52,7 +52,7 @@ class MainTableViewCell: UITableViewCell {
     //    var timer: Timer?
     
     //    var deadline: String?
-    var remainSeconds: Int?
+    var remainSeconds: Int = 0
     
     /*
      func updateCell(model: Any) {
@@ -129,11 +129,11 @@ class MainTableViewCell: UITableViewCell {
     func updateTime() {
         
         //        print("update TIme!!")
-        remainSeconds! -= 1
+        remainSeconds -= 1
         self.mainClockImageView.isHidden = false
-        self.mainDeadlineLabel.text = self.dateHelper.timerString(remainSeconds: remainSeconds!)
+        self.mainDeadlineLabel.text = self.dateHelper.timerString(remainSeconds: remainSeconds)
         
-        if remainSeconds! <= 0 {
+        if remainSeconds <= 0 {
             self.mainDeadlineLabel.text = "마감된 투표에요"
             self.mainClockImageView.isHidden = true
             

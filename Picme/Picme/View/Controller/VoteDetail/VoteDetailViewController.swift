@@ -100,16 +100,12 @@ class VoteDetailViewController: BaseViewContoller {
     var isFirst: Bool = true
     
     // MARK: - Timer
-    var timer = Timer()
-    
+
+    var timer: Timer?
     var dateHelper = DateHelper()
-  
     let currentDate = Date()
-    
-    deinit {
-        timer.invalidate()
-    }
-    
+    var remainSeconds: Int = 0
+ 
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -117,6 +113,7 @@ class VoteDetailViewController: BaseViewContoller {
         
         setConfiguration()
         setupButton()
+        createTimer()
         
         bindViewModel()
     }
@@ -143,9 +140,13 @@ class VoteDetailViewController: BaseViewContoller {
                 self.detailPageLabel.text = "\(self.currentPage)/\(response.images.count)"
                 
                 // Set Deadline Timer
-                if let deadline = response.deadline {
-                    self.setTimer(deadline: deadline)
-                }
+//                if let deadline = response.deadline {
+//                    self.setTimer(deadline: deadline)
+//                }
+                
+                let endDate = self.dateHelper.stringToDate(dateString: response.deadline!)
+                self.remainSeconds = self.dateHelper.getTimer(startDate: self.currentDate, endDate: endDate!)
+                self.updateTimer()
                 
                 self.detailPageControl.numberOfPages = response.images.count
                 
@@ -462,27 +463,27 @@ extension VoteDetailViewController: AlertViewActionDelegate {
     
     // MARK: - Set Timer
     
-    func setTimer(deadline: String) {
-        let endDate = dateHelper.stringToDate(dateString: deadline)!
-        var remainSeconds = dateHelper.getTimer(startDate: currentDate, endDate: endDate)
-
-       DispatchQueue.main.async { [weak self] in
-        self?.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] timer in
-
-                if remainSeconds <= 0 {
-                    timer.invalidate()
-                    self?.detailDeadlineLabel.text = "마감된 투표에요"
-                    self?.detailClockImageView.isHidden = true
-                    
-                    return
-                }
-
-                remainSeconds -= 1
-                self?.detailClockImageView.isHidden = false
-            self?.detailDeadlineLabel.text = self?.dateHelper.timerString(remainSeconds: remainSeconds)
-            }
-       }
-    }
+//    func setTimer(deadline: String) {
+//        let endDate = dateHelper.stringToDate(dateString: deadline)!
+//        var remainSeconds = dateHelper.getTimer(startDate: currentDate, endDate: endDate)
+//
+//       DispatchQueue.main.async { [weak self] in
+//        self?.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] timer in
+//
+//                if remainSeconds <= 0 {
+//                    timer.invalidate()
+//                    self?.detailDeadlineLabel.text = "마감된 투표에요"
+//                    self?.detailClockImageView.isHidden = true
+//
+//                    return
+//                }
+//
+//                remainSeconds -= 1
+//                self?.detailClockImageView.isHidden = false
+//            self?.detailDeadlineLabel.text = self?.dateHelper.timerString(remainSeconds: remainSeconds)
+//            }
+//       }
+//    }
     
     /*
     func setTimer(endTime: String) {
@@ -753,4 +754,42 @@ extension VoteDetailViewController: AlertViewActionDelegate {
         }
     }
     
+}
+
+
+// MARK: - Timer
+extension VoteDetailViewController {
+
+    func createTimer() {
+        if timer == nil {
+            print("* create timer")
+            let timer = Timer(timeInterval: 1.0,
+                              target: self,
+                              selector: #selector(updateTimer),
+                              userInfo: nil,
+                              repeats: true)
+            RunLoop.current.add(timer, forMode: .common)
+            timer.tolerance = 0.1
+            
+            self.timer = timer
+        }
+    }
+    
+    func cancelTimer() {
+        timer?.invalidate()
+        timer = nil
+    }
+    
+    @objc func updateTimer() {
+        
+        remainSeconds -= 1
+        self.detailClockImageView.isHidden = false
+        self.detailDeadlineLabel.text = self.dateHelper.timerString(remainSeconds: remainSeconds)
+        
+        if remainSeconds <= 0 {
+            self.detailDeadlineLabel.text = "마감된 투표에요"
+            self.detailClockImageView.isHidden = true
+            cancelTimer()
+        }
+    }
 }

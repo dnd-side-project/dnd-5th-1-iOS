@@ -250,6 +250,7 @@ extension MainViewController: UITableViewDataSource, CollectionViewCellDelegate 
             cell.cellDelegate = self
             
             let endDate = dateHelper.stringToDate(dateString: viewModel.moderator(at: indexPath.row).deadline)
+            
             let remainTime = dateHelper.getTimer(startDate: currentDate, endDate: endDate!)
             
             cell.remainSeconds = remainTime
