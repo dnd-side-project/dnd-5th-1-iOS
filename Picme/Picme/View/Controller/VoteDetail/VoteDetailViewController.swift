@@ -70,6 +70,8 @@ class VoteDetailViewController: BaseViewContoller {
     
     // Delete View
     @IBOutlet weak var deleteView: UIView!
+    @IBOutlet weak var deleteImageView: UIImageView!
+    @IBOutlet weak var deleteLabel: UILabel!
     
     // MARK: - Properties
     
@@ -95,6 +97,8 @@ class VoteDetailViewController: BaseViewContoller {
     
     var voteResultModel: [VoteResultModel] = []
     
+    var isFirst: Bool = true
+    
     // MARK: - Timer
     var timer = Timer()
     
@@ -112,7 +116,7 @@ class VoteDetailViewController: BaseViewContoller {
         print("* token : \(APIConstants.jwtToken)")
         
         setConfiguration()
-        
+        setupButton()
         
         bindViewModel()
     }
@@ -123,6 +127,12 @@ class VoteDetailViewController: BaseViewContoller {
         ActivityView.instance.start(controller: self)
         
         viewModel.voteDetailModel.bindAndFire { (response) in
+             
+            // 제일 처음 뷰가 로드되면 데이터가 무조건 없는 상태로 빠졌다가 로드되기 때문에 isFirst로 한 번 예외처리
+            if self.isFirst {
+                self.isFirst = false
+                return
+            }
             
             if response.postNickname != "" {
                 self.detailNicknameLabel.text = response.postNickname
@@ -140,10 +150,17 @@ class VoteDetailViewController: BaseViewContoller {
                 self.detailPageControl.numberOfPages = response.images.count
                 
                 // 로그인 유저 = 투표 게시자
-                print("로그인 유저 닉네임 : \(self.loginUserNickname) +  게시글 닉네임 \(response.postNickname)")
                 if self.loginUserNickname == response.postNickname {
-                    print("truerueruerueuruere")
                     self.isSameNickname = true
+                }
+                
+                // Navigation Right Bar Button 사용자별 초기화
+                if self.isSameNickname { // 투표 작성자 -> 삭제하기
+                    self.rightBarButton.image = #imageLiteral(resourceName: "trashcan")
+                    self.rightBarButton.tag = 0
+                } else { // 투표자 -> 신고하기
+                    self.rightBarButton.image = #imageLiteral(resourceName: "megaphone")
+                    self.rightBarButton.tag = 1
                 }
                 
                 // 투표 게시자 or 투표한 사용자의 경우 - 결과 값 구하기
@@ -156,11 +173,16 @@ class VoteDetailViewController: BaseViewContoller {
                 }
                 
                 self.setupView() // 결과값 계산 후 Feedback View 퍼센트 초기화 해야함
-                self.setupButton()
                 self.carouselCollectionView.reloadData()
                 
                 ActivityView.instance.stop()
-            }
+            } else { // 투표가 삭제되어 볼 수 없는 경우
+                ActivityView.instance.stop()
+                self.rightBarButton.isEnabled = false
+                self.deleteView.isHidden = false
+                self.deleteImageView.image = #imageLiteral(resourceName: "hmm")
+                self.deleteLabel.text = "게시글이 삭제되어 볼 수 없어요.\n다시 돌아가주세요."
+           }
         }
         
         // 게시글 상세 조회
@@ -500,17 +522,7 @@ extension VoteDetailViewController: AlertViewActionDelegate {
     // MARK: - Button Tags
     
     private func setupButton() {
-        
-        print("************* is same nickname \(isSameNickname)")
-        // Navigation Right Bar Button
-        if isSameNickname { // 투표 작성자 -> 삭제하기
-            rightBarButton.image = #imageLiteral(resourceName: "trashcan")
-            rightBarButton.tag = 0
-        } else { // 투표자 -> 신고하기
-            rightBarButton.image = #imageLiteral(resourceName: "megaphone")
-            rightBarButton.tag = 1
-        }
-        
+                
         rightBarButton.action = #selector(rightButtonClicked(_:))
         rightBarButton.target = self
         
@@ -650,6 +662,7 @@ extension VoteDetailViewController: AlertViewActionDelegate {
             let time = DispatchTime.now() + 0.5
             DispatchQueue.main.asyncAfter(deadline: time) {
                 self.deleteView.isHidden = false
+                self.rightBarButton.isEnabled = false
                 Toast.show(using: .remove, controller: self)
             }
         })
