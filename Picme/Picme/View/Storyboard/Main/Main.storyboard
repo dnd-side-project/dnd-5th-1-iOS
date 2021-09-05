@@ -827,6 +827,12 @@
                                                         <constraint firstItem="IdT-mW-AiB" firstAttribute="centerX" secondItem="fkq-8O-qEk" secondAttribute="centerX" id="sV6-uu-PYI"/>
                                                         <constraint firstItem="vw8-NU-Xdo" firstAttribute="leading" secondItem="IdT-mW-AiB" secondAttribute="leading" constant="21.5" id="zQx-kc-dZN"/>
                                                     </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                            <integer key="value" value="10"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                                    </userDefinedRuntimeAttributes>
                                                 </view>
                                             </subviews>
                                             <constraints>
@@ -837,6 +843,12 @@
                                                 <constraint firstAttribute="trailing" secondItem="fkq-8O-qEk" secondAttribute="trailing" id="bEO-eA-IRs"/>
                                                 <constraint firstItem="fkq-8O-qEk" firstAttribute="height" secondItem="yZE-qI-3Ft" secondAttribute="height" id="m7N-Cf-enc"/>
                                             </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                    <integer key="value" value="10"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                            </userDefinedRuntimeAttributes>
                                         </collectionViewCellContentView>
                                         <connections>
                                             <outlet property="detailPhotoImageView" destination="IdT-mW-AiB" id="N3o-li-hYl"/>
