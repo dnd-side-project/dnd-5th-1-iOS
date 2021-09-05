@@ -81,6 +81,7 @@ class MainViewController: BaseViewContoller, TouchDelegate, UITableViewDelegate 
         print("* main view will appear")
         
         // self.bindViewModel()
+        ActivityView.instance.start(controller: self)
         
         viewModel.page = 0
         viewModel.currentPage = 1
@@ -276,6 +277,8 @@ extension MainViewController: MainViewModelDelegate {
             }
             
             mainTableView.reloadData()
+         
+            ActivityView.instance.stop()
             
             return
         }
@@ -284,6 +287,8 @@ extension MainViewController: MainViewModelDelegate {
         
         let indexPathsToReload = visibleIndexPathsToReload(intersecting: newIndexPathsToReload)
         mainTableView.reloadRows(at: indexPathsToReload, with: .automatic)
+        
+        ActivityView.instance.stop()
     }
     
     func onFetchFailed(with reason: String) {
