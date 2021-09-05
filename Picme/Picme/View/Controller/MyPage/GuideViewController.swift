@@ -66,7 +66,8 @@ extension GuideViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.row {
         case 0:
-            return
+            guard let instarVC = storyboard?.instantiateViewController(withIdentifier: "InstarWebViewController") else { return }
+            self.present(instarVC, animated: true, completion: nil)
         case 1:
             personalInfoPath(type: .term)
         case 2:
