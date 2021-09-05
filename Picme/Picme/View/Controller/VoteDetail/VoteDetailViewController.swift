@@ -566,6 +566,8 @@ extension VoteDetailViewController: AlertViewActionDelegate {
             viewModel.service?.createVote(postId: postId, imageId: selectedImageId!, category: category, completion: {
                 print("vote")
                 
+                print("투표 생성 서버통신 선택한 이미지 id는? \(self.selectedImageId)")
+                
                 let currentButtonTag = sender.tag
                 
                 feedbackDictionary.keys.filter { $0 != currentButtonTag }.forEach { tag in
@@ -602,6 +604,8 @@ extension VoteDetailViewController: AlertViewActionDelegate {
                     self.pickView.isHidden = true // 결과 뷰 나오기 전에 처리를 위해 여기서 hidden
                     self.bindViewModel()
                 }
+                
+                Toast.show(using: .voteComplete, controller: self)
             })
         }
         
