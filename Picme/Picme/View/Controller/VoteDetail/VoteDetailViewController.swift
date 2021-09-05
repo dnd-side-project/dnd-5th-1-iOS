@@ -109,8 +109,6 @@ class VoteDetailViewController: BaseViewContoller {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        ActivityView.instance.start(controller: self)
-        
         print("* token : \(APIConstants.jwtToken)")
         
         setConfiguration()
@@ -122,7 +120,8 @@ class VoteDetailViewController: BaseViewContoller {
     // MARK: - Bind View Model
     
     private func bindViewModel() {
-    
+        ActivityView.instance.start(controller: self)
+        
         viewModel.voteDetailModel.bindAndFire { (response) in
             
             if response.postNickname != "" {
