@@ -827,6 +827,12 @@
                                                         <constraint firstItem="IdT-mW-AiB" firstAttribute="centerX" secondItem="fkq-8O-qEk" secondAttribute="centerX" id="sV6-uu-PYI"/>
                                                         <constraint firstItem="vw8-NU-Xdo" firstAttribute="leading" secondItem="IdT-mW-AiB" secondAttribute="leading" constant="21.5" id="zQx-kc-dZN"/>
                                                     </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                            <integer key="value" value="10"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                                    </userDefinedRuntimeAttributes>
                                                 </view>
                                             </subviews>
                                             <constraints>
@@ -837,6 +843,12 @@
                                                 <constraint firstAttribute="trailing" secondItem="fkq-8O-qEk" secondAttribute="trailing" id="bEO-eA-IRs"/>
                                                 <constraint firstItem="fkq-8O-qEk" firstAttribute="height" secondItem="yZE-qI-3Ft" secondAttribute="height" id="m7N-Cf-enc"/>
                                             </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                    <integer key="value" value="10"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                            </userDefinedRuntimeAttributes>
                                         </collectionViewCellContentView>
                                         <connections>
                                             <outlet property="detailPhotoImageView" destination="IdT-mW-AiB" id="N3o-li-hYl"/>
@@ -1124,7 +1136,7 @@
                                 </constraints>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VvQ-sh-e3K">
-                                <rect key="frame" x="0.0" y="870" width="414" height="26"/>
+                                <rect key="frame" x="0.0" y="850" width="414" height="46"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="u1i-50-UtO">
                                         <rect key="frame" x="101.5" y="352" width="211.5" height="104"/>
@@ -1198,6 +1210,8 @@
                         <outlet property="compositionLabel" destination="0RX-5y-0Nu" id="FeB-gw-4fK"/>
                         <outlet property="compositionPercentLabel" destination="s5c-aI-h4P" id="1j8-uM-JYC"/>
                         <outlet property="compositionResultView" destination="MxF-mP-9NI" id="tRa-SE-gFa"/>
+                        <outlet property="deleteImageView" destination="EpZ-By-SfV" id="ty5-50-Ff7"/>
+                        <outlet property="deleteLabel" destination="29Q-7Z-PQY" id="6tt-jr-JN8"/>
                         <outlet property="deleteView" destination="VvQ-sh-e3K" id="dsP-TB-fd1"/>
                         <outlet property="detailClockImageView" destination="7yz-dX-7Ep" id="bj7-gT-6aA"/>
                         <outlet property="detailDeadlineLabel" destination="zv1-Px-PD4" id="BXp-M2-fhu"/>

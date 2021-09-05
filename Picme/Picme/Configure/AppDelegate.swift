@@ -45,11 +45,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         switch indexOfTab {
         // 홈 탭
         case 0:
-            if let mainNC = tabBarController.viewControllers?.first as? UINavigationController,
+            if let mainNC = tabBarController.selectedViewController as? UINavigationController,
                let mainVC = mainNC.topViewController as? MainViewController {
                 mainVC.mainTableView.scrollToTop()
             }
             
+//            if let mainNC = tabBarController.viewControllers?.first as? UINavigationController,
+//               let mainVC = mainNC.topViewController as? MainViewController {
+//                mainVC.mainTableView.scrollToTop()
+//            }
         // 투표 만들기 탭
         case 1:
             if APIConstants.jwtToken != "" { // 로그인 후 탭하면 present로 나타남

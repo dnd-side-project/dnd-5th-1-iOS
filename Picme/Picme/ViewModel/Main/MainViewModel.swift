@@ -20,8 +20,7 @@ class MainViewModel {
     var dataSource: GenericDataSource<MainModel>?
     var onErrorHandling: ((APIError?) -> Void)?
     
-    ///
-     var mainList: [MainModel] = []
+    var mainList: [MainModel] = []
     
     private weak var delegate: MainViewModelDelegate?
     var currentPage: Int = 1
@@ -69,8 +68,6 @@ class MainViewModel {
         return mainList[index]
     }
     
-    
-    
     // MARK: - 게시글 리스트 조회
     
     func fetchMainList() {
@@ -100,7 +97,7 @@ class MainViewModel {
                         print("* in response data 개수!?! \(responseData.mainList.count)")
                         
                         // 3
-                        if self?.page ?? 0 > 1 {
+                        if self?.page ?? 0 >= 1 {
                             print("* page > 1 \(String(describing: self?.page))")
                             let indexPathsToReload = self?.calculateIndexPathsToReload(from: responseData.mainList)
                             self?.delegate?.onFetchCompleted(with: indexPathsToReload)
@@ -136,7 +133,7 @@ class MainViewModel {
         let startIndex = mainList.count - newMainList.count
         
         let endIndex = startIndex + newMainList.count
-        print("start : \(startIndex) + end : \(endIndex)")
+        print("* start : \(startIndex) + end : \(endIndex)")
         return (startIndex..<endIndex).map { IndexPath(row: $0, section: 0) }
     }
     
