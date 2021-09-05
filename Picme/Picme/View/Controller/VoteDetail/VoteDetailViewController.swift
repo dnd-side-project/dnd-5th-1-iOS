@@ -600,12 +600,11 @@ extension VoteDetailViewController: AlertViewActionDelegate {
                 
                 let time = DispatchTime.now() + 1
                 DispatchQueue.main.asyncAfter(deadline: time) {
+                    Toast.show(using: .voteComplete, controller: self)
                     sender.borderWidth = 0
                     self.pickView.isHidden = true // 결과 뷰 나오기 전에 처리를 위해 여기서 hidden
                     self.bindViewModel()
                 }
-                
-                Toast.show(using: .voteComplete, controller: self)
             })
         }
         
