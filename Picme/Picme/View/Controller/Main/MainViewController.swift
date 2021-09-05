@@ -82,10 +82,10 @@ class MainViewController: BaseViewContoller, TouchDelegate, UITableViewDelegate 
         
         // self.bindViewModel()
         
-//        viewModel.page = 0
-//        viewModel.currentPage = 1
-//        viewModel.mainList = []
-//        viewModel.fetchMainList()
+        viewModel.page = 0
+        viewModel.currentPage = 1
+        viewModel.mainList = []
+        viewModel.fetchMainList()
     }
     
     // MARK: - Tab Bar
