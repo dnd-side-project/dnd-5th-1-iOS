@@ -77,7 +77,6 @@ final class ContentViewController: BaseViewContoller {
                            let mainNav = tabbarVC.selectedViewController as? UINavigationController,
                            let mainVC = mainNav.topViewController as? MainViewController {
                             
-                            mainVC.mainTableView.reloadData()
                             mainVC.mainTableView.scrollToTop()
                             Toast.show(using: .voteUpload, controller: mainVC)
                         }
