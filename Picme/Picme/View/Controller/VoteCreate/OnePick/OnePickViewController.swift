@@ -72,6 +72,7 @@ extension OnePickViewController: UICollectionViewDataSource {
                 cell.pickLayer.backgroundColor = .opacityColor(.pink80)
                 nextButton.backgroundColor = .mainColor(.pink)
                 nextButton.setTitleColor(.white, for: .normal)
+                nextButton.isEnabled = true
                 
                 cell.pickCenterImage.isHidden = false
             } else {
@@ -119,6 +120,8 @@ extension OnePickViewController {
     override func setProperties() {
         
         nextButton.addTarget(self, action: #selector(nextView(_:)), for: .touchUpInside)
+        
+        nextButton.isEnabled = false
     }
     
     @objc func nextView(_ sender: UIButton) {
@@ -137,6 +140,7 @@ extension OnePickViewController {
         view.addSubview(stepView)
         view.addSubview(collectionView)
         view.addSubview(nextButton)
+        
         stepView.clipsToBounds = true
         stepView.backgroundColor = .solidColor(.solid12)
         stepView.layer.cornerRadius = 10
@@ -168,14 +172,14 @@ extension OnePickViewController {
         }
         
         collectionView.snp.makeConstraints {
-            $0.top.equalTo(stepView.snp.bottom).offset(14)
+            $0.top.equalTo(stepView.snp.bottom).offset(16)
             $0.leading.equalTo(progressBar.snp.leading)
             $0.trailing.equalTo(progressBar.snp.trailing)
             $0.bottom.equalTo(nextButton.snp.top).offset(-20)
         }
         
         nextButton.snp.makeConstraints {
-            $0.bottom.equalTo(view.snp.bottom).offset(-20)
+            $0.bottom.equalTo(view.snp.bottom).offset(-28)
             $0.leading.equalTo(progressBar.snp.leading)
             $0.trailing.equalTo(progressBar.snp.trailing)
             $0.height.equalTo(52)
