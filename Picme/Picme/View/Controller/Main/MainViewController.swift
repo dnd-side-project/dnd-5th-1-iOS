@@ -14,14 +14,14 @@ protocol TouchDelegate: AnyObject {
 
 protocol MainViewControllerDelegate: AnyObject {
     func passTotalCount() -> Int
-
+    
     func isLoadingCell(for indexPath: IndexPath) -> Bool
     
     func passMainListIndex(index: Int) -> MainModel
 }
 
 class MainViewController: BaseViewContoller, TouchDelegate, UITableViewDelegate {
- 
+    
     // MARK: - IBOutlets
     
     @IBOutlet weak var mainTableView: UITableView!
@@ -50,6 +50,8 @@ class MainViewController: BaseViewContoller, TouchDelegate, UITableViewDelegate 
     
     weak var delegate: TouchDelegate?
     
+    let refresh = UIRefreshControl()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -61,11 +63,14 @@ class MainViewController: BaseViewContoller, TouchDelegate, UITableViewDelegate 
         mainTableView.delegate = self
         mainTableView.prefetchDataSource = self
         
+        self.initRefresh()
+        
+        
         viewModel = MainViewModel(service: MainService(), delegate: self)
         // viewModel = MainViewModel(service: MainService(), dataSource: dataSource, delegate: self)
         // viewModel = MainViewModel(service: MainService(), dataSource: dataSource)
-       
-        // viewModel.fetchMainList()
+        
+        viewModel.fetchMainList()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -74,11 +79,14 @@ class MainViewController: BaseViewContoller, TouchDelegate, UITableViewDelegate 
         print("* main view will appear")
         
         // self.bindViewModel()
-
-        viewModel.page = 0
-        viewModel.currentPage = 1
-        viewModel.mainList = []
-        viewModel.fetchMainList()
+        
+        //        viewModel.page = 0
+        //        viewModel.currentPage = 1
+        //        viewModel.mainList = []
+        //        viewModel.fetchMainList()
+        
+        mainTableView.reloadData()
+        
         // mainTableView.scrollToTop()
         
     }
@@ -101,50 +109,55 @@ class MainViewController: BaseViewContoller, TouchDelegate, UITableViewDelegate 
     }
     
     /*
-    // MARK: - Bind View Model
-    
-    private func bindViewModel() {
-        
-        print("* main bind view model")
-    
-        mainTableView.dataSource = dataSource
-        dataSource.delegate = self
-        dataSource.mainDelegate = self
-        
-        dataSource.data.addAndNotify(observer: self) { [weak self] _ in
-            print("* main show Table View")
-            self?.showTableView()
-        }
-        
-        // 메인 리스트 조회
-        viewModel.fetchMainList()
-    }
-    
-    // MARK: - Table View
-    
-    func showTableView() {
-        DispatchQueue.main.async {
-            // 제일 처음 뷰가 로드되면 데이터가 무조건 없는 isEmpty로 빠졌다가 로드되기 때문에 isFirt 변수 추가
-            if self.isFirst {
-                self.isFirst = false
-            } else {
-                if self.dataSource.data.value.isEmpty {
-                    self.showEmptyView()
-                } else {
-                    self.emptyView.isHidden = true
-                    self.mainTableView.isHidden = false
-                    // self.mainTableView.reloadData()
-                    print("* main reload data")
-                }
-            }
-        }
-    }
+     // MARK: - Bind View Model
+     
+     private func bindViewModel() {
+     
+     print("* main bind view model")
+     
+     mainTableView.dataSource = dataSource
+     dataSource.delegate = self
+     dataSource.mainDelegate = self
+     
+     dataSource.data.addAndNotify(observer: self) { [weak self] _ in
+     print("* main show Table View")
+     self?.showTableView()
+     }
+     
+     // 메인 리스트 조회
+     viewModel.fetchMainList()
+     }
+     
+     // MARK: - Table View
+     
+     func showTableView() {
+     DispatchQueue.main.async {
+     // 제일 처음 뷰가 로드되면 데이터가 무조건 없는 isEmpty로 빠졌다가 로드되기 때문에 isFirt 변수 추가
+     if self.isFirst {
+     self.isFirst = false
+     } else {
+     if self.dataSource.data.value.isEmpty {
+     self.showEmptyView()
+     } else {
+     self.emptyView.isHidden = true
+     self.mainTableView.isHidden = false
+     // self.mainTableView.reloadData()
+     print("* main reload data")
+     }
+     }
+     }
+     }
+     
+     func showEmptyView() {
+     self.emptyView.isHidden = false
+     self.mainTableView.isHidden = true
+     }
+     */
     
     func showEmptyView() {
         self.emptyView.isHidden = false
         self.mainTableView.isHidden = true
     }
-    */
     
     // MARK: - Collection View Cell 클릭시
     
@@ -159,65 +172,65 @@ class MainViewController: BaseViewContoller, TouchDelegate, UITableViewDelegate 
         }
     }
     
-//    func passTotalCount() -> Int {
-//        return viewModel.totalCount()
-//    }
-//
-//    func isLoadingCell(for indexPath: IndexPath) -> Bool {
-//      return indexPath.row >= viewModel.currentCount
-//    }
-//
-//    func passMainListIndex(index: Int) -> MainModel {
-//        print("* pass Main List Index 개수??? \(viewModel.mainListIndex(at: index))")
-//        return viewModel.mainListIndex(at: index)
-//    }
+    //    func passTotalCount() -> Int {
+    //        return viewModel.totalCount()
+    //    }
+    //
+    //    func isLoadingCell(for indexPath: IndexPath) -> Bool {
+    //      return indexPath.row >= viewModel.currentCount
+    //    }
+    //
+    //    func passMainListIndex(index: Int) -> MainModel {
+    //        print("* pass Main List Index 개수??? \(viewModel.mainListIndex(at: index))")
+    //        return viewModel.mainListIndex(at: index)
+    //    }
 }
 
 /*
-// MARK: - Table View Data Source / Collection View Cell Delegate
-
-class MainListDatasource: GenericDataSource<MainModel>, UITableViewDataSource, CollectionViewCellDelegate {
-    
-    // MARK: - CollectionV View Cell Delegate
-    
-    weak var delegate: TouchDelegate?
-    weak var mainDelegate: MainViewControllerDelegate?
-    
-    // Collection View Cell 클릭시 실행할 함수
-    func selectedCVCell(_ index: Int, _ postId: String) {
-        delegate?.pushVoteDetailView(index: index, postId: postId)
-    }
-    
-    // MARK: - Table View Data Source
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // return data.value.count
-        
-        print("* number of rows in section : \( mainDelegate?.passTotalCount() ?? 0)")
-        
-        return mainDelegate?.passTotalCount() ?? 0
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: MainTableViewCell = tableView.dequeueTableCell(for: indexPath)
-        
-        if mainDelegate?.isLoadingCell(for: indexPath) ?? false {
-            cell.updateCell(model: 0)
-        } else {
-            cell.setCollectionViewDataSourceDelegate(forRow: indexPath.row)
-            cell.cellDelegate = self
-            cell.updateCell(model: mainDelegate?.passMainListIndex(index: indexPath.row) ?? 0)
-          }
-        
-        // 페이징 전 코드
-//        cell.setCollectionViewDataSourceDelegate(forRow: indexPath.row)
-//        cell.cellDelegate = self
-//        cell.updateCell(model: data.value[indexPath.row])
-        
-        return cell
-    }
-}
-*/
+ // MARK: - Table View Data Source / Collection View Cell Delegate
+ 
+ class MainListDatasource: GenericDataSource<MainModel>, UITableViewDataSource, CollectionViewCellDelegate {
+ 
+ // MARK: - CollectionV View Cell Delegate
+ 
+ weak var delegate: TouchDelegate?
+ weak var mainDelegate: MainViewControllerDelegate?
+ 
+ // Collection View Cell 클릭시 실행할 함수
+ func selectedCVCell(_ index: Int, _ postId: String) {
+ delegate?.pushVoteDetailView(index: index, postId: postId)
+ }
+ 
+ // MARK: - Table View Data Source
+ 
+ func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+ // return data.value.count
+ 
+ print("* number of rows in section : \( mainDelegate?.passTotalCount() ?? 0)")
+ 
+ return mainDelegate?.passTotalCount() ?? 0
+ }
+ 
+ func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+ let cell: MainTableViewCell = tableView.dequeueTableCell(for: indexPath)
+ 
+ if mainDelegate?.isLoadingCell(for: indexPath) ?? false {
+ cell.updateCell(model: 0)
+ } else {
+ cell.setCollectionViewDataSourceDelegate(forRow: indexPath.row)
+ cell.cellDelegate = self
+ cell.updateCell(model: mainDelegate?.passMainListIndex(index: indexPath.row) ?? 0)
+ }
+ 
+ // 페이징 전 코드
+ //        cell.setCollectionViewDataSourceDelegate(forRow: indexPath.row)
+ //        cell.cellDelegate = self
+ //        cell.updateCell(model: data.value[indexPath.row])
+ 
+ return cell
+ }
+ }
+ */
 
 extension MainViewController: UITableViewDataSource, CollectionViewCellDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -228,11 +241,11 @@ extension MainViewController: UITableViewDataSource, CollectionViewCellDelegate 
         let cell: MainTableViewCell = tableView.dequeueTableCell(for: indexPath)
         
         if isLoadingCell(for: indexPath) {
-          cell.configure(with: .none)
+            cell.configure(with: .none)
         } else {
             cell.setCollectionViewDataSourceDelegate(forRow: indexPath.row)
             cell.cellDelegate = self
-          cell.configure(with: viewModel.moderator(at: indexPath.row))
+            cell.configure(with: viewModel.moderator(at: indexPath.row))
         }
         
         return cell
@@ -255,10 +268,18 @@ extension MainViewController: MainViewModelDelegate {
     func onFetchCompleted(with newIndexPathsToReload: [IndexPath]?) {
         guard let newIndexPathsToReload = newIndexPathsToReload else {
             print("* on fetch com - guard 안 ")
-//          indicatorView.stopAnimating()
-//          tableView.isHidden = false
-          mainTableView.reloadData()
-          return
+            //          indicatorView.stopAnimating()
+            //          tableView.isHidden = false
+            
+            // 처음 1페이지일 때 아무것도 없으면 empty
+            print("* 메인 개수 : \(viewModel.mainList.count)")
+            
+            if viewModel.mainList.isEmpty {
+                self.showEmptyView()
+            }
+            
+            mainTableView.reloadData()
+            return
         }
         
         print("* on fetch com - guard 밖")
@@ -268,11 +289,11 @@ extension MainViewController: MainViewModelDelegate {
     }
     
     func onFetchFailed(with reason: String) {
-//        indicatorView.stopAnimating()
-//
-//        let title = "Warning".localizedString
-//        let action = UIAlertAction(title: "OK".localizedString, style: .default)
-//        displayAlert(with: title , message: reason, actions: [action])
+        //        indicatorView.stopAnimating()
+        //
+        //        let title = "Warning".localizedString
+        //        let action = UIAlertAction(title: "OK".localizedString, style: .default)
+        //        displayAlert(with: title , message: reason, actions: [action])
         
         print("* Main View Model Delegate - onFetchFailed")
     }
@@ -288,14 +309,14 @@ extension MainViewController: UITableViewDataSourcePrefetching {
 
 private extension MainViewController {
     func isLoadingCell(for indexPath: IndexPath) -> Bool {
-      return indexPath.row >= viewModel.currentCount
+        return indexPath.row >= viewModel.currentCount
     }
-  
-  func  visibleIndexPathsToReload(intersecting indexPaths: [IndexPath]) -> [IndexPath] {
-    let indexPathsForVisibleRows = mainTableView.indexPathsForVisibleRows ?? []
-    let indexPathsIntersection = Set(indexPathsForVisibleRows).intersection(indexPaths)
-    return Array(indexPathsIntersection)
-  }
+    
+    func  visibleIndexPathsToReload(intersecting indexPaths: [IndexPath]) -> [IndexPath] {
+        let indexPathsForVisibleRows = mainTableView.indexPathsForVisibleRows ?? []
+        let indexPathsIntersection = Set(indexPathsForVisibleRows).intersection(indexPaths)
+        return Array(indexPathsIntersection)
+    }
 }
 
 // MARK: - Alert View Action Delegate
@@ -310,10 +331,43 @@ extension MainViewController: AlertViewActionDelegate {
             window?.rootViewController = loginVC
             
             UIView.transition(with: window ?? UIWindow(),
-                                  duration: 0.3,
-                                  options: .transitionCrossDissolve,
-                                  animations: nil,
-                                  completion: nil)
+                              duration: 0.3,
+                              options: .transitionCrossDissolve,
+                              animations: nil,
+                              completion: nil)
         })
     }
+}
+
+// Refresh Control
+extension MainViewController {
+    
+    func initRefresh() {
+        refresh.addTarget(self, action: #selector(refreshTable(refresh:)), for: .valueChanged)
+        refresh.backgroundColor = UIColor.clear
+        refresh.tintColor = UIColor.gray
+        self.mainTableView.refreshControl = refresh
+    }
+ 
+    @objc func refreshTable(refresh: UIRefreshControl) {
+        print("refreshTable")
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            
+            self.viewModel.page = 0
+            self.viewModel.currentPage = 1
+            self.viewModel.mainList = []
+            self.viewModel.fetchMainList()
+            
+            self.mainTableView.reloadData()
+            refresh.endRefreshing()
+        }
+    }
+ 
+    //MARK: - UIRefreshControl of ScrollView
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        if(velocity.y < -0.1) {
+            self.refreshTable(refresh: self.refresh)
+        }
+    }
+ 
 }
