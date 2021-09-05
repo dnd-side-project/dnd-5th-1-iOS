@@ -70,6 +70,8 @@ class VoteDetailViewController: BaseViewContoller {
     
     // Delete View
     @IBOutlet weak var deleteView: UIView!
+    @IBOutlet weak var deleteImageView: UIImageView!
+    @IBOutlet weak var deleteLabel: UILabel!
     
     // MARK: - Properties
     
@@ -95,26 +97,23 @@ class VoteDetailViewController: BaseViewContoller {
     
     var voteResultModel: [VoteResultModel] = []
     
+    var isFirst: Bool = true
+    
     // MARK: - Timer
-    var timer = Timer()
-    
+
+    var timer: Timer?
     var dateHelper = DateHelper()
-  
     let currentDate = Date()
-    
-    deinit {
-        timer.invalidate()
-    }
-    
+    var remainSeconds: Int = 0
+ 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        ActivityView.instance.start(controller: self)
         
         print("* token : \(APIConstants.jwtToken)")
         
         setConfiguration()
-        
+        setupButton()
+        createTimer()
         
         bindViewModel()
     }
@@ -122,8 +121,15 @@ class VoteDetailViewController: BaseViewContoller {
     // MARK: - Bind View Model
     
     private func bindViewModel() {
-    
+        ActivityView.instance.start(controller: self)
+        
         viewModel.voteDetailModel.bindAndFire { (response) in
+             
+            // 제일 처음 뷰가 로드되면 데이터가 무조건 없는 상태로 빠졌다가 로드되기 때문에 isFirst로 한 번 예외처리
+            if self.isFirst {
+                self.isFirst = false
+                return
+            }
             
             if response.postNickname != "" {
                 self.detailNicknameLabel.text = response.postNickname
@@ -134,17 +140,28 @@ class VoteDetailViewController: BaseViewContoller {
                 self.detailPageLabel.text = "\(self.currentPage)/\(response.images.count)"
                 
                 // Set Deadline Timer
-                if let deadline = response.deadline {
-                    self.setTimer(deadline: deadline)
-                }
+//                if let deadline = response.deadline {
+//                    self.setTimer(deadline: deadline)
+//                }
+                
+                let endDate = self.dateHelper.stringToDate(dateString: response.deadline!)
+                self.remainSeconds = self.dateHelper.getTimer(startDate: self.currentDate, endDate: endDate!)
+                self.updateTimer()
                 
                 self.detailPageControl.numberOfPages = response.images.count
                 
                 // 로그인 유저 = 투표 게시자
-                print("로그인 유저 닉네임 : \(self.loginUserNickname) +  게시글 닉네임 \(response.postNickname)")
                 if self.loginUserNickname == response.postNickname {
-                    print("truerueruerueuruere")
                     self.isSameNickname = true
+                }
+                
+                // Navigation Right Bar Button 사용자별 초기화
+                if self.isSameNickname { // 투표 작성자 -> 삭제하기
+                    self.rightBarButton.image = #imageLiteral(resourceName: "trashcan")
+                    self.rightBarButton.tag = 0
+                } else { // 투표자 -> 신고하기
+                    self.rightBarButton.image = #imageLiteral(resourceName: "megaphone")
+                    self.rightBarButton.tag = 1
                 }
                 
                 // 투표 게시자 or 투표한 사용자의 경우 - 결과 값 구하기
@@ -157,11 +174,16 @@ class VoteDetailViewController: BaseViewContoller {
                 }
                 
                 self.setupView() // 결과값 계산 후 Feedback View 퍼센트 초기화 해야함
-                self.setupButton()
                 self.carouselCollectionView.reloadData()
                 
                 ActivityView.instance.stop()
-            }
+            } else { // 투표가 삭제되어 볼 수 없는 경우
+                ActivityView.instance.stop()
+                self.rightBarButton.isEnabled = false
+                self.deleteView.isHidden = false
+                self.deleteImageView.image = #imageLiteral(resourceName: "hmm")
+                self.deleteLabel.text = "게시글이 삭제되어 볼 수 없어요.\n다시 돌아가주세요."
+           }
         }
         
         // 게시글 상세 조회
@@ -194,10 +216,13 @@ extension CarouselDatasource: UICollectionViewDataSource {
         
         let cell: VoteDetailCollectionViewCell = collectionView.dequeueCollectionCell(for: indexPath)
         
-        if let scalingCell = cell as? ScalingCarouselCell {
-            scalingCell.mainView.backgroundColor = .black
-            scalingCell.cornerRadius = 10
-        }
+//        if let scalingCell = cell as? ScalingCarouselCell {
+//            scalingCell.mainView.backgroundColor = .black
+//            scalingCell.cornerRadius = 10
+//        }
+        
+        cell.mainView.backgroundColor = .black
+        cell.cornerRadius = 10
         
         let object = self.viewModel.voteDetailModel.value
         
@@ -438,26 +463,27 @@ extension VoteDetailViewController: AlertViewActionDelegate {
     
     // MARK: - Set Timer
     
-    func setTimer(deadline: String) {
-        let endDate = dateHelper.stringToDate(dateString: deadline)!
-        var remainSeconds = dateHelper.getTimer(startDate: currentDate, endDate: endDate)
-
-       DispatchQueue.main.async { [weak self] in
-        self?.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] timer in
-
-                if remainSeconds <= 0 {
-                    timer.invalidate()
-                    self?.detailDeadlineLabel.text = "마감된 투표에요"
-                    self?.detailClockImageView.isHidden = true
-                    return
-                }
-
-                remainSeconds -= 1
-                self?.detailClockImageView.isHidden = false
-            self?.detailDeadlineLabel.text = self?.dateHelper.timerString(remainSeconds: remainSeconds)
-            }
-       }
-    }
+//    func setTimer(deadline: String) {
+//        let endDate = dateHelper.stringToDate(dateString: deadline)!
+//        var remainSeconds = dateHelper.getTimer(startDate: currentDate, endDate: endDate)
+//
+//       DispatchQueue.main.async { [weak self] in
+//        self?.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] timer in
+//
+//                if remainSeconds <= 0 {
+//                    timer.invalidate()
+//                    self?.detailDeadlineLabel.text = "마감된 투표에요"
+//                    self?.detailClockImageView.isHidden = true
+//
+//                    return
+//                }
+//
+//                remainSeconds -= 1
+//                self?.detailClockImageView.isHidden = false
+//            self?.detailDeadlineLabel.text = self?.dateHelper.timerString(remainSeconds: remainSeconds)
+//            }
+//       }
+//    }
     
     /*
     func setTimer(endTime: String) {
@@ -501,17 +527,7 @@ extension VoteDetailViewController: AlertViewActionDelegate {
     // MARK: - Button Tags
     
     private func setupButton() {
-        
-        print("************* is same nickname \(isSameNickname)")
-        // Navigation Right Bar Button
-        if isSameNickname { // 투표 작성자 -> 삭제하기
-            rightBarButton.image = #imageLiteral(resourceName: "trashcan")
-            rightBarButton.tag = 0
-        } else { // 투표자 -> 신고하기
-            rightBarButton.image = #imageLiteral(resourceName: "megaphone")
-            rightBarButton.tag = 1
-        }
-        
+                
         rightBarButton.action = #selector(rightButtonClicked(_:))
         rightBarButton.target = self
         
@@ -566,6 +582,8 @@ extension VoteDetailViewController: AlertViewActionDelegate {
             viewModel.service?.createVote(postId: postId, imageId: selectedImageId!, category: category, completion: {
                 print("vote")
                 
+                print("투표 생성 서버통신 선택한 이미지 id는? \(self.selectedImageId)")
+                
                 let currentButtonTag = sender.tag
                 
                 feedbackDictionary.keys.filter { $0 != currentButtonTag }.forEach { tag in
@@ -598,6 +616,7 @@ extension VoteDetailViewController: AlertViewActionDelegate {
                 
                 let time = DispatchTime.now() + 1
                 DispatchQueue.main.asyncAfter(deadline: time) {
+                    Toast.show(using: .voteComplete, controller: self)
                     sender.borderWidth = 0
                     self.pickView.isHidden = true // 결과 뷰 나오기 전에 처리를 위해 여기서 hidden
                     self.bindViewModel()
@@ -648,6 +667,7 @@ extension VoteDetailViewController: AlertViewActionDelegate {
             let time = DispatchTime.now() + 0.5
             DispatchQueue.main.asyncAfter(deadline: time) {
                 self.deleteView.isHidden = false
+                self.rightBarButton.isEnabled = false
                 Toast.show(using: .remove, controller: self)
             }
         })
@@ -734,4 +754,42 @@ extension VoteDetailViewController: AlertViewActionDelegate {
         }
     }
     
+}
+
+
+// MARK: - Timer
+extension VoteDetailViewController {
+
+    func createTimer() {
+        if timer == nil {
+            print("* create timer")
+            let timer = Timer(timeInterval: 1.0,
+                              target: self,
+                              selector: #selector(updateTimer),
+                              userInfo: nil,
+                              repeats: true)
+            RunLoop.current.add(timer, forMode: .common)
+            timer.tolerance = 0.1
+            
+            self.timer = timer
+        }
+    }
+    
+    func cancelTimer() {
+        timer?.invalidate()
+        timer = nil
+    }
+    
+    @objc func updateTimer() {
+        
+        remainSeconds -= 1
+        self.detailClockImageView.isHidden = false
+        self.detailDeadlineLabel.text = self.dateHelper.timerString(remainSeconds: remainSeconds)
+        
+        if remainSeconds <= 0 {
+            self.detailDeadlineLabel.text = "마감된 투표에요"
+            self.detailClockImageView.isHidden = true
+            cancelTimer()
+        }
+    }
 }

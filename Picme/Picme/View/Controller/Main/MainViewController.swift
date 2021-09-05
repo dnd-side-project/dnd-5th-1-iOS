@@ -44,13 +44,19 @@ class MainViewController: BaseViewContoller, TouchDelegate, UITableViewDelegate 
     
     // var dataSource = MainListDatasource()
     
-    private var viewModel: MainViewModel!
+    var viewModel: MainViewModel!
     
     var isFirst: Bool = true
+    
+    var isUpdate: Bool = false
     
     weak var delegate: TouchDelegate?
     
     let refresh = UIRefreshControl()
+    
+    var timer: Timer?
+    var dateHelper = DateHelper()
+    let currentDate = Date()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,15 +68,15 @@ class MainViewController: BaseViewContoller, TouchDelegate, UITableViewDelegate 
         mainTableView.dataSource = self
         mainTableView.delegate = self
         mainTableView.prefetchDataSource = self
+        mainTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         
         self.initRefresh()
-        
         
         viewModel = MainViewModel(service: MainService(), delegate: self)
         // viewModel = MainViewModel(service: MainService(), dataSource: dataSource, delegate: self)
         // viewModel = MainViewModel(service: MainService(), dataSource: dataSource)
         
-        viewModel.fetchMainList()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -79,15 +85,12 @@ class MainViewController: BaseViewContoller, TouchDelegate, UITableViewDelegate 
         print("* main view will appear")
         
         // self.bindViewModel()
+        ActivityView.instance.start(controller: self)
         
-        //        viewModel.page = 0
-        //        viewModel.currentPage = 1
-        //        viewModel.mainList = []
-        //        viewModel.fetchMainList()
-        
-        mainTableView.reloadData()
-        
-        // mainTableView.scrollToTop()
+        viewModel.page = 0
+        viewModel.currentPage = 1
+        viewModel.mainList = []
+        viewModel.fetchMainList()
         
     }
     
@@ -245,7 +248,23 @@ extension MainViewController: UITableViewDataSource, CollectionViewCellDelegate 
         } else {
             cell.setCollectionViewDataSourceDelegate(forRow: indexPath.row)
             cell.cellDelegate = self
+            
+            let endDate = dateHelper.stringToDate(dateString: viewModel.moderator(at: indexPath.row).deadline)
+            
+            let remainTime = dateHelper.getTimer(startDate: currentDate, endDate: endDate!)
+            
+            cell.remainSeconds = remainTime
+            
+            // print("remainTime : \(remainTime)")
+            
+            createTimer()
+            
+//            if remainTime <= 0 {
+//                cancelTimer()
+//            }
+            
             cell.configure(with: viewModel.moderator(at: indexPath.row))
+            
         }
         
         return cell
@@ -266,6 +285,7 @@ extension MainViewController: UITableViewDataSource, CollectionViewCellDelegate 
 
 extension MainViewController: MainViewModelDelegate {
     func onFetchCompleted(with newIndexPathsToReload: [IndexPath]?) {
+        
         guard let newIndexPathsToReload = newIndexPathsToReload else {
             print("* on fetch com - guard 안 ")
             //          indicatorView.stopAnimating()
@@ -273,12 +293,16 @@ extension MainViewController: MainViewModelDelegate {
             
             // 처음 1페이지일 때 아무것도 없으면 empty
             print("* 메인 개수 : \(viewModel.mainList.count)")
+            print(viewModel.mainList)
             
             if viewModel.mainList.isEmpty {
                 self.showEmptyView()
             }
             
             mainTableView.reloadData()
+            
+            ActivityView.instance.stop()
+            
             return
         }
         
@@ -286,6 +310,8 @@ extension MainViewController: MainViewModelDelegate {
         
         let indexPathsToReload = visibleIndexPathsToReload(intersecting: newIndexPathsToReload)
         mainTableView.reloadRows(at: indexPathsToReload, with: .automatic)
+        
+        ActivityView.instance.stop()
     }
     
     func onFetchFailed(with reason: String) {
@@ -344,11 +370,10 @@ extension MainViewController {
     
     func initRefresh() {
         refresh.addTarget(self, action: #selector(refreshTable(refresh:)), for: .valueChanged)
-        refresh.backgroundColor = UIColor.clear
-        refresh.tintColor = UIColor.gray
+        refresh.tintColor = UIColor.white
         self.mainTableView.refreshControl = refresh
     }
- 
+    
     @objc func refreshTable(refresh: UIRefreshControl) {
         print("refreshTable")
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
@@ -358,16 +383,57 @@ extension MainViewController {
             self.viewModel.mainList = []
             self.viewModel.fetchMainList()
             
-            self.mainTableView.reloadData()
             refresh.endRefreshing()
         }
     }
- 
-    //MARK: - UIRefreshControl of ScrollView
-    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        if(velocity.y < -0.1) {
-            self.refreshTable(refresh: self.refresh)
+    
+    //    //MARK: - UIRefreshControl of ScrollView
+    //    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+    //        if(velocity.y < -0.1) {
+    //            self.refreshTable(refresh: self.refresh)
+    //        }
+    //    }
+    
+}
+
+// MARK: - Timer
+extension MainViewController: TableViewCellDelegate {
+
+    func createTimer() {
+        if timer == nil {
+            print("* create timer")
+            let timer = Timer(timeInterval: 1.0,
+                              target: self,
+                              selector: #selector(updateTimer),
+                              userInfo: nil,
+                              repeats: true)
+            RunLoop.current.add(timer, forMode: .common)
+            timer.tolerance = 0.1
+            
+            self.timer = timer
         }
     }
- 
+    
+    func expiredSeconds() {
+        timer?.invalidate()
+        timer = nil
+    }
+    
+//    func cancelTimer() {
+//        timer?.invalidate()
+//        timer = nil
+//    }
+    
+    @objc func updateTimer() {
+        guard let visibleRowsIndexPaths = mainTableView.indexPathsForVisibleRows else {
+            return
+        }
+        
+        for indexPath in visibleRowsIndexPaths {
+            if let cell = mainTableView.cellForRow(at: indexPath) as? MainTableViewCell {
+                // print("* cell. updatetime")
+                cell.updateTime()
+            }
+        }
+    }
 }
