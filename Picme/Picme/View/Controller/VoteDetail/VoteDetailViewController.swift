@@ -215,10 +215,13 @@ extension CarouselDatasource: UICollectionViewDataSource {
         
         let cell: VoteDetailCollectionViewCell = collectionView.dequeueCollectionCell(for: indexPath)
         
-        if let scalingCell = cell as? ScalingCarouselCell {
-            scalingCell.mainView.backgroundColor = .black
-            scalingCell.cornerRadius = 10
-        }
+//        if let scalingCell = cell as? ScalingCarouselCell {
+//            scalingCell.mainView.backgroundColor = .black
+//            scalingCell.cornerRadius = 10
+//        }
+        
+        cell.mainView.backgroundColor = .black
+        cell.cornerRadius = 10
         
         let object = self.viewModel.voteDetailModel.value
         
@@ -470,6 +473,7 @@ extension VoteDetailViewController: AlertViewActionDelegate {
                     timer.invalidate()
                     self?.detailDeadlineLabel.text = "마감된 투표에요"
                     self?.detailClockImageView.isHidden = true
+                    
                     return
                 }
 
