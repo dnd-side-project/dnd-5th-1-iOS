@@ -14,6 +14,10 @@ protocol CollectionViewCellDelegate: AnyObject {
     func selectedCVCell(_ index: Int, _ postId: String)
 }
 
+protocol TableViewCellDelegate: AnyObject {
+    func expiredSeconds()
+}
+
 class MainTableViewCell: UITableViewCell {
     
     // MARK: - IBOutlets
@@ -29,22 +33,25 @@ class MainTableViewCell: UITableViewCell {
     // MARK: - Variables
     
     weak var cellDelegate: CollectionViewCellDelegate?
+    
+    weak var tableDelegate: TableViewCellDelegate?
+    
     var imageData: [Images]?
     var postId: String!
     
     var dateHelper = DateHelper()
     
     // Timer
-//    let currentDate = Date()
+    //    let currentDate = Date()
     
     //    var timer = Timer()
     //    deinit {
     //        timer.invalidate()
     //    }
     
-//    var timer: Timer?
+    //    var timer: Timer?
     
-//    var deadline: String?
+    //    var deadline: String?
     var remainSeconds: Int?
     
     /*
@@ -81,9 +88,9 @@ class MainTableViewCell: UITableViewCell {
             
             // deadline = object.deadline
             
-//            let endDate = dateHelper.stringToDate(dateString: deadline!)
-//            remainSeconds = dateHelper.getTimer(startDate: currentDate, endDate: endDate!)
-//
+            //            let endDate = dateHelper.stringToDate(dateString: deadline!)
+            //            remainSeconds = dateHelper.getTimer(startDate: currentDate, endDate: endDate!)
+            //
             
             // print("* Cell 남은시간? \(remainSeconds)")
             updateTime()
@@ -121,21 +128,24 @@ class MainTableViewCell: UITableViewCell {
     
     func updateTime() {
         
-//        print("update TIme!!")
+        //        print("update TIme!!")
         remainSeconds! -= 1
         self.mainClockImageView.isHidden = false
         self.mainDeadlineLabel.text = self.dateHelper.timerString(remainSeconds: remainSeconds!)
         
         if remainSeconds! <= 0 {
-        self.mainDeadlineLabel.text = "마감된 투표에요"
-        self.mainClockImageView.isHidden = true
+            self.mainDeadlineLabel.text = "마감된 투표에요"
+            self.mainClockImageView.isHidden = true
+            
+            tableDelegate?.expiredSeconds()
+            
         }
     }
     
     func setTimer(deadline: String) {
-//        let endDate = dateHelper.stringToDate(dateString: deadline)!
-//        var remainSeconds = dateHelper.getTimer(startDate: currentDate, endDate: endDate)
-//        
+        //        let endDate = dateHelper.stringToDate(dateString: deadline)!
+        //        var remainSeconds = dateHelper.getTimer(startDate: currentDate, endDate: endDate)
+        //
         //        DispatchQueue.global(qos: .background).async {
         //            self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.update), userInfo: ["remainSeconds": remainSeconds], repeats: true)
         //            RunLoop.current.run()

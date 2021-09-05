@@ -396,8 +396,8 @@ extension MainViewController {
 }
 
 // MARK: - Timer
-extension MainViewController {
-    
+extension MainViewController: TableViewCellDelegate {
+
     func createTimer() {
         if timer == nil {
             print("* create timer")
@@ -413,10 +413,15 @@ extension MainViewController {
         }
     }
     
-    func cancelTimer() {
+    func expiredSeconds() {
         timer?.invalidate()
         timer = nil
     }
+    
+//    func cancelTimer() {
+//        timer?.invalidate()
+//        timer = nil
+//    }
     
     @objc func updateTimer() {
         guard let visibleRowsIndexPaths = mainTableView.indexPathsForVisibleRows else {
