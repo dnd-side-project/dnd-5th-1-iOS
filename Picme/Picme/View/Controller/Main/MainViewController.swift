@@ -64,9 +64,9 @@ class MainViewController: BaseViewContoller, TouchDelegate, UITableViewDelegate 
         mainTableView.dataSource = self
         mainTableView.delegate = self
         mainTableView.prefetchDataSource = self
+        mainTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         
         self.initRefresh()
-        
         
         viewModel = MainViewModel(service: MainService(), delegate: self)
         // viewModel = MainViewModel(service: MainService(), dataSource: dataSource, delegate: self)
