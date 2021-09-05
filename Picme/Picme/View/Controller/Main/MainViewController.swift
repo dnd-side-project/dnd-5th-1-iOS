@@ -345,7 +345,7 @@ extension MainViewController {
     func initRefresh() {
         refresh.addTarget(self, action: #selector(refreshTable(refresh:)), for: .valueChanged)
         refresh.backgroundColor = UIColor.clear
-        refresh.tintColor = UIColor.gray
+        refresh.tintColor = .opacityColor(.solid0)
         self.mainTableView.refreshControl = refresh
     }
  
