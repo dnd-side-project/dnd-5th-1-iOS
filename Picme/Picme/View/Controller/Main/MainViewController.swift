@@ -44,9 +44,11 @@ class MainViewController: BaseViewContoller, TouchDelegate, UITableViewDelegate 
     
     // var dataSource = MainListDatasource()
     
-    private var viewModel: MainViewModel!
+    var viewModel: MainViewModel!
     
     var isFirst: Bool = true
+    
+    var isUpdate: Bool = false
     
     weak var delegate: TouchDelegate?
     
@@ -80,15 +82,10 @@ class MainViewController: BaseViewContoller, TouchDelegate, UITableViewDelegate 
         
         // self.bindViewModel()
         
-        //        viewModel.page = 0
-        //        viewModel.currentPage = 1
-        //        viewModel.mainList = []
-        //        viewModel.fetchMainList()
-        
-        mainTableView.reloadData()
-        
-        // mainTableView.scrollToTop()
-        
+//        viewModel.page = 0
+//        viewModel.currentPage = 1
+//        viewModel.mainList = []
+//        viewModel.fetchMainList()
     }
     
     // MARK: - Tab Bar
@@ -279,6 +276,7 @@ extension MainViewController: MainViewModelDelegate {
             }
             
             mainTableView.reloadData()
+            
             return
         }
         
@@ -347,7 +345,7 @@ extension MainViewController {
         refresh.tintColor = UIColor.white
         self.mainTableView.refreshControl = refresh
     }
- 
+    
     @objc func refreshTable(refresh: UIRefreshControl) {
         print("refreshTable")
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
@@ -357,16 +355,15 @@ extension MainViewController {
             self.viewModel.mainList = []
             self.viewModel.fetchMainList()
             
-            self.mainTableView.reloadData()
             refresh.endRefreshing()
         }
     }
- 
-    //MARK: - UIRefreshControl of ScrollView
-    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        if(velocity.y < -0.1) {
-            self.refreshTable(refresh: self.refresh)
-        }
-    }
- 
+    
+//    //MARK: - UIRefreshControl of ScrollView
+//    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+//        if(velocity.y < -0.1) {
+//            self.refreshTable(refresh: self.refresh)
+//        }
+//    }
+    
 }
