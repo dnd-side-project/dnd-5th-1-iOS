@@ -23,6 +23,7 @@
 		A9322EF726C0C38F0061EF35 /* OnePickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9322EF626C0C38F0061EF35 /* OnePickViewController.swift */; };
 		A9322EF926C0CADA0061EF35 /* OnePickCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9322EF826C0CADA0061EF35 /* OnePickCell.swift */; };
 		A9322EFC26C0D2670061EF35 /* ContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9322EFB26C0D2670061EF35 /* ContentViewController.swift */; };
+		A93AD23326E509F200AF1475 /* InstarWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93AD23226E509F200AF1475 /* InstarWebViewController.swift */; };
 		A95CD34E269DA66C002CCCA8 /* Protocol+LoginState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95CD34D269DA66C002CCCA8 /* Protocol+LoginState.swift */; };
 		A95CD354269EB2BF002CCCA8 /* Enum+APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95CD353269EB2BF002CCCA8 /* Enum+APIError.swift */; };
 		A95CD356269EB5B7002CCCA8 /* Enum+HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95CD355269EB5B7002CCCA8 /* Enum+HTTPMethod.swift */; };
@@ -139,6 +140,7 @@
 		A9322EF626C0C38F0061EF35 /* OnePickViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnePickViewController.swift; sourceTree = "<group>"; };
 		A9322EF826C0CADA0061EF35 /* OnePickCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnePickCell.swift; sourceTree = "<group>"; };
 		A9322EFB26C0D2670061EF35 /* ContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewController.swift; sourceTree = "<group>"; };
+		A93AD23226E509F200AF1475 /* InstarWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstarWebViewController.swift; sourceTree = "<group>"; };
 		A95CD34D269DA66C002CCCA8 /* Protocol+LoginState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Protocol+LoginState.swift"; sourceTree = "<group>"; };
 		A95CD353269EB2BF002CCCA8 /* Enum+APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Enum+APIError.swift"; sourceTree = "<group>"; };
 		A95CD355269EB5B7002CCCA8 /* Enum+HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Enum+HTTPMethod.swift"; sourceTree = "<group>"; };
@@ -327,6 +329,14 @@
 				A9322EFB26C0D2670061EF35 /* ContentViewController.swift */,
 			);
 			path = VoteComplete;
+			sourceTree = "<group>";
+		};
+		A93AD23126E509D000AF1475 /* Instargram */ = {
+			isa = PBXGroup;
+			children = (
+				A93AD23226E509F200AF1475 /* InstarWebViewController.swift */,
+			);
+			path = Instargram;
 			sourceTree = "<group>";
 		};
 		A975287926B69E5B003EE1A9 /* Login */ = {
@@ -637,6 +647,7 @@
 		A9E6DD7426C8E8E5006155F3 /* MyPage */ = {
 			isa = PBXGroup;
 			children = (
+				A93AD23126E509D000AF1475 /* Instargram */,
 				A9DDA15326E1A6E400ACA63D /* PersonalInfo */,
 				A9E6DD7526C8E8F4006155F3 /* MyPageViewController.swift */,
 				A9DDA14126DF436000ACA63D /* GuideViewController.swift */,
@@ -1198,6 +1209,7 @@
 				D1103F6426C46B44002D1E78 /* MainService.swift in Sources */,
 				A95CD36526A30357002CCCA8 /* LoginModel.swift in Sources */,
 				D1449D9926A848610083418D /* MainViewController.swift in Sources */,
+				A93AD23326E509F200AF1475 /* InstarWebViewController.swift in Sources */,
 				A95CD354269EB2BF002CCCA8 /* Enum+APIError.swift in Sources */,
 				D11C2DC126B82AA100C8EE51 /* VoteDetailTableViewController.swift in Sources */,
 				A9E6DD8526CB9F78006155F3 /* MyPageViewModel.swift in Sources */,
@@ -1383,7 +1395,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.32;
+				MARKETING_VERSION = 0.34;
 				PRODUCT_BUNDLE_IDENTIFIER = com.PicmeDnD5;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -1406,7 +1418,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.32;
+				MARKETING_VERSION = 0.34;
 				PRODUCT_BUNDLE_IDENTIFIER = com.PicmeDnD5;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

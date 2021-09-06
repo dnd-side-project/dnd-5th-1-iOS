@@ -42,9 +42,14 @@ final class ContentViewController: BaseViewContoller {
     
     @IBOutlet weak var registVoteButton: UIButton!
     
-    let pickerView: UIPickerView = {
+    private let pickerView: UIPickerView = {
         return $0
     }(UIPickerView())
+    
+    private let clearTextViewButton: UIButton = {
+        $0.setImage(UIImage(named: "x24"), for: .normal)
+        return $0
+    }(UIButton(type: .custom))
     
     // MARK: - LifeCycle
     
@@ -56,6 +61,7 @@ final class ContentViewController: BaseViewContoller {
         datePickerToolBar()
         voteTextView.delegate = self
         pickerView.delegate = self
+        voteEndDateTextfield.delegate = self
         
     }
     
@@ -159,6 +165,29 @@ extension ContentViewController: UITextViewDelegate {
         textCount = textView.text.count
         contentViewModel?.completeCheck()
     }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        textView.layer.borderWidth = 3
+        textView.layer.borderColor = UIColor.solidColor(.solid26).cgColor
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        textView.layer.borderWidth = 0
+        textView.layer.borderColor = UIColor.clear.cgColor
+    }
+}
+
+extension ContentViewController: UITextFieldDelegate {
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        textField.layer.borderWidth = 3
+        textField.layer.borderColor = UIColor.solidColor(.solid26).cgColor
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        textField.layer.borderWidth = 0
+        textField.layer.borderColor = UIColor.clear.cgColor
+    }
 }
 
 // MARK: - PickerViewDelegate
@@ -215,22 +244,37 @@ extension ContentViewController {
         voteTextView.textColor = .textColor(.text100)
         voteTextView.backgroundColor = .solidColor(.solid12)
         voteTextView.layer.cornerRadius = 10
+        voteTextView.textContainerInset = UIEdgeInsets(top: 5, left: 12, bottom: 0, right: 12)
         
         voteEndDateTextLabel.textColor = .mainColor(.pink)
         voteEndDateTextfield.backgroundColor = .solidColor(.solid12)
         voteEndDateTextfield.textAlignment = .center
         voteEndDateTextfield.text = contentViewModel?.addDate(0)
         voteEndDateTextfield.textColor = .white
+        voteEndDateTextfield.layer.cornerRadius = 10
         
         registVoteButton.backgroundColor = .solidColor(.solid26)
         registVoteButton.setTitleColor(.textColor(.text50), for: .normal)
         registVoteButton.setTitle("투표 다 만들었어요!", for: .normal)
         registVoteButton.layer.cornerRadius = 10
+        
+        clearTextViewButton.addTarget(self, action: #selector(clearTextAction(_:)), for: .touchUpInside)
+    }
+    
+    @objc func clearTextAction(_ sender: UIButton) {
+        
+        voteTextView.text = ""
+        
+        textCount = 0
+        contentViewModel?.hasTitleText.value = false
+        contentViewModel?.completeCheck()
     }
     
     override func setConfiguration() {
         
         view.addSubview(stepView)
+        voteTextView.addSubview(clearTextViewButton)
+        
         view.backgroundColor = .solidColor(.solid0)
         
         // navigation
@@ -276,6 +320,12 @@ extension ContentViewController {
             $0.leading.equalTo(progressBar.snp.leading)
             $0.trailing.equalTo(progressBar.snp.trailing)
             $0.height.equalTo(52)
+        }
+        
+        clearTextViewButton.snp.makeConstraints {
+            $0.top.equalTo(voteTextView.snp.top).offset(14)
+            $0.trailing.equalTo(view.snp.trailing).offset(-30)
+            $0.width.equalTo(24)
         }
         
     }
