@@ -32,7 +32,7 @@ struct APIConstants {
     // MARK: - URLs
     
     // Base URL
-    private static let baseURL = "http://infra-pickm-cqhjwtrlxm6c-370004496.ap-northeast-2.elb.amazonaws.com"
+    private static let baseURL = "http://infra-picme-1IL66DKS1UYL8-1238101960.ap-northeast-2.elb.amazonaws.com"
     private static let urlVersion = "/v1"
     
     // MARK: - /Main URLs
