@@ -66,7 +66,7 @@
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Version" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tEo-9o-vfo">
                                         <rect key="frame" x="0.0" y="136" width="335" height="52"/>
                                         <color key="backgroundColor" red="0.2156862745" green="0.23529411759999999" blue="0.25882352939999997" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" name="NotoSansCJKkr-Regular" family="Noto Sans CJK KR" pointSize="16"/>
+                                        <fontDescription key="fontDescription" name="NotoSansCJKkr-Bold" family="Noto Sans CJK KR" pointSize="16"/>
                                         <color key="textColor" red="0.47058823529999999" green="0.4823529412" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                         <userDefinedRuntimeAttributes>
@@ -113,8 +113,11 @@
                                             <constraint firstAttribute="width" secondItem="rf8-uR-HyQ" secondAttribute="height" multiplier="17:22" id="u3v-ew-8M6"/>
                                         </constraints>
                                         <state key="normal" image="settingsButton"/>
+                                        <connections>
+                                            <segue destination="aop-3v-K0U" kind="push" id="lwu-hq-WHu"/>
+                                        </connections>
                                     </button>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="1" translatesAutoresizingMaskIntoConstraints="NO" id="irn-8S-9ZD">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profilePink" translatesAutoresizingMaskIntoConstraints="NO" id="irn-8S-9ZD">
                                         <rect key="frame" x="17" y="24" width="44" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="QFE-SE-lgk"/>
@@ -256,6 +259,116 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ymb-JQ-F3y" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="874" y="42"/>
+        </scene>
+        <!--마이페이지-->
+        <scene sceneID="tve-eo-CHG">
+            <objects>
+                <viewController id="aop-3v-K0U" customClass="SettingViewController" customModule="Picme" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="JPz-61-Jq3">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZGB-Xy-tOH">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="690"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="최대 12자까지 자유롭게 입력해주세요" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BDp-v7-1bs">
+                                        <rect key="frame" x="39.5" y="319" width="335" height="52"/>
+                                        <color key="backgroundColor" red="0.10196078431372549" green="0.10980392156862745" blue="0.12156862745098039" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="52" id="DcA-tZ-EBq"/>
+                                            <constraint firstAttribute="width" constant="335" id="dGJ-zQ-hma"/>
+                                            <constraint firstAttribute="width" secondItem="BDp-v7-1bs" secondAttribute="height" multiplier="335:52" id="ks8-1E-edD"/>
+                                        </constraints>
+                                        <color key="textColor" red="0.99607843137254903" green="0.99607843137254903" blue="0.99607843137254903" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" name="NotoSansCJKkr-Regular" family="Noto Sans CJK KR" pointSize="16"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadiusLayer">
+                                                <real key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="placeholderLabel.textColor">
+                                                <color key="value" red="0.30196078431372547" green="0.30980392156862746" blue="0.32156862745098036" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </textField>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="닉네임 수정" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YV9-lp-xiq">
+                                        <rect key="frame" x="39.5" y="287" width="79" height="24"/>
+                                        <fontDescription key="fontDescription" name="NotoSansCJKkr-Bold" family="Noto Sans CJK KR" pointSize="16"/>
+                                        <color key="textColor" red="0.92156862750000001" green="0.28627450980000002" blue="0.60392156860000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0/12" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9IQ-fO-hwf">
+                                        <rect key="frame" x="345.5" y="288.5" width="29" height="21"/>
+                                        <fontDescription key="fontDescription" name="NotoSansCJKkr-Regular" family="Noto Sans CJK KR" pointSize="14"/>
+                                        <color key="textColor" red="0.30196078431372547" green="0.30980392156862746" blue="0.32156862745098036" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="앗, 이미 다른 사람이 사용하고 있는 닉네임이에요!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xrv-c1-LSD">
+                                        <rect key="frame" x="39.5" y="379" width="248" height="18"/>
+                                        <fontDescription key="fontDescription" name="NotoSansCJKkr-Regular" family="Noto Sans CJK KR" pointSize="12"/>
+                                        <color key="textColor" red="0.92156862750000001" green="0.28627450980000002" blue="0.60392156860000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="BDp-v7-1bs" firstAttribute="top" secondItem="YV9-lp-xiq" secondAttribute="bottom" constant="8" id="7ov-Mi-O72"/>
+                                    <constraint firstItem="BDp-v7-1bs" firstAttribute="leading" secondItem="YV9-lp-xiq" secondAttribute="leading" id="C7O-fH-fTw"/>
+                                    <constraint firstItem="BDp-v7-1bs" firstAttribute="centerY" secondItem="ZGB-Xy-tOH" secondAttribute="centerY" id="FlA-6q-sUc"/>
+                                    <constraint firstItem="9IQ-fO-hwf" firstAttribute="trailing" secondItem="BDp-v7-1bs" secondAttribute="trailing" id="LAh-kC-S4G"/>
+                                    <constraint firstItem="Xrv-c1-LSD" firstAttribute="top" secondItem="BDp-v7-1bs" secondAttribute="bottom" constant="8" id="QOL-oG-v8J"/>
+                                    <constraint firstItem="Xrv-c1-LSD" firstAttribute="leading" secondItem="BDp-v7-1bs" secondAttribute="leading" id="UeE-SK-XMk"/>
+                                    <constraint firstItem="BDp-v7-1bs" firstAttribute="centerX" secondItem="ZGB-Xy-tOH" secondAttribute="centerX" id="g5l-Zn-Dnl"/>
+                                    <constraint firstItem="9IQ-fO-hwf" firstAttribute="centerY" secondItem="YV9-lp-xiq" secondAttribute="centerY" id="r4Z-51-EUH"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hLW-ig-3H3">
+                                <rect key="frame" x="39.5" y="690" width="335" height="52"/>
+                                <color key="backgroundColor" red="0.2156862745" green="0.23529411759999999" blue="0.25882352939999997" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="52" id="14o-Tu-taD"/>
+                                    <constraint firstAttribute="width" constant="335" id="9uf-LU-3ig"/>
+                                    <constraint firstAttribute="width" secondItem="hLW-ig-3H3" secondAttribute="height" multiplier="335:52" id="i6I-9b-GDl"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="NotoSansCJKkr-Bold" family="Noto Sans CJK KR" pointSize="16"/>
+                                <state key="normal" title="수정하기">
+                                    <color key="titleColor" red="0.47058823529999999" green="0.4823529412" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadiusLayer">
+                                        <real key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="RxF-gH-6Ek"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="ZGB-Xy-tOH" firstAttribute="leading" secondItem="RxF-gH-6Ek" secondAttribute="leading" id="QWa-pm-4nj"/>
+                            <constraint firstItem="hLW-ig-3H3" firstAttribute="top" secondItem="ZGB-Xy-tOH" secondAttribute="bottom" id="RSD-Um-rD3"/>
+                            <constraint firstItem="hLW-ig-3H3" firstAttribute="centerX" secondItem="RxF-gH-6Ek" secondAttribute="centerX" id="UaU-jO-OVc"/>
+                            <constraint firstItem="ZGB-Xy-tOH" firstAttribute="top" secondItem="RxF-gH-6Ek" secondAttribute="top" id="lZz-5O-ffA"/>
+                            <constraint firstItem="RxF-gH-6Ek" firstAttribute="bottom" secondItem="hLW-ig-3H3" secondAttribute="bottom" constant="32" id="prf-Qm-Nhd"/>
+                            <constraint firstItem="ZGB-Xy-tOH" firstAttribute="trailing" secondItem="RxF-gH-6Ek" secondAttribute="trailing" id="qz4-t0-jrI"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="마이페이지" id="usP-VB-611">
+                        <barButtonItem key="leftBarButtonItem" image="leftArrow28" id="atD-RZ-aUJ">
+                            <connections>
+                                <action selector="leftBarButtonClicked:" destination="aop-3v-K0U" id="7fu-2E-8SV"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="editButton" destination="hLW-ig-3H3" id="5Hf-LQ-jwP"/>
+                        <outlet property="nickNameTextField" destination="BDp-v7-1bs" id="3I5-Ld-vwm"/>
+                        <outlet property="nicknameCountLabel" destination="9IQ-fO-hwf" id="Ye4-l8-HLu"/>
+                        <outlet property="nicknameOverlapLabel" destination="Xrv-c1-LSD" id="iUH-6o-Nfu"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GsK-sX-QUB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1702.8985507246377" y="-610.04464285714278"/>
         </scene>
         <!--Guide View Controller-->
         <scene sceneID="mWv-wX-HPK">
@@ -468,6 +581,7 @@ PICME 은(는) 정보주체의 이용정보를 저장하고 수시로 불러오�
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="vRo-K2-ZZk">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="barTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <textAttributes key="titleTextAttributes">
                             <color key="textColor" red="0.99607843137254903" green="0.99607843137254903" blue="0.99607843137254903" alpha="1" colorSpace="calibratedRGB"/>
@@ -506,7 +620,8 @@ PICME 은(는) 정보주체의 이용정보를 저장하고 수시로 불러오�
         </scene>
     </scenes>
     <resources>
-        <image name="1" width="44" height="44"/>
+        <image name="leftArrow28" width="8.5" height="14"/>
+        <image name="profilePink" width="44" height="44"/>
         <image name="settingsButton" width="17" height="17"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

@@ -79,6 +79,8 @@
 		D138B3F926E2F25000323A0B /* DateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D138B3F826E2F25000323A0B /* DateHelper.swift */; };
 		D1449D9426A845370083418D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D1449D9326A845370083418D /* Main.storyboard */; };
 		D1449D9926A848610083418D /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1449D9826A848610083418D /* MainViewController.swift */; };
+		D1641D4926F0E1E0003CD989 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1641D4826F0E1E0003CD989 /* SettingViewController.swift */; };
+		D1641D4B26F0F881003CD989 /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1641D4A26F0F881003CD989 /* SettingViewModel.swift */; };
 		D1657FB826D973C900A12F9E /* MyPageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1657FB726D973C900A12F9E /* MyPageModel.swift */; };
 		D1657FBB26D9749700A12F9E /* MyPageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1657FBA26D9749700A12F9E /* MyPageService.swift */; };
 		D173CD9F26C50E2F00468D52 /* VoteDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D173CD9E26C50E2F00468D52 /* VoteDetailViewController.swift */; };
@@ -204,6 +206,8 @@
 		D138B3F826E2F25000323A0B /* DateHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHelper.swift; sourceTree = "<group>"; };
 		D1449D9326A845370083418D /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		D1449D9826A848610083418D /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		D1641D4826F0E1E0003CD989 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		D1641D4A26F0F881003CD989 /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
 		D1657FB726D973C900A12F9E /* MyPageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageModel.swift; sourceTree = "<group>"; };
 		D1657FBA26D9749700A12F9E /* MyPageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageService.swift; sourceTree = "<group>"; };
 		D173CD9E26C50E2F00468D52 /* VoteDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteDetailViewController.swift; sourceTree = "<group>"; };
@@ -652,6 +656,7 @@
 				A9E6DD7526C8E8F4006155F3 /* MyPageViewController.swift */,
 				A9DDA14126DF436000ACA63D /* GuideViewController.swift */,
 				A9DDA14326DF438E00ACA63D /* GuideCell.swift */,
+				D1641D4826F0E1E0003CD989 /* SettingViewController.swift */,
 			);
 			path = MyPage;
 			sourceTree = "<group>";
@@ -677,6 +682,7 @@
 			isa = PBXGroup;
 			children = (
 				A9E6DD8426CB9F77006155F3 /* MyPageViewModel.swift */,
+				D1641D4A26F0F881003CD989 /* SettingViewModel.swift */,
 			);
 			path = MyPage;
 			sourceTree = "<group>";
@@ -1190,6 +1196,7 @@
 				D1B51E2726C3090400928FF3 /* MainListModel.swift in Sources */,
 				D180457326B3EAB90053430E /* MainModel.swift in Sources */,
 				A9DDA14226DF436000ACA63D /* GuideViewController.swift in Sources */,
+				D1641D4B26F0F881003CD989 /* SettingViewModel.swift in Sources */,
 				A9DDA12026D6FD2C00ACA63D /* DateFormat.swift in Sources */,
 				A9E6DD6D26C89064006155F3 /* ContentViewModel.swift in Sources */,
 				A9E6DD7C26C9F855006155F3 /* CreateVoteService.swift in Sources */,
@@ -1205,6 +1212,7 @@
 				D1B51C9826BE9EB000928FF3 /* VoteDetailTableViewCell.swift in Sources */,
 				A9DDA15526E1A6FC00ACA63D /* PersonalInfoViewContoller.swift in Sources */,
 				D1657FB826D973C900A12F9E /* MyPageModel.swift in Sources */,
+				D1641D4926F0E1E0003CD989 /* SettingViewController.swift in Sources */,
 				D1B51C9F26BEB26300928FF3 /* VoteDetailModel.swift in Sources */,
 				D1103F6426C46B44002D1E78 /* MainService.swift in Sources */,
 				A95CD36526A30357002CCCA8 /* LoginModel.swift in Sources */,
