@@ -47,8 +47,9 @@ class SettingViewController: UIViewController {
        
         // nickNameTextField.addRightPadding()
         if let button = nickNameTextField.value(forKey: "clearButton") as? UIButton {
+            button.setImage(button.image(for: .normal)?.withRenderingMode(.alwaysTemplate), for: .normal)
             button.tintColor = .white
-            // button.setImage(UIImage(named: "x21")?.withRenderingMode(.alwaysTemplate), for: .normal)
+           // button.setImage(UIImage(named: "x24")?.withRenderingMode(.alwaysTemplate), for: .normal)
         }
         // 수정하기 버튼 활성화 비활성화
         settingViewModel?.isButtonState.bindAndFire(listener: { state in
