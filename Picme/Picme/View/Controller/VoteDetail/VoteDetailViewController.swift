@@ -789,6 +789,7 @@ extension VoteDetailViewController {
         if remainSeconds <= 0 {
             self.detailDeadlineLabel.text = "마감된 투표에요"
             self.detailClockImageView.isHidden = true
+            self.detailTitleLabel.textColor = .textColor(.text50)
             cancelTimer()
         }
     }
