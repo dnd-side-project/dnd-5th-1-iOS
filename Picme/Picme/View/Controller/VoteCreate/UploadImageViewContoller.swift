@@ -55,6 +55,7 @@ final class UploadImageViewContoller: BaseViewContoller {
             for item in items {
                 switch item {
                 case .photo(let photos):
+                    
                     self.userImages.append(photos.image)
                     self.userImagesData.append(photos.image.jpegData(compressionQuality: 1.0)!)
                     print(photos.image)
@@ -75,8 +76,8 @@ final class UploadImageViewContoller: BaseViewContoller {
                     guard let self = self else { return }
                     
                     guard let onePickVC = self.storyboard?.instantiateViewController(withIdentifier: "OnePickViewController") as? OnePickViewController else { return }
-                    onePickVC.userImages = self.userImages
                     onePickVC.imageDelegate = self
+                    onePickVC.userImages = self.userImages
                     onePickVC.createUserImges = self.userimagesMeta
                     self.navigationController?.pushViewController(onePickVC, animated: true)
                 }
@@ -95,6 +96,8 @@ extension UploadImageViewContoller: ImageDelete {
     
     func removeALLImage() {
         self.userImages.removeAll()
+        self.userImagesData.removeAll()
+        self.userimagesMeta.sizes.removeAll()
     }
 }
 
