@@ -71,11 +71,11 @@ final class MyPageViewController: BaseViewContoller {
     
     func setupButtons() {
         allVoteListButton.tag = 1
-        settingButton.tag = 3
+        // settingButton.tag = 3
         
         allVoteListButton.addTarget(self, action: #selector(showAlertView), for: UIControl.Event.touchUpInside)
 
-        settingButton.addTarget(self, action: #selector(showAlertView), for: UIControl.Event.touchUpInside)
+        // settingButton.addTarget(self, action: #selector(showAlertView), for: UIControl.Event.touchUpInside)
     }
     
     @objc func showAlertView(_ sender: UIButton) {
