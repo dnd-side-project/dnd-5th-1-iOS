@@ -111,7 +111,7 @@ final class ContentViewController: BaseViewContoller {
     }
     
     @objc func toolBarDoneButton(_ sender: UIButton) {
-        print("DONE")
+        
         if voteEndDateTextfield.text == contentViewModel?.addDate(0) {
             contentViewModel?.hasVoteEndDate.value = false
         }
@@ -154,8 +154,10 @@ extension ContentViewController: UITextViewDelegate {
         
         if textView.text != "" {
             contentViewModel?.hasTitleText.value = true
+            clearTextViewButton.isHidden = false
         } else {
             contentViewModel?.hasTitleText.value = false
+            clearTextViewButton.isHidden = true
         }
         
         if textView.text.count >= 46 {
@@ -167,7 +169,7 @@ extension ContentViewController: UITextViewDelegate {
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
-        textView.layer.borderWidth = 3
+        textView.layer.borderWidth = 1
         textView.layer.borderColor = UIColor.solidColor(.solid26).cgColor
     }
     
@@ -180,7 +182,7 @@ extension ContentViewController: UITextViewDelegate {
 extension ContentViewController: UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        textField.layer.borderWidth = 3
+        textField.layer.borderWidth = 1
         textField.layer.borderColor = UIColor.solidColor(.solid26).cgColor
     }
     
@@ -244,7 +246,7 @@ extension ContentViewController {
         voteTextView.textColor = .textColor(.text100)
         voteTextView.backgroundColor = .solidColor(.solid12)
         voteTextView.layer.cornerRadius = 10
-        voteTextView.textContainerInset = UIEdgeInsets(top: 5, left: 12, bottom: 0, right: 12)
+        voteTextView.textContainerInset = UIEdgeInsets(top: 14, left: 12, bottom: 14, right: 20)
         
         voteEndDateTextLabel.textColor = .mainColor(.pink)
         voteEndDateTextfield.backgroundColor = .solidColor(.solid12)
@@ -258,6 +260,7 @@ extension ContentViewController {
         registVoteButton.setTitle("투표 다 만들었어요!", for: .normal)
         registVoteButton.layer.cornerRadius = 10
         
+        clearTextViewButton.isHidden = true
         clearTextViewButton.addTarget(self, action: #selector(clearTextAction(_:)), for: .touchUpInside)
     }
     
@@ -265,6 +268,7 @@ extension ContentViewController {
         
         voteTextView.text = ""
         
+        clearTextViewButton.isHidden = true
         textCount = 0
         contentViewModel?.hasTitleText.value = false
         contentViewModel?.completeCheck()
@@ -273,7 +277,7 @@ extension ContentViewController {
     override func setConfiguration() {
         
         view.addSubview(stepView)
-        voteTextView.addSubview(clearTextViewButton)
+        view.addSubview(clearTextViewButton)
         
         view.backgroundColor = .solidColor(.solid0)
         
