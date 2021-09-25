@@ -69,8 +69,8 @@
 		A9E6DD7E26CA1AD6006155F3 /* CreateUserImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E6DD7D26CA1AD6006155F3 /* CreateUserImages.swift */; };
 		A9E6DD8526CB9F78006155F3 /* MyPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E6DD8426CB9F77006155F3 /* MyPageViewModel.swift */; };
 		A9E6DD8D26CCE206006155F3 /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E6DD8C26CCE206006155F3 /* ToastView.swift */; };
-		A9E72E2C26C527D3003C98A0 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = A9E72E2B26C527D3003C98A0 /* SnapKit */; };
-		A9E72E2F26C52F62003C98A0 /* YPImagePicker in Frameworks */ = {isa = PBXBuildFile; productRef = A9E72E2E26C52F62003C98A0 /* YPImagePicker */; };
+		A9E72E2C26C527D3003C98A0 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = A9E72E2B26C527D3003C98A0 /* SwiftPackageProductDependency */; };
+		A9E72E2F26C52F62003C98A0 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = A9E72E2E26C52F62003C98A0 /* SwiftPackageProductDependency */; };
 		D1103F6226C46AE4002D1E78 /* Enum+NetworkResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1103F6126C46AE4002D1E78 /* Enum+NetworkResult.swift */; };
 		D1103F6426C46B44002D1E78 /* MainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1103F6326C46B44002D1E78 /* MainService.swift */; };
 		D11C2DC126B82AA100C8EE51 /* VoteDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11C2DC026B82AA100C8EE51 /* VoteDetailTableViewController.swift */; };
@@ -238,8 +238,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				521630CB556750301749121F /* Pods_Picme.framework in Frameworks */,
-				A9E72E2F26C52F62003C98A0 /* YPImagePicker in Frameworks */,
-				A9E72E2C26C527D3003C98A0 /* SnapKit in Frameworks */,
+				A9E72E2F26C52F62003C98A0 /* BuildFile in Frameworks */,
+				A9E72E2C26C527D3003C98A0 /* BuildFile in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -852,7 +852,6 @@
 				A9A1AD3D2699FAE600169D76 /* Resources */,
 				A9C12B97269C31AC00729A74 /* ShellScript */,
 				38E0222B9F2E3675B420EE4F /* [CP] Embed Pods Frameworks */,
-				DC8E79990E4993E91A02261F /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -860,8 +859,8 @@
 			);
 			name = Picme;
 			packageProductDependencies = (
-				A9E72E2B26C527D3003C98A0 /* SnapKit */,
-				A9E72E2E26C52F62003C98A0 /* YPImagePicker */,
+				A9E72E2B26C527D3003C98A0 /* SwiftPackageProductDependency */,
+				A9E72E2E26C52F62003C98A0 /* SwiftPackageProductDependency */,
 			);
 			productName = "dnd-5th-1-iOS";
 			productReference = A9A1AD3F2699FAE600169D76 /* Picme.app */;
@@ -895,7 +894,6 @@
 				A9A1AD5D2699FAE800169D76 /* Frameworks */,
 				A9A1AD5E2699FAE800169D76 /* Resources */,
 				C1835FD42B1809FC9029F422 /* [CP] Embed Pods Frameworks */,
-				3FA8E547113F059544FE0316 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -939,8 +937,8 @@
 			);
 			mainGroup = A9A1AD362699FAE600169D76;
 			packageReferences = (
-				A9E72E2A26C527D3003C98A0 /* XCRemoteSwiftPackageReference "SnapKit" */,
-				A9E72E2D26C52F62003C98A0 /* XCRemoteSwiftPackageReference "YPImagePicker" */,
+				A9E72E2A26C527D3003C98A0 /* RemoteSwiftPackageReference */,
+				A9E72E2D26C52F62003C98A0 /* RemoteSwiftPackageReference */,
 			);
 			productRefGroup = A9A1AD402699FAE600169D76 /* Products */;
 			projectDirPath = "";
@@ -1033,23 +1031,6 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Picme/Pods-Picme-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		3FA8E547113F059544FE0316 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Picme-PicmeUITests/Pods-Picme-PicmeUITests-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Picme-PicmeUITests/Pods-Picme-PicmeUITests-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Picme-PicmeUITests/Pods-Picme-PicmeUITests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		88794663FD404E94E72B8487 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1126,23 +1107,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Picme-PicmeUITests/Pods-Picme-PicmeUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		DC8E79990E4993E91A02261F /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Picme/Pods-Picme-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Picme/Pods-Picme-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Picme/Pods-Picme-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1560,7 +1524,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		A9E72E2A26C527D3003C98A0 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+		A9E72E2A26C527D3003C98A0 /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
 			requirement = {
@@ -1568,7 +1532,7 @@
 				minimumVersion = 5.0.1;
 			};
 		};
-		A9E72E2D26C52F62003C98A0 /* XCRemoteSwiftPackageReference "YPImagePicker" */ = {
+		A9E72E2D26C52F62003C98A0 /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Yummypets/YPImagePicker";
 			requirement = {
@@ -1579,14 +1543,14 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		A9E72E2B26C527D3003C98A0 /* SnapKit */ = {
+		A9E72E2B26C527D3003C98A0 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = A9E72E2A26C527D3003C98A0 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			package = A9E72E2A26C527D3003C98A0 /* RemoteSwiftPackageReference */;
 			productName = SnapKit;
 		};
-		A9E72E2E26C52F62003C98A0 /* YPImagePicker */ = {
+		A9E72E2E26C52F62003C98A0 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = A9E72E2D26C52F62003C98A0 /* XCRemoteSwiftPackageReference "YPImagePicker" */;
+			package = A9E72E2D26C52F62003C98A0 /* RemoteSwiftPackageReference */;
 			productName = YPImagePicker;
 		};
 /* End XCSwiftPackageProductDependency section */
