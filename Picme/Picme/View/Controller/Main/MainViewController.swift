@@ -7,20 +7,7 @@
 
 import UIKit
 
-// MARK: - Collection View Cell 클릭 시 실행할 프로토콜
-protocol TouchDelegate: AnyObject {
-    func pushVoteDetailView(index: Int, postId: String)
-}
-
-protocol MainViewControllerDelegate: AnyObject {
-    func passTotalCount() -> Int
-    
-    func isLoadingCell(for indexPath: IndexPath) -> Bool
-    
-    func passMainListIndex(index: Int) -> MainModel
-}
-
-class MainViewController: BaseViewContoller, TouchDelegate, UITableViewDelegate {
+class MainViewController: BaseViewContoller, UITableViewDelegate {
     
     // MARK: - IBOutlets
     
@@ -29,11 +16,12 @@ class MainViewController: BaseViewContoller, TouchDelegate, UITableViewDelegate 
     
     // MARK: - IBActions
     
+    // Empty View일 때 투표만들기 버튼 눌렀을 때
     @IBAction func voteButtonClicked(_ sender: Any) {
-        if APIConstants.jwtToken == "" {
+        if APIConstants.jwtToken == "" { // 미로그인 사용자일 경우 로그인 Alert View
             AlertView.instance.showAlert(using: .logInVote)
             AlertView.instance.actionDelegate = self
-        } else {
+        } else { // 투표 만들기 뷰 Present
             if let uploadImageVC = tabBarController?.storyboard?.instantiateViewController(withIdentifier: "UploadImage") {
                 tabBarController?.present(uploadImageVC, animated: true)
             }
@@ -42,27 +30,19 @@ class MainViewController: BaseViewContoller, TouchDelegate, UITableViewDelegate 
     
     // MARK: - Variables
     
-    // var dataSource = MainListDatasource()
-    
     var viewModel: MainViewModel!
     
-    var isFirst: Bool = true
-    
-    var isUpdate: Bool = false
-    
-    weak var delegate: TouchDelegate?
-    
+    // Refresh Control
     let refresh = UIRefreshControl()
     
+    // Timer
     var timer: Timer?
     var dateHelper = DateHelper()
     let currentDate = Date()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        print("* main view did load")
-        
+     
         setupTabBar()
         
         mainTableView.dataSource = self
@@ -73,18 +53,11 @@ class MainViewController: BaseViewContoller, TouchDelegate, UITableViewDelegate 
         self.initRefresh()
         
         viewModel = MainViewModel(service: MainService(), delegate: self)
-        // viewModel = MainViewModel(service: MainService(), dataSource: dataSource, delegate: self)
-        // viewModel = MainViewModel(service: MainService(), dataSource: dataSource)
-        
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        print("* main view will appear")
-        
-        // self.bindViewModel()
         ActivityView.instance.start(controller: self)
         
         viewModel.page = 0
@@ -92,6 +65,13 @@ class MainViewController: BaseViewContoller, TouchDelegate, UITableViewDelegate 
         viewModel.mainList = []
         viewModel.fetchMainList()
         
+    }
+    
+    // MARK: - Empty View
+    
+    func showEmptyView() {
+        self.emptyView.isHidden = false
+        self.mainTableView.isHidden = true
     }
     
     // MARK: - Tab Bar
@@ -110,130 +90,9 @@ class MainViewController: BaseViewContoller, TouchDelegate, UITableViewDelegate 
         self.tabBarController?.tabBar.items![2].image = #imageLiteral(resourceName: "mypageWhite")
         
     }
-    
-    /*
-     // MARK: - Bind View Model
-     
-     private func bindViewModel() {
-     
-     print("* main bind view model")
-     
-     mainTableView.dataSource = dataSource
-     dataSource.delegate = self
-     dataSource.mainDelegate = self
-     
-     dataSource.data.addAndNotify(observer: self) { [weak self] _ in
-     print("* main show Table View")
-     self?.showTableView()
-     }
-     
-     // 메인 리스트 조회
-     viewModel.fetchMainList()
-     }
-     
-     // MARK: - Table View
-     
-     func showTableView() {
-     DispatchQueue.main.async {
-     // 제일 처음 뷰가 로드되면 데이터가 무조건 없는 isEmpty로 빠졌다가 로드되기 때문에 isFirt 변수 추가
-     if self.isFirst {
-     self.isFirst = false
-     } else {
-     if self.dataSource.data.value.isEmpty {
-     self.showEmptyView()
-     } else {
-     self.emptyView.isHidden = true
-     self.mainTableView.isHidden = false
-     // self.mainTableView.reloadData()
-     print("* main reload data")
-     }
-     }
-     }
-     }
-     
-     func showEmptyView() {
-     self.emptyView.isHidden = false
-     self.mainTableView.isHidden = true
-     }
-     */
-    
-    func showEmptyView() {
-        self.emptyView.isHidden = false
-        self.mainTableView.isHidden = true
-    }
-    
-    // MARK: - Collection View Cell 클릭시
-    
-    func pushVoteDetailView(index: Int, postId: String) {
-        if APIConstants.jwtToken == "" { // 미로그인 사용자
-            AlertView.instance.showAlert(using: .logInDetail)
-            AlertView.instance.actionDelegate = self
-        } else { // 로그인한 사용자
-            guard let voteDetailVC = self.storyboard?.instantiateViewController(withIdentifier: "VoteDetailViewController") as? VoteDetailViewController else { return }
-            voteDetailVC.postId = postId
-            self.navigationController?.pushViewController(voteDetailVC, animated: true)
-        }
-    }
-    
-    //    func passTotalCount() -> Int {
-    //        return viewModel.totalCount()
-    //    }
-    //
-    //    func isLoadingCell(for indexPath: IndexPath) -> Bool {
-    //      return indexPath.row >= viewModel.currentCount
-    //    }
-    //
-    //    func passMainListIndex(index: Int) -> MainModel {
-    //        print("* pass Main List Index 개수??? \(viewModel.mainListIndex(at: index))")
-    //        return viewModel.mainListIndex(at: index)
-    //    }
 }
 
-/*
- // MARK: - Table View Data Source / Collection View Cell Delegate
- 
- class MainListDatasource: GenericDataSource<MainModel>, UITableViewDataSource, CollectionViewCellDelegate {
- 
- // MARK: - CollectionV View Cell Delegate
- 
- weak var delegate: TouchDelegate?
- weak var mainDelegate: MainViewControllerDelegate?
- 
- // Collection View Cell 클릭시 실행할 함수
- func selectedCVCell(_ index: Int, _ postId: String) {
- delegate?.pushVoteDetailView(index: index, postId: postId)
- }
- 
- // MARK: - Table View Data Source
- 
- func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
- // return data.value.count
- 
- print("* number of rows in section : \( mainDelegate?.passTotalCount() ?? 0)")
- 
- return mainDelegate?.passTotalCount() ?? 0
- }
- 
- func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
- let cell: MainTableViewCell = tableView.dequeueTableCell(for: indexPath)
- 
- if mainDelegate?.isLoadingCell(for: indexPath) ?? false {
- cell.updateCell(model: 0)
- } else {
- cell.setCollectionViewDataSourceDelegate(forRow: indexPath.row)
- cell.cellDelegate = self
- cell.updateCell(model: mainDelegate?.passMainListIndex(index: indexPath.row) ?? 0)
- }
- 
- // 페이징 전 코드
- //        cell.setCollectionViewDataSourceDelegate(forRow: indexPath.row)
- //        cell.cellDelegate = self
- //        cell.updateCell(model: data.value[indexPath.row])
- 
- return cell
- }
- }
- */
+// MARK: - Table View Data Source
 
 extension MainViewController: UITableViewDataSource, CollectionViewCellDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -243,34 +102,23 @@ extension MainViewController: UITableViewDataSource, CollectionViewCellDelegate 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: MainTableViewCell = tableView.dequeueTableCell(for: indexPath)
         
-        if isLoadingCell(for: indexPath) {
+        if isLoadingCell(for: indexPath) { // 로딩된 셀이 없을 경우 .none을 넘김
             cell.configure(with: .none)
         } else {
             cell.setCollectionViewDataSourceDelegate(forRow: indexPath.row)
             cell.cellDelegate = self
-            
-            let endDate = dateHelper.stringToDate(dateString: viewModel.moderator(at: indexPath.row).deadline)
-            
-            let remainTime = dateHelper.getTimer(startDate: currentDate, endDate: endDate!)
-            
-            cell.remainSeconds = remainTime
-            
-            // print("remainTime : \(remainTime)")
-            
+
             createTimer()
+            cell.currentDate = Date() // 여기서 현재 시간 초기화를 해줘야지 매번 올바르게 마감시간 설정 가능
             
-//            if remainTime <= 0 {
-//                cancelTimer()
-//            }
-            
-            cell.configure(with: viewModel.moderator(at: indexPath.row))
-            
+            cell.configure(with: viewModel.mainModel(at: indexPath.row))
         }
         
         return cell
     }
     
-    // Collection View Cell 클릭시 실행할 함수
+    // MARK: - Collection View Cell Delegate - Collection View Cell 클릭시 실행
+    
     func selectedCVCell(_ index: Int, _ postId: String) {
         if APIConstants.jwtToken == "" { // 미로그인 사용자
             AlertView.instance.showAlert(using: .logInDetail)
@@ -283,18 +131,13 @@ extension MainViewController: UITableViewDataSource, CollectionViewCellDelegate 
     }
 }
 
+// MARK: - Infinite Scrolling
+
 extension MainViewController: MainViewModelDelegate {
     func onFetchCompleted(with newIndexPathsToReload: [IndexPath]?) {
-        
+        // 첫 로딩 - 1페이지일 경우
         guard let newIndexPathsToReload = newIndexPathsToReload else {
-            print("* on fetch com - guard 안 ")
-            //          indicatorView.stopAnimating()
-            //          tableView.isHidden = false
-            
-            // 처음 1페이지일 때 아무것도 없으면 empty
-            print("* 메인 개수 : \(viewModel.mainList.count)")
-            print(viewModel.mainList)
-            
+            // 처음 1페이지일 때 아무것도 없으면 empty view
             if viewModel.mainList.isEmpty {
                 self.showEmptyView()
             }
@@ -306,8 +149,7 @@ extension MainViewController: MainViewModelDelegate {
             return
         }
         
-        print("* on fetch com - guard 밖")
-        
+        // 그 이외의 페이지의 경우 - 새로 로드될 셀만 업데이트
         let indexPathsToReload = visibleIndexPathsToReload(intersecting: newIndexPathsToReload)
         mainTableView.reloadRows(at: indexPathsToReload, with: .automatic)
         
@@ -315,13 +157,7 @@ extension MainViewController: MainViewModelDelegate {
     }
     
     func onFetchFailed(with reason: String) {
-        //        indicatorView.stopAnimating()
-        //
-        //        let title = "Warning".localizedString
-        //        let action = UIAlertAction(title: "OK".localizedString, style: .default)
-        //        displayAlert(with: title , message: reason, actions: [action])
-        
-        print("* Main View Model Delegate - onFetchFailed")
+        ActivityView.instance.stop()
     }
 }
 
@@ -365,7 +201,8 @@ extension MainViewController: AlertViewActionDelegate {
     }
 }
 
-// Refresh Control
+// MARK: - Refresh Control
+
 extension MainViewController {
     
     func initRefresh() {
@@ -375,7 +212,6 @@ extension MainViewController {
     }
     
     @objc func refreshTable(refresh: UIRefreshControl) {
-        print("refreshTable")
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             
             self.viewModel.page = 0
@@ -387,21 +223,14 @@ extension MainViewController {
         }
     }
     
-    //    //MARK: - UIRefreshControl of ScrollView
-    //    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-    //        if(velocity.y < -0.1) {
-    //            self.refreshTable(refresh: self.refresh)
-    //        }
-    //    }
-    
 }
 
 // MARK: - Timer
-extension MainViewController: TableViewCellDelegate {
 
+extension MainViewController: TableViewCellDelegate {
+   
     func createTimer() {
         if timer == nil {
-            print("* create timer")
             let timer = Timer(timeInterval: 1.0,
                               target: self,
                               selector: #selector(updateTimer),
@@ -414,15 +243,10 @@ extension MainViewController: TableViewCellDelegate {
         }
     }
     
-    func expiredSeconds() {
+    func cancleTimer() {
         timer?.invalidate()
         timer = nil
     }
-    
-//    func cancelTimer() {
-//        timer?.invalidate()
-//        timer = nil
-//    }
     
     @objc func updateTimer() {
         guard let visibleRowsIndexPaths = mainTableView.indexPathsForVisibleRows else {
@@ -431,7 +255,6 @@ extension MainViewController: TableViewCellDelegate {
         
         for indexPath in visibleRowsIndexPaths {
             if let cell = mainTableView.cellForRow(at: indexPath) as? MainTableViewCell {
-                // print("* cell. updatetime")
                 cell.updateTime()
             }
         }
