@@ -75,37 +75,42 @@ class VoteDetailViewController: BaseViewContoller {
     
     // MARK: - Properties
     
-    var selectedImageId: String? // 실제 선택된 이미지의 ID 값
-    var firstRankSet: Set<Int> = [] // 1위 이미지 인덱스 값 저장
+    var isSelect: Bool = false // didSelectItemAt으로 이미지 선택이 되었는지 판별할 Bool 값 - true라면 선택함
+    var selectedImageId: String? // 선택된 이미지의 ID 값
+    var selectImageIndex: Int? // 선택된 이미지의 컬렉션뷰 상의 IndexPath.row 값
+    
+    var firstRankSet: Set<Int> = [] // 1위 이미지 인덱스 값들 저장
     var isFirstRank: Bool = false // 1위 이미지가 원픽 이미지 or 투표한 이미지일 경우 true
     
     var currentPage: Int = 0 // 현재 중앙에 보이는 컬렉션뷰 이미지의 IndexPath.row 값
-    var isSelect: Bool = false // didSelectItemAt으로 이미지 선택이 되었는지 판별할 Bool 값 - true라면 선택함
-    var selectImageIndex: Int? // 선택된 이미지의 컬렉션뷰 상의 IndexPath.row 값
-    var isPick: Bool = false // pick Button 클릭시 피드백 뷰를 보여주기 위한 Bool 값 - true라면 Feedback View 보여줌
-    var isPickStart: Bool = false
     
+    var isPick: Bool = false // pick 버튼 클릭한 경우만 피드백 뷰를 보여주기 위한 Bool 값 - true면 Feedback View 보여줌
+    var isPickStart: Bool = false // Pick View에서 이미지 선택한 경우만 투표하기 통신을 하게 하기위한 Bool 값
+    
+    var isFirst: Bool = true // 제일 처음 뷰가 로드되면 데이터가 무조건 없는 상태로 빠졌다가 로드되기 때문에 Flag 처리
+    
+    var isDeadline: Bool = false
+    
+    // View Model
     lazy var viewModel: VoteDetailViewModel = {
         let viewModel = VoteDetailViewModel(service: VoteDetailService())
         return viewModel
     }()
     
-    var postId: String!
+    var postId: String! // 메인에서 받아오는 게시글 아이디 값
     
-    let loginUserNickname = LoginUser.shared.userNickname!
+    let loginUserNickname = LoginUser.shared.userNickname! // 로그인 유저 아이디
     var isSameNickname: Bool = false // 로그인 유저와 게시글 작성자가 일치하는지 판별
     
-    var voteResultModel: [VoteResultModel] = []
-    
-    var isFirst: Bool = true
+    var voteResultModel: [VoteResultModel] = [] // 투표 결과 값 담을 배열
     
     // MARK: - Timer
-
+    
     var timer: Timer?
     var dateHelper = DateHelper()
     let currentDate = Date()
     var remainSeconds: Int = 0
- 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -121,29 +126,29 @@ class VoteDetailViewController: BaseViewContoller {
     // MARK: - Bind View Model
     
     private func bindViewModel() {
-        ActivityView.instance.start(controller: self)
+        ActivityView.instance.start(controller: self) // 인디케이터 시작
         
         viewModel.voteDetailModel.bindAndFire { (response) in
-             
+            
             // 제일 처음 뷰가 로드되면 데이터가 무조건 없는 상태로 빠졌다가 로드되기 때문에 isFirst로 한 번 예외처리
             if self.isFirst {
                 self.isFirst = false
                 return
             }
             
-            if response.postNickname != "" {
+            if response.postNickname != "" { // 투표가 삭제되지 않고 있는 경우
+                
                 self.detailNicknameLabel.text = response.postNickname
-                // self.detailProfileImageView.kf.setImage(with: URL(string: response.postProfileUrl), placeholder: #imageLiteral(resourceName: "progressCircle"))
                 self.detailProfileImageView.image = UIImage.profileImage(response.postProfileUrl)
                 self.detailParticipantsLabel.text = "\(response.participantsNum)명 참여중"
-                self.detailTitleLabel.text = response.title
                 self.detailPageLabel.text = "\(self.currentPage)/\(response.images.count)"
+                self.detailTitleLabel.text = response.title
                 
-                // Set Deadline Timer
-//                if let deadline = response.deadline {
-//                    self.setTimer(deadline: deadline)
-//                }
+                // 기기별 타이틀 사이즈 조절
+                self.detailTitleLabel.minimumScaleFactor = 10 / UIFont.labelFontSize
+                self.detailTitleLabel.adjustsFontSizeToFitWidth = true
                 
+                // 타이머 설정
                 let endDate = self.dateHelper.stringToDate(dateString: response.deadline!)
                 self.remainSeconds = self.dateHelper.getTimer(startDate: self.currentDate, endDate: endDate!)
                 self.updateTimer()
@@ -165,8 +170,8 @@ class VoteDetailViewController: BaseViewContoller {
                 }
                 
                 // 투표 게시자 or 투표한 사용자의 경우 - 결과 값 구하기
-                if self.isSameNickname || response.isVoted {
-                    // 투표 이미지 별 결과를 담을 배열
+                if self.isSameNickname || response.isVoted || self.isDeadline {
+                    // 투표 이미지 별 결과를 담을 배열 초기화
                     self.voteResultModel = Array(repeating: VoteResultModel(percent: 0.0, rank: 0, sensitivityPercent: 0.0, compositionPercent: 0.0, lightPercent: 0.0, colorPercent: 0.0), count: self.viewModel.voteDetailModel.value.images.count)
                     
                     // 결과 값 계산
@@ -175,31 +180,19 @@ class VoteDetailViewController: BaseViewContoller {
                 
                 self.setupView() // 결과값 계산 후 Feedback View 퍼센트 초기화 해야함
                 self.carouselCollectionView.reloadData()
-                
-                ActivityView.instance.stop()
             } else { // 투표가 삭제되어 볼 수 없는 경우
-                ActivityView.instance.stop()
                 self.rightBarButton.isEnabled = false
                 self.deleteView.isHidden = false
                 self.deleteImageView.image = #imageLiteral(resourceName: "hmm")
                 self.deleteLabel.text = "게시글이 삭제되어 볼 수 없어요.\n다시 돌아가주세요."
-           }
+            }
         }
         
-        // 게시글 상세 조회
-        
+        // 게시글 상세 조회 서버 통신
         viewModel.fetchVoteDetail(postId: postId)
-
+        
+        ActivityView.instance.stop() // 인디케이터 중지
     }
-    
-    override func setConfiguration() {
-        buttonArray = [sensitivityButton, compositionButton, lightButton, colorButton, skipButton]
-        percentLabelArray = [sensitivityPercentLabel, compositionPercentLabel, lightPercentLabel, colorPercentLabel]
-        resultViewArray = [sensitivityResultView, compositionResultView, lightResultView, colorResultView]
-        heightConstraintArray = [sensitivityHeightConstraint, compositionHeightConstraint, lightHeightConstraint, colorHeightConstraint]
-        buttonLabelArray = [sensitivityLabel, compositionLabel, lightLabel, colorLabel]
-    }
-    
 }
 
 // MARK: - Collection View Data Source
@@ -216,19 +209,15 @@ extension CarouselDatasource: UICollectionViewDataSource {
         
         let cell: VoteDetailCollectionViewCell = collectionView.dequeueCollectionCell(for: indexPath)
         
-//        if let scalingCell = cell as? ScalingCarouselCell {
-//            scalingCell.mainView.backgroundColor = .black
-//            scalingCell.cornerRadius = 10
-//        }
-        
         cell.mainView.backgroundColor = .black
         cell.cornerRadius = 10
         
         let object = self.viewModel.voteDetailModel.value
         
-        // 1. 투표 게시자 and 2-2. 투표한 사용자 -> 투표 결과 화면 Feedback View
-        if isSameNickname || object.isVoted {
-            // 선택 이미지 효과 해제
+        // 1. 투표 게시자 & 2-2. 투표한 사용자 & 마감된 투표일 경우-> 투표 결과 화면 Feedback View
+        if isSameNickname || object.isVoted || isDeadline {
+            
+            // 선택 이미지 효과(핑크 다이아몬드) 해제
             cell.viewWidthConstraint.constant = 0
             cell.diamondsImageView.isHidden = true
             
@@ -238,49 +227,38 @@ extension CarouselDatasource: UICollectionViewDataSource {
             cell.percentLabel.text = "\(voteResultModel[indexPath.row].percent)%"
             cell.rankingLabel.text = "\(voteResultModel[indexPath.row].rank)위"
             
-            if cell.percentLabel.text == "0.0%" {
+            if cell.percentLabel.text == "0.0%" { // 0%
                 cell.viewWidthConstraint.constant = 299
                 cell.resultColorView.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.5)
-            } else {
+            } else { // 그 이외의 퍼센트
                 let size = 239 * 0.01 * (voteResultModel[indexPath.row].percent) + 60
                 cell.viewWidthConstraint.constant = CGFloat(size)
-                print("image size : \(cell.detailPhotoImageView.frame.width)")
-                print("resut size : \(size)")
                 
                 // 1위 이미지일 경우
                 if firstRankSet.contains(indexPath.row) {
-                    // 작성자 원픽이 1위 or 투표자 투표 이미지가 1위
+                    // 작성자 원픽이 1위 or 투표자 투표 이미지가 1위일 경우
                     if (isSameNickname && object.onePickImageId == indexPath.row) || (loginUserNickname != object.postNickname && object.votedImageId == indexPath.row) {
                         cell.resultColorView.backgroundColor = #colorLiteral(red: 0.9215686275, green: 0.2862745098, blue: 0.6039215686, alpha: 0.8)
                         isFirstRank = true
-                    } else { // 1위가 다르면
+                    } else { // 1위가 다르다면
                         cell.resultColorView.backgroundColor = #colorLiteral(red: 0.9411764706, green: 0.4745098039, blue: 0.2352941176, alpha: 0.8)
                         isFirstRank = false
                     }
-                } else { // 그 외
+                } else { // 1위가 아닌 그 이외의 경우
                     cell.resultColorView.backgroundColor = #colorLiteral(red: 0.2, green: 0.8, blue: 0.5490196078, alpha: 0.8)
                 }
             }
-        } else { // 2-1. 투표 안한 사용자 -> 투표 선택 화면 Pick View
+        } else { // 2-1. 마감되지 않고, 투표 안한 사용자 -> 투표 선택 화면 Pick View
             if isSelect {
-               // print("* cell for is select")
-                // 투표는 안했지만 선택한 이미지가 있는 경우 -> 핑크뷰 + 다이아몬드 이미지 활성화
+                // 투표는 안했지만 선택한 이미지가 있는 경우 -> 핑크 다이아몬드 이미지 활성화
                 if indexPath.item == selectImageIndex {
-                   // print("* cell for is select ---- 활성 핑크")
                     cell.viewWidthConstraint.constant = 299
                     cell.diamondsImageView.isHidden = false
                 } else { // 나머지 이미지는 그대로
-                   // print("* cell for is select ---- 비활성 그대로 ")
                     cell.viewWidthConstraint.constant = 0
                     cell.diamondsImageView.isHidden = true
                 }
             }
-            
-            //             else { // didselectimetat에서 isselect취소시 해당 셀 활성이미지 없애주기 위함
-            //
-            //                    cell.viewWidthConstraint.constant = 0
-            //                    cell.diamondsImageView.isHidden = true
-            //
         }
         
         cell.detailPhotoImageView.kf.setImage(with: URL(string: (object.images[indexPath.row].imageUrl)), placeholder: #imageLiteral(resourceName: "defalutImage"))
@@ -303,20 +281,11 @@ extension VoteDetailViewController: UICollectionViewDelegate {
     // MARK: - Did Select Item At
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        if !isSelect {
-//            print("* did select item - select ok")
-            isSelect = true
-            selectImageIndex = indexPath.row
-            selectedImageId = viewModel.voteDetailModel.value.images[indexPath.row].imageId
-            pickButton.setImage(#imageLiteral(resourceName: "pickButtonNormal"), for: .normal)
-            carouselCollectionView.reloadData() // 컬렉션 뷰 업데이트 해줘야지 반영됨
-//        }
-//        else {
-//            print("* did select item - select nope!")
-//            isSelect = false
-//            pickButton.setImage(#imageLiteral(resourceName: "pickButtonDisabled"), for: .normal)
-//            carouselCollectionView.reloadData() // 컬렉션 뷰 업데이트 해줘야지 반영됨
-//        }
+        isSelect = true
+        selectImageIndex = indexPath.row
+        selectedImageId = viewModel.voteDetailModel.value.images[indexPath.row].imageId
+        pickButton.setImage(#imageLiteral(resourceName: "pickButtonNormal"), for: .normal)
+        carouselCollectionView.reloadData() // 컬렉션 뷰 업데이트 해줘야지 반영됨
     }
     
     // MARK: - Scroll View Did Scroll
@@ -331,8 +300,8 @@ extension VoteDetailViewController: UICollectionViewDelegate {
         detailPageLabel.text = "\(String(describing: currentPage + 1)) / \(String(describing: viewModel.voteDetailModel.value.images.count))"
         detailPageControl.currentPage = currentPage
         
-        // 투표하지 않은 경우 (Pick View)
-        if !isSameNickname && !viewModel.voteDetailModel.value.isVoted { // 투표를 하지 않아 이미지를 선택해야할 경우 (Pick View)
+        // 투표하지 않고 마감되지 않은 경우 (Pick View) -> 투표 이미지 선택해야 함
+        if !isSameNickname && !viewModel.voteDetailModel.value.isVoted && !isDeadline {
             if isSelect { // 선택한 이미지가 있을 경우
                 if currentPage == selectImageIndex { // 현재 이미지 인덱스 = 선택된 이미지 인덱스
                     if !isPick {
@@ -384,16 +353,13 @@ extension VoteDetailViewController: AlertViewActionDelegate {
         
         // 1. 투표 작성자인 경우 -> Feedback View + 원픽 버튼(원픽 이미지)
         if isSameNickname {
-            print("투표 작성자인 경우")
             isPickStart = false
             setupResultView(isPicked: true, isVoted: true)
         } else { // 2. 투표 작성자가 아닐 경우
-            if !viewModel.voteDetailModel.value.isVoted { // 2-1. 투표하지 않은 사용자 -> Pick View
-                print("사용자 투표 X")
+            if !viewModel.voteDetailModel.value.isVoted && !isDeadline { // 2-1. 마감되지 않은 투표이고, 투표하지 않은 사용자 -> Pick View
                 isPickStart = true
                 setupResultView(isPicked: false, isVoted: false)
             } else { // 2-2. 투표한 사용자 -> Feedback View + 원픽 버튼(투표 이미지)
-                print("사용자 투표 O")
                 isPickStart = false
                 setupResultView(isPicked: true, isVoted: true)
             }
@@ -416,9 +382,8 @@ extension VoteDetailViewController: AlertViewActionDelegate {
             skipButton.setImage(#imageLiteral(resourceName: "onePickButton"), for: .normal)
             skipButton.setImage(#imageLiteral(resourceName: "onePickButtonDisabled"), for: .highlighted)
             skipButton.setTitle("", for: .normal)
-  
+            
             skipButton.tag = 17
-            print("tag 변경 skip tag ? \(skipButton.tag)")
             onePickLabel.text = "내 원픽!"
             onePickLabel.textColor = .textColor(.text91)
             
@@ -461,73 +426,21 @@ extension VoteDetailViewController: AlertViewActionDelegate {
         }
     }
     
-    // MARK: - Set Timer
+    // MARK: - Set Configuration
     
-//    func setTimer(deadline: String) {
-//        let endDate = dateHelper.stringToDate(dateString: deadline)!
-//        var remainSeconds = dateHelper.getTimer(startDate: currentDate, endDate: endDate)
-//
-//       DispatchQueue.main.async { [weak self] in
-//        self?.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] timer in
-//
-//                if remainSeconds <= 0 {
-//                    timer.invalidate()
-//                    self?.detailDeadlineLabel.text = "마감된 투표에요"
-//                    self?.detailClockImageView.isHidden = true
-//
-//                    return
-//                }
-//
-//                remainSeconds -= 1
-//                self?.detailClockImageView.isHidden = false
-//            self?.detailDeadlineLabel.text = self?.dateHelper.timerString(remainSeconds: remainSeconds)
-//            }
-//       }
-//    }
-    
-    /*
-    func setTimer(endTime: String) {
-        DispatchQueue.main.async { [weak self] in
-            self?.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] timer in
-                
-                // 마감 시간 Date 형식으로 변환
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-                let convertDate = dateFormatter.date(from: endTime)
-                
-                // 현재 시간 적용하기 - 시간 + 9시간
-                let calendar = Calendar.current
-                let today = Date()
-                let localDate = Date(timeInterval: TimeInterval(calendar.timeZone.secondsFromGMT()), since: today)
-                let localConvertDate =  Date(timeInterval: TimeInterval(calendar.timeZone.secondsFromGMT()), since: convertDate!)
-                
-                let elapsedTimeSeconds = Int(Date().timeIntervalSince(localConvertDate)) // 마감 시간
-                let expireLimit = Int(Date().timeIntervalSince(localDate)) // 현재 시간
-                
-                guard elapsedTimeSeconds <= expireLimit else { // 시간 초과한 경우
-                    timer.invalidate()
-                    
-                    self?.detailDeadlineLabel.text = "마감된 투표에요"
-                    self?.detailClockImageView.isHidden = true
-                    return
-                }
-                
-                let remainSeconds = expireLimit - elapsedTimeSeconds
-                
-                let hours   = Int(remainSeconds) / 3600
-                let minutes = Int(remainSeconds) / 60 % 60
-                let seconds = Int(remainSeconds) % 60
-                
-                self?.detailDeadlineLabel.text = String(format: "%02i:%02i:%02i", hours, minutes, seconds)
-            }
-        }
+    override func setConfiguration() {
+        buttonArray = [sensitivityButton, compositionButton, lightButton, colorButton, skipButton]
+        percentLabelArray = [sensitivityPercentLabel, compositionPercentLabel, lightPercentLabel, colorPercentLabel]
+        resultViewArray = [sensitivityResultView, compositionResultView, lightResultView, colorResultView]
+        heightConstraintArray = [sensitivityHeightConstraint, compositionHeightConstraint, lightHeightConstraint, colorHeightConstraint]
+        buttonLabelArray = [sensitivityLabel, compositionLabel, lightLabel, colorLabel]
     }
-    */
     
     // MARK: - Button Tags
     
     private func setupButton() {
-                
+        
+        // 다양한 방식으로 Button Action 적용
         rightBarButton.action = #selector(rightButtonClicked(_:))
         rightBarButton.target = self
         
@@ -536,7 +449,7 @@ extension VoteDetailViewController: AlertViewActionDelegate {
         backButton.target = self
         
         // Pick Button
-        pickButton.addTarget(self, action: #selector(pickButtonClicked), for: UIControl.Event.touchUpInside)
+        pickButton.addTarget(self, action: #selector(pickButtonClicked), for: .touchUpInside)
         
         // Feedback Button
         for button in buttonArray {
@@ -547,8 +460,6 @@ extension VoteDetailViewController: AlertViewActionDelegate {
     // MARK: - Back Button Action
     
     @objc func backButtonClicked(_ sender: UIButton) {
-        print("* vote delete back button click")
-        
         self.navigationController?.popViewController(animated: true)
     }
     
@@ -565,11 +476,8 @@ extension VoteDetailViewController: AlertViewActionDelegate {
     // MARK: - Feedback Button Action
     
     @objc func feedbackButtonClicked(_ sender: UIButton) {
-        // 투표 안 했을 때만 투표 생성 서버 통신
-        
-        print("is pick start??? \(isPickStart) + tag \(sender.tag)")
-        
-        if isPickStart { // Pick View에서 투표해서 온 경우만 통신 가능
+        // 투표 안 했을 때만 투표 생성 서버 통신 - Pick View에서 투표해서 온 경우만 통신 가능
+        if isPickStart {
             isPickStart = false
             
             let feedbackDictionary: [Int: String] = [11: "emotion", 12: "composition", 13: "light", 14: "color", 15: "skip"]
@@ -580,10 +488,6 @@ extension VoteDetailViewController: AlertViewActionDelegate {
             
             // 투표 생성
             viewModel.service?.createVote(postId: postId, imageId: selectedImageId!, category: category, completion: {
-                print("vote")
-                
-                print("투표 생성 서버통신 선택한 이미지 id는? \(self.selectedImageId)")
-                
                 let currentButtonTag = sender.tag
                 
                 feedbackDictionary.keys.filter { $0 != currentButtonTag }.forEach { tag in
@@ -624,37 +528,33 @@ extension VoteDetailViewController: AlertViewActionDelegate {
             })
         }
         
-        print("여기까지옴")
-        
         // One Pick Button Clicked
         if sender.tag == 17 {
-            print("tag = 17")
-            
-            // 투표 작성자일 경우 -> 원픽 이미지로 이동
+            // 투표 작성자일 경우 -> 원픽 이미지 인덱스로 이동
             if isSameNickname {
-                print("투표 작성자 원픽 ")
                 carouselCollectionView.scrollToItem(at: IndexPath(row: viewModel.voteDetailModel.value.onePickImageId, section: 0), at: .top, animated: true)
-            } else { // 투표자일 경우 -> 투표한 이미지로 이동
-                print("투표자 투표한 이미지 ")
-                carouselCollectionView.scrollToItem(at: IndexPath(row: viewModel.voteDetailModel.value.votedImageId, section: 0), at: .top, animated: true)
+            } else { // 투표자일 경우
+                if viewModel.voteDetailModel.value.isVoted { // 투표한 경우 - 투표한 이미지 인덱스로 이동
+                    carouselCollectionView.scrollToItem(at: IndexPath(row: viewModel.voteDetailModel.value.votedImageId, section: 0), at: .top, animated: true)
+                } else { // 투표하지 않은 경우 - 투표 작성자 원픽 이미지 인덱스로 이동
+                    carouselCollectionView.scrollToItem(at: IndexPath(row: viewModel.voteDetailModel.value.onePickImageId, section: 0), at: .top, animated: true)
+                }
             }
         }
     }
     
-    // MARK: - Right Button Action - Alert View
+    // MARK: - Navigation Right Button Action - Alert View
     
     @objc func rightButtonClicked(_ sender: UIButton) {
         switch sender.tag {
-        case 0:
-            print("삭제하기")
+        case 0: // 삭제하기
             AlertView.instance.showAlert(using: .listRemove)
             AlertView.instance.actionDelegate = self
-        case 1:
-            print("신고하기")
+        case 1: // 신고하기
             AlertView.instance.showAlert(using: .report)
             AlertView.instance.actionDelegate = self
-        default:
-            print("error")
+        default: // Error
+            print("Right Button Clicked Error")
         }
     }
     
@@ -677,10 +577,13 @@ extension VoteDetailViewController: AlertViewActionDelegate {
         Toast.show(using: .report, controller: self)
     }
     
-    // MARK: - Get Vote Result
+}
+
+// MARK: - Get Vote Result
+
+extension VoteDetailViewController {
     
     func getVoteResult() {
-        
         // 전체 투표 결과 값 구하기
         let object = viewModel.voteDetailModel.value
         
@@ -753,16 +656,15 @@ extension VoteDetailViewController: AlertViewActionDelegate {
             }
         }
     }
-    
 }
 
-
 // MARK: - Timer
-extension VoteDetailViewController {
 
+extension VoteDetailViewController {
+    
+    // 타이머 생성
     func createTimer() {
         if timer == nil {
-            print("* create timer")
             let timer = Timer(timeInterval: 1.0,
                               target: self,
                               selector: #selector(updateTimer),
@@ -775,18 +677,21 @@ extension VoteDetailViewController {
         }
     }
     
+    // 타이머 삭제
     func cancelTimer() {
         timer?.invalidate()
         timer = nil
     }
     
+    // 1초 씩 업데이트
     @objc func updateTimer() {
-        
         remainSeconds -= 1
         self.detailClockImageView.isHidden = false
         self.detailDeadlineLabel.text = self.dateHelper.timerString(remainSeconds: remainSeconds)
         
+        // 마감시간이 지닌 경우
         if remainSeconds <= 0 {
+            isDeadline = true
             self.detailDeadlineLabel.text = "마감된 투표에요"
             self.detailClockImageView.isHidden = true
             self.detailTitleLabel.textColor = .textColor(.text50)

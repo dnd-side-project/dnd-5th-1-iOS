@@ -67,7 +67,6 @@ class VoteDetailService: VoteDetailServiceProtocol {
     // MARK: - 게시글 삭제
     
     func deletePost(postId: String, completion: @escaping () -> Void) {
-        print("postID ; \(postId)")
         let URL = APIConstants.Post.deletePost(postID: postId).urlString
         let header: HTTPHeaders = [ "Authorization": APIConstants.jwtToken ]
         

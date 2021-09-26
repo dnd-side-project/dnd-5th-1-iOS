@@ -8,14 +8,16 @@
 import UIKit
 import Kingfisher
 
-// MARK: - CollectionviewCellDelegate
+// MARK: - Collection View Cell Delegate
 
 protocol CollectionViewCellDelegate: AnyObject {
     func selectedCVCell(_ index: Int, _ postId: String)
 }
 
+// MARK: - Main Table View Cell Delegate
+
 protocol TableViewCellDelegate: AnyObject {
-    func expiredSeconds()
+    func cancleTimer()
 }
 
 class MainTableViewCell: UITableViewCell {
@@ -33,45 +35,15 @@ class MainTableViewCell: UITableViewCell {
     // MARK: - Variables
     
     weak var cellDelegate: CollectionViewCellDelegate?
-    
     weak var tableDelegate: TableViewCellDelegate?
     
     var imageData: [Images]?
     var postId: String!
     
-    var dateHelper = DateHelper()
-    
     // Timer
-    //    let currentDate = Date()
-    
-    //    var timer = Timer()
-    //    deinit {
-    //        timer.invalidate()
-    //    }
-    
-    //    var timer: Timer?
-    
-    //    var deadline: String?
+    var dateHelper = DateHelper()
+    var currentDate: Date?
     var remainSeconds: Int = 0
-    
-    /*
-     func updateCell(model: Any) {
-     if let object = model as? MainModel {
-     // mainProfileImageView.kf.setImage(with: URL(string: object.user.profileImageUrl), placeholder: #imageLiteral(resourceName: "progressCircle"))
-     
-     mainProfileImageView.image = UIImage.profileImage(object.user.profileImageUrl)
-     mainNicknameLabel.text = object.user.nickname
-     mainParticipantsLabel.text = "\(object.participantsNum)명 참여중"
-     mainTitleLabel.text = object.title
-     imageData = object.images
-     // setTimer(endTime: object.deadline)
-     setTimer(deadline: object.deadline)
-     postId = object.postId
-     } else {
-     
-     }
-     }
-     */
     
     func configure(with object: MainModel?) {
         if let object = object {
@@ -80,55 +52,19 @@ class MainTableViewCell: UITableViewCell {
             mainParticipantsLabel.text = "\(object.participantsNum)명 참여중"
             mainTitleLabel.text = object.title
             imageData = object.images
-            // setTimer(endTime: object.deadline)
             
-            // setTimer(deadline: object.deadline)
-            
-            // timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(fireTimer), userInfo: ["deadline": object.deadline], repeats: true)
-            
-            // deadline = object.deadline
-            
-            //            let endDate = dateHelper.stringToDate(dateString: deadline!)
-            //            remainSeconds = dateHelper.getTimer(startDate: currentDate, endDate: endDate!)
-            //
-            
-            // print("* Cell 남은시간? \(remainSeconds)")
+            // 타이머 설정
+            let endDate = dateHelper.stringToDate(dateString: object.deadline)
+            remainSeconds = dateHelper.getTimer(startDate: currentDate!, endDate: endDate!)
             updateTime()
             
             postId = object.postId
-        } else {
-            // print("로딩중")
         }
     }
-    
-    /*
-     @objc func fireTimer() {
-     guard let context = timer?.userInfo as? [String: String] else { return }
-     let deadline = context["deadline", default: ""]
-     
-     let endDate = dateHelper.stringToDate(dateString: deadline)!
-     var remainSeconds = dateHelper.getTimer(startDate: currentDate, endDate: endDate)
-     
-     
-     
-     if remainSeconds <= 0 {
-     timer?.invalidate()
-     self.mainDeadlineLabel.text = "마감된 투표에요"
-     self.mainClockImageView.isHidden = true
-     timer = nil
-     }
-     
-     remainSeconds -= 1
-     self.mainClockImageView.isHidden = false
-     self.mainDeadlineLabel.text = self.dateHelper.timerString(remainSeconds: remainSeconds)
-     }
-     */
     
     // MARK: - Timer
     
     func updateTime() {
-        
-        //        print("update TIme!!")
         remainSeconds -= 1
         self.mainClockImageView.isHidden = false
         self.mainDeadlineLabel.text = self.dateHelper.timerString(remainSeconds: remainSeconds)
@@ -137,78 +73,9 @@ class MainTableViewCell: UITableViewCell {
             self.mainDeadlineLabel.text = "마감된 투표에요"
             self.mainClockImageView.isHidden = true
             
-            tableDelegate?.expiredSeconds()
-            
+            tableDelegate?.cancleTimer()
         }
     }
-    
-    func setTimer(deadline: String) {
-        //        let endDate = dateHelper.stringToDate(dateString: deadline)!
-        //        var remainSeconds = dateHelper.getTimer(startDate: currentDate, endDate: endDate)
-        //
-        //        DispatchQueue.global(qos: .background).async {
-        //            self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.update), userInfo: ["remainSeconds": remainSeconds], repeats: true)
-        //            RunLoop.current.run()
-        //        }
-        
-        //        DispatchQueue.main.async { [weak self] in
-        //            self?.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] timer in
-        //
-        //                if remainSeconds <= 0 {
-        //                    timer.invalidate()
-        //                    self?.mainDeadlineLabel.text = "마감된 투표에요"
-        //                    self?.mainClockImageView.isHidden = true
-        //                    return
-        //                }
-        //
-        //                remainSeconds -= 1
-        //                self?.mainClockImageView.isHidden = false
-        //                self?.mainDeadlineLabel.text = self?.dateHelper.timerString(remainSeconds: remainSeconds)
-        //            }
-        //        }
-    }
-    
-    /*
-     func setTimer(endTime: String) {
-     print("settiemr")
-     DispatchQueue.main.async { [weak self] in
-     self?.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] timer in
-     
-     
-     // 마감 시간 Date 형식으로 변환
-     let dateFormatter = DateFormatter()
-     dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-     let convertDate = dateFormatter.date(from: endTime)
-     
-     // 현재 시간 적용하기 - 시간 + 9시간
-     let calendar = Calendar.current
-     let today = Date()
-     let localDate = Date(timeInterval: TimeInterval(calendar.timeZone.secondsFromGMT()), since: today)
-     let localConvertDate =  Date(timeInterval: TimeInterval(calendar.timeZone.secondsFromGMT()), since: convertDate!)
-     
-     let elapsedTimeSeconds = Int(Date().timeIntervalSince(localConvertDate)) // 마감 시간
-     let expireLimit = Int(Date().timeIntervalSince(localDate)) // 현재 시간
-     
-     guard elapsedTimeSeconds <= expireLimit else { // 시간 초과한 경우
-     timer.invalidate()
-     
-     self?.mainDeadlineLabel.text = "마감된 투표에요"
-     self?.mainClockImageView.isHidden = true
-     return
-     }
-     
-     let remainSeconds = expireLimit - elapsedTimeSeconds
-     
-     let hours   = Int(remainSeconds) / 3600
-     let minutes = Int(remainSeconds) / 60 % 60
-     let seconds = Int(remainSeconds) % 60
-     
-     self?.mainClockImageView.isHidden = false
-     self?.mainDeadlineLabel.text = String(format: "%02i:%02i:%02i", hours, minutes, seconds)
-     }
-     }
-     }
-     */
     
     func setCollectionViewDataSourceDelegate(forRow row: Int) {
         mainCollectionView.delegate = self
@@ -221,28 +88,22 @@ class MainTableViewCell: UITableViewCell {
         
         mainProfileImageView.circular() // 프로필 이미지 원형
         
-        mainCollectionView.showsHorizontalScrollIndicator = false
+        mainCollectionView.showsHorizontalScrollIndicator = false // 컬렉션뷰 스크롤바 없앰
     }
-    
-    //    override func prepareForReuse() {
-    //        super.prepareForReuse()
-    //
-    //        timer.invalidate()
-    //    }
-    
 }
 
 // MARK: - CollectionView
 
 extension MainTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        let count = imageData?.count ?? 0
-        return count + 1
         
-        // return 3
+        let count = imageData?.count ?? 0
+        
+        return count + 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
         let cell: MainCollectionViewCell = mainCollectionView.dequeueCollectionCell(for: indexPath)
         
         if let imageData = imageData {
@@ -255,8 +116,6 @@ extension MainTableViewCell: UICollectionViewDelegate, UICollectionViewDataSourc
                 cell.stackView.isHidden = true
             }
         }
-        
-        // cell.mainPhotoImageView.image = imageData[indexPath.row]
         
         return cell
     }

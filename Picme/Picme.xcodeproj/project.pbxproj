@@ -73,7 +73,6 @@
 		A9E72E2F26C52F62003C98A0 /* YPImagePicker in Frameworks */ = {isa = PBXBuildFile; productRef = A9E72E2E26C52F62003C98A0 /* YPImagePicker */; };
 		D1103F6226C46AE4002D1E78 /* Enum+NetworkResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1103F6126C46AE4002D1E78 /* Enum+NetworkResult.swift */; };
 		D1103F6426C46B44002D1E78 /* MainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1103F6326C46B44002D1E78 /* MainService.swift */; };
-		D11C2DC126B82AA100C8EE51 /* VoteDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11C2DC026B82AA100C8EE51 /* VoteDetailTableViewController.swift */; };
 		D12B119A26CD057B00777498 /* Extension+UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D12B119926CD057B00777498 /* Extension+UIViewController.swift */; };
 		D12B119C26CD924200777498 /* LoginUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D12B119B26CD924200777498 /* LoginUser.swift */; };
 		D138B3F926E2F25000323A0B /* DateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D138B3F826E2F25000323A0B /* DateHelper.swift */; };
@@ -200,7 +199,6 @@
 		CE1E7EEC4130AD59C5A0B524 /* Pods-Picme.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Picme.release.xcconfig"; path = "Target Support Files/Pods-Picme/Pods-Picme.release.xcconfig"; sourceTree = "<group>"; };
 		D1103F6126C46AE4002D1E78 /* Enum+NetworkResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Enum+NetworkResult.swift"; sourceTree = "<group>"; };
 		D1103F6326C46B44002D1E78 /* MainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainService.swift; sourceTree = "<group>"; };
-		D11C2DC026B82AA100C8EE51 /* VoteDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteDetailTableViewController.swift; sourceTree = "<group>"; };
 		D12B119926CD057B00777498 /* Extension+UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIViewController.swift"; sourceTree = "<group>"; };
 		D12B119B26CD924200777498 /* LoginUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUser.swift; sourceTree = "<group>"; };
 		D138B3F826E2F25000323A0B /* DateHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHelper.swift; sourceTree = "<group>"; };
@@ -790,7 +788,6 @@
 			isa = PBXGroup;
 			children = (
 				D1B51E2126C301F600928FF3 /* Cell */,
-				D11C2DC026B82AA100C8EE51 /* VoteDetailTableViewController.swift */,
 				D173CD9E26C50E2F00468D52 /* VoteDetailViewController.swift */,
 			);
 			path = VoteDetail;
@@ -852,7 +849,6 @@
 				A9A1AD3D2699FAE600169D76 /* Resources */,
 				A9C12B97269C31AC00729A74 /* ShellScript */,
 				38E0222B9F2E3675B420EE4F /* [CP] Embed Pods Frameworks */,
-				DC8E79990E4993E91A02261F /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -895,7 +891,6 @@
 				A9A1AD5D2699FAE800169D76 /* Frameworks */,
 				A9A1AD5E2699FAE800169D76 /* Resources */,
 				C1835FD42B1809FC9029F422 /* [CP] Embed Pods Frameworks */,
-				3FA8E547113F059544FE0316 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1033,23 +1028,6 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Picme/Pods-Picme-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		3FA8E547113F059544FE0316 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Picme-PicmeUITests/Pods-Picme-PicmeUITests-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Picme-PicmeUITests/Pods-Picme-PicmeUITests-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Picme-PicmeUITests/Pods-Picme-PicmeUITests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		88794663FD404E94E72B8487 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1128,23 +1106,6 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Picme-PicmeUITests/Pods-Picme-PicmeUITests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		DC8E79990E4993E91A02261F /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Picme/Pods-Picme-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Picme/Pods-Picme-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Picme/Pods-Picme-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -1219,7 +1180,6 @@
 				D1449D9926A848610083418D /* MainViewController.swift in Sources */,
 				A93AD23326E509F200AF1475 /* InstarWebViewController.swift in Sources */,
 				A95CD354269EB2BF002CCCA8 /* Enum+APIError.swift in Sources */,
-				D11C2DC126B82AA100C8EE51 /* VoteDetailTableViewController.swift in Sources */,
 				A9E6DD8526CB9F78006155F3 /* MyPageViewModel.swift in Sources */,
 				A95CD356269EB5B7002CCCA8 /* Enum+HTTPMethod.swift in Sources */,
 				D12B119C26CD924200777498 /* LoginUser.swift in Sources */,
