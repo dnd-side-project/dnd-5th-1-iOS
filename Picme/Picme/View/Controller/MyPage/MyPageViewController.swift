@@ -13,7 +13,7 @@ final class MyPageViewController: BaseViewContoller {
     // MARK: - IBOutlet
     
     @IBOutlet weak var logOutButton: UIButton!
-    @IBOutlet weak var allVoteListButton: UIButton!
+    // @IBOutlet weak var allVoteListButton: UIButton!
     @IBOutlet weak var guideButton: UIButton!
     @IBOutlet weak var versionLabel: UILabel!
     @IBOutlet weak var settingButton: UIButton!
@@ -72,11 +72,10 @@ final class MyPageViewController: BaseViewContoller {
     // MARK: - Button Actions
     
     func setupButtons() {
-        allVoteListButton.tag = 1
-        // settingButton.tag = 3
-        
-        allVoteListButton.addTarget(self, action: #selector(showAlertView), for: UIControl.Event.touchUpInside)
+        // allVoteListButton.tag = 1
+        // allVoteListButton.addTarget(self, action: #selector(showAlertView), for: UIControl.Event.touchUpInside)
 
+        // settingButton.tag = 3
         // settingButton.addTarget(self, action: #selector(showAlertView), for: UIControl.Event.touchUpInside)
     }
     

@@ -46,6 +46,9 @@
                                                 <real key="value" value="10"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <segue destination="IhX-Xe-Db9" kind="push" id="PvC-vH-nYU"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u9h-jN-ZVF">
                                         <rect key="frame" x="0.0" y="68" width="335" height="52"/>
@@ -243,7 +246,6 @@
                     </view>
                     <navigationItem key="navigationItem" title="마이페이지" id="HQK-ya-1IQ"/>
                     <connections>
-                        <outlet property="allVoteListButton" destination="SBI-Rb-gZ2" id="uw5-xK-GUV"/>
                         <outlet property="guideButton" destination="u9h-jN-ZVF" id="AF5-RT-tJW"/>
                         <outlet property="logOutButton" destination="5bP-dw-Tkm" id="o0u-i9-1xV"/>
                         <outlet property="myVoteCountLabel" destination="kYa-ll-htJ" id="pRC-f7-FCt"/>
@@ -369,6 +371,43 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GsK-sX-QUB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1702.8985507246377" y="-610.04464285714278"/>
+        </scene>
+        <!--마이페이지-->
+        <scene sceneID="6K8-gp-sgi">
+            <objects>
+                <viewController storyboardIdentifier="MyVoteViewController" id="IhX-Xe-Db9" customClass="MyVoteViewController" customModule="Picme" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="esU-iy-YIT">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="yjs-GK-vVJ"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="마이페이지" id="tnQ-XW-M5Y">
+                        <barButtonItem key="leftBarButtonItem" image="leftArrow28" id="6ZI-h9-PLc">
+                            <connections>
+                                <action selector="leftBarButtonClicked:" destination="IhX-Xe-Db9" id="epv-66-prq"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Dv7-51-9Id" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2390" y="-610"/>
+        </scene>
+        <!--Test View Controller-->
+        <scene sceneID="9pV-lD-yXG">
+            <objects>
+                <viewController storyboardIdentifier="TestViewController" id="8GF-9O-W5S" customClass="TestViewController" customModule="Picme" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="2eP-D9-KOk">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="vaf-XY-3Co"/>
+                        <color key="backgroundColor" systemColor="systemGray3Color"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Y9B-TN-2y7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3049" y="-610"/>
         </scene>
         <!--Guide View Controller-->
         <scene sceneID="mWv-wX-HPK">
@@ -625,6 +664,9 @@ PICME 은(는) 정보주체의 이용정보를 저장하고 수시로 불러오�
         <image name="settingsButton" width="17" height="17"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray3Color">
+            <color red="0.7803921568627451" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
