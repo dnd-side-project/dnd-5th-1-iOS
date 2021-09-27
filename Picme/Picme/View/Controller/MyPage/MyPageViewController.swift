@@ -25,7 +25,7 @@ final class MyPageViewController: BaseViewContoller {
     @IBOutlet weak var participationCountLabel: UILabel!
     @IBOutlet weak var overallWinRateLabel: UILabel!
     
-    @IBOutlet weak var progressView: UIProgressView!
+    @IBOutlet weak var slider: UISlider!
     
     // MARK: - Properties
     
@@ -58,6 +58,8 @@ final class MyPageViewController: BaseViewContoller {
         fetchUser()
         
         versionLabel.text = viewModel.getVersion()
+        
+        slider.setThumbImage(#imageLiteral(resourceName: "progressCircle"), for: .normal)
     }
     
     // MARK: - Log Out
