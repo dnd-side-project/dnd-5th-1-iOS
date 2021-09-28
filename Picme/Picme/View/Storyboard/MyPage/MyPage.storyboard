@@ -385,7 +385,7 @@
                     <navigationItem key="navigationItem" title="마이페이지" id="tnQ-XW-M5Y">
                         <barButtonItem key="leftBarButtonItem" image="leftArrow28" id="6ZI-h9-PLc">
                             <connections>
-                                <action selector="leftBarButtonClicked:" destination="IhX-Xe-Db9" id="epv-66-prq"/>
+                                <action selector="leftBarButtonClicked:" destination="IhX-Xe-Db9" id="nWh-fg-ojt"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

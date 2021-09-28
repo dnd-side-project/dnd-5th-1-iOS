@@ -9,8 +9,14 @@ import UIKit
 
 class MyVoteViewController: UIViewController {
 
+    @IBAction func leftBarButtonClicked(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+
         
     }
     
