@@ -25,7 +25,7 @@ final class MyPageViewController: BaseViewContoller {
     @IBOutlet weak var participationCountLabel: UILabel!
     @IBOutlet weak var overallWinRateLabel: UILabel!
     
-    @IBOutlet weak var progressView: UIProgressView!
+    @IBOutlet weak var slider: UISlider!
     
     // MARK: - Properties
     
@@ -58,6 +58,8 @@ final class MyPageViewController: BaseViewContoller {
         fetchUser()
         
         versionLabel.text = viewModel.getVersion()
+        
+        slider.setThumbImage(#imageLiteral(resourceName: "progressCircle"), for: .normal)
     }
     
     // MARK: - Log Out
@@ -70,11 +72,10 @@ final class MyPageViewController: BaseViewContoller {
     // MARK: - Button Actions
     
     func setupButtons() {
-        allVoteListButton.tag = 1
-        // settingButton.tag = 3
-        
-        allVoteListButton.addTarget(self, action: #selector(showAlertView), for: UIControl.Event.touchUpInside)
+         allVoteListButton.tag = 1
+         allVoteListButton.addTarget(self, action: #selector(showAlertView), for: UIControl.Event.touchUpInside)
 
+        // settingButton.tag = 3
         // settingButton.addTarget(self, action: #selector(showAlertView), for: UIControl.Event.touchUpInside)
     }
     

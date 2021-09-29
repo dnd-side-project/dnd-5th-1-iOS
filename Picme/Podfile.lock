@@ -27,7 +27,6 @@ PODS:
   - Kingfisher (6.3.0)
   - ScalingCarousel (3.2.0)
   - SwiftLint (0.43.1)
-  - SwipeViewController (2.0)
 
 DEPENDENCIES:
   - Alamofire (~> 5.4)
@@ -38,7 +37,6 @@ DEPENDENCIES:
   - Kingfisher (~> 6.0)
   - ScalingCarousel
   - SwiftLint
-  - SwipeViewController
 
 SPEC REPOS:
   trunk:
@@ -53,7 +51,6 @@ SPEC REPOS:
     - Kingfisher
     - ScalingCarousel
     - SwiftLint
-    - SwipeViewController
 
 SPEC CHECKSUMS:
   Alamofire: e447a2774a40c996748296fa2c55112fdbbc42f9
@@ -67,8 +64,7 @@ SPEC CHECKSUMS:
   Kingfisher: 6c3df386db71d82c0817a429d2c9421a77396529
   ScalingCarousel: d40f0ce438af5cfb2225e2f723f7161597961128
   SwiftLint: 99f82d07b837b942dd563c668de129a03fc3fb52
-  SwipeViewController: 87ac3b72473f2caee7b84a7761c9367501fd557a
 
-PODFILE CHECKSUM: c1d1c1fee4be66d3e8fbf4c38af78871d1e0a761
+PODFILE CHECKSUM: c9b5de07f9242d8310ef1b7a1d67b12f558e49de
 
 COCOAPODS: 1.10.1
