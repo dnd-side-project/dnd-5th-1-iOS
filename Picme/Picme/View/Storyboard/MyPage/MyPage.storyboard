@@ -46,9 +46,6 @@
                                                 <real key="value" value="10"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <segue destination="IhX-Xe-Db9" kind="push" id="PvC-vH-nYU"/>
-                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u9h-jN-ZVF">
                                         <rect key="frame" x="0.0" y="68" width="335" height="52"/>
@@ -246,6 +243,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="마이페이지" id="HQK-ya-1IQ"/>
                     <connections>
+                        <outlet property="allVoteListButton" destination="SBI-Rb-gZ2" id="Glq-9I-IcX"/>
                         <outlet property="guideButton" destination="u9h-jN-ZVF" id="AF5-RT-tJW"/>
                         <outlet property="logOutButton" destination="5bP-dw-Tkm" id="o0u-i9-1xV"/>
                         <outlet property="myVoteCountLabel" destination="kYa-ll-htJ" id="pRC-f7-FCt"/>
@@ -294,7 +292,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="닉네임 수정" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YV9-lp-xiq">
-                                        <rect key="frame" x="39.5" y="287" width="79" height="24"/>
+                                        <rect key="frame" x="39.5" y="287" width="78.5" height="24"/>
                                         <fontDescription key="fontDescription" name="NotoSansCJKkr-Bold" family="Noto Sans CJK KR" pointSize="16"/>
                                         <color key="textColor" red="0.92156862750000001" green="0.28627450980000002" blue="0.60392156860000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <nil key="highlightedColor"/>
@@ -306,7 +304,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="앗, 이미 다른 사람이 사용하고 있는 닉네임이에요!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xrv-c1-LSD">
-                                        <rect key="frame" x="39.5" y="379" width="248" height="18"/>
+                                        <rect key="frame" x="39.5" y="379" width="247.5" height="18"/>
                                         <fontDescription key="fontDescription" name="NotoSansCJKkr-Regular" family="Noto Sans CJK KR" pointSize="12"/>
                                         <color key="textColor" red="0.92156862750000001" green="0.28627450980000002" blue="0.60392156860000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <nil key="highlightedColor"/>
@@ -377,7 +375,7 @@
             <objects>
                 <viewController storyboardIdentifier="MyVoteViewController" id="IhX-Xe-Db9" customClass="MyVoteViewController" customModule="Picme" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="esU-iy-YIT">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="yjs-GK-vVJ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>

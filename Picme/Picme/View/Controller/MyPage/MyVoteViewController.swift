@@ -16,8 +16,6 @@ class MyVoteViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-
-        
     }
     
 }
