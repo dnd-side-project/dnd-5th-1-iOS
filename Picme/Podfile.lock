@@ -25,7 +25,6 @@ PODS:
   - KakaoSDKUser (2.5.5):
     - KakaoSDKAuth (= 2.5.5)
   - Kingfisher (6.3.0)
-  - PageMenu (2.0.0)
   - ScalingCarousel (3.2.0)
   - SwiftLint (0.43.1)
 
@@ -36,7 +35,6 @@ DEPENDENCIES:
   - KakaoSDKCommon
   - KakaoSDKUser
   - Kingfisher (~> 6.0)
-  - PageMenu
   - ScalingCarousel
   - SwiftLint
 
@@ -51,7 +49,6 @@ SPEC REPOS:
     - KakaoSDKCommon
     - KakaoSDKUser
     - Kingfisher
-    - PageMenu
     - ScalingCarousel
     - SwiftLint
 
@@ -65,10 +62,9 @@ SPEC CHECKSUMS:
   KakaoSDKCommon: fb2c9223a86d6f65a8ba73bbaad7cec6a2b09630
   KakaoSDKUser: 7bb1c38bbd4608bd4e7eebbd4eda130338364fb3
   Kingfisher: 6c3df386db71d82c0817a429d2c9421a77396529
-  PageMenu: 9c38fd7e0d9ef4b1408320f55bb907bbc0e538dc
   ScalingCarousel: d40f0ce438af5cfb2225e2f723f7161597961128
   SwiftLint: 99f82d07b837b942dd563c668de129a03fc3fb52
 
-PODFILE CHECKSUM: d08cc742e95af1a77e2b7aaef052f603588999db
+PODFILE CHECKSUM: c9b5de07f9242d8310ef1b7a1d67b12f558e49de
 
 COCOAPODS: 1.10.1
