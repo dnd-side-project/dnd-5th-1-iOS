@@ -88,6 +88,8 @@
 		D180456C26B3E8DD0053430E /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D180456B26B3E8DD0053430E /* APIConstants.swift */; };
 		D180457326B3EAB90053430E /* MainModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D180457226B3EAB90053430E /* MainModel.swift */; };
 		D180457626B3F03B0053430E /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D180457526B3F03B0053430E /* MainViewModel.swift */; };
+		D1A67D662702272800DC0E53 /* MyVoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A67D652702272800DC0E53 /* MyVoteViewController.swift */; };
+		D1A67D68270229AC00DC0E53 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A67D67270229AC00DC0E53 /* TestViewController.swift */; };
 		D1B51C9626BE9EA500928FF3 /* VoteDetailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B51C9526BE9EA500928FF3 /* VoteDetailCollectionViewCell.swift */; };
 		D1B51C9826BE9EB000928FF3 /* VoteDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B51C9726BE9EB000928FF3 /* VoteDetailTableViewCell.swift */; };
 		D1B51C9B26BEAD2C00928FF3 /* GenericDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B51C9A26BEAD2C00928FF3 /* GenericDataSource.swift */; };
@@ -214,6 +216,8 @@
 		D180456B26B3E8DD0053430E /* APIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConstants.swift; sourceTree = "<group>"; };
 		D180457226B3EAB90053430E /* MainModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainModel.swift; sourceTree = "<group>"; };
 		D180457526B3F03B0053430E /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		D1A67D652702272800DC0E53 /* MyVoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyVoteViewController.swift; sourceTree = "<group>"; };
+		D1A67D67270229AC00DC0E53 /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		D1B51C9526BE9EA500928FF3 /* VoteDetailCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteDetailCollectionViewCell.swift; sourceTree = "<group>"; };
 		D1B51C9726BE9EB000928FF3 /* VoteDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteDetailTableViewCell.swift; sourceTree = "<group>"; };
 		D1B51C9A26BEAD2C00928FF3 /* GenericDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericDataSource.swift; sourceTree = "<group>"; };
@@ -655,6 +659,8 @@
 				A9DDA14126DF436000ACA63D /* GuideViewController.swift */,
 				A9DDA14326DF438E00ACA63D /* GuideCell.swift */,
 				D1641D4826F0E1E0003CD989 /* SettingViewController.swift */,
+				D1A67D652702272800DC0E53 /* MyVoteViewController.swift */,
+				D1A67D67270229AC00DC0E53 /* TestViewController.swift */,
 			);
 			path = MyPage;
 			sourceTree = "<group>";
@@ -1119,6 +1125,7 @@
 				A9C12B80269AB86A00729A74 /* Extension+UIColor.swift in Sources */,
 				A9322EEE26C0910C0061EF35 /* UploadImageViewModel.swift in Sources */,
 				D1F173F726C8675C0069C42E /* AlertView.swift in Sources */,
+				D1A67D68270229AC00DC0E53 /* TestViewController.swift in Sources */,
 				D173CD9F26C50E2F00468D52 /* VoteDetailViewController.swift in Sources */,
 				D1EC0C6326C30D2000387F1B /* VoteDetailViewModel.swift in Sources */,
 				D12B119A26CD057B00777498 /* Extension+UIViewController.swift in Sources */,
@@ -1129,6 +1136,7 @@
 				A91F57D726B7B641006F20AD /* OnboardingViewModel.swift in Sources */,
 				D180456826B3E2850053430E /* MainTableViewCell.swift in Sources */,
 				A91F57D426B7B261006F20AD /* OnboardingViewController.swift in Sources */,
+				D1A67D662702272800DC0E53 /* MyVoteViewController.swift in Sources */,
 				A95CD34E269DA66C002CCCA8 /* Protocol+LoginState.swift in Sources */,
 				D1B51C9B26BEAD2C00928FF3 /* GenericDataSource.swift in Sources */,
 				A9C12B87269C137600729A74 /* Dynamic.swift in Sources */,
