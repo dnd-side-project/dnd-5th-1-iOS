@@ -660,8 +660,35 @@
                                     <outlet property="delegate" destination="hjh-eJ-59M" id="ww0-jJ-Epk"/>
                                 </connections>
                             </collectionView>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nM7-Ii-Esh" userLabel="Feedback View">
-                                <rect key="frame" x="0.0" y="762" width="414" height="100"/>
+                            <view hidden="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VvQ-sh-e3K">
+                                <rect key="frame" x="0.0" y="850" width="414" height="46"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="u1i-50-UtO">
+                                        <rect key="frame" x="101.5" y="352" width="211.5" height="104"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="trash" translatesAutoresizingMaskIntoConstraints="NO" id="EpZ-By-SfV">
+                                                <rect key="frame" x="0.0" y="0.0" width="211.5" height="48.5"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="EpZ-By-SfV" secondAttribute="height" multiplier="211:48" id="0Ii-Qe-IwR"/>
+                                                </constraints>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="게시글이 삭제되어 볼 수 없어요. 홈으로 돌아가주세요." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="29Q-7Z-PQY">
+                                                <rect key="frame" x="0.0" y="56.5" width="211.5" height="47.5"/>
+                                                <fontDescription key="fontDescription" name="NotoSansCJKkr-Bold" family="Noto Sans CJK KR" pointSize="16"/>
+                                                <color key="textColor" red="0.30196078431372547" green="0.30980392156862746" blue="0.32156862745098036" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="u1i-50-UtO" firstAttribute="centerX" secondItem="VvQ-sh-e3K" secondAttribute="centerX" id="0zH-Rd-4HR"/>
+                                    <constraint firstItem="u1i-50-UtO" firstAttribute="centerY" secondItem="VvQ-sh-e3K" secondAttribute="centerY" id="V85-NL-O9d"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nM7-Ii-Esh" userLabel="Feedback View">
+                                <rect key="frame" x="0.0" y="609.5" width="414" height="100"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="eFd-LK-A9A" userLabel="Feedback Stack View">
                                         <rect key="frame" x="67" y="16.5" width="280" height="67"/>
@@ -922,39 +949,13 @@
                                     <constraint firstAttribute="height" constant="100" id="lj2-Kn-ZpA"/>
                                 </constraints>
                             </view>
-                            <view hidden="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VvQ-sh-e3K">
-                                <rect key="frame" x="0.0" y="850" width="414" height="46"/>
-                                <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="u1i-50-UtO">
-                                        <rect key="frame" x="101.5" y="352" width="211.5" height="104"/>
-                                        <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="trash" translatesAutoresizingMaskIntoConstraints="NO" id="EpZ-By-SfV">
-                                                <rect key="frame" x="0.0" y="0.0" width="211.5" height="48.5"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" secondItem="EpZ-By-SfV" secondAttribute="height" multiplier="211:48" id="0Ii-Qe-IwR"/>
-                                                </constraints>
-                                            </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="게시글이 삭제되어 볼 수 없어요. 홈으로 돌아가주세요." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="29Q-7Z-PQY">
-                                                <rect key="frame" x="0.0" y="56.5" width="211.5" height="47.5"/>
-                                                <fontDescription key="fontDescription" name="NotoSansCJKkr-Bold" family="Noto Sans CJK KR" pointSize="16"/>
-                                                <color key="textColor" red="0.30196078431372547" green="0.30980392156862746" blue="0.32156862745098036" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                    </stackView>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstItem="u1i-50-UtO" firstAttribute="centerX" secondItem="VvQ-sh-e3K" secondAttribute="centerX" id="0zH-Rd-4HR"/>
-                                    <constraint firstItem="u1i-50-UtO" firstAttribute="centerY" secondItem="VvQ-sh-e3K" secondAttribute="centerY" id="V85-NL-O9d"/>
-                                </constraints>
-                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vlC-pT-r26"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="vlC-pT-r26" firstAttribute="trailing" secondItem="vTV-am-Nmy" secondAttribute="trailing" constant="20" id="7VO-de-PwA"/>
                             <constraint firstItem="cEW-AT-Rkn" firstAttribute="leading" secondItem="vlC-pT-r26" secondAttribute="leading" constant="20" id="8Pu-4M-kp3"/>
+                            <constraint firstItem="vlC-pT-r26" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Lbn-9o-aCP" secondAttribute="bottom" constant="20" id="AlV-xd-RWl"/>
                             <constraint firstItem="Khk-tx-YN4" firstAttribute="leading" secondItem="Lge-DT-c9U" secondAttribute="trailing" constant="8" id="J1j-xy-zI8"/>
                             <constraint firstItem="vlC-pT-r26" firstAttribute="trailing" secondItem="cEW-AT-Rkn" secondAttribute="trailing" constant="20" id="JQs-2j-gdb"/>
                             <constraint firstItem="T04-YG-drm" firstAttribute="centerX" secondItem="vlC-pT-r26" secondAttribute="centerX" id="K27-SH-PdK"/>
@@ -978,6 +979,7 @@
                             <constraint firstItem="Khk-tx-YN4" firstAttribute="centerY" secondItem="Lge-DT-c9U" secondAttribute="centerY" id="oeF-LL-oJl"/>
                             <constraint firstItem="4oQ-Hg-wQt" firstAttribute="trailing" secondItem="vlC-pT-r26" secondAttribute="trailing" id="sQf-gh-PqZ"/>
                             <constraint firstItem="Lbn-9o-aCP" firstAttribute="trailing" secondItem="vlC-pT-r26" secondAttribute="trailing" id="sRs-I8-cY1"/>
+                            <constraint firstItem="vlC-pT-r26" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="nM7-Ii-Esh" secondAttribute="bottom" constant="20" id="seb-F7-wdx"/>
                             <constraint firstItem="VvQ-sh-e3K" firstAttribute="trailing" secondItem="vlC-pT-r26" secondAttribute="trailing" id="vJX-fN-0CJ"/>
                             <constraint firstItem="4oQ-Hg-wQt" firstAttribute="top" secondItem="vlC-pT-r26" secondAttribute="top" id="vY2-Ps-7gB"/>
                             <constraint firstItem="nM7-Ii-Esh" firstAttribute="top" secondItem="T04-YG-drm" secondAttribute="bottom" id="vg9-8v-cFf"/>
