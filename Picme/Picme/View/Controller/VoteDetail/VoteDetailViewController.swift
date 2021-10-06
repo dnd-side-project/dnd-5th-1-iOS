@@ -81,6 +81,7 @@ class VoteDetailViewController: BaseViewContoller {
     
     var firstRankSet: Set<Int> = [] // 1위 이미지 인덱스 값들 저장
     var isFirstRank: Bool = false // 1위 이미지가 원픽 이미지 or 투표한 이미지일 경우 true
+    var firstRankColor = #colorLiteral(red: 0.9411764706, green: 0.4745098039, blue: 0.2352941176, alpha: 0.8)
     
     var currentPage: Int = 0 // 현재 중앙에 보이는 컬렉션뷰 이미지의 IndexPath.row 값
     
@@ -191,7 +192,7 @@ class VoteDetailViewController: BaseViewContoller {
         // 게시글 상세 조회 서버 통신
         viewModel.fetchVoteDetail(postId: postId)
         
-        ActivityView.instance.stop() // 인디케이터 중지
+        //        ActivityView.instance.stop() // 인디케이터 중지
     }
 }
 
@@ -235,6 +236,7 @@ extension CarouselDatasource: UICollectionViewDataSource {
                 cell.viewWidthConstraint.constant = CGFloat(size)
                 
                 // 1위 이미지일 경우
+                /*
                 if firstRankSet.contains(indexPath.row) {
                     // 작성자 원픽이 1위 or 투표자 투표 이미지가 1위일 경우
                     if (isSameNickname && object.onePickImageId == indexPath.row) || (loginUserNickname != object.postNickname && object.votedImageId == indexPath.row) {
@@ -245,6 +247,13 @@ extension CarouselDatasource: UICollectionViewDataSource {
                         isFirstRank = false
                     }
                 } else { // 1위가 아닌 그 이외의 경우
+                    cell.resultColorView.backgroundColor = #colorLiteral(red: 0.2, green: 0.8, blue: 0.5490196078, alpha: 0.8)
+                }
+                */
+                
+                if firstRankSet.contains(indexPath.row) {
+                    cell.resultColorView.backgroundColor = firstRankColor
+                } else {
                     cell.resultColorView.backgroundColor = #colorLiteral(red: 0.2, green: 0.8, blue: 0.5490196078, alpha: 0.8)
                 }
             }
@@ -267,6 +276,8 @@ extension CarouselDatasource: UICollectionViewDataSource {
             cell.setNeedsLayout()
             cell.layoutIfNeeded()
         }
+        
+        ActivityView.instance.stop() // 인디케이터 중지
         
         return cell
     }
@@ -411,11 +422,19 @@ extension VoteDetailViewController: AlertViewActionDelegate {
                 resultViewArray[index].backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.5)
                 heightConstraintArray[index].constant = 48
             } else {
+                /*
                 if firstRankSet.contains(currentPage) && isFirstRank { // 1위 = 원픽 or 투표이미지
                     resultViewArray[index].backgroundColor = #colorLiteral(red: 0.9215686275, green: 0.2862745098, blue: 0.6039215686, alpha: 0.8)
                 } else if firstRankSet.contains(currentPage) && !isFirstRank { // 1위 != 원픽 or 투표이미지
                     resultViewArray[index].backgroundColor = #colorLiteral(red: 0.9411764706, green: 0.4745098039, blue: 0.2352941176, alpha: 0.8)
                 } else { // 그 외
+                    resultViewArray[index].backgroundColor = #colorLiteral(red: 0.2, green: 0.8, blue: 0.5490196078, alpha: 0.8)
+                }
+                */
+                
+                if firstRankSet.contains(currentPage) {
+                    resultViewArray[index].backgroundColor = firstRankColor
+                } else {
                     resultViewArray[index].backgroundColor = #colorLiteral(red: 0.2, green: 0.8, blue: 0.5490196078, alpha: 0.8)
                 }
                 
@@ -635,25 +654,49 @@ extension VoteDetailViewController {
         
         let sortedDitionary = dictionary.sorted { $0.1 > $1.1 }
         
+        print("* diction : ")
+        print(sortedDitionary)
+        
         // 공동 순위 정리
         var rank = 1
+        
         // 정렬했으니 0번째가 1등
         var rankPickedNum = object.images[sortedDitionary[0].key].pickedNum
         voteResultModel[sortedDitionary[0].key].rank = rank
         firstRankSet.insert(sortedDitionary[0].key)
         
         for index in 1..<sortedDitionary.count {
+            
             // 이전 퍼센트와 동일할 경우 공동 순위
             if object.images[sortedDitionary[index].key].pickedNum == rankPickedNum {
                 voteResultModel[sortedDitionary[index].key].rank = rank
-                if rank == 1 { // 공동 1위라면 1위 Set에 추가
-                    firstRankSet.insert(sortedDitionary[index].key)
-                }
+                //                if rank == 1 { // 공동 1위라면 1위 Set에 추가
+                //                    firstRankSet.insert(sortedDitionary[index].key)
+                //                }
             } else { // 다르면 다음 순위
                 rank += 1
                 voteResultModel[sortedDitionary[index].key].rank = rank
                 rankPickedNum = object.images[sortedDitionary[index].key].pickedNum
             }
+            
+            if isSameNickname || object.isVoted { // 투표 게시자이거나 투표한 사용자일 경우
+                // 1,2,3 순위에 속한다면
+                if rank == 1 || rank == 2 || rank == 3 {
+                    firstRankSet.insert(sortedDitionary[index].key)
+                }
+            } else { // 투표를 하지 않은 사용자일 경우
+                // 1순위에 속한다면
+                if rank == 1 {
+                    firstRankSet.insert(sortedDitionary[index].key)
+                }
+            }
+        }
+        
+        // 1,2,3위 색 판별을 위한 기준 인덱스 - 투표 게시자일 경우 firstPickIndex / 투표자일 경우 votedImageIndex
+        let compareIndex = isSameNickname ? object.onePickImageId : object.votedImageId
+        
+        if firstRankSet.contains(compareIndex) { // 1,2,3 순위 안에 있을 경우 핑크
+            firstRankColor = #colorLiteral(red: 0.9215686275, green: 0.2862745098, blue: 0.6039215686, alpha: 0.8)
         }
     }
 }
