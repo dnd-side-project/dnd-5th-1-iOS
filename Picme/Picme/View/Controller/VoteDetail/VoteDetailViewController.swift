@@ -691,10 +691,14 @@ extension VoteDetailViewController {
                 }
             }
         }
+  
+        if !isSameNickname && !object.isVoted { // 투표게시자가 아닌데 투표 안했으면 패스
+            return
+        }
         
         // 1,2,3위 색 판별을 위한 기준 인덱스 - 투표 게시자일 경우 firstPickIndex / 투표자일 경우 votedImageIndex
         let compareIndex = isSameNickname ? object.onePickImageId : object.votedImageId
-        
+     
         if firstRankSet.contains(compareIndex) { // 1,2,3 순위 안에 있을 경우 핑크
             firstRankColor = #colorLiteral(red: 0.9215686275, green: 0.2862745098, blue: 0.6039215686, alpha: 0.8)
         }
