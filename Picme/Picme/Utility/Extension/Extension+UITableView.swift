@@ -21,8 +21,7 @@ extension UITableView {
         return cell
     }
     
-    
-    func scrollToTop(isAnimated:Bool = true) {
+    func scrollToTop(isAnimated: Bool = true) {
 
         DispatchQueue.main.async {
             let indexPath = IndexPath(row: 0, section: 0)
