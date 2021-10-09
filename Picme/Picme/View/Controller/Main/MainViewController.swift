@@ -53,10 +53,6 @@ class MainViewController: BaseViewContoller, UITableViewDelegate {
         self.initRefresh()
         
         viewModel = MainViewModel(service: MainService(), delegate: self)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         
         ActivityView.instance.start(controller: self)
         
@@ -64,8 +60,19 @@ class MainViewController: BaseViewContoller, UITableViewDelegate {
         viewModel.currentPage = 1
         viewModel.mainList = []
         viewModel.fetchMainList()
-        
     }
+    
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//
+//        ActivityView.instance.start(controller: self)
+//
+//        viewModel.page = 0
+//        viewModel.currentPage = 1
+//        viewModel.mainList = []
+//        viewModel.fetchMainList()
+//
+//    }
     
     // MARK: - Empty View
     
