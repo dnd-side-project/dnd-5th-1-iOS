@@ -115,13 +115,24 @@ class VoteDetailViewController: BaseViewContoller {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("* token : \(APIConstants.jwtToken)")
-        
         setConfiguration()
         setupButton()
         createTimer()
         
         bindViewModel()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        let deviceType = UIDevice().type
+        
+        print("* Running on: \(deviceType)")
+        
+        switch deviceType {
+        case .iPhone6, .iPhone7, .iPhone8, .iPhoneSE, .iPhoneSE2: self.tabBarController?.tabBar.isHidden = true
+        default: break
+        }
     }
     
     // MARK: - Bind View Model
@@ -237,19 +248,19 @@ extension CarouselDatasource: UICollectionViewDataSource {
                 
                 // 1위 이미지일 경우
                 /*
-                if firstRankSet.contains(indexPath.row) {
-                    // 작성자 원픽이 1위 or 투표자 투표 이미지가 1위일 경우
-                    if (isSameNickname && object.onePickImageId == indexPath.row) || (loginUserNickname != object.postNickname && object.votedImageId == indexPath.row) {
-                        cell.resultColorView.backgroundColor = #colorLiteral(red: 0.9215686275, green: 0.2862745098, blue: 0.6039215686, alpha: 0.8)
-                        isFirstRank = true
-                    } else { // 1위가 다르다면
-                        cell.resultColorView.backgroundColor = #colorLiteral(red: 0.9411764706, green: 0.4745098039, blue: 0.2352941176, alpha: 0.8)
-                        isFirstRank = false
-                    }
-                } else { // 1위가 아닌 그 이외의 경우
-                    cell.resultColorView.backgroundColor = #colorLiteral(red: 0.2, green: 0.8, blue: 0.5490196078, alpha: 0.8)
-                }
-                */
+                 if firstRankSet.contains(indexPath.row) {
+                 // 작성자 원픽이 1위 or 투표자 투표 이미지가 1위일 경우
+                 if (isSameNickname && object.onePickImageId == indexPath.row) || (loginUserNickname != object.postNickname && object.votedImageId == indexPath.row) {
+                 cell.resultColorView.backgroundColor = #colorLiteral(red: 0.9215686275, green: 0.2862745098, blue: 0.6039215686, alpha: 0.8)
+                 isFirstRank = true
+                 } else { // 1위가 다르다면
+                 cell.resultColorView.backgroundColor = #colorLiteral(red: 0.9411764706, green: 0.4745098039, blue: 0.2352941176, alpha: 0.8)
+                 isFirstRank = false
+                 }
+                 } else { // 1위가 아닌 그 이외의 경우
+                 cell.resultColorView.backgroundColor = #colorLiteral(red: 0.2, green: 0.8, blue: 0.5490196078, alpha: 0.8)
+                 }
+                 */
                 
                 if firstRankSet.contains(indexPath.row) {
                     cell.resultColorView.backgroundColor = firstRankColor
@@ -423,14 +434,14 @@ extension VoteDetailViewController: AlertViewActionDelegate {
                 heightConstraintArray[index].constant = 48
             } else {
                 /*
-                if firstRankSet.contains(currentPage) && isFirstRank { // 1위 = 원픽 or 투표이미지
-                    resultViewArray[index].backgroundColor = #colorLiteral(red: 0.9215686275, green: 0.2862745098, blue: 0.6039215686, alpha: 0.8)
-                } else if firstRankSet.contains(currentPage) && !isFirstRank { // 1위 != 원픽 or 투표이미지
-                    resultViewArray[index].backgroundColor = #colorLiteral(red: 0.9411764706, green: 0.4745098039, blue: 0.2352941176, alpha: 0.8)
-                } else { // 그 외
-                    resultViewArray[index].backgroundColor = #colorLiteral(red: 0.2, green: 0.8, blue: 0.5490196078, alpha: 0.8)
-                }
-                */
+                 if firstRankSet.contains(currentPage) && isFirstRank { // 1위 = 원픽 or 투표이미지
+                 resultViewArray[index].backgroundColor = #colorLiteral(red: 0.9215686275, green: 0.2862745098, blue: 0.6039215686, alpha: 0.8)
+                 } else if firstRankSet.contains(currentPage) && !isFirstRank { // 1위 != 원픽 or 투표이미지
+                 resultViewArray[index].backgroundColor = #colorLiteral(red: 0.9411764706, green: 0.4745098039, blue: 0.2352941176, alpha: 0.8)
+                 } else { // 그 외
+                 resultViewArray[index].backgroundColor = #colorLiteral(red: 0.2, green: 0.8, blue: 0.5490196078, alpha: 0.8)
+                 }
+                 */
                 
                 if firstRankSet.contains(currentPage) {
                     resultViewArray[index].backgroundColor = firstRankColor
@@ -691,14 +702,14 @@ extension VoteDetailViewController {
                 }
             }
         }
-  
+        
         if !isSameNickname && !object.isVoted { // 투표게시자가 아닌데 투표 안했으면 패스
             return
         }
         
         // 1,2,3위 색 판별을 위한 기준 인덱스 - 투표 게시자일 경우 firstPickIndex / 투표자일 경우 votedImageIndex
         let compareIndex = isSameNickname ? object.onePickImageId : object.votedImageId
-     
+        
         if firstRankSet.contains(compareIndex) { // 1,2,3 순위 안에 있을 경우 핑크
             firstRankColor = #colorLiteral(red: 0.9215686275, green: 0.2862745098, blue: 0.6039215686, alpha: 0.8)
         }

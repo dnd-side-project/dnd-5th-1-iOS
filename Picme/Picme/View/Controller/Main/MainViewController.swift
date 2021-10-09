@@ -62,17 +62,19 @@ class MainViewController: BaseViewContoller, UITableViewDelegate {
         viewModel.fetchMainList()
     }
     
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.tabBarController?.tabBar.isHidden = false
+
 //        ActivityView.instance.start(controller: self)
 //
 //        viewModel.page = 0
 //        viewModel.currentPage = 1
 //        viewModel.mainList = []
 //        viewModel.fetchMainList()
-//
-//    }
+
+    }
     
     // MARK: - Empty View
     
