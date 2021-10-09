@@ -84,6 +84,7 @@ final class ContentViewController: BaseViewContoller {
                            let mainVC = mainNav.topViewController as? MainViewController {
                             
                             mainVC.mainTableView.scrollToTop()
+                            mainVC.initViewModel()
                             Toast.show(using: .voteUpload, controller: mainVC)
                         }
                     }

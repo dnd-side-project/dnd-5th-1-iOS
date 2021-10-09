@@ -54,26 +54,23 @@ class MainViewController: BaseViewContoller, UITableViewDelegate {
         
         viewModel = MainViewModel(service: MainService(), delegate: self)
         
-        ActivityView.instance.start(controller: self)
-        
-        viewModel.page = 0
-        viewModel.currentPage = 1
-        viewModel.mainList = []
-        viewModel.fetchMainList()
+        initViewModel()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         self.tabBarController?.tabBar.isHidden = false
-
-//        ActivityView.instance.start(controller: self)
-//
-//        viewModel.page = 0
-//        viewModel.currentPage = 1
-//        viewModel.mainList = []
-//        viewModel.fetchMainList()
-
+    }
+    
+    func initViewModel() {
+        ActivityView.instance.start(controller: self)
+        
+        viewModel.page = 0
+        viewModel.currentPage = 1
+        viewModel.mainList = []
+        
+        viewModel.fetchMainList()
     }
     
     // MARK: - Empty View
