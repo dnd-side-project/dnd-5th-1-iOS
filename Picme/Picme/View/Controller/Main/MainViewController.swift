@@ -137,14 +137,15 @@ extension MainViewController: MainViewModelDelegate {
     func onFetchCompleted(with newIndexPathsToReload: [IndexPath]?) {
         // 첫 로딩 - 1페이지일 경우
         guard let newIndexPathsToReload = newIndexPathsToReload else {
+            
+            ActivityView.instance.stop()
+            
             // 처음 1페이지일 때 아무것도 없으면 empty view
             if viewModel.mainList.isEmpty {
                 self.showEmptyView()
             }
             
             mainTableView.reloadData()
-            
-            ActivityView.instance.stop()
             
             return
         }
