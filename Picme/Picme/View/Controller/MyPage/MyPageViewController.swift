@@ -73,11 +73,8 @@ final class MyPageViewController: BaseViewContoller {
     // MARK: - Button Actions
     
     func setupButtons() {
-         allVoteListButton.tag = 1
          allVoteListButton.addTarget(self, action: #selector(showAlertView), for: UIControl.Event.touchUpInside)
-
-        // settingButton.tag = 3
-        // settingButton.addTarget(self, action: #selector(showAlertView), for: UIControl.Event.touchUpInside)
+        settingButton.addTarget(self, action: #selector(showAlertView), for: UIControl.Event.touchUpInside)
     }
     
     @objc func showAlertView(_ sender: UIButton) {
@@ -100,10 +97,6 @@ final class MyPageViewController: BaseViewContoller {
 
 extension MyPageViewController: AlertViewActionDelegate {
     
-    func serviceTapped() {
-        
-    }
-    
     func logOutTapped() {
         guard let userVendor = loginUserInfo.vendor else { return }
         self.viewModel.logOutAction(from: userVendor)
@@ -121,8 +114,4 @@ extension MyPageViewController: LogOutProtocol {
         loginVC.modalPresentationStyle = .fullScreen
         self.present(loginVC, animated: true, completion: nil)
     }
-}
-
-extension MyPageViewController {
-    
 }

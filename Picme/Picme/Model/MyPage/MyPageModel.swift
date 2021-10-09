@@ -9,7 +9,7 @@ import Foundation
 
 struct MyPageModel: Codable {
     let createdCount: Int
-    let attendedCount : Int
+    let attendedCount: Int
     
     enum CodingKeys: String, CodingKey {
         case createdCount = "numOfCreatedPosts"

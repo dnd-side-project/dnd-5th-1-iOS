@@ -90,7 +90,7 @@ class SettingViewController: UIViewController {
     
 }
 
-//extension UITextField {
+// extension UITextField {
 //
 //    // Clear Button White
 //    open override func layoutSubviews() {
@@ -103,18 +103,18 @@ class SettingViewController: UIViewController {
 //              }
 //          }
 //      }
-//}
+// }
 
-//// MARK: - addPadding
+////  MARK: - addPadding
 //
-//extension UITextField {
+// extension UITextField {
 //
 //    func addRightPadding() {
 //        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: self.frame.height))
 //        self.rightView = paddingView
 //        self.rightViewMode = ViewMode.always
 //    }
-//}
+// }
 
 extension SettingViewController: UITextFieldDelegate {
     
