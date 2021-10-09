@@ -80,7 +80,7 @@ class Toast {
         toastContainer.snp.makeConstraints {
             $0.leading.equalTo(controller.view.snp.leading).offset(20)
             $0.trailing.equalTo(controller.view.snp.trailing).offset(-20)
-            $0.bottom.equalTo(controller.view.snp.bottom).offset(-100)
+            $0.bottom.equalTo(controller.view.snp.bottom).offset(-controller.view.frame.size.height / 10)
             $0.height.equalTo(42)
         }
         
