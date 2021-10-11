@@ -42,15 +42,18 @@ extension GuideViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let leaveButton = UIButton(type: .custom)
-        leaveButton.frame = CGRect(x: 0, y: 0, width: tableView.frame.width, height: 22)
-        leaveButton.setTitle("회원 탈퇴하기", for: .normal)
-        leaveButton.titleLabel?.textAlignment = .center
-        leaveButton.setTitleColor(.textColor(.text50), for: .normal)
-        leaveButton.titleLabel?.font = .kr(.bold, size: 14)
-        leaveButton.backgroundColor = .solidColor(.solid0)
-        leaveButton.addTarget(self, action: #selector(leaveAction(_:)), for: .touchUpInside)
-        return leaveButton
+//        let leaveButton = UIButton(type: .custom)
+//        leaveButton.frame = CGRect(x: 0, y: 0, width: tableView.frame.width, height: 22)
+//        leaveButton.setTitle("회원 탈퇴하기", for: .normal)
+//        leaveButton.titleLabel?.textAlignment = .center
+//        leaveButton.setTitleColor(.textColor(.text50), for: .normal)
+//        leaveButton.titleLabel?.font = .kr(.bold, size: 14)
+//        leaveButton.backgroundColor = .solidColor(.solid0)
+//        leaveButton.addTarget(self, action: #selector(leaveAction(_:)), for: .touchUpInside)
+//        return leaveButton
+        let emptyView = UIView()
+        emptyView.backgroundColor = .black
+        return emptyView
     }
     
     @objc func leaveAction(_ sender: UIButton) {
