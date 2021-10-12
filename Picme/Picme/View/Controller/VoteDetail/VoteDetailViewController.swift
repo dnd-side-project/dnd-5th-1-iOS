@@ -83,7 +83,7 @@ class VoteDetailViewController: BaseViewContoller {
     var isFirstRank: Bool = false // 1위 이미지가 원픽 이미지 or 투표한 이미지일 경우 true
     var firstRankColor = #colorLiteral(red: 0.9411764706, green: 0.4745098039, blue: 0.2352941176, alpha: 0.8)
     
-    var currentPage: Int = 1 // 현재 중앙에 보이는 컬렉션뷰 이미지의 IndexPath.row 값
+    var currentPage: Int = 0 // 현재 중앙에 보이는 컬렉션뷰 이미지의 IndexPath.row 값
     
     var isPick: Bool = false // pick 버튼 클릭한 경우만 피드백 뷰를 보여주기 위한 Bool 값 - true면 Feedback View 보여줌
     var isPickStart: Bool = false // Pick View에서 이미지 선택한 경우만 투표하기 통신을 하게 하기위한 Bool 값
@@ -153,7 +153,7 @@ class VoteDetailViewController: BaseViewContoller {
                 self.detailNicknameLabel.text = response.postNickname
                 self.detailProfileImageView.image = UIImage.profileImage(response.postProfileUrl)
                 self.detailParticipantsLabel.text = "\(response.participantsNum)명 참여중"
-                self.detailPageLabel.text = "\(self.currentPage)/\(response.images.count)"
+                self.detailPageLabel.text = "\(self.currentPage + 1)/\(response.images.count)"
                 self.detailTitleLabel.text = response.title
                 self.detailTitleLabel.lineBreakMode = .byCharWrapping
                 
@@ -192,6 +192,7 @@ class VoteDetailViewController: BaseViewContoller {
                 }
                 
                 self.setupView() // 결과값 계산 후 Feedback View 퍼센트 초기화 해야함
+      
                 self.carouselCollectionView.reloadData()
         }
      
@@ -420,7 +421,7 @@ extension VoteDetailViewController: AlertViewActionDelegate {
             onePickLabel.text = "내 원픽!"
             onePickLabel.textColor = .textColor(.text91)
             
-            setupResultViewPercent(currentPage: currentPage) // 처음 보여줄 이미지의 피드백뷰 퍼센트 값 설정 
+            setupResultViewPercent(currentPage: currentPage) // 처음 보여줄 이미지의 피드백뷰 퍼센트 값 설정
         }
     }
     
