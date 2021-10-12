@@ -69,10 +69,10 @@ final class ContentViewController: BaseViewContoller {
         print("Regist")
         
         ActivityView.instance.start(controller: self)
-        
+
         if let voteText = voteTextView.text, let voteEndDate = voteEndDateTextfield.text {
             contentViewModel?.createList(title: voteText, endDate: voteEndDate, completion: {
-                
+
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                     ActivityView.instance.stop()
                     self.dismiss(animated: true) {
@@ -80,12 +80,21 @@ final class ContentViewController: BaseViewContoller {
                         guard let sceneDelegate = UIApplication.shared.connectedScenes.first!.delegate as? SceneDelegate, let rootVC = sceneDelegate.window?.rootViewController else { return }
                         
                         if let tabbarVC = rootVC as? UITabBarController,
-                           let mainNav = tabbarVC.selectedViewController as? UINavigationController,
-                           let mainVC = mainNav.topViewController as? MainViewController {
-                            
-                            mainVC.mainTableView.scrollToTop()
-                            mainVC.initViewModel()
-                            Toast.show(using: .voteUpload, controller: mainVC)
+                           let mainNav = tabbarVC.selectedViewController as? UINavigationController {
+                            if let mainVC = mainNav.topViewController as? MainViewController {
+                                
+                                mainVC.mainTableView.scrollToTop()
+                                mainVC.initViewModel()
+                                Toast.show(using: .voteUpload, controller: mainVC)
+                            } else {
+                                mainNav.popViewController(animated: true)
+                                if let mainVC = mainNav.topViewController as? MainViewController {
+                                    
+                                    mainVC.mainTableView.scrollToTop()
+                                    mainVC.initViewModel()
+                                    Toast.show(using: .voteUpload, controller: mainVC)
+                                }
+                            }
                         }
                     }
                 }
