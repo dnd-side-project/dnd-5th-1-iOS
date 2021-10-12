@@ -83,7 +83,7 @@ class VoteDetailViewController: BaseViewContoller {
     var isFirstRank: Bool = false // 1위 이미지가 원픽 이미지 or 투표한 이미지일 경우 true
     var firstRankColor = #colorLiteral(red: 0.9411764706, green: 0.4745098039, blue: 0.2352941176, alpha: 0.8)
     
-    var currentPage: Int = 0 // 현재 중앙에 보이는 컬렉션뷰 이미지의 IndexPath.row 값
+    var currentPage: Int = 1 // 현재 중앙에 보이는 컬렉션뷰 이미지의 IndexPath.row 값
     
     var isPick: Bool = false // pick 버튼 클릭한 경우만 피드백 뷰를 보여주기 위한 Bool 값 - true면 Feedback View 보여줌
     var isPickStart: Bool = false // Pick View에서 이미지 선택한 경우만 투표하기 통신을 하게 하기위한 Bool 값
