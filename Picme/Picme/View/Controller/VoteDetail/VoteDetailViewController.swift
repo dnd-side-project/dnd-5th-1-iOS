@@ -115,6 +115,8 @@ class VoteDetailViewController: BaseViewContoller {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print("* token : \(APIConstants.jwtToken)")
+        
         setConfiguration()
         setupButton()
         createTimer()
@@ -148,13 +150,12 @@ class VoteDetailViewController: BaseViewContoller {
                 return
             }
             
-            if response.postNickname != "" { // 투표가 삭제되지 않고 있는 경우
-                
                 self.detailNicknameLabel.text = response.postNickname
                 self.detailProfileImageView.image = UIImage.profileImage(response.postProfileUrl)
                 self.detailParticipantsLabel.text = "\(response.participantsNum)명 참여중"
                 self.detailPageLabel.text = "\(self.currentPage)/\(response.images.count)"
                 self.detailTitleLabel.text = response.title
+                self.detailTitleLabel.lineBreakMode = .byCharWrapping
                 
                 // 기기별 타이틀 사이즈 조절
                 self.detailTitleLabel.minimumScaleFactor = 10 / UIFont.labelFontSize
@@ -192,18 +193,20 @@ class VoteDetailViewController: BaseViewContoller {
                 
                 self.setupView() // 결과값 계산 후 Feedback View 퍼센트 초기화 해야함
                 self.carouselCollectionView.reloadData()
-            } else { // 투표가 삭제되어 볼 수 없는 경우
+        }
+     
+        // 게시글 상세 조회 서버 통신
+        // viewModel.fetchVoteDetail(postId: postId)
+        
+        // 투표가 삭제된 경우
+        viewModel.fetchVoteDetail(postId: postId) { result in
+            if result == "networkERR" {
                 self.rightBarButton.isEnabled = false
                 self.deleteView.isHidden = false
                 self.deleteImageView.image = #imageLiteral(resourceName: "hmm")
                 self.deleteLabel.text = "게시글이 삭제되어 볼 수 없어요.\n다시 돌아가주세요."
             }
         }
-        
-        // 게시글 상세 조회 서버 통신
-        viewModel.fetchVoteDetail(postId: postId)
-        
-        //        ActivityView.instance.stop() // 인디케이터 중지
     }
 }
 
@@ -262,10 +265,18 @@ extension CarouselDatasource: UICollectionViewDataSource {
                  }
                  */
                 
+                print("* first rank set")
+                for index in 0..<firstRankSet.count {
+                    print(index)
+                }
+                
+                print("index path : \(indexPath.row)")
                 if firstRankSet.contains(indexPath.row) {
                     cell.resultColorView.backgroundColor = firstRankColor
+                    print("true")
                 } else {
                     cell.resultColorView.backgroundColor = #colorLiteral(red: 0.2, green: 0.8, blue: 0.5490196078, alpha: 0.8)
+                    print("false")
                 }
             }
         } else { // 2-1. 마감되지 않고, 투표 안한 사용자 -> 투표 선택 화면 Pick View
@@ -443,6 +454,8 @@ extension VoteDetailViewController: AlertViewActionDelegate {
                  }
                  */
                 
+                print("current page : \(currentPage)")
+                
                 if firstRankSet.contains(currentPage) {
                     resultViewArray[index].backgroundColor = firstRankColor
                 } else {
@@ -599,6 +612,18 @@ extension VoteDetailViewController: AlertViewActionDelegate {
                 self.deleteView.isHidden = false
                 self.rightBarButton.isEnabled = false
                 Toast.show(using: .remove, controller: self)
+                
+                guard let sceneDelegate = UIApplication.shared.connectedScenes.first!.delegate as? SceneDelegate, let rootVC = sceneDelegate.window?.rootViewController else { return }
+                
+                if let tabbarVC = rootVC as? UITabBarController,
+                   let mainNav = tabbarVC.selectedViewController as? UINavigationController,
+                   let mainVC = mainNav.topViewController as? MainViewController {
+                    
+                    print("* main VC")
+                    
+                    mainVC.mainTableView.scrollToTop()
+                    mainVC.initViewModel()
+                }
             }
         })
     }
