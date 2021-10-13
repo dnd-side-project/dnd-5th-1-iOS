@@ -122,7 +122,7 @@ extension MainTableViewCell: UICollectionViewDelegate, UICollectionViewDataSourc
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let cellDelegate = cellDelegate {
-            cellDelegate.selectedCVCell(indexPath.item, postId)
+            cellDelegate.selectedCVCell(mainCollectionView.tag, postId)
         }
     }
     
