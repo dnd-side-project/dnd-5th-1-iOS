@@ -587,8 +587,9 @@ extension VoteDetailViewController: AlertViewActionDelegate {
             } else { // 투표자일 경우
                 if viewModel.voteDetailModel.value.isVoted { // 투표한 경우 - 투표한 이미지 인덱스로 이동
                     carouselCollectionView.scrollToItem(at: IndexPath(row: viewModel.voteDetailModel.value.votedImageId, section: 0), at: .top, animated: true)
-                } else { // 투표하지 않은 경우 - 투표 작성자 원픽 이미지 인덱스로 이동
-                    carouselCollectionView.scrollToItem(at: IndexPath(row: viewModel.voteDetailModel.value.onePickImageId, section: 0), at: .top, animated: true)
+                } else {
+//                    // 투표하지 않은 경우 - 투표 작성자 원픽 이미지 인덱스로 이동
+//                    carouselCollectionView.scrollToItem(at: IndexPath(row: viewModel.voteDetailModel.value.onePickImageId, section: 0), at: .top, animated: true)
                 }
             }
         }
