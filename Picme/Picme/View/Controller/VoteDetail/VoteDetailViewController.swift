@@ -114,7 +114,7 @@ class VoteDetailViewController: BaseViewContoller {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+   
         setConfiguration()
         setupButton()
         createTimer()
@@ -135,6 +135,15 @@ class VoteDetailViewController: BaseViewContoller {
         }
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        // 투표 삭제 후 메인으로 갈 경우 
+        if !deleteView.isHidden {
+            NotificationCenter.default.post(name: .backToMain, object: nil)
+        }
+    }
+    
     // MARK: - Bind View Model
     
     private func bindViewModel() {
@@ -148,13 +157,12 @@ class VoteDetailViewController: BaseViewContoller {
                 return
             }
             
-            if response.postNickname != "" { // 투표가 삭제되지 않고 있는 경우
-                
                 self.detailNicknameLabel.text = response.postNickname
                 self.detailProfileImageView.image = UIImage.profileImage(response.postProfileUrl)
                 self.detailParticipantsLabel.text = "\(response.participantsNum)명 참여중"
-                self.detailPageLabel.text = "\(self.currentPage)/\(response.images.count)"
+                self.detailPageLabel.text = "\(self.currentPage + 1)/\(response.images.count)"
                 self.detailTitleLabel.text = response.title
+                self.detailTitleLabel.lineBreakMode = .byCharWrapping
                 
                 // 기기별 타이틀 사이즈 조절
                 self.detailTitleLabel.minimumScaleFactor = 10 / UIFont.labelFontSize
@@ -191,19 +199,22 @@ class VoteDetailViewController: BaseViewContoller {
                 }
                 
                 self.setupView() // 결과값 계산 후 Feedback View 퍼센트 초기화 해야함
+      
                 self.carouselCollectionView.reloadData()
-            } else { // 투표가 삭제되어 볼 수 없는 경우
+        }
+     
+        // 게시글 상세 조회 서버 통신
+        // viewModel.fetchVoteDetail(postId: postId)
+        
+        // 투표가 삭제된 경우
+        viewModel.fetchVoteDetail(postId: postId) { result in
+            if result == "networkERR" {
                 self.rightBarButton.isEnabled = false
                 self.deleteView.isHidden = false
                 self.deleteImageView.image = #imageLiteral(resourceName: "hmm")
                 self.deleteLabel.text = "게시글이 삭제되어 볼 수 없어요.\n다시 돌아가주세요."
             }
         }
-        
-        // 게시글 상세 조회 서버 통신
-        viewModel.fetchVoteDetail(postId: postId)
-        
-        //        ActivityView.instance.stop() // 인디케이터 중지
     }
 }
 
@@ -246,22 +257,7 @@ extension CarouselDatasource: UICollectionViewDataSource {
                 let size = 239 * 0.01 * (voteResultModel[indexPath.row].percent) + 60
                 cell.viewWidthConstraint.constant = CGFloat(size)
                 
-                // 1위 이미지일 경우
-                /*
-                 if firstRankSet.contains(indexPath.row) {
-                 // 작성자 원픽이 1위 or 투표자 투표 이미지가 1위일 경우
-                 if (isSameNickname && object.onePickImageId == indexPath.row) || (loginUserNickname != object.postNickname && object.votedImageId == indexPath.row) {
-                 cell.resultColorView.backgroundColor = #colorLiteral(red: 0.9215686275, green: 0.2862745098, blue: 0.6039215686, alpha: 0.8)
-                 isFirstRank = true
-                 } else { // 1위가 다르다면
-                 cell.resultColorView.backgroundColor = #colorLiteral(red: 0.9411764706, green: 0.4745098039, blue: 0.2352941176, alpha: 0.8)
-                 isFirstRank = false
-                 }
-                 } else { // 1위가 아닌 그 이외의 경우
-                 cell.resultColorView.backgroundColor = #colorLiteral(red: 0.2, green: 0.8, blue: 0.5490196078, alpha: 0.8)
-                 }
-                 */
-                
+                // 각 사용자별 1,2,3위 이미지일 경우
                 if firstRankSet.contains(indexPath.row) {
                     cell.resultColorView.backgroundColor = firstRankColor
                 } else {
@@ -269,7 +265,18 @@ extension CarouselDatasource: UICollectionViewDataSource {
                 }
             }
         } else { // 2-1. 마감되지 않고, 투표 안한 사용자 -> 투표 선택 화면 Pick View
-            if isSelect {
+//            if isSelect {
+//                // 투표는 안했지만 선택한 이미지가 있는 경우 -> 핑크 다이아몬드 이미지 활성화
+//                if indexPath.item == selectImageIndex {
+//                    cell.viewWidthConstraint.constant = 299
+//                    cell.diamondsImageView.isHidden = false
+//                } else { // 나머지 이미지는 그대로
+//                    cell.viewWidthConstraint.constant = 0
+//                    cell.diamondsImageView.isHidden = true
+//                }
+//            }
+            
+            if isSelect { // 2-1. 마감되지 않고, 투표 안한 사용자 -> 투표 선택 화면 Pick View
                 // 투표는 안했지만 선택한 이미지가 있는 경우 -> 핑크 다이아몬드 이미지 활성화
                 if indexPath.item == selectImageIndex {
                     cell.viewWidthConstraint.constant = 299
@@ -278,6 +285,9 @@ extension CarouselDatasource: UICollectionViewDataSource {
                     cell.viewWidthConstraint.constant = 0
                     cell.diamondsImageView.isHidden = true
                 }
+            } else {
+                cell.viewWidthConstraint.constant = 0
+                cell.diamondsImageView.isHidden = true
             }
         }
         
@@ -303,9 +313,30 @@ extension VoteDetailViewController: UICollectionViewDelegate {
     // MARK: - Did Select Item At
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        isSelect = true
-        selectImageIndex = indexPath.row
-        selectedImageId = viewModel.voteDetailModel.value.images[indexPath.row].imageId
+//        isSelect = true
+//        selectImageIndex = indexPath.row
+//        selectedImageId = viewModel.voteDetailModel.value.images[indexPath.row].imageId
+//        pickButton.setImage(#imageLiteral(resourceName: "pickButtonNormal"), for: .normal)
+//        carouselCollectionView.reloadData() // 컬렉션 뷰 업데이트 해줘야지 반영됨
+        
+        if !isSelect { // 투표 사진을 선택하지 않은 경우
+            initPickView(index: indexPath.row)
+            carouselCollectionView.reloadData() // 컬렉션 뷰 업데이트 해줘야지 반영됨
+        } else { // 이미 투표한 사진을 다시 선택한 경우
+            if selectImageIndex == indexPath.row {
+                isSelect = false
+                pickButton.setImage(#imageLiteral(resourceName: "pickButtonDisabled"), for: .normal)
+                carouselCollectionView.reloadData()
+            } else { // 투표한 상태에서 다른 사진을 선택한 경우
+                initPickView(index: indexPath.row)
+            }
+        }
+    }
+    
+    func initPickView(index: Int) {
+        isSelect = true // 선택했다고 true 변경 후 관련 인덱스 저장 및 픽 버튼 활성화
+        selectImageIndex = index
+        selectedImageId = viewModel.voteDetailModel.value.images[index].imageId
         pickButton.setImage(#imageLiteral(resourceName: "pickButtonNormal"), for: .normal)
         carouselCollectionView.reloadData() // 컬렉션 뷰 업데이트 해줘야지 반영됨
     }
@@ -409,7 +440,7 @@ extension VoteDetailViewController: AlertViewActionDelegate {
             onePickLabel.text = "내 원픽!"
             onePickLabel.textColor = .textColor(.text91)
             
-            setupResultViewPercent(currentPage: currentPage) // 처음 보여줄 이미지의 피드백뷰 퍼센트 값 설정 
+            setupResultViewPercent(currentPage: currentPage) // 처음 보여줄 이미지의 피드백뷰 퍼센트 값 설정
         }
     }
     
@@ -433,16 +464,6 @@ extension VoteDetailViewController: AlertViewActionDelegate {
                 resultViewArray[index].backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.5)
                 heightConstraintArray[index].constant = 48
             } else {
-                /*
-                 if firstRankSet.contains(currentPage) && isFirstRank { // 1위 = 원픽 or 투표이미지
-                 resultViewArray[index].backgroundColor = #colorLiteral(red: 0.9215686275, green: 0.2862745098, blue: 0.6039215686, alpha: 0.8)
-                 } else if firstRankSet.contains(currentPage) && !isFirstRank { // 1위 != 원픽 or 투표이미지
-                 resultViewArray[index].backgroundColor = #colorLiteral(red: 0.9411764706, green: 0.4745098039, blue: 0.2352941176, alpha: 0.8)
-                 } else { // 그 외
-                 resultViewArray[index].backgroundColor = #colorLiteral(red: 0.2, green: 0.8, blue: 0.5490196078, alpha: 0.8)
-                 }
-                 */
-                
                 if firstRankSet.contains(currentPage) {
                     resultViewArray[index].backgroundColor = firstRankColor
                 } else {
@@ -566,8 +587,9 @@ extension VoteDetailViewController: AlertViewActionDelegate {
             } else { // 투표자일 경우
                 if viewModel.voteDetailModel.value.isVoted { // 투표한 경우 - 투표한 이미지 인덱스로 이동
                     carouselCollectionView.scrollToItem(at: IndexPath(row: viewModel.voteDetailModel.value.votedImageId, section: 0), at: .top, animated: true)
-                } else { // 투표하지 않은 경우 - 투표 작성자 원픽 이미지 인덱스로 이동
-                    carouselCollectionView.scrollToItem(at: IndexPath(row: viewModel.voteDetailModel.value.onePickImageId, section: 0), at: .top, animated: true)
+                } else {
+//                    // 투표하지 않은 경우 - 투표 작성자 원픽 이미지 인덱스로 이동
+//                    carouselCollectionView.scrollToItem(at: IndexPath(row: viewModel.voteDetailModel.value.onePickImageId, section: 0), at: .top, animated: true)
                 }
             }
         }
@@ -664,9 +686,6 @@ extension VoteDetailViewController {
         }
         
         let sortedDitionary = dictionary.sorted { $0.1 > $1.1 }
-        
-        print("* diction : ")
-        print(sortedDitionary)
         
         // 공동 순위 정리
         var rank = 1

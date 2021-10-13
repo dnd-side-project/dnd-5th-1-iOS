@@ -40,6 +40,8 @@ class MainViewController: BaseViewContoller, UITableViewDelegate {
     var dateHelper = DateHelper()
     let currentDate = Date()
     
+    var postIndex: Int = 0 // 게시물 삭제시 삭제할 게시물의 인덱스를 저장하기 위해 사용
+    
     override func viewDidLoad() {
         super.viewDidLoad()
      
@@ -61,6 +63,18 @@ class MainViewController: BaseViewContoller, UITableViewDelegate {
         super.viewWillAppear(animated)
         
         self.tabBarController?.tabBar.isHidden = false
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(backToMain), name: .backToMain, object: nil)
+
+    }
+    
+    @objc func backToMain() { // 투표 상세에서 삭제하고 돌아왔을 때 실행
+        mainTableView.beginUpdates()
+        let indexPath = IndexPath(row: postIndex, section: 0)
+        viewModel.mainList.remove(at: postIndex)
+        viewModel.totalCount -= 1
+        mainTableView.deleteRows(at: [indexPath], with: .fade)
+        mainTableView.endUpdates()
     }
     
     func initViewModel() {
@@ -117,12 +131,14 @@ extension MainViewController: UITableViewDataSource, CollectionViewCellDelegate 
             createTimer()
             cell.currentDate = Date() // 여기서 현재 시간 초기화를 해줘야지 매번 올바르게 마감시간 설정 가능
             
+            cell.mainCollectionView.tag = indexPath.row
+            
             cell.configure(with: viewModel.mainModel(at: indexPath.row))
         }
         
         return cell
     }
-    
+
     // MARK: - Collection View Cell Delegate - Collection View Cell 클릭시 실행
     
     func selectedCVCell(_ index: Int, _ postId: String) {
@@ -132,6 +148,7 @@ extension MainViewController: UITableViewDataSource, CollectionViewCellDelegate 
         } else { // 로그인한 사용자
             guard let voteDetailVC = self.storyboard?.instantiateViewController(withIdentifier: "VoteDetailViewController") as? VoteDetailViewController else { return }
             voteDetailVC.postId = postId
+            postIndex = index
             self.navigationController?.pushViewController(voteDetailVC, animated: true)
         }
     }
@@ -266,4 +283,8 @@ extension MainViewController: TableViewCellDelegate {
             }
         }
     }
+}
+
+extension Notification.Name {
+    static let backToMain = Notification.Name("backToMain")
 }
