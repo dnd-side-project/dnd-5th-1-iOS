@@ -25,7 +25,7 @@ final class VoteDetailViewModel {
     
     // MARK: - 게시글 조회
     
-    func fetchVoteDetail(postId: String) {
+    func fetchVoteDetail(postId: String, completion: @escaping (String) -> Void ) {
         guard let service = service else {
             onErrorHandling?(APIError.networkFailed)
             return
@@ -46,6 +46,7 @@ final class VoteDetailViewModel {
                     print("serverERR")
                 case .networkFail:
                     print("networkERR")
+                    completion("networkERR")
                 }
             }
         }
