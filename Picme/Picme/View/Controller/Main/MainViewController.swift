@@ -68,15 +68,13 @@ class MainViewController: BaseViewContoller, UITableViewDelegate {
 
     }
     
-    @objc func backToMain() {
+    @objc func backToMain() { // 투표 상세에서 삭제하고 돌아왔을 때 실행
         mainTableView.beginUpdates()
         let indexPath = IndexPath(row: postIndex, section: 0)
         viewModel.mainList.remove(at: postIndex)
         viewModel.totalCount -= 1
         mainTableView.deleteRows(at: [indexPath], with: .fade)
         mainTableView.endUpdates()
-        
-        print("noti post index : \(postIndex)")
     }
     
     func initViewModel() {
@@ -151,7 +149,6 @@ extension MainViewController: UITableViewDataSource, CollectionViewCellDelegate 
             guard let voteDetailVC = self.storyboard?.instantiateViewController(withIdentifier: "VoteDetailViewController") as? VoteDetailViewController else { return }
             voteDetailVC.postId = postId
             postIndex = index
-            print("* index! : \(index)")
             self.navigationController?.pushViewController(voteDetailVC, animated: true)
         }
     }

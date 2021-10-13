@@ -114,9 +114,7 @@ class VoteDetailViewController: BaseViewContoller {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        print("* token : \(APIConstants.jwtToken)")
-        
+   
         setConfiguration()
         setupButton()
         createTimer()
@@ -466,18 +464,6 @@ extension VoteDetailViewController: AlertViewActionDelegate {
                 resultViewArray[index].backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.5)
                 heightConstraintArray[index].constant = 48
             } else {
-                /*
-                 if firstRankSet.contains(currentPage) && isFirstRank { // 1위 = 원픽 or 투표이미지
-                 resultViewArray[index].backgroundColor = #colorLiteral(red: 0.9215686275, green: 0.2862745098, blue: 0.6039215686, alpha: 0.8)
-                 } else if firstRankSet.contains(currentPage) && !isFirstRank { // 1위 != 원픽 or 투표이미지
-                 resultViewArray[index].backgroundColor = #colorLiteral(red: 0.9411764706, green: 0.4745098039, blue: 0.2352941176, alpha: 0.8)
-                 } else { // 그 외
-                 resultViewArray[index].backgroundColor = #colorLiteral(red: 0.2, green: 0.8, blue: 0.5490196078, alpha: 0.8)
-                 }
-                 */
-                
-                print("current page : \(currentPage)")
-                
                 if firstRankSet.contains(currentPage) {
                     resultViewArray[index].backgroundColor = firstRankColor
                 } else {
@@ -699,9 +685,6 @@ extension VoteDetailViewController {
         }
         
         let sortedDitionary = dictionary.sorted { $0.1 > $1.1 }
-        
-        print("* diction : ")
-        print(sortedDitionary)
         
         // 공동 순위 정리
         var rank = 1
