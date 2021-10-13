@@ -259,37 +259,26 @@ extension CarouselDatasource: UICollectionViewDataSource {
                 let size = 239 * 0.01 * (voteResultModel[indexPath.row].percent) + 60
                 cell.viewWidthConstraint.constant = CGFloat(size)
                 
-                // 1위 이미지일 경우
-                /*
-                 if firstRankSet.contains(indexPath.row) {
-                 // 작성자 원픽이 1위 or 투표자 투표 이미지가 1위일 경우
-                 if (isSameNickname && object.onePickImageId == indexPath.row) || (loginUserNickname != object.postNickname && object.votedImageId == indexPath.row) {
-                 cell.resultColorView.backgroundColor = #colorLiteral(red: 0.9215686275, green: 0.2862745098, blue: 0.6039215686, alpha: 0.8)
-                 isFirstRank = true
-                 } else { // 1위가 다르다면
-                 cell.resultColorView.backgroundColor = #colorLiteral(red: 0.9411764706, green: 0.4745098039, blue: 0.2352941176, alpha: 0.8)
-                 isFirstRank = false
-                 }
-                 } else { // 1위가 아닌 그 이외의 경우
-                 cell.resultColorView.backgroundColor = #colorLiteral(red: 0.2, green: 0.8, blue: 0.5490196078, alpha: 0.8)
-                 }
-                 */
-                
-                print("* first rank set")
-                for index in 0..<firstRankSet.count {
-                    print(index)
-                }
-                
+                // 각 사용자별 1,2,3위 이미지일 경우
                 if firstRankSet.contains(indexPath.row) {
                     cell.resultColorView.backgroundColor = firstRankColor
-                    print("true")
                 } else {
                     cell.resultColorView.backgroundColor = #colorLiteral(red: 0.2, green: 0.8, blue: 0.5490196078, alpha: 0.8)
-                    print("false")
                 }
             }
         } else { // 2-1. 마감되지 않고, 투표 안한 사용자 -> 투표 선택 화면 Pick View
-            if isSelect {
+//            if isSelect {
+//                // 투표는 안했지만 선택한 이미지가 있는 경우 -> 핑크 다이아몬드 이미지 활성화
+//                if indexPath.item == selectImageIndex {
+//                    cell.viewWidthConstraint.constant = 299
+//                    cell.diamondsImageView.isHidden = false
+//                } else { // 나머지 이미지는 그대로
+//                    cell.viewWidthConstraint.constant = 0
+//                    cell.diamondsImageView.isHidden = true
+//                }
+//            }
+            
+            if isSelect { // 2-1. 마감되지 않고, 투표 안한 사용자 -> 투표 선택 화면 Pick View
                 // 투표는 안했지만 선택한 이미지가 있는 경우 -> 핑크 다이아몬드 이미지 활성화
                 if indexPath.item == selectImageIndex {
                     cell.viewWidthConstraint.constant = 299
@@ -298,6 +287,9 @@ extension CarouselDatasource: UICollectionViewDataSource {
                     cell.viewWidthConstraint.constant = 0
                     cell.diamondsImageView.isHidden = true
                 }
+            } else {
+                cell.viewWidthConstraint.constant = 0
+                cell.diamondsImageView.isHidden = true
             }
         }
         
@@ -323,9 +315,30 @@ extension VoteDetailViewController: UICollectionViewDelegate {
     // MARK: - Did Select Item At
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        isSelect = true
-        selectImageIndex = indexPath.row
-        selectedImageId = viewModel.voteDetailModel.value.images[indexPath.row].imageId
+//        isSelect = true
+//        selectImageIndex = indexPath.row
+//        selectedImageId = viewModel.voteDetailModel.value.images[indexPath.row].imageId
+//        pickButton.setImage(#imageLiteral(resourceName: "pickButtonNormal"), for: .normal)
+//        carouselCollectionView.reloadData() // 컬렉션 뷰 업데이트 해줘야지 반영됨
+        
+        if !isSelect { // 투표 사진을 선택하지 않은 경우
+            initPickView(index: indexPath.row)
+            carouselCollectionView.reloadData() // 컬렉션 뷰 업데이트 해줘야지 반영됨
+        } else { // 이미 투표한 사진을 다시 선택한 경우
+            if selectImageIndex == indexPath.row {
+                isSelect = false
+                pickButton.setImage(#imageLiteral(resourceName: "pickButtonDisabled"), for: .normal)
+                carouselCollectionView.reloadData()
+            } else { // 투표한 상태에서 다른 사진을 선택한 경우
+                initPickView(index: indexPath.row)
+            }
+        }
+    }
+    
+    func initPickView(index: Int) {
+        isSelect = true // 선택했다고 true 변경 후 관련 인덱스 저장 및 픽 버튼 활성화
+        selectImageIndex = index
+        selectedImageId = viewModel.voteDetailModel.value.images[index].imageId
         pickButton.setImage(#imageLiteral(resourceName: "pickButtonNormal"), for: .normal)
         carouselCollectionView.reloadData() // 컬렉션 뷰 업데이트 해줘야지 반영됨
     }
