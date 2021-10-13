@@ -41,6 +41,19 @@ class OnePickViewController: BaseViewContoller {
     
     weak var imageDelegate: ImageDelete?
     
+    private lazy var width = collectionView.frame.width / 2 - 5
+    
+    // collectionView height UpdateConstraints
+    private var isCollectionHeight: Bool = false {
+        didSet {
+            if isCollectionHeight {
+                collectionView.snp.updateConstraints {
+                    $0.height.equalTo(width * 3 + 20)
+                }
+            }
+        }
+    }
+    
     // MARK: - LifeCycle
     
     override func viewDidLoad() {
@@ -98,7 +111,10 @@ extension OnePickViewController: UICollectionViewDataSource {
 extension OnePickViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = collectionView.frame.width / 2 - 5
+        
+        if !isCollectionHeight {
+            isCollectionHeight = true
+        }
         
         return CGSize(width: width, height: width)
     }
@@ -175,11 +191,12 @@ extension OnePickViewController {
             $0.top.equalTo(stepView.snp.bottom).offset(16)
             $0.leading.equalTo(progressBar.snp.leading)
             $0.trailing.equalTo(progressBar.snp.trailing)
-            $0.bottom.equalTo(nextButton.snp.top).offset(-20)
+            $0.height.equalTo(10)   // height 임시 값
         }
         
         nextButton.snp.makeConstraints {
-            $0.bottom.equalTo(view.snp.bottom).offset(-28)
+            $0.top.equalTo(collectionView.snp.bottom).offset(20)
+            $0.bottom.lessThanOrEqualTo(view.snp.bottom)
             $0.leading.equalTo(progressBar.snp.leading)
             $0.trailing.equalTo(progressBar.snp.trailing)
             $0.height.equalTo(52)
