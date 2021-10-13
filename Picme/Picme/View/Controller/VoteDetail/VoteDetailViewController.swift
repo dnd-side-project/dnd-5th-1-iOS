@@ -137,6 +137,15 @@ class VoteDetailViewController: BaseViewContoller {
         }
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        // 투표 삭제 후 메인으로 갈 경우 
+        if !deleteView.isHidden {
+            NotificationCenter.default.post(name: .backToMain, object: nil)
+        }
+    }
+    
     // MARK: - Bind View Model
     
     private func bindViewModel() {
@@ -271,7 +280,6 @@ extension CarouselDatasource: UICollectionViewDataSource {
                     print(index)
                 }
                 
-                print("index path : \(indexPath.row)")
                 if firstRankSet.contains(indexPath.row) {
                     cell.resultColorView.backgroundColor = firstRankColor
                     print("true")
@@ -613,18 +621,6 @@ extension VoteDetailViewController: AlertViewActionDelegate {
                 self.deleteView.isHidden = false
                 self.rightBarButton.isEnabled = false
                 Toast.show(using: .remove, controller: self)
-                
-                guard let sceneDelegate = UIApplication.shared.connectedScenes.first!.delegate as? SceneDelegate, let rootVC = sceneDelegate.window?.rootViewController else { return }
-                
-                if let tabbarVC = rootVC as? UITabBarController,
-                   let mainNav = tabbarVC.selectedViewController as? UINavigationController,
-                   let mainVC = mainNav.topViewController as? MainViewController {
-                    
-                    print("* main VC")
-                    
-                    mainVC.mainTableView.scrollToTop()
-                    mainVC.initViewModel()
-                }
             }
         })
     }

@@ -36,7 +36,11 @@ class MainViewModel {
     }
     
     var totalCount: Int {
-        return total
+        get {
+            return total
+        } set(value) {
+            total = value
+        }
     }
     
     var currentCount: Int {
