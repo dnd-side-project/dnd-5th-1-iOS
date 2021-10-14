@@ -13,11 +13,14 @@ class GuideViewController: BaseViewContoller {
     
     let guideList: [String] = ["인스타그램", "이용 약관", "개인정보 처리방침"]
     
+    var myPageViewModel: MyPageViewModel?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         tableView.delegate = self
         tableView.dataSource = self
+        myPageViewModel?.seccsionDelegate = self
         tableView.separatorStyle = .none
     }
 
@@ -42,18 +45,18 @@ extension GuideViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-//        let leaveButton = UIButton(type: .custom)
-//        leaveButton.frame = CGRect(x: 0, y: 0, width: tableView.frame.width, height: 22)
-//        leaveButton.setTitle("회원 탈퇴하기", for: .normal)
-//        leaveButton.titleLabel?.textAlignment = .center
-//        leaveButton.setTitleColor(.textColor(.text50), for: .normal)
-//        leaveButton.titleLabel?.font = .kr(.bold, size: 14)
-//        leaveButton.backgroundColor = .solidColor(.solid0)
-//        leaveButton.addTarget(self, action: #selector(leaveAction(_:)), for: .touchUpInside)
-//        return leaveButton
-        let emptyView = UIView()
-        emptyView.backgroundColor = .black
-        return emptyView
+        let leaveButton = UIButton(type: .custom)
+        leaveButton.frame = CGRect(x: 0, y: 0, width: tableView.frame.width, height: 22)
+        leaveButton.setTitle("회원 탈퇴하기", for: .normal)
+        leaveButton.titleLabel?.textAlignment = .center
+        leaveButton.setTitleColor(.textColor(.text50), for: .normal)
+        leaveButton.titleLabel?.font = .kr(.bold, size: 14)
+        leaveButton.backgroundColor = .solidColor(.solid0)
+        leaveButton.addTarget(self, action: #selector(leaveAction(_:)), for: .touchUpInside)
+        return leaveButton
+//        let emptyView = UIView()
+//        emptyView.backgroundColor = .black
+//        return emptyView
     }
     
     @objc func leaveAction(_ sender: UIButton) {
@@ -91,10 +94,25 @@ extension GuideViewController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
+extension GuideViewController: UserSeccsionProtocol {
+    func seccsionUserAction() {
+        let presentLogin = UIStoryboard(name: "Login", bundle: nil)
+        let loginVC = presentLogin.instantiateViewController(withIdentifier: "LoginViewController")
+        loginVC.modalPresentationStyle = .fullScreen
+        self.present(loginVC, animated: true, completion: nil)
+    }
+}
+
 extension GuideViewController: AlertViewActionDelegate {
     
     func leaveActionTapped() {
-        print("탈퇴")
+        
+        if LoginUser.shared.vendorID != nil {
+            myPageViewModel?.requestUserSecession(SeccsionCase.loginUser)
+        } else {
+            myPageViewModel?.requestUserSecession(SeccsionCase.onBoardingUser)
+        }
+        
     }
 }
 

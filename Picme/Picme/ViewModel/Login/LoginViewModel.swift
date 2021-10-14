@@ -80,6 +80,7 @@ extension LoginViewModel {
                         self.loginUserInfo.userNickname = data.nickname
                         self.loginUserInfo.userProfileImageUrl = data.profilePictureImage
                         self.loginUserInfo.vendor = data.vendor
+                        self.loginUserInfo.vendorID = String(kakaoUserId)
                         
                         self.loginDelegate?.loginSuccess()
                     case .failure(let err):
@@ -145,6 +146,7 @@ extension LoginViewModel: ASAuthorizationControllerDelegate, ASAuthorizationCont
                     self.loginUserInfo.userNickname = data.nickname
                     self.loginUserInfo.userProfileImageUrl = data.profilePictureImage
                     self.loginUserInfo.vendor = data.vendor
+                    self.loginUserInfo.vendorID = appleIDCredetial.user
                     
                     _ = KeyChainModel.shared.createUserInfo(with: saveUserInfo)
                     self.loginDelegate?.loginSuccess()
