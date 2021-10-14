@@ -10,8 +10,17 @@ import KakaoSDKAuth
 import KakaoSDKUser
 import AuthenticationServices
 
+enum SeccsionCase {
+    case loginUser
+    case onBoardingUser
+}
+
 protocol LogOutProtocol: AnyObject {
     func logoutFromMain()
+}
+
+protocol UserSeccsionProtocol: AnyObject {
+    func seccsionUserAction()
 }
 
 final class MyPageViewModel {
@@ -24,8 +33,10 @@ final class MyPageViewModel {
     var onErrorHandling: ((APIError?) -> Void)?
     
     weak var logOutDelegate: LogOutProtocol?
+    weak var seccsionDelegate: UserSeccsionProtocol?
     
     let loginUserInfo = LoginUser.shared
+    let onboardingUser = OnboardingUserInfo.shared
     
     // MARK: - Initializer
     
@@ -40,7 +51,15 @@ final class MyPageViewModel {
         return "Version \(version)"
     }
     
-    // MARK: - Login
+    func requestUserSecession(_ userinfo: SeccsionCase) {
+        service?.fetchUserSecession(userinfo, completion: { [weak self] in
+            print("response Fetch User Secession")
+            self?.userInfoRemove()
+            self?.seccsionDelegate?.seccsionUserAction()
+        })
+    }
+    
+    // MARK: - LogOut
     
     func logOutAction(from kind: String?) {
         
@@ -73,9 +92,14 @@ final class MyPageViewModel {
     }
     
     func userInfoRemove() {
+        
         loginUserInfo.vendor = nil
+        loginUserInfo.vendorID = nil
         loginUserInfo.userNickname = nil
         loginUserInfo.userProfileImageUrl = nil
         APIConstants.jwtToken = ""
+        onboardingUser.userEmail = nil
+        onboardingUser.vendor = nil
+        onboardingUser.vendorID = nil
     }
 }

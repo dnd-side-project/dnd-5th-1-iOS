@@ -63,6 +63,19 @@ final class MyPageViewController: BaseViewContoller {
         settingButton.isEnabled = false
     }
     
+    // MARK: - Guide Button Action
+    
+    @IBAction func guideButtonAction(_ sender: UIButton) {
+//        let guideVC = GuideViewController()
+        
+        let myPage = UIStoryboard(name: "MyPage", bundle: nil)
+        let guideVC = myPage.instantiateViewController(withIdentifier: "GuideViewController")
+        if let infoType = guideVC as? GuideViewController {
+            infoType.myPageViewModel = viewModel
+        }
+        self.navigationController?.pushViewController(guideVC, animated: true)
+    }
+    
     // MARK: - Log Out
     
     @IBAction func logOutAction(_ sender: UIButton) {

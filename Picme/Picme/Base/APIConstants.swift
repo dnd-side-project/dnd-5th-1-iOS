@@ -42,6 +42,8 @@ struct APIConstants {
         case signIn
         /// 회원가입 URL
         case signUp
+        /// 탈퇴
+        case secession
         
         var urlString: String {
             switch self {
@@ -49,6 +51,8 @@ struct APIConstants {
                 return "\(APIConstants.baseURL)\(APIConstants.urlVersion)/auth/signin"
             case .signUp:
                 return "\(APIConstants.baseURL)\(APIConstants.urlVersion)/auth/signup"
+            case .secession:
+                return "\(APIConstants.baseURL)\(APIConstants.urlVersion)/auth/secession"
             }
         }
     }

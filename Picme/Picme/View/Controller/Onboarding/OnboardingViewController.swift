@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 final class OnboardingViewController: BaseViewContoller {
 
@@ -15,6 +16,12 @@ final class OnboardingViewController: BaseViewContoller {
     @IBOutlet weak var nickNameCountLabel: UILabel!
     @IBOutlet weak var nickNameTextfield: UITextField!
     @IBOutlet weak var startButton: UIButton!
+    
+    private let clearTextViewButton: UIButton = {
+        $0.isUserInteractionEnabled = true
+        $0.setImage(UIImage(named: "x24"), for: .normal)
+        return $0
+    }(UIButton(type: .custom))
     
     var onboardingViewModel: OnboardingViewModel? = OnboardingViewModel()
     
@@ -34,7 +41,6 @@ final class OnboardingViewController: BaseViewContoller {
         super.viewDidLoad()
         
         nickNameTextfield.delegate = self
-        nickNameTextfield.clearButtonMode = .whileEditing
         onboardingViewModel?.onboardingDelegate = self
         // 시작하기 버튼 활성화 비활성화
         onboardingViewModel?.isButtonState.bindAndFire(listener: { state in
@@ -78,6 +84,15 @@ final class OnboardingViewController: BaseViewContoller {
         guard let nickNameText = nickNameTextfield.text else { return }
         onboardingViewModel?.registUser(nickNameText)
     }
+    
+    @objc func clearText(_ sender: UIButton) {
+        nickNameTextfield.text = ""
+        nickNameTextCount = 0
+        clearTextViewButton.isHidden = true
+        startButton.setTitleColor(.textColor(.text50), for: .normal)
+        startButton.backgroundColor = .solidColor(.solid26)
+        startButton.isEnabled = false
+    }
 }
 
 extension OnboardingViewController: UITextFieldDelegate {
@@ -97,6 +112,26 @@ extension OnboardingViewController: UITextFieldDelegate {
         }
         return false
     }
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        if textField.text != "" {
+            clearTextViewButton.isHidden = false
+        } else {
+            clearTextViewButton.isHidden = true
+        }
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        nickNameTextfield.layer.borderWidth = 1
+        nickNameTextfield.layer.borderColor = UIColor.solidColor(.solid26).cgColor
+        
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        nickNameTextfield.layer.borderWidth = 0
+        nickNameTextfield.layer.borderColor = UIColor.clear.cgColor
+        
+    }
+    
 }
 
 // MARK: - addPadding
@@ -137,12 +172,12 @@ extension OnboardingViewController {
         
         nickNameTextfield.textColor = .textColor(.text100)
         nickNameTextfield.layer.cornerRadius = 10
-        
         nickNameCountLabel.textColor = .textColor(.text71)
         
         startButton.layer.cornerRadius = 10
         
         nickNameTextfield.addTarget(self, action: #selector(textfieldDidChanged(_:)), for: .editingChanged)
+        clearTextViewButton.addTarget(self, action: #selector(clearText(_:)), for: .touchUpInside)
     }
     
     override func setConfiguration() {
@@ -155,6 +190,18 @@ extension OnboardingViewController {
         
         nickNameTextfield.addLeftPadding()
 
+        view.addSubview(clearTextViewButton)
+        clearTextViewButton.isHidden = true
+    }
+    
+    override func setConstraints() {
+        
+        clearTextViewButton.snp.makeConstraints {
+            $0.top.equalTo(nickNameTextfield).offset(12)
+            $0.trailing.equalTo(nickNameTextfield).inset(12)
+            $0.bottom.equalTo(nickNameTextfield).inset(12)
+            $0.width.equalTo(24)
+        }
     }
 }
 

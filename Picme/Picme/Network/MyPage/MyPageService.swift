@@ -10,6 +10,7 @@ import Alamofire
 
 protocol MyPageServiceProtocol: AnyObject {
     func getUser(completion: @escaping (MyPageModel) -> Void)
+    func fetchUserSecession(_ userInfo: SeccsionCase, completion: @escaping () -> Void)
 }
 
 class MyPageService: MyPageServiceProtocol {
@@ -40,4 +41,37 @@ class MyPageService: MyPageServiceProtocol {
             }
     }
     
+    // MARK: - 유저 탈퇴
+    
+    func fetchUserSecession(_ userInfo: SeccsionCase, completion: @escaping () -> Void) {
+        
+        let url = APIConstants.Auth.secession.urlString
+        
+        var parameter: Parameters = [:]
+        
+        switch userInfo {
+        case .loginUser:
+            guard let vendor = LoginUser.shared.vendor,
+                  let vendorIdentifier = LoginUser.shared.vendorID else { return }
+            
+            parameter = [
+                "vendor": vendor,
+                "vendorAccountId": vendorIdentifier
+            ]
+        case .onBoardingUser:
+            guard let vendor = OnboardingUserInfo.shared.vendor,
+                  let vendorIdentifier = OnboardingUserInfo.shared.vendorID else { return }
+            
+            parameter = [
+                "vendor": vendor,
+                "vendorAccountId": vendorIdentifier
+            ]
+        }
+
+        AF.request(url, method: .delete, parameters: parameter, encoding: JSONEncoding.default, headers: nil).response { response in
+            print(response.response?.statusCode)
+            print("Secesson", response)
+            completion()
+        }
+    }
 }
