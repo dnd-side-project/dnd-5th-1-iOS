@@ -66,6 +66,8 @@ struct APIConstants {
         case postRetrieve(postID: String)
         /// 게시글 삭제 URL
         case deletePost(postID: String)
+        /// 게시글 신고
+        case reportPost(postID: String)
         
         var urlString: String {
             switch self {
@@ -77,6 +79,8 @@ struct APIConstants {
                 return "\(APIConstants.baseURL)\(APIConstants.urlVersion)/posts/\(postID)"
             case .deletePost(let postID):
                 return "\(APIConstants.baseURL)\(APIConstants.urlVersion)/posts/\(postID)"
+            case .reportPost(let postID):
+                return "\(APIConstants.baseURL)\(APIConstants.urlVersion)/posts/reports/\(postID)"
             }
         }
     }

@@ -52,4 +52,12 @@ final class VoteDetailViewModel {
         }
     }
     
+    // MARK: - 게시글 신고
+    
+    func requestReport(postId: String) {
+        service?.fetchReportPost(postId: postId, completion: {
+            print("Report")
+        })
+    }
+    
 }

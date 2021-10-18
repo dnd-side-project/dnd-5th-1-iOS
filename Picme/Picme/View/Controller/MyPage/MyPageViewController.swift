@@ -60,7 +60,7 @@ final class MyPageViewController: BaseViewContoller {
         versionLabel.text = viewModel.getVersion()
         
         slider.setThumbImage(#imageLiteral(resourceName: "progressCircle"), for: .normal)
-        settingButton.isEnabled = false
+        settingButton.isHidden = true
     }
     
     // MARK: - Guide Button Action

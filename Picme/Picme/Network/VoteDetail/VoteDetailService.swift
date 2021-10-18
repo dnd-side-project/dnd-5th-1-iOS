@@ -12,6 +12,7 @@ protocol VoteDetailServiceProtocol: AnyObject {
     func getVoteDetail(postId: String, completion: @escaping ((NetworkResult<Any>) -> Void))
     func createVote(postId: String, imageId: String, category: String, completion: @escaping () -> Void)
     func deletePost(postId: String, completion: @escaping () -> Void)
+    func fetchReportPost(postId: String, completion: @escaping () -> Void)
 }
 
 class VoteDetailService: VoteDetailServiceProtocol {
@@ -84,6 +85,27 @@ class VoteDetailService: VoteDetailServiceProtocol {
                 print(error.localizedDescription)
             }
         }
+    }
+    
+    // MARK: - 게시글 신고 API
+    
+    func fetchReportPost(postId: String, completion: @escaping () -> Void) {
+        
+        let url = APIConstants.Post.reportPost(postID: postId).urlString
+        let header: HTTPHeaders = [ "Authorization": APIConstants.jwtToken ]
+        let parameter: Parameters = [
+            "postId": postId
+        ]
+        print("URL: ", url)
+        print("POSTID: ", postId)
+        
+        AF.request(url, method: .post, parameters: parameter, encoding: JSONEncoding.default, headers: header)
+            .response { response in
+                if 200..<300 ~= response.response!.statusCode {
+                    completion()
+                }
+                print(response.response?.statusCode)
+            }
     }
     
     func judgeStatus(by statusCode: Int, _ data: Data) -> NetworkResult<Any> {
