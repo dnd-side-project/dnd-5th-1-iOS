@@ -44,6 +44,8 @@ class MainViewController: BaseViewContoller, UITableViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        print("* login token : \(APIConstants.jwtToken)")
      
         setupTabBar()
         
