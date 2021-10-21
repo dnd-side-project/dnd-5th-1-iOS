@@ -19,11 +19,19 @@ class MainService: MainServiceProtocol {
     func getMainList(page: Int, completion: @escaping ((NetworkResult<Any>) -> Void)) {
         let URL = APIConstants.Post.postListRetrieve.urlString.replacingOccurrences(of: "pageNum", with: String(page))
         
+        let header: HTTPHeaders?
+        
+        if APIConstants.jwtToken != "" {
+            header = [ "Authorization": APIConstants.jwtToken ]
+        } else {
+            header = nil
+        }
+        
         let dataRequest = AF.request(URL,
                                      method: .get,
                                      parameters: nil,
                                      encoding: JSONEncoding.default,
-                                     headers: nil)
+                                     headers: header)
         
         dataRequest.responseData { dataResponse in
             switch dataResponse.result {

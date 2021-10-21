@@ -628,7 +628,12 @@ extension VoteDetailViewController: AlertViewActionDelegate {
     
     func reportTapped() {
         viewModel.requestReport(postId: postId)
+        self.deleteView.isHidden = false
+        self.rightBarButton.isEnabled = false
+        deleteLabel.text = "게시글이 신고되어 볼 수 없어요.\n홈으로 돌아가주세요."
+        deleteImageView.image = #imageLiteral(resourceName: "report")
         Toast.show(using: .report, controller: self)
+        
     }
     
 }
