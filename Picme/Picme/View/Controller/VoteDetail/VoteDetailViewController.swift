@@ -396,6 +396,7 @@ extension ScalingCarouselFlowDelegate: UICollectionViewDelegateFlowLayout {
 
 extension VoteDetailViewController: AlertViewActionDelegate {
     
+    
     // MARK: - Set Up View
     
     private func setupView() {
@@ -626,6 +627,7 @@ extension VoteDetailViewController: AlertViewActionDelegate {
     }
     
     func reportTapped() {
+        viewModel.requestReport(postId: postId)
         Toast.show(using: .report, controller: self)
     }
     
